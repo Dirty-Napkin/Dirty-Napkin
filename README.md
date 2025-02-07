@@ -1,6 +1,11 @@
 # Dirty Napkin
+### Live Site
 [https://dirtynapkin.netlify.app/](https://dirtynapkin.netlify.app/)
 [https://dirtynapkin.co](https://dirtynapkin.co)
+### Dev Site
+[https://dirtynapkindev.netlify.app/](https://dirtynapkindev.netlify.app/)
+
+### Notes
 - All changes should be made on branches, not `main`. Once you are done making your changes, please submit a pull request
 - Be sure to fetch and pull from the desktop app (or vscode integration) and create a branch before making changes
 - To improve organization, I recommend using [Gitmoji](https://gitmoji.dev/) at the beginning of your commit messages
