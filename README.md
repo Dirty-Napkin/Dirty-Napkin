@@ -6,7 +6,7 @@
 [https://dirtynapkindev.netlify.app/](https://dirtynapkindev.netlify.app/)
 
 ### Notes
-- All changes should be made on branches, not `main`. Once you are done making your changes, please submit a pull request
+- All changes should be made as a branch from the dev branch, not `main` or `dev` itself. Once you are done making your changes, please submit a pull request
 - Be sure to fetch and pull from the desktop app (or vscode integration) and create a branch before making changes
 - To improve organization, I recommend using [Gitmoji](https://gitmoji.dev/) at the beginning of your commit messages
 - I (Noah) configured prepros for myself, feel free to setup codekit and have the config file here (and then you all can work from the same config)
