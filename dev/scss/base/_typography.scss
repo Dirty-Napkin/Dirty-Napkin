@@ -8,29 +8,3 @@ body {
     // color: var(--yellow) !important;
     text-decoration: none !important;
 }
-
-a{
-    /*CSS why are you like this*/
-    color: inherit;
-}
-
-p {
-    font-size: 18.5px;
-    font-style: normal;
-    font-weight: 450;
-    line-height: 100%;
-    /* 18.5px */
-}
-
-.welcome{
-    color: var(--key);
-}
-.email {
-    color: var(--cyan);
-}
-.smile{
-    color: var(--yellow);
-}
-.insta{
-    color: var(--magenta)
-}

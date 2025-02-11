@@ -334,82 +334,19 @@ template {
           box-sizing: border-box;
 }
 
-.homeLogo {
-  width: 198px;
-  height: 189px;
+ul.blankList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.feedbackLogo {
-  width: 100px;
+.bulletFix {
+  list-style-type: disc !important;
 }
 
-body {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 100vh;
-}
-
-.home {
-  background-image: url("assets/Colors.gif");
-}
-
-.content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 80vw;
-  height: 45vh;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
-  margin: auto;
-}
-@media (min-width: 576px) {
-  .content {
-    width: 50vw;
-  }
-}
-
-.topBar, .bottomBar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -ms-flex-item-align: stretch;
-      -ms-grid-row-align: stretch;
-      align-self: stretch;
-}
-
-iframe {
-  width: 400px;
-}
-@media (min-width: 576px) {
-  iframe {
-    width: 80vw !important;
-    height: 800px;
-  }
+img {
+  width: auto;
+  height: 100%;
 }
 
 /* =============
@@ -421,35 +358,6 @@ body {
 
 .noLink a {
   text-decoration: none !important;
-}
-
-a {
-  /*CSS why are you like this*/
-  color: inherit;
-}
-
-p {
-  font-size: 18.5px;
-  font-style: normal;
-  font-weight: 450;
-  line-height: 100%;
-  /* 18.5px */
-}
-
-.welcome {
-  color: var(--key);
-}
-
-.email {
-  color: var(--cyan);
-}
-
-.smile {
-  color: var(--yellow);
-}
-
-.insta {
-  color: var(--magenta);
 }
 
 /* =============

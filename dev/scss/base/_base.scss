@@ -5,54 +5,17 @@
     box-sizing: border-box;
 }
 
-.homeLogo {
-    width: 198px;
-    height: 189px;
+ul.blankList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.feedbackLogo {
-    width: 100px;
+.bulletFix {
+    list-style-type: disc !important;
 }
 
-body {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.home{
-    background-image: url("assets/Colors.gif");
-}
-
-.content {
-    display: flex;
-    width: 80vw;
-    height: 45vh;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    margin: auto;
-    @include sm{
-        width: 50vw;
-    }
-
-}
-
-.topBar, .bottomBar {
-    display: flex;
-    // flex-direction: row;
-    justify-content: space-between;
-    // width: 100%;
-    align-items: flex-start;
-    align-self: stretch;
-}
-
-iframe {
-    width: 400px;
-    @include sm {
-        width: 80vw !important;
-        height: 800px;
-    }
+img{
+    width: auto;
+    height: 100%;
 }
