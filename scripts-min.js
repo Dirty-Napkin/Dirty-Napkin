@@ -1,1 +1,1 @@
-let toggle=!1;const body=document.body;toggle&&(body.style.backgroundImage="none");
+let toggle=!1;const body=document.body;toggle&&(body.style.backgroundImage="none");const date=new Date(Date.now());date.getMonth()>=3&&(window.location="https://scratch.mit.edu/projects/1151867708/");
