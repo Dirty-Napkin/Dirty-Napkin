@@ -6,3 +6,4 @@
 - We want to be helpful
 - Messy ideas, daring executions
 - Get hype or get out
+- We're cool and we're designers
