@@ -15,7 +15,6 @@
     - Similarly, make sure that all `img` elements have an `alt` attribute
 - Commit and push often
     - Commit messages should be brief but specific. Use [Gitmoji](https://gitmoji.dev/) at the beginning of your commit messages to improve organization and clarity
-- If you are creating a file in a folder that contains a file called `placeholder.txt`, you can delete the temporary file
 - Except for `.README`, all file names are fully lowercase with dashes or underscores. `.html` and `.kit` files should only use dashes. Other things that get named (variables, functions, classes, ids, etc) use camel case (ex: `functionName`)
     - File names should not contain spaces
 - Use the modularity of Prepros to keep things simple and organized. You shouldn't need to touch `styles.css` or any of the `.html` files
