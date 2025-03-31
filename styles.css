@@ -358,6 +358,7 @@ body {
 }
 
 .noLink a {
+  color: initial !important;
   text-decoration: none !important;
 }
 
