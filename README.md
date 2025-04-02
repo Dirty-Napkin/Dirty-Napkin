@@ -13,6 +13,7 @@
 #### While Working:
 - Use comments to organize and explain your code. Remember that others need to be able to understand what's going on
     - Similarly, make sure that all `img` elements have an `alt` attribute
+- If you use AI to help you code, you should still understand what each line does and how the code works
 - Commit and push often
     - Commit messages should be brief but specific. Use [Gitmoji](https://gitmoji.dev/) at the beginning of your commit messages to improve organization and clarity
 - Except for `.README`, all file names are fully lowercase with dashes or underscores. `.html` and `.kit` files should only use dashes. Other things that get named (variables, functions, classes, ids, etc) use camel case (ex: `functionName`)
