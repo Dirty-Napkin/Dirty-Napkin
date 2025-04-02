@@ -6,8 +6,6 @@ if (toggle) {
 }
 
 //April fool's
-const date = new Date(Date.now());
-// console.log(date.getMonth());
-if (date.getMonth() >= 3) {
+if (Date.now() < 1743771600000) {
     window.location = "https://scratch.mit.edu/projects/1151867708/";
 }
