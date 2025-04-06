@@ -366,7 +366,7 @@ body {
   font-family: degular-mono, sans-serif;
 }
 
-.no-link a {
+a.no-link {
   color: initial !important;
   text-decoration: none !important;
 }
