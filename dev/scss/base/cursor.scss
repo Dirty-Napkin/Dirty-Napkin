@@ -9,7 +9,6 @@
     transform: translate(-50%, -50%);
     transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), 
                 height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    mix-blend-mode: difference;
 
     &.hover-button {
         background-color: var(--key);
@@ -18,9 +17,8 @@
     }
     
     &.hover-link {
-        background-color: var(--magenta);
+        z-index: -1;
         width: var(--link-width);
         height: var(--link-height);
-        mix-blend-mode: difference;
     }
 }

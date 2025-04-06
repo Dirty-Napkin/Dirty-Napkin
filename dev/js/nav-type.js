@@ -74,137 +74,77 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    // Function to get random grid position while maintaining order
-    function getRandomPosition(spanNumber, otherSpans) {
-        // Get all possible positions
-        const possiblePositions = [];
-        for (let row = 0; row < 3; row++) {
-            for (let col = 0; col < numColumns; col++) {
-                const positionNumber = col + (row * numColumns);
-                possiblePositions.push({ row, col, positionNumber });
-            }
-        }
-
-        // Get currently occupied positions
-        const occupiedPositions = new Set();
-        otherSpans.forEach(span => {
-            const pos = getGridCoords(
-                parseFloat(span.style.left),
-                parseFloat(span.style.top)
-            );
-            occupiedPositions.add(`${pos.col},${pos.row}`);
-        });
-
-        // Get current position of this span
-        const currentSpan = Array.from(letterSpans).find(span => 
-            parseInt(span.dataset.spanNumber) === spanNumber
-        );
-        const currentPos = currentSpan ? getGridCoords(
-            parseFloat(currentSpan.style.left),
-            parseFloat(currentSpan.style.top)
-        ) : null;
-
-        // Filter positions based on neighbor constraints and occupation
-        const validPositions = possiblePositions.filter(pos => {
-            // Check if position is already occupied
-            if (occupiedPositions.has(`${pos.col},${pos.row}`)) {
-                return false;
-            }
-
-            // Check if this position would violate any neighbor constraints
-            for (const otherSpan of otherSpans) {
-                const otherNumber = parseInt(otherSpan.dataset.spanNumber);
-                const otherPos = getGridCoords(
-                    parseFloat(otherSpan.style.left),
-                    parseFloat(otherSpan.style.top)
-                );
-                const otherPositionNumber = otherPos.col + (otherPos.row * numColumns);
-
-                // If this is a previous span, our position must be >= its position
-                if (otherNumber < spanNumber && pos.positionNumber < otherPositionNumber) {
-                    return false;
-                }
-                // If this is a next span, our position must be <= its position
-                if (otherNumber > spanNumber && pos.positionNumber > otherPositionNumber) {
-                    return false;
-                }
-            }
-            return true;
-        });
-
-        // If no valid positions, stay in current position
-        if (validPositions.length === 0) {
-            return null;
-        }
-
-        // Add bias for first and last letters and movement
-        const weightedPositions = validPositions.map(pos => {
-            let weight = 1; // Default weight
-            
-            // First letter prefers top-left corner
-            if (spanNumber === 0 && pos.row === 0 && pos.col === 0) {
-                weight = 5;
-            }
-            // Second letter prefers top row
-            else if (spanNumber === 1 && pos.row === 0) {
-                weight = 3;
-            }
-            
-            // Last letter prefers bottom-right corner
-            if (spanNumber === numColumns - 1 && pos.row === 2 && pos.col === numColumns - 1) {
-                weight = 5;
-            }
-            // Second-to-last letter prefers bottom row
-            if (spanNumber === numColumns - 2 && pos.row === 2) {
-                weight = 3;
-            }
-
-            // Add movement bias - higher weight for positions further from current position
-            if (currentPos) {
-                const distance = Math.abs(pos.row - currentPos.row) + Math.abs(pos.col - currentPos.col);
-                weight *= (1 + distance * 1.0);
-            }
-            
-            return { ...pos, weight };
-        });
-
-        // Create weighted array for random selection
-        const weightedArray = [];
-        weightedPositions.forEach(pos => {
-            for (let i = 0; i < pos.weight; i++) {
-                weightedArray.push(pos);
-            }
-        });
-
-        // Randomly select from weighted positions
-        const randomIndex = Math.floor(Math.random() * weightedArray.length);
-        const selectedPos = weightedArray[randomIndex];
-        return { row: selectedPos.row, col: selectedPos.col };
+    // Function to check if a position is occupied
+    function isPositionOccupied(col, row, occupiedPositions) {
+        return occupiedPositions.some(pos => pos.col === col && pos.row === row);
     }
 
-    textElement.addEventListener("mouseenter", () => {
-        // Create array of all spans in order
-        const orderedSpans = Array.from(letterSpans).sort((a, b) => {
-            return parseInt(a.dataset.spanNumber) - parseInt(b.dataset.spanNumber);
+    // Function to get random grid position
+    function getRandomPosition(occupiedPositions) {
+        let col, row;
+        do {
+            col = Math.floor(Math.random() * numColumns);
+            row = Math.floor(Math.random() * 3); // 3 rows (0, 1, 2)
+        } while (isPositionOccupied(col, row, occupiedPositions));
+        return { col, row };
+    }
+
+    // Function to randomize letter positions
+    function randomizeLetters() {
+        const occupiedPositions = [];
+        
+        letterSpans.forEach(span => {
+            const newPos = getRandomPosition(occupiedPositions);
+            occupiedPositions.push(newPos);
+            
+            const pixelPos = getPixelPosition(newPos.col, newPos.row);
+            span.style.left = `${pixelPos.x}px`;
+            span.style.top = `${pixelPos.y}px`;
+        });
+    }
+
+    // Function to log occupied positions
+    function logOccupiedPositions() {
+        const positions = [];
+        letterSpans.forEach(span => {
+            const x = parseFloat(span.style.left);
+            const y = parseFloat(span.style.top);
+            const gridCoords = getGridCoords(x, y);
+            positions.push(gridCoords);
+        });
+        console.log('Current letter positions:', positions);
+        return positions;
+    }
+
+    // Modified randomizeLetters to maintain letter order
+    const originalRandomizeLetters = randomizeLetters;
+    randomizeLetters = function() {
+        // Get random positions first
+        const occupiedPositions = [];
+        const positions = [];
+        
+        // Generate all random positions first
+        for(let i = 0; i < letterSpans.length; i++) {
+            const newPos = getRandomPosition(occupiedPositions);
+            occupiedPositions.push(newPos);
+            positions.push(newPos);
+        }
+
+        // Sort positions left to right to maintain word order
+        positions.sort((a, b) => a.row - b.row || a.col - b.col);
+
+        // Apply positions in order to maintain readability
+        letterSpans.forEach((span, index) => {
+            const pixelPos = getPixelPosition(positions[index].col, positions[index].row);
+            span.style.left = `${pixelPos.x}px`;
+            span.style.top = `${pixelPos.y}px`;
         });
 
-        // Move each span to a new position
-        orderedSpans.forEach((span, index) => {
-            const spanNumber = parseInt(span.dataset.spanNumber);
-            
-            // Get all other spans except this one
-            const otherSpans = orderedSpans.filter(s => s !== span);
-            
-            // Get new position
-            const newPos = getRandomPosition(spanNumber, otherSpans);
-            
-            if (newPos) {
-                const pixelPos = getPixelPosition(newPos.col, newPos.row);
-                span.style.left = `${pixelPos.x}px`;
-                span.style.top = `${pixelPos.y}px`;
-            }
-        });
-    });
+        return logOccupiedPositions();
+    }
+
+    // Add mouseenter event to randomize
+    textElement.addEventListener("mouseenter", randomizeLetters);
 
     textElement.addEventListener("mouseleave", () => {
         // Return all letters to their original positions
