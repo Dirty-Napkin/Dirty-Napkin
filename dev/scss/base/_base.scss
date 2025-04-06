@@ -19,3 +19,9 @@ img{
     width: auto;
     height: 100%;
 }
+
+// Removing default button styles
+button {
+    all: unset;
+    white-space: nowrap;
+}
