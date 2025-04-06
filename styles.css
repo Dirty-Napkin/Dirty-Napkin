@@ -439,6 +439,24 @@ body {
 }
 
 /* End Arrow Button */
+/* Nav Type */
+.centered-text {
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* Adjust tracking */
+  cursor: pointer; /* Adds the pointer cursor on hover */
+}
+
+.shift-letter {
+  display: inline-block; /* Needed for transform to work */
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease; /* Smooth movement */
+}
+
+/* End Nav Type */
 /* =============
     Forms
 ============= */
@@ -470,3 +488,20 @@ textarea {
 /* =============
     Footer
 ============= */
+body {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}

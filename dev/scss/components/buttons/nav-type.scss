@@ -1,0 +1,17 @@
+/* Nav Type */
+
+    .centered-text {
+        font-size: 1em;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em; /* Adjust tracking */
+        cursor: pointer; /* Adds the pointer cursor on hover */
+
+    }
+
+    .shift-letter {
+        display: inline-block; /* Needed for transform to work */
+        transition: transform 0.3s ease; /* Smooth movement */
+    }
+
+/* End Nav Type */
