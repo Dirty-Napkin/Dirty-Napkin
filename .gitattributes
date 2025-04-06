@@ -1,0 +1,9 @@
+# Force LF endings for common text/code files
+*.css text eol=lf
+*.html text eol=lf
+*.kit text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.scss text eol=lf
+*.md text eol=lf
+*.json text eol=lf

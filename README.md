@@ -1,16 +1,16 @@
 # Dirty Napkin
-### Live Site
+## Live Site
 [https://dirtynapkin.netlify.app/](https://dirtynapkin.netlify.app/)
 [https://dirtynapkin.co](https://dirtynapkin.co)
-### Dev Site
+## Dev Site
 [https://dirtynapkindev.netlify.app/](https://dirtynapkindev.netlify.app/)
 
-### Guidelines
-#### Before Working:
+## Guidelines
+### Before Working:
 - Fetch and pull from origin before doing anything else
 - Make all changes on branches from the dev branch. DO NOT touch `main` or `dev` branches
 
-#### While Working:
+### While Working:
 - Use comments to organize and explain your code. Remember that others need to be able to understand what's going on
     - Similarly, make sure that all `img` elements have an `alt` attribute
 - If you use AI to help you code, you should still understand what each line does and how the code works. This includes removing redundant or irrelevant elements of the code
@@ -28,21 +28,9 @@
   
       ```<img src="/assets/window_lockup.png" alt="The Window logo lockup">```
       
-      you can use
+      you can use [this](docs/snippets.md#responsive-images)
 
-      ```
-      <picture>
-        <source
-          media=”(min-width: 1024px)”
-          srcset=”/assets/window_lockup_lg.png” />
-        <source
-          media=”(min-width: 576px)”
-          scrset=”/assets/window_lockup_sm.png” />
-        <img src=”/assets/window_lockup_min.png” alt=”Window logo lockup”>
-      </picture>
-      ```
-
-#### When You Are Done Working:
+### When You Are Done Working:
 - Validate `styles.css` and all new or modified `.html` files
     - [HTML Validator](https://validator.w3.org/#validate_by_upload)
     - [CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_upload)
