@@ -1,12 +1,15 @@
 /* Nav Type */
 
     .centered-text {
-        font-size: 1em;
+        font-size: 2em;
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0.1em; /* Adjust tracking */
         cursor: pointer; /* Adds the pointer cursor on hover */
 
+        // &:hover {
+        //     color: var(--white);
+        // }
     }
 
     // .shift-letter {

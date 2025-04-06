@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             span.textContent = text[i];
             span.style.display = 'block';
             span.style.position = 'absolute';
-            span.style.transition = 'all 0.4s ease';
+            span.style.transition = 'all 0.3s ease';
             span.style.margin = '0';
             span.style.padding = '0';
             
