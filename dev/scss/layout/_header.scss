@@ -1,3 +1,54 @@
 /* =============
     Header
 ============= */
+header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 12px 24px;
+    justify-content: space-between;
+    align-items: center;
+
+    @include sm {
+        padding: 16.125px 32.25px;
+    }
+
+    @include md {
+        padding: 60px 48px;
+    }
+
+    .logo-container {
+        height: 2em;
+
+        #desktop-logo {
+            display: none;
+
+            @media (min-width: 900px) {
+                display: block;
+            }
+        }
+
+        @media (min-width: 900px) {
+            #mobile-logo {
+                display: none;
+            }
+        }
+    }
+
+    nav {
+        button{
+            @include md{
+                display: none;
+            }
+        }
+        ul {
+            display: none;
+            gap: 48px;
+
+            @include md {
+                display: flex;
+            }
+        }
+    }
+
+}
