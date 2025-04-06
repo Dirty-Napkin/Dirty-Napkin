@@ -448,14 +448,6 @@ body {
   cursor: pointer; /* Adds the pointer cursor on hover */
 }
 
-.shift-letter {
-  display: inline-block; /* Needed for transform to work */
-  -webkit-transition: -webkit-transform 0.3s ease;
-  transition: -webkit-transform 0.3s ease;
-  transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease; /* Smooth movement */
-}
-
 /* End Nav Type */
 /* =============
     Forms
