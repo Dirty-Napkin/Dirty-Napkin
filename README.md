@@ -13,15 +13,15 @@
 #### While Working:
 - Use comments to organize and explain your code. Remember that others need to be able to understand what's going on
     - Similarly, make sure that all `img` elements have an `alt` attribute
-- If you use AI to help you code, you should still understand what each line does and how the code works
+- If you use AI to help you code, you should still understand what each line does and how the code works. This includes removing redundant or irrelevant elements of the code
 - Commit and push often
     - Commit messages should be brief but specific. Use [Gitmoji](https://gitmoji.dev/) at the beginning of your commit messages to improve organization and clarity
 - Except for `.README`, all file names are fully lowercase with dashes or underscores. `.html` and `.kit` files should only use dashes. Other things that get named (variables, functions, classes, ids, etc) use camel case (ex: `functionName`)
     - File names should not contain spaces
 - Use the modularity of Prepros to keep things simple and organized. You shouldn't need to touch `styles.css` or any of the `.html` files
-    - When creating a new `.kit` file, be sure to properly configure Prepros to output the right file in the right place
+    - When creating a new `.kit` file, be sure to properly configure Prepros to output the right file in the right place. A template `.kit` file is in the dev folder
 - We are going to use a spritesheet instead of FontAwesome
-- Remember that ampersands are encoded in HTML as `&amp;`
+- Remember that [special characters need to be encoded](https://emn178.github.io/online-tools/html_encode.html)
 - Be mindful of load times and don't overcomplicate
     - If you can animate using CSS [transitions](https://www.w3schools.com/css/css3_transitions.asp) or [animations](https://www.w3schools.com/css/css3_animations.asp), you don't need to use JS or AfterEffects
     - It might be better to use responsive images in some places. For example, instead of
