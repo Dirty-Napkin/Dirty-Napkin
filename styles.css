@@ -375,16 +375,28 @@ body {
 .button-text {
   color: var(--key);
   font-size: 1rem;
-  font-style: normal;
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
 }
 
+.centered-text {
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* Adjust tracking */
+  cursor: pointer; /* Adds the pointer cursor on hover */
+}
+
 /* =============
     Buttons
 ============= */
+button {
+  all: unset;
+  white-space: nowrap;
+}
+
 /* Arrow Button */
 .arrow-btn {
   position: relative;
