@@ -15,14 +15,9 @@ footer {
     }
 
     .footer-column {
-        .footer-squares {
-            width: 24px;
-            height: 24px;
-        }
-
         &.column1,
         &.column2 {
-            .footer-squares {
+            .squares {
                 display: none;
             }
         }
@@ -96,7 +91,7 @@ footer {
         gap: 40px;
         grid-template-areas: "column2 column1 column3";
 
-        .footer-squares {
+        .squares {
             display: block !important;
         }
 
@@ -126,7 +121,7 @@ footer {
                     grid-area: spacer;
                 }
 
-                .footer-squares {
+                .squares {
                     grid-area: square;
                 }
             }
@@ -136,7 +131,7 @@ footer {
                 padding-top: 0;
                 flex-direction: row !important;
 
-                .footer-squares {
+                .squares {
                     order: 1;
                 }
             }

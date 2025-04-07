@@ -43,4 +43,12 @@ button {
 
 .squares {
     background-color: var(--key);
+    &.squares-sm{
+        width: 24px;
+        height: 24px;
+    }
+    &.squares-lg{
+        width: 116px;
+        height: 116px;
+    }
 }
