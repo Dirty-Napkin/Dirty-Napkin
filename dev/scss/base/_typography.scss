@@ -2,7 +2,7 @@
     Typography
 ============= */
 body {
-    font-family: degular-mono, sans-serif;
+    font-family: "degular-mono", sans-serif;
 }
 
 a.no-link{
@@ -26,4 +26,44 @@ a.no-link{
     text-transform: uppercase;
     letter-spacing: 0.1em; /* Adjust tracking */
     cursor: pointer; /* Adds the pointer cursor on hover */
+}
+
+// Big Puzzle
+.big-puzzle, h1{
+    text-align: justify;
+    text-box: trim-both cap; /*https://caniuse.com/mdn-css_properties_text-box*/
+    font-size: 21.563rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: 86.25px;
+    text-transform: uppercase;
+}
+
+.semibold-32pt, h2{
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.semibold-24pt, h3{
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 130%; /*31.2px*/
+    text-transform: uppercase;
+}
+
+.bold-20pt, h4{
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: 0.075rem;
+    text-transform: uppercase;
+}
+
+.body, p{
+    font-family: "degular-text", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 130%; /*20.8px*/
 }
