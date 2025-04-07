@@ -410,6 +410,12 @@ a.no-link {
   cursor: pointer; /* Adds the pointer cursor on hover */
 }
 
+.justified-text {
+  margin: 0;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+}
+
 .big-puzzle, h1 {
   text-align: justify;
   text-box: trim-both cap; /*https://caniuse.com/mdn-css_properties_text-box*/

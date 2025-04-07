@@ -28,6 +28,11 @@ a.no-link{
     cursor: pointer; /* Adds the pointer cursor on hover */
 }
 
+.justified-text{
+    margin: 0;
+    text-align-last: justify;
+}
+
 // Big Puzzle
 .big-puzzle, h1{
     text-align: justify;
