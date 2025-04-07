@@ -359,6 +359,10 @@ button {
   white-space: nowrap;
 }
 
+.squares {
+  background-color: var(--key);
+}
+
 /* =============
     Typography
 ============= */
