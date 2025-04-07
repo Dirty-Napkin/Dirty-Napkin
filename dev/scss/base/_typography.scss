@@ -29,7 +29,6 @@ a.no-link{
 }
 
 .justified-text{
-    margin: 0;
     text-align-last: justify;
 }
 
@@ -64,6 +63,7 @@ a.no-link{
     line-height: 130%;
     letter-spacing: 0.075rem;
     text-transform: uppercase;
+    margin: 0;
 }
 
 .body, p{
