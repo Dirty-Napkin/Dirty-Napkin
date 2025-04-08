@@ -40,3 +40,19 @@
 ```js
 if (target) observer.observe(target);
 ```
+
+## Icons with a Spritesheet
+```html
+<div class="icon linkedin"></div>
+```
+
+```css
+.icon {
+    background: url("/assets/spritesheet.gif") no-repeat;
+    height: 20px;
+    width: 20px;
+    background-size: cover;
+    margin: 6px;
+    background-position: -21px 0;
+}
+```
