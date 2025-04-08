@@ -46,13 +46,16 @@ if (target) observer.observe(target);
 <div class="icon linkedin"></div>
 ```
 
-```css
+```scss
 .icon {
     background: url("/assets/spritesheet.gif") no-repeat;
     height: 20px;
     width: 20px;
     background-size: cover;
     margin: 6px;
-    background-position: -21px 0;
+
+    &.linkedin{
+        background-position: -21px 0;
+    }
 }
 ```
