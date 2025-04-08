@@ -1,0 +1,70 @@
+.brand-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    // Image container with 16:9 aspect ratio
+    .card__image-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; // 16:9 aspect ratio (9/16 = 0.5625)
+        overflow: hidden;
+    }
+
+    // Image styling
+    .card__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    // Content container
+    .card__content {
+        padding: 1rem 0 0 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    // Title styling
+    .card__title {
+        font-size: 1.625rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0 0 0.2rem 0;
+        background-color: var(--white);
+        position: relative; 
+    }
+
+    // Description styling
+    .card__description {
+        margin: 0;
+        transform: translateY(-25px);
+        // opacity: 0;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: -1;
+    }
+
+    // Hover effect
+    &:hover {
+        .card__image {
+            transform: scale(1.05);
+        }
+        .card__description {
+            transform: translateY(0);
+            // opacity: 1;
+        }
+    }
+}
+
+.brand-card-test {
+    grid-column: span 1;
+    background-color: red;
+    width: 100%;
+    height: 50px;
+}

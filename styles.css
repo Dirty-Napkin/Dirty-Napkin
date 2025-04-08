@@ -501,12 +501,95 @@ textarea {
 /* =============
     Navigation
 ============= */
+.brand-card {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.brand-card .card__image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+}
+.brand-card .card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+.brand-card .card__content {
+  padding: 1rem 0 0 0;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.brand-card .card__title {
+  font-size: 1.625rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0 0 0.2rem 0;
+  background-color: var(--white);
+  position: relative;
+}
+.brand-card .card__description {
+  margin: 0;
+  -webkit-transform: translateY(-25px);
+          transform: translateY(-25px);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: -1;
+}
+.brand-card:hover .card__image {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+.brand-card:hover .card__description {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+.brand-card-test {
+  -ms-grid-column-span: 1;
+  grid-column: span 1;
+  background-color: red;
+  width: 100%;
+  height: 50px;
+}
+
 /* =============
     Header
 ============= */
 /* =============
     Footer
 ============= */
+.brand-card-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2rem 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 60px;
+  width: 100%;
+  height: 100%;
+}
+
 body {
   -webkit-box-align: center;
       -ms-flex-align: center;
