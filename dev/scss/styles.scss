@@ -8,7 +8,7 @@
 @import "base/_normalize";
 @import "base/_base";
 @import "base/_typography";
-@import "base/cursor";
+@import "base/_cursor";
 
 // Components Styles
 @import "components/_buttons";
@@ -18,4 +18,3 @@
 // Layout Styles
 @import "layout/_header";
 @import "layout/_footer";
-@import "layout/brands";
