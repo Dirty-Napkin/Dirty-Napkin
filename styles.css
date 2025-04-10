@@ -421,7 +421,6 @@ a.no-link {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.1em; /* Adjust tracking */
-  cursor: pointer; /* Adds the pointer cursor on hover */
 }
 
 .justified-text {
@@ -552,10 +551,6 @@ button {
 
 /* Nav Type */
 .centered-text {
-  font-size: 2em;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1em; /* Adjust tracking */
   cursor: pointer; /* Adds the pointer cursor on hover */
 }
 .centered-text:hover {
