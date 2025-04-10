@@ -5,13 +5,13 @@
     box-sizing: border-box;
 }
 
-ul.blankList {
+ul.blank-list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.bulletFix {
+.bullet-fix {
     list-style-type: disc !important;
 }
 
@@ -24,4 +24,31 @@ img{
 button {
     all: unset;
     white-space: nowrap;
+}
+
+.padding {
+    padding-left: 24px;
+    padding-right: 24px;
+
+    @include md {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    @include xl {
+        padding-left: 64px;
+        padding-right: 64px;
+    }
+}
+
+.squares {
+    background-color: var(--key);
+    &.squares-sm{
+        width: 24px;
+        height: 24px;
+    }
+    &.squares-lg{
+        width: 116px;
+        height: 116px;
+    }
 }

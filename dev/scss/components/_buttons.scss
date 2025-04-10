@@ -1,6 +1,10 @@
 /* =============
     Buttons
 ============= */
+button {
+    all: unset;
+    white-space: nowrap;
+}
 
 @import "buttons/arrow-btn";
 @import "buttons/nav-type";

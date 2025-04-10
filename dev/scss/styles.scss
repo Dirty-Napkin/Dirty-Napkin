@@ -9,24 +9,13 @@
 @import "base/_base";
 @import "base/_typography";
 @import "base/cursor";
+
 // Components Styles
 @import "components/_buttons";
 @import "components/_forms";
-@import "components/_navigation";
 @import "components/_brand-cards";
 
 // Layout Styles
 @import "layout/_header";
 @import "layout/_footer";
 @import "layout/brands";
-
-
-
-body {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-}
