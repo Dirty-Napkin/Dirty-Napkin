@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <!-- @include "global/header.kit" -->
+    <!-- @include "global/header_nav.kit" -->
 
     <main>
         <!-- @include "global/footer.kit" -->
