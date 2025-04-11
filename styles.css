@@ -420,7 +420,8 @@ a.no-link {
   font-size: 1em;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.1em; /* Adjust tracking */
+  letter-spacing: 0.1em;
+  /* Adjust tracking */
 }
 
 .justified-text {
@@ -428,9 +429,11 @@ a.no-link {
        text-align-last: justify;
 }
 
-.big-puzzle, h1 {
+.big-puzzle,
+h1 {
   text-align: justify;
-  text-box: trim-both cap; /*https://caniuse.com/mdn-css_properties_text-box*/
+  text-box: trim-both cap;
+  /*https://caniuse.com/mdn-css_properties_text-box*/
   font-size: 21.563rem;
   font-weight: 700;
   line-height: 130%;
@@ -438,21 +441,25 @@ a.no-link {
   text-transform: uppercase;
 }
 
-.semibold-32pt, h2 {
+.semibold-32pt,
+h2 {
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: 1.6px;
   text-transform: uppercase;
 }
 
-.semibold-24pt, h3 {
+.semibold-24pt,
+h3 {
   font-size: 1.5rem;
   font-weight: 600;
-  line-height: 130%; /*31.2px*/
+  line-height: 130%;
+  /*31.2px*/
   text-transform: uppercase;
 }
 
-.bold-20pt, h4 {
+.bold-20pt,
+h4 {
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 130%;
@@ -461,11 +468,20 @@ a.no-link {
   margin: 0;
 }
 
-.body, p {
+.medium-24pt-lower,
+h5 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.body,
+p {
   font-family: "degular-text", sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  line-height: 130%; /*20.8px*/
+  line-height: 130%;
+  /*20.8px*/
 }
 
 .cursors {

@@ -16,7 +16,9 @@
     - also default styling for `h2` elements
 - **`.semibold-24pt`**: 24pt semibold
     - also default styling for `h3` elements
-- **`.bold-20pt`**: 20pt bold mono
+- **`.bold-20pt`**: 20pt bold
     - also default styling for `h4` elements
+- **`.medium-24pt-lower`**: 24pt medium lowercase
+    - also default styling for `h5` elements
 - **`.body`**: body copy
     - also default styling for `p` elements
