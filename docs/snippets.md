@@ -1,13 +1,13 @@
 # Code Snippets
 ## Kit File Template
+Replace `Page title here` with the name of the page
 ```html
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head>
-    <!-- @include "global/head.kit"-->
-    <title>Dirty Napkin | Page Name</title>
-</head>
+<!-- @pageTitle = Page title here -->
+ 
+<!-- @include "global/head.kit"-->
 
 <body>
     <!-- @include "global/header_nav.kit" -->
