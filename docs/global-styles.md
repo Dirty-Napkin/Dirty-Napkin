@@ -1,6 +1,6 @@
 # CSS Global Styles List
 - **`ul.blank-list`**: removes bullet formatting from an unordered list
-- **`.padding`**: adds responsive left and right padding for margins
+- **`.margins`**: adds responsive left and right margins
 - **`.squares`**: formats divs into squares
     - **`.squares.squares-sm`**: 24px squares
     - **`.squares.squares-lg`**: 116px squares

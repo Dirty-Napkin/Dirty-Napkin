@@ -354,20 +354,20 @@ img {
   height: 100%;
 }
 
-.padding {
-  padding-left: 24px;
-  padding-right: 24px;
+.margins {
+  margin-left: 24px;
+  margin-right: 24px;
 }
 @media (min-width: 768px) {
-  .padding {
-    padding-left: 32px;
-    padding-right: 32px;
+  .margins {
+    margin-left: 32px;
+    margin-right: 32px;
   }
 }
 @media (min-width: 1280px) {
-  .padding {
-    padding-left: 64px;
-    padding-right: 64px;
+  .margins {
+    margin-left: 64px;
+    margin-right: 64px;
   }
 }
 
@@ -724,8 +724,6 @@ header nav ul {
     Footer
 ============= */
 footer {
-  padding-top: 18px;
-  padding-bottom: 18px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -738,6 +736,19 @@ footer {
           align-items: center;
   gap: 60px;
   width: 100%;
+  padding: 18px 24px;
+}
+@media (min-width: 768px) {
+  footer {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media (min-width: 1280px) {
+  footer {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
 footer p {
   margin: 0;
