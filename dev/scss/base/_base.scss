@@ -15,7 +15,7 @@ ul.blank-list {
     list-style-type: disc !important;
 }
 
-img{
+img {
     width: auto;
     height: 100%;
 }
@@ -37,11 +37,13 @@ img{
 
 .squares {
     background-color: var(--key);
-    &.squares-sm{
+
+    &.squares-sm {
         width: 24px;
         height: 24px;
     }
-    &.squares-lg{
+
+    &.squares-lg {
         width: 116px;
         height: 116px;
     }
@@ -51,4 +53,159 @@ img{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+}
+
+.project-page {
+
+    .hero {
+        @include md {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .title-frame {
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem; //10px
+            margin-bottom: 24px;
+
+            @include md {
+                margin-right: 0;
+            }
+        }
+
+        img {
+            width: 100%;
+
+            @include md {
+                order: 1;
+            }
+        }
+
+        .tags-frame {
+            display: flex;
+            margin: 8px 24px 24px 24px;
+            justify-content: space-between;
+            gap: 1.6875rem; //27px
+
+            @include md {
+                order: 0;
+                margin: 0 32px 20px 0;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-end;
+            }
+
+            .tag {
+                display: flex;
+                gap: 12.177px;
+                align-items: center;
+
+                p {
+                    font-family: "degular-mono", sans-serif;
+                    font-size: 0.7941875rem; //12.707px
+                    font-weight: 600;
+                    line-height: 130%;
+                    text-transform: uppercase;
+
+                    @include md {
+                        font-size: 1.5rem; //24px
+                        font-weight: 600;
+                        line-height: 130%; //31.2px
+                        text-transform: uppercase;
+                    }
+                }
+
+                .squares {
+                    width: 8.471px;
+                    height: 8.471px;
+
+                    @include md {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        .adjectives {
+            margin-top: 32px;
+            display: flex;
+            gap: 26px 28px;
+            flex-wrap: wrap;
+            width: 100%;
+
+            @include md {
+                order: 3;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+
+            p {
+                font-family: "Degular Mono" sans-serif;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 130%;
+                letter-spacing: 1.6px;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .intro {
+        margin-top: 120px;
+        margin-bottom: 120px;
+
+        h5 {
+            text-align: justify;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding-bottom: 24px;
+
+        @include md {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        img{
+            width: 100%;
+            height: auto;
+        }
+
+        .grid-element {
+            //assign grid-area property to be same as class name
+            @each $name in element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14 {
+                &.#{$name} {
+                    grid-area: #{$name};
+                    background-color: aqua;
+                }
+            }
+
+            &.line-break{
+                margin-bottom: 1rem;
+            }
+        }
+
+        &#window {
+            grid-template-areas:
+                "element1 element1 element1 element1 element2 element2"
+                "element3 element3 element3 element5 element5 element5"
+                "element4 element4 element4 element5 element5 element5"
+                "element6 element6 element6 element6 element6 element6"
+                "element7 element7 element7 element7 element7 element7"
+                "element8 element8 element8 element9 element9 element9"
+                "element10 element10 element10 element10 element11 element11"
+                "element10 element10 element10 element10 element12 element12"
+                "element13 element13 element13 element13 element13 element13"
+                "element14 element14 element14 element14 element14 element14";
+        }
+
+    }
 }

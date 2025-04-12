@@ -391,6 +391,274 @@ img {
   gap: 2rem;
 }
 
+@media (min-width: 768px) {
+  .project-page .hero {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+.project-page .hero .title-frame {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .project-page .hero .title-frame {
+    margin-right: 0;
+  }
+}
+.project-page .hero img {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .project-page .hero img {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+}
+.project-page .hero .tags-frame {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 8px 24px 24px 24px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1.6875rem;
+}
+@media (min-width: 768px) {
+  .project-page .hero .tags-frame {
+    -webkit-box-ordinal-group: 1;
+        -ms-flex-order: 0;
+            order: 0;
+    margin: 0 32px 20px 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+  }
+}
+.project-page .hero .tags-frame .tag {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 12.177px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.project-page .hero .tags-frame .tag p {
+  font-family: "degular-mono", sans-serif;
+  font-size: 0.7941875rem;
+  font-weight: 600;
+  line-height: 130%;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .project-page .hero .tags-frame .tag p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 130%;
+    text-transform: uppercase;
+  }
+}
+.project-page .hero .tags-frame .tag .squares {
+  width: 8.471px;
+  height: 8.471px;
+}
+@media (min-width: 768px) {
+  .project-page .hero .tags-frame .tag .squares {
+    width: 16px;
+    height: 16px;
+  }
+}
+.project-page .hero .adjectives {
+  margin-top: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 26px 28px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .project-page .hero .adjectives {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+.project-page .hero .adjectives p {
+  font-family: "Degular Mono" sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+.project-page .intro {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+.project-page .intro h5 {
+  text-align: justify;
+}
+.project-page .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 40px;
+  padding-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .project-page .content {
+    display: -ms-grid;
+    display: grid;
+    gap: 40px;
+    -ms-grid-columns: 1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr;
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+.project-page .content img {
+  width: 100%;
+  height: auto;
+}
+.project-page .content .grid-element.element1 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: element1;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element2 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 2;
+  grid-area: element2;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: element3;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element4 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: element4;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element5 {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 3;
+  grid-area: element5;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element6 {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 6;
+  grid-area: element6;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element7 {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 6;
+  grid-area: element7;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element8 {
+  -ms-grid-row: 6;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: element8;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element9 {
+  -ms-grid-row: 6;
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 3;
+  grid-area: element9;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element10 {
+  -ms-grid-row: 7;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: element10;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element11 {
+  -ms-grid-row: 7;
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 2;
+  grid-area: element11;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element12 {
+  -ms-grid-row: 8;
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 2;
+  grid-area: element12;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element13 {
+  -ms-grid-row: 9;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 6;
+  grid-area: element13;
+  background-color: aqua;
+}
+.project-page .content .grid-element.element14 {
+  -ms-grid-row: 10;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 6;
+  grid-area: element14;
+  background-color: aqua;
+}
+.project-page .content .grid-element.line-break {
+  margin-bottom: 1rem;
+}
+.project-page .content#window {
+      grid-template-areas: "element1 element1 element1 element1 element2 element2" "element3 element3 element3 element5 element5 element5" "element4 element4 element4 element5 element5 element5" "element6 element6 element6 element6 element6 element6" "element7 element7 element7 element7 element7 element7" "element8 element8 element8 element9 element9 element9" "element10 element10 element10 element10 element11 element11" "element10 element10 element10 element10 element12 element12" "element13 element13 element13 element13 element13 element13" "element14 element14 element14 element14 element14 element14";
+}
+
 /* =============
     Typography
 ============= */
@@ -466,6 +734,7 @@ h4 {
 
 .medium-24pt-lower,
 h5 {
+  margin: 0;
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 130%;
@@ -477,6 +746,7 @@ p {
   font-size: 1rem;
   font-weight: 500;
   line-height: 130%;
+  margin: 0;
 }
 
 .cursors {
