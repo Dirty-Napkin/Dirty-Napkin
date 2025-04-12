@@ -6,12 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     cursor.classList.add("cursors");
     document.body.appendChild(cursor);
     
-    // Hide the default cursor for the entire document
-    document.documentElement.style.cursor = "none";
-    document.body.style.cursor = "none";
-    document.querySelectorAll("*").forEach(el => el.style.cursor = "none");
-
-    
     // Update cursor position
     document.addEventListener("mousemove", function (e) {
         cursor.style.left = e.clientX + "px";

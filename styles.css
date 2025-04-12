@@ -505,6 +505,10 @@ p {
   height: var(--link-height);
 }
 
+html, body, * {
+  cursor: none;
+}
+
 /* =============
     Buttons
 ============= */

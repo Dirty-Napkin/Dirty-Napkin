@@ -22,3 +22,8 @@
         height: var(--link-height);
     }
 }
+
+// Hide the default cursor for the entire document
+html, body, * {
+    cursor: none;
+}
