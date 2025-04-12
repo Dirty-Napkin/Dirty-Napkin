@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hide the default cursor for the entire document
     document.documentElement.style.cursor = "none";
     document.body.style.cursor = "none";
-    document.querySelectorAll("*").forEach(el => el.style.cursor = "none");
+    // This line removes the default cursor from all elements on the page
+        document.querySelectorAll("*").forEach(el => el.style.cursor = "none");
 
     
     // Update cursor position

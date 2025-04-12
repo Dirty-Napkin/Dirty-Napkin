@@ -5,7 +5,7 @@ button {
     all: unset;
     white-space: nowrap;
 }
-
+// Button where arrows appear on hover
 .arrow-btn {
     position: relative;
     padding: 20px 30px;
@@ -59,4 +59,11 @@ button {
     }
 }
 
-@import "buttons/nav-type";
+// Nav Type (see JS as well)
+.centered-text {
+    cursor: pointer; /* Adds the pointer cursor on hover */
+
+    &:hover {
+        color: var(--white);
+    }
+}
