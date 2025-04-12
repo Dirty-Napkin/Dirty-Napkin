@@ -389,9 +389,6 @@ img {
   -ms-grid-columns: 1fr 2rem 1fr;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  padding: 60px;
-  width: 100%;
-  height: 100%;
 }
 
 /* =============
@@ -641,6 +638,7 @@ textarea {
   margin: 0 0 0.2rem 0;
   background-color: var(--white);
   position: relative;
+  line-height: revert;
 }
 .brand-card .card__description {
   margin: 0;
@@ -650,6 +648,7 @@ textarea {
   transition: all 0.3s ease;
   position: relative;
   z-index: -1;
+  line-height: revert;
 }
 .brand-card:hover .card__image {
   -webkit-transform: scale(1.05);

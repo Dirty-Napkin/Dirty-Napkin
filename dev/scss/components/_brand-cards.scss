@@ -38,6 +38,7 @@
         margin: 0 0 0.2rem 0;
         background-color: var(--white);
         position: relative; 
+        line-height: revert;
     }
 
     // Description styling
@@ -48,6 +49,7 @@
         transition: all 0.3s ease;
         position: relative;
         z-index: -1;
+        line-height: revert;
     }
 
     // Hover effect
