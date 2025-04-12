@@ -14,7 +14,7 @@ a.no-link {
 /* Button Text */
 .button-text {
     color: var(--key);
-    font-size: 1rem;
+    font-size: 1rem; //16px
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.05rem;
@@ -22,7 +22,7 @@ a.no-link {
 }
 
 .centered-text {
-    font-size: 1em;
+    font-size: 1em; //16px
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -39,7 +39,7 @@ h1 {
     text-align: justify;
     text-box: trim-both cap;
     /*https://caniuse.com/mdn-css_properties_text-box*/
-    font-size: 21.563rem;
+    font-size: 21.563rem; //345px
     font-weight: 700;
     line-height: 130%;
     letter-spacing: 86.25px;
@@ -48,7 +48,7 @@ h1 {
 
 .semibold-32pt,
 h2 {
-    font-size: 2rem;
+    font-size: 2rem; //32px
     font-weight: 600;
     letter-spacing: 1.6px;
     text-transform: uppercase;
@@ -56,16 +56,15 @@ h2 {
 
 .semibold-24pt,
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; //24px
     font-weight: 600;
-    line-height: 130%;
-    /*31.2px*/
+    line-height: 130%; //31.2px
     text-transform: uppercase;
 }
 
 .bold-20pt,
 h4 {
-    font-size: 1.25rem;
+    font-size: 1.25rem; //20px
     font-weight: 700;
     line-height: 130%;
     letter-spacing: 0.075rem;
@@ -75,7 +74,7 @@ h4 {
 
 .medium-24pt-lower,
 h5 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; //24px
     font-weight: 500;
     line-height: 130%;
 }
@@ -83,8 +82,7 @@ h5 {
 .body,
 p {
     font-family: "degular-text", sans-serif;
-    font-size: 1rem;
+    font-size: 1rem; //16px
     font-weight: 500;
-    line-height: 130%;
-    /*20.8px*/
+    line-height: 130%; //20.8px
 }
