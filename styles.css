@@ -80,6 +80,7 @@ pre {
  */
 a {
   background-color: transparent;
+  all: unset;
 }
 
 /**
@@ -383,14 +384,6 @@ img {
   height: 116px;
 }
 
-.brand-card-grid {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 2rem 1fr;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-
 /* =============
     Typography
 ============= */
@@ -477,8 +470,24 @@ p {
   font-family: "degular-text", sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  line-height: 130%;
+  line-height: 130%; /*20.8px*/
   margin: 0;
+}
+
+.txt24pt {
+  font-size: 1.5rem;
+}
+
+.txtbold {
+  font-weight: 700;
+}
+
+.txt24pt {
+  font-size: 1.5rem;
+}
+
+.txtbold {
+  font-weight: 700;
 }
 
 .cursors {
@@ -566,7 +575,6 @@ button {
   /* Adjusted to account for absolute positioning */
 }
 
-/* Nav Type */
 .centered-text {
   cursor: pointer; /* Adds the pointer cursor on hover */
 }
@@ -574,7 +582,6 @@ button {
   color: var(--white);
 }
 
-/* End Nav Type */
 /* =============
     Forms
 ============= */
@@ -597,8 +604,39 @@ textarea {
        appearance: none;
 }
 
-.brand-card {
+/*---- Page title ----*/
+.pg-title-container {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 4em;
+}
+.pg-title-container .pg-title {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.7rem;
+}
+
+/*---- Brand Cards ----*/
+.brand-card-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 max(1.25rem, 4.5%) max(2rem, 7.2%) max(1.25rem, 4.5%);
+  gap: 2.7rem;
+}
+.brand-card-grid .brand-card {
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -610,13 +648,13 @@ textarea {
       -ms-flex-align: start;
           align-items: flex-start;
 }
-.brand-card .card__image-container {
+.brand-card-grid .card__image-container {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;
+  padding-top: 100%;
   overflow: hidden;
 }
-.brand-card .card__image {
+.brand-card-grid .card__image {
   position: absolute;
   top: 0;
   left: 0;
@@ -624,19 +662,15 @@ textarea {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  -webkit-transition: -webkit-transform 0.3s ease;
-  transition: -webkit-transform 0.3s ease;
-  transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
-.brand-card .card__content {
-  padding: 1rem 0 0 0;
+.brand-card-grid .card__content {
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-.brand-card .card__title {
-  font-size: 1.625rem;
+.brand-card-grid .card__title {
+  padding: 0.25rem 0 0 0;
+  font-size: 1.25rem;
   font-weight: bold;
   text-transform: uppercase;
   margin: 0 0 0.2rem 0;
@@ -644,23 +678,54 @@ textarea {
   position: relative;
   line-height: revert;
 }
-.brand-card .card__description {
+.brand-card-grid .card__description {
+  font-size: 1rem;
   margin: 0;
-  -webkit-transform: translateY(-25px);
-          transform: translateY(-25px);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  position: relative;
   z-index: -1;
-  line-height: revert;
 }
-.brand-card:hover .card__image {
-  -webkit-transform: scale(1.05);
-          transform: scale(1.05);
+@media (min-width: 430px) {
+  .brand-card-grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr max(1rem, 3.6%) 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem max(1rem, 3.6%);
+  }
+  .brand-card-grid .card__image-container {
+    padding-top: 56.25%;
+  }
 }
-.brand-card:hover .card__description {
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+@media (min-width: 768px) {
+  .brand-card-grid .brand-card .card__title {
+    font-size: 1.625rem;
+  }
+  .brand-card-grid .brand-card .card__description {
+    -webkit-transform: translateY(-110%);
+            transform: translateY(-110%);
+    position: relative;
+    z-index: -1;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+    font-size: 1.5rem;
+  }
+  .brand-card-grid .brand-card .card__image {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  .brand-card-grid .brand-card:hover .card__image-container {
+    background-color: #fff;
+  }
+  .brand-card-grid .brand-card:hover .card__image {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+    opacity: 90%;
+  }
+  .brand-card-grid .brand-card:hover .card__description {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 
 /* =============
