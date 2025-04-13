@@ -1,8 +1,10 @@
 // Function to create a card component
-function createCard(imageUrl, title, description) {
+function createCard(imageUrl, title, description, cardLink) {
     // Create the main card container
-    const card = document.createElement('div');
+    const card = document.createElement('a');
     card.className = 'brand-card';
+    card.href = cardLink;
+
 
     // Create the image container
     const imageContainer = document.createElement('div');
@@ -43,29 +45,43 @@ const cardsData = [
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'Those Eyes',
-        description: 'Prepare to be psychologically thrilled'
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'google.com'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg', 
         title: 'The Lemonade Stand',
-        description: 'Prepare to be psychologically thrilled'
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'google.com'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'The Window', 
-        description: 'Prepare to be psychologically thrilled'
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'google.com'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled'
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'google.com'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled'
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'google.com'
+    },
+    {
+        imageUrl: 'assets/test/Those Eyes image.jpg',
+        title: 'American Scripture Project',
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'google.com'
     }
 ];
+
+console.log("ready to populate cards!");
+
 
 // Create and append all cards when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,9 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = createCard(
                 cardData.imageUrl,
                 cardData.title,
-                cardData.description
+                cardData.description,
+                cardData.cardLink
             );
             gridContainer.appendChild(card);
         });
     }
 });
+
+
