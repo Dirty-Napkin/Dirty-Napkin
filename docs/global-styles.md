@@ -1,6 +1,6 @@
 # CSS Global Styles List
 - **`ul.blank-list`**: removes bullet formatting from an unordered list
-- **`.padding`**: adds responsive left and right padding for margins
+- **`.margins`**: adds responsive left and right margins
 - **`.squares`**: formats divs into squares
     - **`.squares.squares-sm`**: 24px squares
     - **`.squares.squares-lg`**: 116px squares
@@ -18,5 +18,7 @@
     - also default styling for `h3` elements
 - **`.bold-20pt`**: 20pt bold mono
     - also default styling for `h4` elements
+- **`.medium-24pt-lower`**: 24pt medium lowercase
+    - also default styling for `h5` elements
 - **`.body`**: body copy
     - also default styling for `p` elements
