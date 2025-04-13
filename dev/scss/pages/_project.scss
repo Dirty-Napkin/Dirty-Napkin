@@ -1,4 +1,24 @@
 .project-page {
+    .narrow-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+            @include md {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+            
+            @include lg {
+                padding: 0;
+                *{
+                    /*4 columns + 3 gaps:
+                    (100% - (5 x gap)) / 6 = column width
+                    (column width x 4) + (gap x 3) = img width*/
+                    max-width: calc((100% - 5 * 40px) / 6 * 4 + 40px * 3);
+                }
+            }
+    }
 
     .hero {
         @include md {
@@ -83,25 +103,40 @@
                 order: 3;
                 flex-wrap: nowrap;
                 justify-content: space-between;
+                padding-left: 32px;
+                padding-right: 32px;
             }
 
             p {
                 font-family: "Degular Mono" sans-serif;
-                font-size: 1rem;
+                font-size: 1rem; //16px
                 font-weight: 400;
                 line-height: 130%;
                 letter-spacing: 1.6px;
                 text-transform: uppercase;
+                @include md{
+                    font-size: 1.5rem; //24px
+                    letter-spacing: 2.4px;
+                }
             }
         }
     }
 
     .intro {
+        width: 100%;
+        gap: 1rem;
         margin-top: 120px;
         margin-bottom: 120px;
 
+        @include lg {
+            margin-top: 152px;
+            margin-bottom: 152px;
+        }
+
         h5 {
             text-align: justify;
+            text-align-last: justify;
+            width: 100%;
         }
     }
 
@@ -113,25 +148,46 @@
 
         @include md {
             display: grid;
-            gap: 40px;
             grid-template-columns: repeat(6, 1fr);
         }
 
-        img{
+        img {
             width: 100%;
             height: auto;
         }
 
         .grid-element {
+
             //assign grid-area property to be same as class name
             @each $name in element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14 {
                 &.#{$name} {
                     grid-area: #{$name};
-                    background-color: aqua;
+                }
+            }
+            
+            &.small-img {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                
+                img {
+                    /* 2 columns + 1 gap
+                    (100% - (2 x gap)) / 3 = column width
+                    column width x 2 + gap = img width*/
+                    width: calc((100% - 2 * 40px) / 3 * 2 + 40px);
+                }
+            }
+            
+            &.vert-center{
+                align-self: center;
+                @include lg{
+                    padding-left: 24px;
+                    padding-right: 24px;
                 }
             }
 
-            &.line-break{
+            .line-break {
                 margin-bottom: 1rem;
             }
         }
