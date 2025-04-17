@@ -1012,11 +1012,14 @@ footer .footer-column.column3 {
 }
 @media (min-width: 768px) {
   .project-page .content .narrow-text {
-    max-width: calc(100% - 64px);
+    margin-left: 32px;
+    margin-right: 32px;
   }
 }
 @media (min-width: 1024px) {
   .project-page .content .narrow-text {
+    margin-left: 0;
+    margin-right: 0;
     /*4 columns + 3 gaps:
     (100% - (5 x gap)) / 6 = column width
     (column width x 4) + (gap x 3) = img width*/

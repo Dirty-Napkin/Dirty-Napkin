@@ -167,10 +167,13 @@
             margin-bottom: 1rem; //16px
 
             @include md {
-                max-width: calc(100% - 64px);
+                margin-left: 32px;
+                margin-right: 32px;
             }
 
             @include lg {
+                margin-left: 0;
+                margin-right: 0;
                 /*4 columns + 3 gaps:
                 (100% - (5 x gap)) / 6 = column width
                 (column width x 4) + (gap x 3) = img width*/
