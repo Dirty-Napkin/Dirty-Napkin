@@ -1,24 +1,4 @@
 .project-page {
-    .narrow-text {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-            @include md {
-                padding-left: 32px;
-                padding-right: 32px;
-            }
-            
-            @include lg {
-                padding: 0;
-                *{
-                    /*4 columns + 3 gaps:
-                    (100% - (5 x gap)) / 6 = column width
-                    (column width x 4) + (gap x 3) = img width*/
-                    max-width: calc((100% - 5 * 40px) / 6 * 4 + 40px * 3);
-                }
-            }
-    }
 
     .hero {
         @include md {
@@ -114,7 +94,8 @@
                 line-height: 130%;
                 letter-spacing: 1.6px;
                 text-transform: uppercase;
-                @include md{
+
+                @include md {
                     font-size: 1.5rem; //24px
                     letter-spacing: 2.4px;
                 }
@@ -123,6 +104,10 @@
     }
 
     .intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         gap: 1rem;
         margin-top: 120px;
@@ -134,6 +119,7 @@
         }
 
         h5 {
+            max-width: 50ch;
             text-align: justify;
             text-align-last: justify;
             width: 100%;
@@ -156,55 +142,67 @@
             height: auto;
         }
 
-        .grid-element {
+        .height2 {
+            grid-row: span 2;
+        }
 
-            //assign grid-area property to be same as class name
-            @each $name in element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14 {
-                &.#{$name} {
-                    grid-area: #{$name};
-                }
+        .width2 {
+            grid-column: span 2;
+        }
+
+        .width3 {
+            grid-column: span 3;
+        }
+
+        .width4 {
+            grid-column: span 4;
+        }
+
+        .width6 {
+            grid-column: span 6;
+        }
+
+        .narrow-text {
+            justify-self: center;
+            margin-bottom: 1rem; //16px
+
+            @include md {
+                max-width: calc(100% - 64px);
             }
-            
-            &.small-img {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                
+
+            @include lg {
+                /*4 columns + 3 gaps:
+                (100% - (5 x gap)) / 6 = column width
+                (column width x 4) + (gap x 3) = img width*/
+                max-width: calc((100% - 5 * 40px) / 6 * 4 + 40px * 3);
+            }
+        }
+
+        .small-img {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            @include md {
+
                 img {
                     /* 2 columns + 1 gap
-                    (100% - (2 x gap)) / 3 = column width
-                    column width x 2 + gap = img width*/
+                        (100% - (2 x gap)) / 3 = column width
+                        column width x 2 + gap = img width*/
                     width: calc((100% - 2 * 40px) / 3 * 2 + 40px);
                 }
             }
-            
-            &.vert-center{
-                align-self: center;
-                @include lg{
-                    padding-left: 24px;
-                    padding-right: 24px;
-                }
-            }
-
-            .line-break {
-                margin-bottom: 1rem;
-            }
         }
 
-        &#window {
-            grid-template-areas:
-                "element1 element1 element1 element1 element2 element2"
-                "element3 element3 element3 element5 element5 element5"
-                "element4 element4 element4 element5 element5 element5"
-                "element6 element6 element6 element6 element6 element6"
-                "element7 element7 element7 element7 element7 element7"
-                "element8 element8 element8 element9 element9 element9"
-                "element10 element10 element10 element10 element11 element11"
-                "element10 element10 element10 element10 element12 element12"
-                "element13 element13 element13 element13 element13 element13"
-                "element14 element14 element14 element14 element14 element14";
-        }
+        .vert-center {
+            align-self: center;
 
+            @include md {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
     }
+
 }

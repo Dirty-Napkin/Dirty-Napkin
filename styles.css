@@ -986,38 +986,6 @@ footer .footer-column.column3 {
   }
 }
 
-.project-page .narrow-text {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-@media (min-width: 768px) {
-  .project-page .narrow-text {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-@media (min-width: 1024px) {
-  .project-page .narrow-text {
-    padding: 0;
-  }
-  .project-page .narrow-text * {
-    /*4 columns + 3 gaps:
-    (100% - (5 x gap)) / 6 = column width
-    (column width x 4) + (gap x 3) = img width*/
-    max-width: calc((100% - 200px) / 6 * 4 + 120px);
-  }
-}
 @media (min-width: 768px) {
   .project-page .hero {
     display: -webkit-box;
@@ -1157,6 +1125,19 @@ footer .footer-column.column3 {
   }
 }
 .project-page .intro {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
   gap: 1rem;
   margin-top: 120px;
@@ -1169,6 +1150,7 @@ footer .footer-column.column3 {
   }
 }
 .project-page .intro h5 {
+  max-width: 50ch;
   text-align: justify;
   -moz-text-align-last: justify;
        text-align-last: justify;
@@ -1197,93 +1179,45 @@ footer .footer-column.column3 {
   width: 100%;
   height: auto;
 }
-.project-page .content .grid-element.element1 {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 4;
-  grid-area: element1;
-}
-.project-page .content .grid-element.element2 {
-  -ms-grid-row: 1;
-  -ms-grid-column: 5;
-  -ms-grid-column-span: 2;
-  grid-area: element2;
-}
-.project-page .content .grid-element.element3 {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
-  grid-area: element3;
-}
-.project-page .content .grid-element.element4 {
-  -ms-grid-row: 3;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
-  grid-area: element4;
-}
-.project-page .content .grid-element.element5 {
-  -ms-grid-row: 2;
+.project-page .content .height2 {
   -ms-grid-row-span: 2;
-  -ms-grid-column: 4;
+  grid-row: span 2;
+}
+.project-page .content .width2 {
+  -ms-grid-column-span: 2;
+  grid-column: span 2;
+}
+.project-page .content .width3 {
   -ms-grid-column-span: 3;
-  grid-area: element5;
+  grid-column: span 3;
 }
-.project-page .content .grid-element.element6 {
-  -ms-grid-row: 4;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 6;
-  grid-area: element6;
-}
-.project-page .content .grid-element.element7 {
-  -ms-grid-row: 5;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 6;
-  grid-area: element7;
-}
-.project-page .content .grid-element.element8 {
-  -ms-grid-row: 6;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
-  grid-area: element8;
-}
-.project-page .content .grid-element.element9 {
-  -ms-grid-row: 6;
-  -ms-grid-column: 4;
-  -ms-grid-column-span: 3;
-  grid-area: element9;
-}
-.project-page .content .grid-element.element10 {
-  -ms-grid-row: 7;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 1;
+.project-page .content .width4 {
   -ms-grid-column-span: 4;
-  grid-area: element10;
+  grid-column: span 4;
 }
-.project-page .content .grid-element.element11 {
-  -ms-grid-row: 7;
-  -ms-grid-column: 5;
-  -ms-grid-column-span: 2;
-  grid-area: element11;
-}
-.project-page .content .grid-element.element12 {
-  -ms-grid-row: 8;
-  -ms-grid-column: 5;
-  -ms-grid-column-span: 2;
-  grid-area: element12;
-}
-.project-page .content .grid-element.element13 {
-  -ms-grid-row: 9;
-  -ms-grid-column: 1;
+.project-page .content .width6 {
   -ms-grid-column-span: 6;
-  grid-area: element13;
+  grid-column: span 6;
 }
-.project-page .content .grid-element.element14 {
-  -ms-grid-row: 10;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 6;
-  grid-area: element14;
+.project-page .content .narrow-text {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  margin-bottom: 1rem;
 }
-.project-page .content .grid-element.small-img {
+@media (min-width: 768px) {
+  .project-page .content .narrow-text {
+    max-width: calc(100% - 64px);
+  }
+}
+@media (min-width: 1024px) {
+  .project-page .content .narrow-text {
+    /*4 columns + 3 gaps:
+    (100% - (5 x gap)) / 6 = column width
+    (column width x 4) + (gap x 3) = img width*/
+    max-width: calc((100% - 200px) / 6 * 4 + 120px);
+  }
+}
+.project-page .content .small-img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1298,26 +1232,22 @@ footer .footer-column.column3 {
       -ms-flex-align: center;
           align-items: center;
 }
-.project-page .content .grid-element.small-img img {
-  /* 2 columns + 1 gap
-  (100% - (2 x gap)) / 3 = column width
-  column width x 2 + gap = img width*/
-  width: calc((100% - 80px) / 3 * 2 + 40px);
+@media (min-width: 768px) {
+  .project-page .content .small-img img {
+    /* 2 columns + 1 gap
+        (100% - (2 x gap)) / 3 = column width
+        column width x 2 + gap = img width*/
+    width: calc((100% - 80px) / 3 * 2 + 40px);
+  }
 }
-.project-page .content .grid-element.vert-center {
+.project-page .content .vert-center {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
 }
-@media (min-width: 1024px) {
-  .project-page .content .grid-element.vert-center {
+@media (min-width: 768px) {
+  .project-page .content .vert-center {
     padding-left: 24px;
     padding-right: 24px;
   }
-}
-.project-page .content .grid-element .line-break {
-  margin-bottom: 1rem;
-}
-.project-page .content#window {
-      grid-template-areas: "element1 element1 element1 element1 element2 element2" "element3 element3 element3 element5 element5 element5" "element4 element4 element4 element5 element5 element5" "element6 element6 element6 element6 element6 element6" "element7 element7 element7 element7 element7 element7" "element8 element8 element8 element9 element9 element9" "element10 element10 element10 element10 element11 element11" "element10 element10 element10 element10 element12 element12" "element13 element13 element13 element13 element13 element13" "element14 element14 element14 element14 element14 element14";
 }
