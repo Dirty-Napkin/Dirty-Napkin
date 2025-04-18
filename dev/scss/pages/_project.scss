@@ -208,4 +208,51 @@
         }
     }
 
+    .next-project{
+        display: flex;
+        margin: 64px 16px 0 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        align-self: stretch;
+
+        a{
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            align-self: stretch;
+
+            .next-project-text{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 18px;
+
+                p{
+                    text-align: justify;
+                    text-box: trim-both cap;
+                    /*https://caniuse.com/mdn-css_properties_text-box*/
+                }
+                h2{
+                    margin: 0;
+                    text-align: right;
+                }
+            }
+            img{
+                height: 107px;
+            }
+            .project-floating-arrow{
+                position: absolute;
+                white-space: nowrap;
+                &.arrow-1{
+                }
+                &.arrow-2{
+                }
+                &.arrow-3{
+                }
+            }
+        }
+    }
+
 }

@@ -1049,3 +1049,40 @@ footer .footer-column.column3 {
     padding-right: 24px;
   }
 }
+.project-page .next-project {
+  display: flex;
+  margin: 64px 16px 0 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  align-self: stretch;
+}
+.project-page .next-project a {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  align-self: stretch;
+}
+.project-page .next-project a .next-project-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+.project-page .next-project a .next-project-text p {
+  text-align: justify;
+  text-box: trim-both cap;
+  /*https://caniuse.com/mdn-css_properties_text-box*/
+}
+.project-page .next-project a .next-project-text h2 {
+  margin: 0;
+  text-align: right;
+}
+.project-page .next-project a img {
+  height: 107px;
+}
+.project-page .next-project a .project-floating-arrow {
+  position: absolute;
+  white-space: nowrap;
+}
