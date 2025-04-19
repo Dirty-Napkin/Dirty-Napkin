@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* --------------------------------------------------------------------------------
     
-    Here I need to fix the spacing Factor so that it can scale proportionally based on screen size in addition to the font size scaling
+    Here I need to fix the spacing Factor so that it can scale proportionally based on screen size in addition to the font size scaling.
+
+    It works well on page load, but if you scale the browswer while you're using it, the spacing does not change. Maybe this is an issue we don't worry about fixing?
 
     -----------------------------------------------------------------------------------*/
     
