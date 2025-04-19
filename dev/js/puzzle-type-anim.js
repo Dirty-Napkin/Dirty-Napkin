@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     It works well on page load, but if you scale the browswer while you're using it, the spacing does not change. Maybe this is an issue we don't worry about fixing?
 
+    window.addEventListener("resize", () => {}) This might help -NS
+
     -----------------------------------------------------------------------------------*/
     
         const spacingFactor = .75;
