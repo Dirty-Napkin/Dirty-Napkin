@@ -15,33 +15,35 @@ ul.blank-list {
     list-style-type: disc !important;
 }
 
-img{
+img {
     width: auto;
     height: 100%;
 }
 
-.padding {
-    padding-left: 24px;
-    padding-right: 24px;
+.margins {
+    margin-left: 24px;
+    margin-right: 24px;
 
     @include md {
-        padding-left: 32px;
-        padding-right: 32px;
+        margin-left: 32px;
+        margin-right: 32px;
     }
 
     @include xl {
-        padding-left: 64px;
-        padding-right: 64px;
+        margin-left: 64px;
+        margin-right: 64px;
     }
 }
 
 .squares {
     background-color: var(--key);
-    &.squares-sm{
+
+    &.squares-sm {
         width: 24px;
         height: 24px;
     }
-    &.squares-lg{
+
+    &.squares-lg {
         width: 116px;
         height: 116px;
     }

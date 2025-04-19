@@ -1,0 +1,258 @@
+.project-page {
+
+    .hero {
+        @include md {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .title-frame {
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem; //10px
+            margin-bottom: 24px;
+
+            @include md {
+                margin-right: 0;
+            }
+        }
+
+        img {
+            width: 100%;
+
+            @include md {
+                order: 1;
+            }
+        }
+
+        .tags-frame {
+            display: flex;
+            margin: 8px 24px 24px 24px;
+            justify-content: space-between;
+            gap: 1.6875rem; //27px
+
+            @include md {
+                order: 0;
+                margin: 0 32px 20px 0;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-end;
+            }
+
+            .tag {
+                display: flex;
+                gap: 12.177px;
+                align-items: center;
+
+                p {
+                    font-family: "degular-mono", sans-serif;
+                    font-size: 0.7941875rem; //12.707px
+                    font-weight: 600;
+                    line-height: 130%;
+                    text-transform: uppercase;
+
+                    @include md {
+                        font-size: 1.5rem; //24px
+                        font-weight: 600;
+                        line-height: 130%; //31.2px
+                        text-transform: uppercase;
+                    }
+                }
+
+                .squares {
+                    width: 8.471px;
+                    height: 8.471px;
+
+                    @include md {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        .adjectives {
+            margin-top: 32px;
+            display: flex;
+            gap: 26px 28px;
+            flex-wrap: wrap;
+            width: 100%;
+
+            @include md {
+                order: 3;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+
+            p {
+                font-family: "Degular Mono" sans-serif;
+                font-size: 1rem; //16px
+                font-weight: 400;
+                line-height: 130%;
+                letter-spacing: 1.6px;
+                text-transform: uppercase;
+
+                @include md {
+                    font-size: 1.5rem; //24px
+                    letter-spacing: 2.4px;
+                }
+            }
+        }
+    }
+
+    .intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 1rem;
+        margin-top: 120px;
+        margin-bottom: 120px;
+
+        @include lg {
+            margin-top: 152px;
+            margin-bottom: 152px;
+        }
+
+        h5 {
+            max-width: 50ch;
+            text-align: justify;
+            text-align-last: justify;
+            width: 100%;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding-bottom: 24px;
+
+        @include md {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .height2 {
+            grid-row: span 2;
+        }
+
+        .width2 {
+            grid-column: span 2;
+        }
+
+        .width3 {
+            grid-column: span 3;
+        }
+
+        .width4 {
+            grid-column: span 4;
+        }
+
+        .width6 {
+            grid-column: span 6;
+        }
+
+        .narrow-text {
+            justify-self: center;
+            margin-bottom: 1rem; //16px
+
+            @include md {
+                margin-left: 32px;
+                margin-right: 32px;
+            }
+
+            @include lg {
+                margin-left: 0;
+                margin-right: 0;
+                /*4 columns + 3 gaps:
+                (100% - (5 x gap)) / 6 = column width
+                (column width x 4) + (gap x 3) = img width*/
+                max-width: calc((100% - 5 * 40px) / 6 * 4 + 40px * 3);
+            }
+        }
+
+        .small-img {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            @include md {
+
+                img {
+                    /* 2 columns + 1 gap
+                        (100% - (2 x gap)) / 3 = column width
+                        column width x 2 + gap = img width*/
+                    width: calc((100% - 2 * 40px) / 3 * 2 + 40px);
+                }
+            }
+        }
+
+        .vert-center {
+            align-self: center;
+
+            @include md {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    }
+
+    .next-project{
+        display: flex;
+        margin: 64px 16px 0 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        align-self: stretch;
+
+        a{
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            align-self: stretch;
+
+            .next-project-text{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 18px;
+
+                p{
+                    text-align: justify;
+                    text-box: trim-both cap;
+                    /*https://caniuse.com/mdn-css_properties_text-box*/
+                }
+                h2{
+                    margin: 0;
+                    text-align: right;
+                }
+            }
+            img{
+                height: 107px;
+            }
+            .project-floating-arrow{
+                position: absolute;
+                white-space: nowrap;
+                &.arrow-1{
+                }
+                &.arrow-2{
+                }
+                &.arrow-3{
+                }
+            }
+        }
+    }
+
+}

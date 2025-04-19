@@ -5,7 +5,7 @@ body {
     font-family: "degular-mono", sans-serif;
 }
 
-a.no-link{
+a.no-link {
     color: initial !important;
     text-decoration: none !important;
 }
@@ -14,50 +14,57 @@ a.no-link{
 /* Button Text */
 .button-text {
     color: var(--key);
-    font-size: 1rem;
+    font-size: 1rem; //16px
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
 }
+
 .centered-text {
-    font-size: 1em;
+    font-size: 1em; //16px
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.1em; /* Adjust tracking */
+    letter-spacing: 0.1em;
+    /* Adjust tracking */
 }
 
-.justified-text{
+.justified-text {
     text-align-last: justify;
 }
 
 // Big Puzzle
-.big-puzzle, h1{
+.big-puzzle,
+h1 {
     text-align: justify;
-    text-box: trim-both cap; /*https://caniuse.com/mdn-css_properties_text-box*/
-    font-size: 21.563rem;
+    text-box: trim-both cap;
+    /*https://caniuse.com/mdn-css_properties_text-box*/
+    font-size: 21.563rem; //345px
     font-weight: 700;
     line-height: 130%;
     letter-spacing: 86.25px;
     text-transform: uppercase;
 }
 
-.semibold-32pt, h2{
-    font-size: 2rem;
+.semibold-32pt,
+h2 {
+    font-size: 2rem; //32px
     font-weight: 600;
     letter-spacing: 1.6px;
     text-transform: uppercase;
 }
 
-.semibold-24pt, h3{
-    font-size: 1.5rem;
+.semibold-24pt,
+h3 {
+    font-size: 1.5rem; //24px
     font-weight: 600;
-    line-height: 130%; /*31.2px*/
+    line-height: 130%; //31.2px
     text-transform: uppercase;
 }
 
-.bold-20pt, h4{
-    font-size: 1.25rem;
+.bold-20pt,
+h4 {
+    font-size: 1.25rem; //20px
     font-weight: 700;
     line-height: 130%;
     letter-spacing: 0.075rem;
@@ -65,11 +72,21 @@ a.no-link{
     margin: 0;
 }
 
-.body, p{
-    font-family: "degular-text", sans-serif;
-    font-size: 1rem;
+.medium-24pt-lower,
+h5 {
+    margin: 0;
+    font-size: 1.5rem; //24px
     font-weight: 500;
-    line-height: 130%; /*20.8px*/
+    line-height: 130%;
+}
+
+.body,
+p {
+    font-family: "degular-text", sans-serif;
+    font-size: 1rem; //16px
+    font-weight: 500;
+    line-height: 130%; //20.8px
+    margin: 0;
 }
 
 .txt24pt {
