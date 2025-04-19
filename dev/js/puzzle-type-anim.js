@@ -5,7 +5,7 @@ Puzzle type animations
 - Add the class "puzzle-hover" if you want the effect to apply on hover (for nav)
 - Add the class "puzzle-auto" if you want the effect to play on load (for page titles)
 
------*/
+/-----------------*/
 
 document.addEventListener("DOMContentLoaded", () => {
     const textElements = document.querySelectorAll(".puzzle-type")
@@ -13,6 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     textElements.forEach((textElement) => {
     // Here is where to adjust the spacing of the grid, if you want the tracking to be more or less
+
+    /* --------------------------------------------------------------------------------
+    
+    Here I need to fix the spacing Factor so that it can scale proportionally based on screen size in addition to the font size scaling.
+
+    It works well on page load, but if you scale the browswer while you're using it, the spacing does not change. Maybe this is an issue we don't worry about fixing?
+
+    -----------------------------------------------------------------------------------*/
+    
         const spacingFactor = .75;
         const spacingTranslate = 13;
 
