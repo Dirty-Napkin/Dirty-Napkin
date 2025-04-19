@@ -211,49 +211,142 @@
         }
     }
 
-    .next-project{
+    //         .next-project-img{
+    //             height: 107px;
+    //             width: 107px;
+    //             background-size: cover;
+    //             background-position: center;
+    //             &#lemonade-stand{
+    //                 background-image: url("https://placehold.co/185x185.png");
+    //             }
+    //             .next-project-tint-overlay{
+    //                 height: 100%;
+    //                 width: 100%;
+    //                 opacity: 0%;
+    //                 background-color: var(--white);
+    //             }
+    //         }
+
+    //         .project-floating-arrow {
+    //             position: absolute;
+    //             white-space: nowrap;
+    //         }
+    //     }
+    // }
+
+    .next-project {
         display: flex;
-        margin: 64px 16px 0 0;
+        margin: 64px 0 0 0;
         flex-direction: column;
         justify-content: center;
         align-items: flex-end;
-        align-self: stretch;
+        align-self: center;
+        transform: scale(0.75);
 
-        a{
-            position: relative;
+        @include md{
+            transform: none;
+        }
+
+        a {
             display: flex;
-            align-items: flex-start;
             gap: 18px;
-            align-self: stretch;
+            align-self: center;
+            width: fit-content;
+            height: fit-content;
+            border: 1px solid #000;
 
-            .next-project-text{
+            .next-project-text {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
-                gap: 18px;
+                gap: 25px;
 
-                p{
-                    text-align: justify;
-                    text-box: trim-both cap;
-                    /*https://caniuse.com/mdn-css_properties_text-box*/
+                div {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    p{
+                        transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+                    }
+
+                    .arrow-1 {
+                        color: var(--magenta);
+                    }
+
+                    p {
+                        text-align: justify;
+                        text-box: trim-both cap;
+                        /*https://caniuse.com/mdn-css_properties_text-box*/
+                    }
                 }
-                h2{
+
+                h2 {
                     margin: 0;
                     text-align: right;
+                    transition: font-weight 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
                 }
             }
-            img{
-                height: 107px;
+
+            .next-project-img {
+                margin-top: 5px;
+                height: 185px;
+                width: 185px;
+                background-size: cover;
+                background-position: center;
+
+                &#lemonade-stand {
+                    background-image: url("https://placehold.co/185x185.png");
+                }
+
+                .next-project-tint-overlay {
+                    height: 100%;
+                    width: 100%;
+                    opacity: 0%;
+                    background-color: var(--white);
+                    transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+                }
+            }
+
+            .project-floating-arrow {
+                white-space: nowrap;
+                transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+                opacity: 0;
+                font-size: 32px;
+
+                &.arrow-2 {
+                    position: relative;
+                    top: 12.6px;
+                    right: 126px;
+                }
+
+                &.arrow-3 {
+                    position: relative;
+                    top: 103.32px;
+                    right: 88px;
+                }
+            }
+        }
+
+        &:hover{
+            .next-project-text{
+                div>*{
+                    color: var(--magenta) !important;
+                }
+                h2{
+                    font-weight: 700;
+                }
             }
             .project-floating-arrow{
-                position: absolute;
-                white-space: nowrap;
-                &.arrow-1{
-                }
-                &.arrow-2{
-                }
-                &.arrow-3{
-                }
+                opacity: 100%;
+            }
+            .next-project-tint-overlay{
+                opacity: 15% !important;
+            }
+        }
+        &:active{
+            .project-floating-arrow{
+                opacity: 0;
+                transition: opacity 200ms cubic-bezier(0.02, 0.89, 0.85, 1);
             }
         }
     }

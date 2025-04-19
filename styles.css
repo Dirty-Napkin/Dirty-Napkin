@@ -1062,26 +1062,46 @@ footer .footer-column.column3 {
 }
 .project-page .next-project {
   display: flex;
-  margin: 64px 16px 0 0;
+  margin: 64px 0 0 0;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  align-self: stretch;
+  align-self: center;
+  transform: scale(0.75);
+}
+@media (min-width: 768px) {
+  .project-page .next-project {
+    transform: none;
+  }
 }
 .project-page .next-project a {
-  position: relative;
   display: flex;
-  align-items: flex-start;
   gap: 18px;
-  align-self: stretch;
+  align-self: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid #000;
 }
 .project-page .next-project a .next-project-text {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 18px;
+  gap: 25px;
 }
-.project-page .next-project a .next-project-text p {
+.project-page .next-project a .next-project-text div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.project-page .next-project a .next-project-text div p {
+  transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+}
+.project-page .next-project a .next-project-text div .arrow-1 {
+  color: var(--magenta);
+}
+.project-page .next-project a .next-project-text div p {
   text-align: justify;
   text-box: trim-both cap;
   /*https://caniuse.com/mdn-css_properties_text-box*/
@@ -1089,11 +1109,54 @@ footer .footer-column.column3 {
 .project-page .next-project a .next-project-text h2 {
   margin: 0;
   text-align: right;
+  transition: font-weight 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
 }
-.project-page .next-project a img {
-  height: 107px;
+.project-page .next-project a .next-project-img {
+  margin-top: 5px;
+  height: 185px;
+  width: 185px;
+  background-size: cover;
+  background-position: center;
+}
+.project-page .next-project a .next-project-img#lemonade-stand {
+  background-image: url("https://placehold.co/185x185.png");
+}
+.project-page .next-project a .next-project-img .next-project-tint-overlay {
+  height: 100%;
+  width: 100%;
+  opacity: 0%;
+  background-color: var(--white);
+  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
 }
 .project-page .next-project a .project-floating-arrow {
-  position: absolute;
   white-space: nowrap;
+  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+  opacity: 0;
+  font-size: 32px;
+}
+.project-page .next-project a .project-floating-arrow.arrow-2 {
+  position: relative;
+  top: 12.6px;
+  right: 126px;
+}
+.project-page .next-project a .project-floating-arrow.arrow-3 {
+  position: relative;
+  top: 103.32px;
+  right: 88px;
+}
+.project-page .next-project:hover .next-project-text div > * {
+  color: var(--magenta) !important;
+}
+.project-page .next-project:hover .next-project-text h2 {
+  font-weight: 700;
+}
+.project-page .next-project:hover .project-floating-arrow {
+  opacity: 100%;
+}
+.project-page .next-project:hover .next-project-tint-overlay {
+  opacity: 15% !important;
+}
+.project-page .next-project:active .project-floating-arrow {
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.02, 0.89, 0.85, 1);
 }
