@@ -588,10 +588,15 @@ textarea {
   margin-bottom: 4em;
 }
 .pg-title-container .pg-title {
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 700;
   line-height: normal;
-  letter-spacing: 0.7rem;
+  letter-spacing: 0rem;
+}
+@media (min-width: 768px) {
+  .pg-title-container .pg-title {
+    font-size: 5rem;
+  }
 }
 
 /*---- Brand Cards ----*/
