@@ -2,7 +2,9 @@
     Header
 ============= */
 header {
+    position: fixed;
     display: flex;
+    width: 100%;
     align-items: center;
     gap: 1rem;
     padding: 12px 24px;
@@ -14,7 +16,7 @@ header {
     }
 
     @include md {
-        padding: 60px 48px;
+        padding: 1.5rem /*24px*/ 4rem /*64px*/;
     }
 
     .logo-container {
@@ -41,6 +43,7 @@ header {
                 display: none;
             }
         }
+        
         ul {
             display: none;
             gap: 48px;
@@ -51,4 +54,7 @@ header {
         }
     }
 
+    .test {
+        text-transform: uppercase;
+    }
 }
