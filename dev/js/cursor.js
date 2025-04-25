@@ -1,5 +1,3 @@
-console.log("Hello World - Cursor.js is working!");
-
 document.addEventListener("DOMContentLoaded", function () {
     // Create the custom cursor element
     let cursor = document.createElement("div");
