@@ -756,6 +756,60 @@ footer .footer-column.column3 {
 }
 
 /* =============
+    About Page
+============= */
+#about-page .hero {
+  background-color: red;
+}
+#about-page .hero .hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 12px;
+}
+#about-page .hero .hero-content .repeated-container .repeated-text {
+  text-align: justify;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+}
+@media (min-width: 430px) {
+  #about-page .hero .hero-content .repeated-container .repeated-text {
+    font-size: 2.016rem;
+  }
+}
+@media (min-width: 768px) {
+  #about-page .hero .hero-content .repeated-container .repeated-text {
+    font-size: 1.125rem;
+    max-width: 24ch;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page .hero .hero-content .repeated-container .repeated-text {
+    font-size: 1.5rem;
+  }
+}
+#about-page .hero .hero-content .team-pic-container {
+  position: relative;
+}
+#about-page .hero .hero-content .team-pic-container picture {
+  display: block;
+}
+#about-page .hero .hero-content .team-pic-container picture img {
+  width: 100%;
+}
+#about-page .hero .hero-content .team-pic-container #about-square-1 {
+  position: absolute;
+  top: 87.5706214689%;
+  left: 66.1764705882%;
+}
+#about-page .hero .hero-content #about-square-2 {
+  display: none;
+}
+#about-page .hero .hero-content #about-square-3 {
+  background: var(--white);
+}
+
+/* =============
     Brands Page
 ============= */
 /*---- Page title ----*/

@@ -1,0 +1,58 @@
+/* =============
+    About Page
+============= */
+
+#about-page{
+    .hero{
+        background-color: red;
+
+        .hero-content{
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-bottom: 12px;
+
+            .repeated-container{
+                .repeated-text{
+                    text-align: justify;
+                    text-align-last: justify;
+
+                    @include sm{
+                        font-size: 2.016rem;
+                    }
+
+                    @include md{
+                        font-size: 1.125rem;
+                        max-width: 24ch;
+                    }
+
+                    @include lg{
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+            .team-pic-container{
+                position: relative;
+                
+                picture{
+                    display: block;
+                    img{
+                        width: 100%;
+                    }
+                }
+
+                #about-square-1{
+                    position: absolute;
+                    top: calc(310 / 354 * 100%);
+                    left: calc(180 / 272 * 100%);
+                }
+            }
+            #about-square-2{
+                display: none;
+            }
+            #about-square-3{
+                background: var(--white);
+            }
+        }
+    }
+}
