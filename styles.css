@@ -347,8 +347,8 @@ ul.blank-list {
 }
 
 img {
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .margins {
@@ -976,9 +976,6 @@ footer .footer-column.column3 {
     margin-right: 0;
   }
 }
-.project-page .hero img {
-  width: 100%;
-}
 @media (min-width: 768px) {
   .project-page .hero img {
     order: 1;
@@ -1093,10 +1090,6 @@ footer .footer-column.column3 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
   }
-}
-.project-page .content img {
-  width: 100%;
-  height: auto;
 }
 .project-page .content .height2 {
   grid-row: span 2;
