@@ -834,6 +834,11 @@ footer .footer-column.column3 {
   align-items: center;
   gap: 67px;
 }
+@media (min-width: 768px) {
+  #about-page .what-we-do .content .mobile-squares-container {
+    display: none;
+  }
+}
 #about-page .what-we-do .content .mobile-squares-container .square {
   height: 67px;
   width: 67px;
@@ -843,6 +848,17 @@ footer .footer-column.column3 {
   margin-top: 47px;
   display: grid;
   gap: 40px;
+}
+#about-page .bios-conc .bios .bio {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+#about-page .bios-conc .bios .bio .bio-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 #about-page .bios-conc .bios .bio .bio-text h4 {
   text-box: trim-both cap;
