@@ -388,7 +388,6 @@ a.no-link {
 
 /* Button Text */
 .button-text {
-  color: var(--key);
   font-size: 1rem;
   font-weight: 700;
   line-height: normal;
@@ -462,6 +461,10 @@ p {
   font-weight: 500;
   line-height: 130%;
   margin: 0;
+}
+.body.paragraph-spacing,
+p.paragraph-spacing {
+  margin-top: 0.5rem;
 }
 
 .txt24pt {
@@ -752,55 +755,100 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
-#about-page .hero {
-  background-color: red;
+#about-page h3 {
+  text-align: justify;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
 }
-#about-page .hero .hero-content {
+#about-page .hero {
+  background-color: gray;
+}
+#about-page .hero .content {
   display: flex;
   flex-direction: column;
   gap: 40px;
   padding-bottom: 12px;
 }
-#about-page .hero .hero-content .repeated-container .repeated-text {
-  text-align: justify;
-  -moz-text-align-last: justify;
-       text-align-last: justify;
-}
 @media (min-width: 430px) {
-  #about-page .hero .hero-content .repeated-container .repeated-text {
+  #about-page .hero .content .repeated-container .repeated-text {
     font-size: 2.016rem;
   }
 }
 @media (min-width: 768px) {
-  #about-page .hero .hero-content .repeated-container .repeated-text {
+  #about-page .hero .content .repeated-container .repeated-text {
     font-size: 1.125rem;
     max-width: 24ch;
   }
 }
 @media (min-width: 1024px) {
-  #about-page .hero .hero-content .repeated-container .repeated-text {
+  #about-page .hero .content .repeated-container .repeated-text {
     font-size: 1.5rem;
   }
 }
-#about-page .hero .hero-content .team-pic-container {
+#about-page .hero .content .team-pic-container {
   position: relative;
 }
-#about-page .hero .hero-content .team-pic-container picture {
+#about-page .hero .content .team-pic-container picture {
   display: block;
 }
-#about-page .hero .hero-content .team-pic-container picture img {
+#about-page .hero .content .team-pic-container picture img {
   width: 100%;
 }
-#about-page .hero .hero-content .team-pic-container #about-square-1 {
+#about-page .hero .content .team-pic-container #about-square-1 {
   position: absolute;
   top: 87.5706214689%;
   left: 66.1764705882%;
 }
-#about-page .hero .hero-content #about-square-2 {
+#about-page .hero .content #about-square-2 {
   display: none;
 }
-#about-page .hero .hero-content #about-square-3 {
+@media (min-width: 768px) {
+  #about-page .hero .content #about-square-2 {
+    display: initial;
+  }
+}
+#about-page .hero .content #about-square-3 {
   background: var(--white);
+}
+#about-page .story {
+  background-color: var(--cyan);
+  color: var(--white);
+}
+#about-page .story .story-grid {
+  display: grid;
+}
+#about-page .what-we-do {
+  background-color: var(--key);
+  color: var(--white);
+}
+#about-page .what-we-do .content {
+  display: flex;
+  padding: 90px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 27px;
+}
+#about-page .what-we-do .content .mobile-squares-container {
+  background-color: #F266B9;
+  display: flex;
+  align-items: center;
+  gap: 67px;
+}
+#about-page .what-we-do .content .mobile-squares-container .square {
+  height: 67px;
+  width: 67px;
+  background-color: gray;
+}
+#about-page .bios-conc .bios {
+  margin-top: 47px;
+  display: grid;
+  gap: 40px;
+}
+#about-page .bios-conc .bios .bio .bio-text h4 {
+  text-box: trim-both cap;
+}
+#about-page .bios-conc .bios .bio .bio-text p {
+  text-align: justify;
 }
 
 /* =============
