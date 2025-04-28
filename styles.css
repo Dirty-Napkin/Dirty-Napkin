@@ -870,6 +870,16 @@ footer .footer-column.column3 {
 #about-page .bios-conc .bios .bio .bio-text p {
   text-align: justify;
 }
+#about-page .bios-conc .bios #about-square-7 {
+  display: none;
+}
+#about-page .bios-conc .conc {
+  margin-top: 16px;
+  margin-bottom: 144px;
+}
+#about-page .bios-conc .conc #about-square-8 {
+  display: none;
+}
 
 /* =============
     Brands Page
