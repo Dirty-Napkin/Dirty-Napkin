@@ -18,6 +18,10 @@
             gap: 40px;
             padding-bottom: 12px;
 
+            @include md {
+                display: block;
+            }
+
             .repeated-container {
                 .repeated-text {
                     @include sm {
@@ -26,16 +30,23 @@
 
                     @include md {
                         font-size: 1.125rem;
-                        max-width: 24ch;
+                        width: 24ch;
                     }
 
                     @include lg {
                         font-size: 1.5rem;
                     }
                 }
+
+                @include md {
+                    gap: 328.7px 210.6px;
+                    z-index: 2;
+                    position: absolute;
+                }
             }
 
             .team-pic-container {
+                z-index: 1;
                 position: relative;
 
                 picture {
@@ -74,6 +85,14 @@
         .story-grid {
             display: grid; //I presume
         }
+
+        .story-text {
+            padding-bottom: 55px;
+
+            @include sm {
+                padding-bottom: 77px;
+            }
+        }
     }
 
     .what-we-do {
@@ -86,6 +105,7 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 27px;
+            overflow: hidden;
 
             .mobile-squares-container {
                 //temporary
@@ -95,7 +115,11 @@
                 align-items: center;
                 gap: 67px;
 
-                @include md{
+                @include sm {
+                    gap: 90px;
+                }
+
+                @include md {
                     display: none;
                 }
 
@@ -104,54 +128,80 @@
                     width: 67px;
                     //temporary
                     background-color: gray;
+
+                    @include sm {
+                        height: 90px;
+                        width: 90px;
+                    }
                 }
             }
         }
     }
 
     .bios-conc {
-        .bios {
-            margin-top: 47px;
-            display: grid;
-            gap: 40px;
+        margin-top: 47px;
+        display: grid;
+        gap: 40px;
 
-            .bio {
+        .bio {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            .bio-text {
                 display: flex;
                 flex-direction: column;
-                gap: 24px;
+                align-items: flex-start;
+                gap: 8px;
 
-                .bio-text {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 8px;
+                h4 {
+                    text-box: trim-both cap;
+                }
 
-                    h4 {
-                        text-box: trim-both cap;
-                    }
-
-                    p {
-                        text-align: justify;
-                    }
+                p {
+                    text-align: justify;
                 }
             }
-
-            #about-square-7{
-                display: none;
-            }
         }
-        .conc{
-            margin-top: 16px;
+
+        #about-square-7 {
+            display: none;
+        }
+
+        #about-square-8 {
+            display: none;
+        }
+
+        .conclusion {
             margin-bottom: 144px;
-            #about-square-8{
-                display: none;
+
+            p:first-of-type {
+                margin-top: 1rem;
             }
-            p:last-of-type{
+
+            p:last-of-type {
                 padding-bottom: 16px;
             }
-            .arrow-btn{
+
+            .arrow-btn {
                 margin-left: -30px;
                 margin-top: 20px;
+            }
+        }
+
+        @include md {
+            grid-template-columns: repeat(6, 1fr);
+
+            .bio {
+                grid-column: span 3;
+            }
+
+            #about-square-5,
+            #about-square-6 {
+                display: none;
+            }
+            .conclusion{
+                grid-column: 2 / span 4;
             }
         }
     }
