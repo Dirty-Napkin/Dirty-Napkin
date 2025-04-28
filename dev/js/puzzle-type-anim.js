@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Set up container
             element.style.position = 'relative';
             element.style.display = 'inline-block';
-            element.style.margin = `0`;
+            element.style.margin = `12px 0 0 0`; //Temp fix to center buttons, might want to come back to
             element.style.padding = '0';
             element.style.transform = `translateY(-${spacingTranslate}%)`;
             
