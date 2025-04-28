@@ -28,7 +28,7 @@ function repeatedText() {
         }
 
         // Apply logic based on container-specific breakpoint
-        if (window.innerWidth > breakpoint) {
+        if (window.innerWidth >= breakpoint) {
             // Remove all clones except the first original
             $container.find(".repeated-text").not($original).remove();
 
