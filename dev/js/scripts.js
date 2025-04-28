@@ -54,9 +54,30 @@ function repeatedText() {
 // Initial run
 repeatedText();
 
-// Debounced resize listener
+/*-----------------
+Header spacing
+-----------------*/
+
+function headerSpacing() {
+    const header = document.querySelector("header");
+    const main = document.querySelector("main");
+    const headerHeight = header.offsetHeight;
+    main.style.paddingTop = headerHeight + "px";
+    return headerHeight;
+}
+
+headerSpacing();
+
+/*-----------------
+Debounced resize listener
+-----------------*/
+function onResize(){
+    repeatedText();
+    headerSpacing();
+}
+
 let resizeTimeout;
 window.addEventListener("resize", function () {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(repeatedText, 200);
+    resizeTimeout = setTimeout(onResize, 200);
 });

@@ -587,7 +587,7 @@ textarea {
 header {
   position: fixed;
   display: flex;
-  width: 100%;
+  width: 100vw;
   align-items: center;
   gap: 1rem;
   padding: 12px 24px;
