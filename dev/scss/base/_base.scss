@@ -16,8 +16,8 @@ ul.blank-list {
 }
 
 img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 .margins {
@@ -35,16 +35,8 @@ img {
     }
 }
 
-.squares {
+.square {
     background-color: var(--key);
-
-    &.squares-sm {
-        width: 24px;
-        height: 24px;
-    }
-
-    &.squares-lg {
-        width: 116px;
-        height: 116px;
-    }
+    width: 24px;
+    height: 24px;
 }

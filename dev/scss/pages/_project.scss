@@ -21,10 +21,8 @@
             }
         }
 
-        img {
-            width: 100%;
-
-            @include md {
+        @include md {
+            img {
                 order: 1;
             }
         }
@@ -138,11 +136,6 @@
         @include md {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-        }
-
-        img {
-            width: 100%;
-            height: auto;
         }
 
         .height2 {
