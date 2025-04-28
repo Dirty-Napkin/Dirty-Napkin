@@ -886,6 +886,13 @@ footer .footer-column.column3 {
 #about-page .bios-conc .conc #about-square-8 {
   display: none;
 }
+#about-page .bios-conc .conc p:last-of-type {
+  padding-bottom: 16px;
+}
+#about-page .bios-conc .conc .arrow-btn {
+  margin-left: -30px;
+  margin-top: 20px;
+}
 
 /* =============
     Brands Page
