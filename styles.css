@@ -591,6 +591,10 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+header img {
+  width: auto;
+  height: 100%;
+}
 @media (min-width: 430px) {
   header {
     padding: 16.125px 32.25px;

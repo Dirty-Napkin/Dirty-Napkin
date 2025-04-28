@@ -9,6 +9,11 @@ header {
     justify-content: space-between;
     align-items: center;
 
+    img{
+        width: auto;
+        height: 100%;
+    }
+
     @include sm {
         padding: 16.125px 32.25px;
     }
