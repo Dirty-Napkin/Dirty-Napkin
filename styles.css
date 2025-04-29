@@ -415,7 +415,6 @@ h1 {
   /*https://caniuse.com/mdn-css_properties_text-box*/
   font-size: 21.563rem;
   font-weight: 700;
-  line-height: 130%;
   letter-spacing: 86.25px;
   text-transform: uppercase;
 }
@@ -424,7 +423,7 @@ h1 {
 h2 {
   font-size: 2rem;
   font-weight: 600;
-  letter-spacing: 1.6px;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
 
@@ -1351,12 +1350,14 @@ footer .footer-column.column3 {
   display: flex;
   align-items: center;
   flex-direction: column;
+  transition: background-color 0.3s ease-in-out;
 }
 .home-container .home-txt-container {
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
+  overflow: hidden;
 }
 .home-container .home-txt-container .home-box {
   margin-top: 65vh;
@@ -1379,12 +1380,7 @@ footer .footer-column.column3 {
 }
 .home-container .home-txt-container .home-box .home-txt .home-row h2 {
   width: 24ch;
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 600;
   line-height: normal;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
   text-align: justify;
   -moz-text-align-last: justify;
        text-align-last: justify;
@@ -1411,66 +1407,133 @@ footer .footer-column.column3 {
 }
 .home-container .brands-container {
   position: relative;
-  height: 275vh;
+  height: auto;
   width: 100vw;
-  overflow: hidden;
   display: flex;
+  overflow: hidden;
+  transform: translateY(-30vh);
+  padding-bottom: 110vw;
 }
-.home-container .brands-container .brands-wrapper {
+.home-container .brands-container .brands-paragraphs {
   color: var(--green);
   width: 114%;
-  position: absolute;
-  align-self: center;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  align-self: top;
+  top: 50vh;
   display: grid;
   align-items: center;
-  grid-template-areas: "b r . . . ." "a p1 p1 p1 n ." ". . p2 p2 . d" ". . s . . .";
+  grid-template-areas: "b r . p1 p1 ." "a p2 p2 . n ." ". . . . . d" ". . s . . .";
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(4, 1.7em);
+  grid-template-rows: repeat(4, 1.25em);
 }
-.home-container .brands-container .brands-wrapper span:nth-of-type(1) {
-  grid-area: b;
-}
-.home-container .brands-container .brands-wrapper span:nth-of-type(2) {
-  grid-area: r;
-}
-.home-container .brands-container .brands-wrapper span:nth-of-type(3) {
-  grid-area: a;
-}
-.home-container .brands-container .brands-wrapper span:nth-of-type(4) {
-  grid-area: n;
-}
-.home-container .brands-container .brands-wrapper span:nth-of-type(5) {
-  grid-area: d;
-}
-.home-container .brands-container .brands-wrapper span:nth-of-type(6) {
-  grid-area: s;
-}
-.home-container .brands-container .brands-wrapper div:nth-of-type(1) {
-  grid-area: p1;
-}
-.home-container .brands-container .brands-wrapper div:nth-of-type(2) {
-  grid-area: p2;
-}
-.home-container .brands-container .brands-wrapper span {
+.home-container .brands-container .brands-paragraphs span {
   -moz-text-align-last: justify;
        text-align-last: justify;
   padding-left: 12%;
 }
-.home-container .brands-container .brands-wrapper div {
+.home-container .brands-container .brands-paragraphs span:nth-of-type(1) {
+  grid-area: b;
+}
+.home-container .brands-container .brands-paragraphs span:nth-of-type(2) {
+  grid-area: r;
+}
+.home-container .brands-container .brands-paragraphs span:nth-of-type(3) {
+  grid-area: a;
+}
+.home-container .brands-container .brands-paragraphs span:nth-of-type(4) {
+  grid-area: n;
+}
+.home-container .brands-container .brands-paragraphs span:nth-of-type(5) {
+  grid-area: d;
+}
+.home-container .brands-container .brands-paragraphs span:nth-of-type(6) {
+  grid-area: s;
+}
+.home-container .brands-container .brands-paragraphs div {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateY(-200vh);
 }
-.home-container .brands-container .brands-wrapper div h3 {
+.home-container .brands-container .brands-paragraphs div:nth-of-type(1) {
+  grid-area: p1;
+}
+.home-container .brands-container .brands-paragraphs div:nth-of-type(2) {
+  grid-area: p2;
+}
+.home-container .brands-container .brands-paragraphs div h3 {
   color: var(--key);
   text-align: justify;
   -moz-text-align-last: justify;
        text-align-last: justify;
-  width: 35ch;
   width: 34ch;
   position: absolute;
   align-self: center;
+}
+.home-container .brands-container .brands-content {
+  width: 100%;
+  align-items: center;
+  padding: 4rem;
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+  display: grid;
+  gap: 1.75rem;
+  grid-template-areas: ". . . . . ." ". TW . . . ." ". . . . LS ." ". . . . TE ." "BM . . . . ." ". . . . . ASP";
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+}
+.home-container .brands-container .brands-content img {
+  width: 100%;
+  height: auto;
+  align-self: center;
+}
+.home-container .brands-container .brands-content .the-window {
+  grid-area: TW;
+}
+.home-container .brands-container .brands-content .lemonade-stand {
+  grid-area: LS;
+}
+.home-container .brands-container .brands-content .those-eyes {
+  grid-area: TE;
+}
+.home-container .brands-container .brands-content .branded-moments {
+  grid-area: BM;
+}
+.home-container .brands-container .brands-content .american-scripture-project {
+  grid-area: ASP;
+}
+.home-container .collabs {
+  width: 100%;
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+.home-container .collabs .collabs-paragraph {
+  width: 100%;
+  display: grid;
+  grid-template-areas: ". . p p .";
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.75rem;
+  align-items: center;
+}
+.home-container .collabs .collabs-paragraph h2 {
+  grid-area: p;
+  text-align: justify;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+  margin-top: 20vh;
+}
+.home-container .color-trigger {
+  height: 200vh;
+  width: 100%;
+  position: absolute;
+  margin-top: 60vh;
+}
+
+.black-background {
+  background-color: var(--key);
+  color: var(--white);
 }
