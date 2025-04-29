@@ -593,6 +593,7 @@ header {
   padding: 12px 24px;
   justify-content: space-between;
   align-items: center;
+  z-index: 999;
 }
 header img {
   width: auto;
