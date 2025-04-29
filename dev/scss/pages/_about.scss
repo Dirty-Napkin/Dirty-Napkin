@@ -1,0 +1,208 @@
+/* =============
+    About Page
+============= */
+
+#about-page {
+    h3 {
+        text-align: justify;
+        text-align-last: justify;
+    }
+
+    .hero {
+        //temporary
+        background-color: gray;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-bottom: 12px;
+
+            @include md {
+                display: block;
+            }
+
+            .repeated-container {
+                .repeated-text {
+                    @include sm {
+                        font-size: 2.016rem;
+                    }
+
+                    @include md {
+                        font-size: 1.125rem;
+                        width: 24ch;
+                    }
+
+                    @include lg {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                @include md {
+                    gap: 328.7px 210.6px;
+                    z-index: 2;
+                    position: absolute;
+                }
+            }
+
+            .team-pic-container {
+                z-index: 1;
+                position: relative;
+
+                picture {
+                    display: block;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                #about-square-1 {
+                    position: absolute;
+                    top: calc(310 / 354 * 100%);
+                    left: calc(180 / 272 * 100%);
+                }
+            }
+
+            #about-square-2 {
+                display: none;
+
+                @include md {
+                    display: initial;
+                }
+            }
+
+            #about-square-3 {
+                background: var(--white);
+            }
+        }
+    }
+
+    .story {
+        background-color: var(--cyan);
+        color: var(--white);
+
+        .story-grid {
+            display: grid; //I presume
+        }
+
+        .story-text {
+            padding-bottom: 55px;
+
+            @include sm {
+                padding-bottom: 77px;
+            }
+        }
+    }
+
+    .what-we-do {
+        background-color: var(--key);
+        color: var(--white);
+
+        .content {
+            display: flex;
+            padding: 90px 24px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 27px;
+            overflow: hidden;
+
+            .mobile-squares-container {
+                //temporary
+                background-color: #F266B9;
+
+                display: flex;
+                align-items: center;
+                gap: 67px;
+
+                @include sm {
+                    gap: 90px;
+                }
+
+                @include md {
+                    display: none;
+                }
+
+                .square {
+                    height: 67px;
+                    width: 67px;
+                    //temporary
+                    background-color: gray;
+
+                    @include sm {
+                        height: 90px;
+                        width: 90px;
+                    }
+                }
+            }
+        }
+    }
+
+    .bios-conc {
+        margin-top: 47px;
+        display: grid;
+        gap: 40px;
+
+        .bio {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            .bio-text {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+
+                h4 {
+                    text-box: trim-both cap;
+                }
+
+                p {
+                    text-align: justify;
+                }
+            }
+        }
+
+        #about-square-7 {
+            display: none;
+        }
+
+        #about-square-8 {
+            display: none;
+        }
+
+        .conclusion {
+            margin-bottom: 144px;
+
+            p:first-of-type {
+                margin-top: 1rem;
+            }
+
+            p:last-of-type {
+                padding-bottom: 16px;
+            }
+
+            .arrow-btn {
+                margin-left: -30px;
+                margin-top: 20px;
+            }
+        }
+
+        @include md {
+            grid-template-columns: repeat(6, 1fr);
+
+            .bio {
+                grid-column: span 3;
+            }
+
+            #about-square-5,
+            #about-square-6 {
+                display: none;
+            }
+            .conclusion{
+                grid-column: 2 / span 4;
+            }
+        }
+    }
+}

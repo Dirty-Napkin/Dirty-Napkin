@@ -4,13 +4,18 @@
 header {
     position: fixed;
     display: flex;
-    width: 100%;
+    width: 100vw;
     align-items: center;
     gap: 1rem;
     padding: 12px 24px;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000;
+    z-index: 999;
+
+    img{
+        width: auto;
+        height: 100%;
+    }
 
     @include sm {
         padding: 16.125px 32.25px;

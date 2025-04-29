@@ -13,7 +13,6 @@ a.no-link {
 
 /* Button Text */
 .button-text {
-    color: var(--key);
     font-size: 1rem; //16px
     font-weight: 700;
     line-height: normal;
@@ -88,6 +87,9 @@ p {
     font-weight: 500;
     line-height: 130%; //20.8px
     margin: 0;
+    &.paragraph-spacing{
+        margin-top: 0.5rem;
+    }
 }
 
 .txt24pt {
