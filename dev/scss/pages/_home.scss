@@ -1,0 +1,234 @@
+.home-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transition: background-color 0.3s ease-in-out;
+
+
+
+    .home-txt-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        overflow: hidden;
+
+        
+        .home-box {
+            margin-top: 65vh;
+            width: 60%;
+            display: flex;
+            flex-wrap: wrap;
+
+            .home-txt {
+                min-width: 100vw;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                
+                    
+                .home-row {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    margin-bottom: 50vh;
+                    padding: 0;
+            
+                    h2 {
+                        width: 24ch;
+                        line-height: normal;
+                        text-align: justify;
+                        text-align-last: justify;
+                        margin: 0 0 0 60%;
+
+                        &:first-of-type {
+                            position: absolute;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+            
+    .ketchup-wrapper {
+        width: 100vw;
+        height: 180vh;
+        // background-color: red;
+        display: flex;
+        justify-content: center;
+        // align-items: top;
+
+
+
+        .ketchup-hero{
+            position: sticky;
+            top: 0;
+            align-self: flex-start;
+            width: 60%;
+            height: auto;
+            margin-top: 90vh;
+            z-index: -1;
+        }
+    }    
+    
+    .brands-container {
+        position: relative;
+        height: auto;
+        width: 100vw;
+        display: flex;
+        overflow: hidden;
+        transform: translateY(-30vh);
+        padding-bottom: 110vw;
+        // background-color: green;
+
+        .brands-paragraphs {
+            color: var(--green);
+            width: 114%;
+            position: relative;
+            align-self: top;
+            top: 50vh;
+            // left: 50%;
+            // transform: translateX(-50%);
+            display: grid;
+            align-items: center;
+            grid-template-areas: 
+                "b r . p1 p1 ."
+                "a p2 p2 . n ."
+                ". . . . . d"
+                ". . s . . ."
+            ;
+            grid-template-columns: repeat(6, 1fr); // 3 equal columns
+            grid-template-rows: repeat(4, 1.25em); // 2 rows
+    
+
+
+            // Setting up brands type grid and applying styling for the paragraphs.
+            $span-areas: b, r, a, n, d, s;
+            $div-areas: p1, p2;
+
+            span {
+                @for $i from 1 through length($span-areas) {
+                    &:nth-of-type(#{$i}) {
+                    grid-area: nth($span-areas, $i);
+                    }
+                }    
+
+                text-align-last: justify;
+                padding-left: 12%;                
+
+            }
+
+            div {
+                @for $i from 1 through length($div-areas) {
+                    &:nth-of-type(#{$i}) {
+                    grid-area: nth($div-areas, $i);
+                    }
+                }
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                transform: translateY(-200vh);
+
+
+                h3 {
+                    color: var(--key);
+                    text-align: justify;
+                    text-align-last: justify;
+                    width: 34ch;
+                    position: absolute;
+                    align-self: center;
+
+                }
+            }  
+        }
+
+        .brands-content {
+            width: 100%;
+            align-items: center;
+            padding: 4rem;
+            position: absolute;
+            width: 100vw;
+            height: 100vw;
+            display: grid;
+            gap: 1.75rem;
+            grid-template-areas: 
+                
+                ". . . . . ."
+                ". TW . . . ."
+                ". . . . LS ."
+                ". . . . TE ."
+                "BM . . . . ."
+                ". . . . . ASP";
+            grid-template-columns: repeat(6, 1fr); // 3 equal columns
+            grid-template-rows: repeat(6, 1fr); // 2 rows
+
+            img {
+                width: 100%;
+                height: auto;
+                align-self: center;
+            }
+
+            .the-window {
+                grid-area: TW;
+            }
+
+            .lemonade-stand {
+                grid-area: LS;
+            }
+            .those-eyes {
+                grid-area: TE;
+            }
+            .branded-moments {
+                grid-area: BM;
+            }
+            .american-scripture-project {
+                grid-area: ASP;
+            }
+        }
+    }
+
+    .collabs {
+        width: 100%;
+        height: 150vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.5s ease-in-out;
+
+
+       .collabs-paragraph {
+            width: 100%;
+            display: grid;
+            grid-template-areas: 
+                ". . p p .";
+            grid-template-columns: repeat(5, 1fr); // 3 equal columns
+            gap: 1.75rem;
+            align-items: center;
+
+            h2 {
+                grid-area: p;
+                text-align: justify;
+                text-align-last: justify;
+                margin-top: 20vh;
+            }
+        } 
+    }
+    
+    .color-trigger {
+        // background-color: green;
+        height: 200vh;
+        width: 100%;
+        position: absolute;
+        margin-top: 60vh;
+
+    }
+}
+
+.black-background {
+    background-color: var(--key);
+    color: var(--white);
+}
