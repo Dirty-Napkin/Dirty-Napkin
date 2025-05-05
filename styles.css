@@ -1128,8 +1128,7 @@ footer .footer-column.column3 {
     order: 3;
     flex-wrap: nowrap;
     justify-content: space-between;
-    padding-left: 32px;
-    padding-right: 32px;
+    gap: unset;
   }
 }
 .project-page .hero .adjectives p {
@@ -1151,7 +1150,7 @@ footer .footer-column.column3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  max-width: 100%;
   gap: 1rem;
   margin-top: 120px;
   margin-bottom: 120px;
