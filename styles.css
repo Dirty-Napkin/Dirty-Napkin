@@ -1245,7 +1245,6 @@ footer .footer-column.column3 {
   justify-content: flex-end;
   align-items: center;
   transform: scale(0.75);
-  border: 1px solid #000;
   position: relative;
   width: 100%;
   margin-inline: auto;
@@ -1264,7 +1263,6 @@ footer .footer-column.column3 {
   width: fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  border: 1px solid #000;
 }
 .project-page .next-project a .next-project-text {
   display: flex;
@@ -1278,7 +1276,11 @@ footer .footer-column.column3 {
   gap: 10px;
 }
 .project-page .next-project a .next-project-text div p {
-  transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+  transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.project-page .next-project a .next-project-text div p:not(:first-child) {
+  margin-left: -24px;
+  transition: margin-left 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .project-page .next-project a .next-project-text div .arrow-1 {
   color: var(--magenta);
@@ -1291,7 +1293,7 @@ footer .footer-column.column3 {
 .project-page .next-project a .next-project-text h2 {
   margin: 0;
   text-align: right;
-  transition: font-weight 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+  transition: font-weight 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .project-page .next-project a .next-project-img {
   margin-top: 5px;
@@ -1308,10 +1310,11 @@ footer .footer-column.column3 {
   width: 100%;
   opacity: 0%;
   background-color: var(--white);
-  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .project-page .next-project a .project-floating-arrow {
-  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
+  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: right 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
   opacity: 0;
   font-size: 32px;
 }
@@ -1325,7 +1328,10 @@ footer .footer-column.column3 {
   top: 103.32px;
   right: 88px;
 }
-.project-page .next-project:hover .next-project-text div > * {
+.project-page .next-project:hover .next-project-text div p:not(:first-child) {
+  margin-left: 0;
+}
+.project-page .next-project:hover .next-project-text div * {
   color: var(--magenta) !important;
 }
 .project-page .next-project:hover .next-project-text h2 {
@@ -1333,6 +1339,12 @@ footer .footer-column.column3 {
 }
 .project-page .next-project:hover .project-floating-arrow {
   opacity: 100%;
+}
+.project-page .next-project:hover .project-floating-arrow.arrow-2 {
+  right: 102px;
+}
+.project-page .next-project:hover .project-floating-arrow.arrow-3 {
+  right: 64px;
 }
 .project-page .next-project:hover .next-project-tint-overlay {
   opacity: 15% !important;
