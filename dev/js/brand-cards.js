@@ -46,7 +46,7 @@ const cardsData = [
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'Those Eyes',
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
+        cardLink: 'those-eyes.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg', 
