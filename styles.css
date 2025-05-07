@@ -765,6 +765,9 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
+#about-page .pg-title-container {
+  margin-bottom: 0;
+}
 #about-page h3 {
   text-align: justify;
   -moz-text-align-last: justify;
