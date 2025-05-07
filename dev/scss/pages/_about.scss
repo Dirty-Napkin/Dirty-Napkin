@@ -12,6 +12,29 @@
         text-align-last: justify;
     }
 
+    .hero .square, .story .square{
+        @include sm{
+            height: 26.875px;
+            width: 26.875px;
+        }
+        @include md{
+            height: 19.2px;
+            width: 19.2px;
+        }
+        @include lg{
+            height: 25.6px;
+            width: 25.6px;
+        }
+        @include xl{
+            height: 32px;
+            width: 32px;
+        }
+        @include xxl{
+            height: 24px;
+            width: 24px;
+        }
+    }
+
     .hero {
         //temporary
         background-color: gray;
@@ -94,7 +117,7 @@
             display: grid;
             grid-row-gap: 40px;
             // What is this insanity what is wrong with me im losing my mind
-            grid-template-columns: 24px calc((100% - 120px)/4) 24px calc((100% - 120px)/4) 24px calc((100% - 120px)/4) 24px calc((100% - 120px)/4) 24px;
+            @include build-grid(24px, 5); //5 columns of 24px
             grid-template-areas:
                 "square-5 . . . . . . . ."
                 "text-1 text-1 square-6 . . . square-8 . ."
@@ -104,6 +127,7 @@
                 "para para para para para para para para para";
 
             @include sm {
+                @include build-grid(26.875px, 5);
                 grid-row-gap: 56px;
             }
 
@@ -244,11 +268,7 @@
             }
         }
 
-        #about-square-35 {
-            display: none;
-        }
-
-        #about-square-36 {
+        #about-square-35, #about-square-36 {
             display: none;
         }
 

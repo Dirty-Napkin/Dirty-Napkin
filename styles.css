@@ -773,6 +773,36 @@ footer .footer-column.column3 {
   -moz-text-align-last: justify;
        text-align-last: justify;
 }
+@media (min-width: 430px) {
+  #about-page .hero .square, #about-page .story .square {
+    height: 26.875px;
+    width: 26.875px;
+  }
+}
+@media (min-width: 768px) {
+  #about-page .hero .square, #about-page .story .square {
+    height: 19.2px;
+    width: 19.2px;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page .hero .square, #about-page .story .square {
+    height: 25.6px;
+    width: 25.6px;
+  }
+}
+@media (min-width: 1280px) {
+  #about-page .hero .square, #about-page .story .square {
+    height: 32px;
+    width: 32px;
+  }
+}
+@media (min-width: 1440px) {
+  #about-page .hero .square, #about-page .story .square {
+    height: 24px;
+    width: 24px;
+  }
+}
 #about-page .hero {
   background-color: gray;
 }
@@ -846,11 +876,12 @@ footer .footer-column.column3 {
   padding-right: 24px;
   display: grid;
   grid-row-gap: 40px;
-  grid-template-columns: 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px;
+  grid-template-columns: 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px  ;
   grid-template-areas: "square-5 . . . . . . . ." "text-1 text-1 square-6 . . . square-8 . ." "square-7 . square-11 . square-9 . square-10 . ." "square-13 . square-14 . . text-2 text-2 text-2 text-2" "square-15 . . . . . . . square-12" "para para para para para para para para para";
 }
 @media (min-width: 430px) {
   #about-page .story .story-grid {
+    grid-template-columns: 26.875px calc((100% - 134.375px) / 4) 26.875px calc((100% - 134.375px) / 4) 26.875px calc((100% - 134.375px) / 4) 26.875px calc((100% - 134.375px) / 4) 26.875px  ;
     grid-row-gap: 56px;
   }
 }
@@ -1057,10 +1088,7 @@ footer .footer-column.column3 {
 #about-page .bios-conc .bio .bio-text p {
   text-align: justify;
 }
-#about-page .bios-conc #about-square-35 {
-  display: none;
-}
-#about-page .bios-conc #about-square-36 {
+#about-page .bios-conc #about-square-35, #about-page .bios-conc #about-square-36 {
   display: none;
 }
 #about-page .bios-conc .conclusion {
