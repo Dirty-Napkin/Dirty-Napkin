@@ -845,10 +845,9 @@ footer .footer-column.column3 {
   padding-left: 24px;
   padding-right: 24px;
   display: grid;
-  grid-template-columns: repeat(5, 24px);
-  grid-column-gap: calc((100% - 120px) / 4);
   grid-row-gap: 40px;
-  grid-template-areas: "square-5 . . . ." ". square-6 . square-8 ." "square-7 square-11 square-9 square-10 ." "square-13 square-14 . . ." "square-15 . . . square-12" "para para para para para";
+  grid-template-columns: 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px;
+  grid-template-areas: "square-5 . . . . . . . ." "text-1 text-1 square-6 . . . square-8 . ." "square-7 . square-11 . square-9 . square-10 . ." "square-13 . square-14 . . text-2 text-2 text-2 text-2" "square-15 . . . . . . . square-12" "para para para para para para para para para";
 }
 @media (min-width: 430px) {
   #about-page .story .story-grid {
@@ -971,6 +970,22 @@ footer .footer-column.column3 {
   #about-page .story .story-grid .square.desktop {
     display: block;
   }
+}
+#about-page .story .story-grid .about-text {
+  white-space: nowrap;
+}
+#about-page .story .story-grid .about-text#about-text-1 {
+  padding-right: 17px;
+  grid-area: text-1;
+  justify-items: end;
+  justify-self: end;
+}
+#about-page .story .story-grid .about-text#about-text-2 {
+  grid-area: text-2;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  overflow: visible;
 }
 #about-page .story .story-grid .story-para {
   grid-area: para;
