@@ -3,10 +3,10 @@
 ============= */
 
 #about-page {
-    .pg-title-container{
+    .pg-title-container {
         margin-bottom: 0;
     }
-    
+
     h3 {
         text-align: justify;
         text-align-last: justify;
@@ -83,18 +83,77 @@
     }
 
     .story {
-        background-color: var(--cyan);
+        // background-color: var(--cyan);
+        background-color: red;
         color: var(--white);
 
         .story-grid {
-            display: grid; //I presume
-        }
-
-        .story-text {
-            padding-bottom: 55px;
+            padding-top: 28px;
+            padding-left: 24px;
+            padding-right: 24px;
+            display: grid;
+            grid-template-columns: repeat(5, 24px);
+            grid-column-gap: calc((100% - 120px)/4);
+            grid-row-gap: 40px;
+            grid-template-areas:
+                "square-5 . . . ."
+                ". square-6 . square-8 ."
+                "square-7 square-11 square-9 square-10 ."
+                "square-13 square-14 . . ."
+                "square-15 . . . square-12"
+                "para para para para para";
 
             @include sm {
-                padding-bottom: 77px;
+                grid-row-gap: 56px;
+            }
+
+            @include md {
+                grid-row-gap: 48px;
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+
+            @include lg {
+                grid-row-gap: 64px;
+            }
+
+            @include xl {
+                grid-row-gap: 80px;
+                padding-left: 64px;
+                padding-right: 64px;
+            }
+
+            @for $i from 5 through 32 {
+                #about-square-#{$i} {
+                    grid-area: square-#{$i};
+                }
+            }
+
+            .square {
+                &.cyan {
+                    background-color: var(--cyan);
+                }
+
+                &.green {
+                    background-color: var(--green);
+                }
+
+                &.desktop {
+                    display: none;
+
+                    @include md {
+                        display: block;
+                    }
+                }
+            }
+
+            .story-para {
+                grid-area: para;
+                padding-bottom: 55px;
+
+                @include sm {
+                    padding-bottom: 77px;
+                }
             }
         }
     }
@@ -168,11 +227,11 @@
             }
         }
 
-        #about-square-7 {
+        #about-square-35 {
             display: none;
         }
 
-        #about-square-8 {
+        #about-square-36 {
             display: none;
         }
 
@@ -200,11 +259,12 @@
                 grid-column: span 3;
             }
 
-            #about-square-5,
-            #about-square-6 {
+            #about-square-33,
+            #about-square-34 {
                 display: none;
             }
-            .conclusion{
+
+            .conclusion {
                 grid-column: 2 / span 4;
             }
         }

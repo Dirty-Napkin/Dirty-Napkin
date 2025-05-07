@@ -837,17 +837,147 @@ footer .footer-column.column3 {
   background: var(--white);
 }
 #about-page .story {
-  background-color: var(--cyan);
+  background-color: red;
   color: var(--white);
 }
 #about-page .story .story-grid {
+  padding-top: 28px;
+  padding-left: 24px;
+  padding-right: 24px;
   display: grid;
+  grid-template-columns: repeat(5, 24px);
+  grid-column-gap: calc((100% - 120px) / 4);
+  grid-row-gap: 40px;
+  grid-template-areas: "square-5 . . . ." ". square-6 . square-8 ." "square-7 square-11 square-9 square-10 ." "square-13 square-14 . . ." "square-15 . . . square-12" "para para para para para";
 }
-#about-page .story .story-text {
+@media (min-width: 430px) {
+  #about-page .story .story-grid {
+    grid-row-gap: 56px;
+  }
+}
+@media (min-width: 768px) {
+  #about-page .story .story-grid {
+    grid-row-gap: 48px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page .story .story-grid {
+    grid-row-gap: 64px;
+  }
+}
+@media (min-width: 1280px) {
+  #about-page .story .story-grid {
+    grid-row-gap: 80px;
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+#about-page .story .story-grid #about-square-5 {
+  grid-area: square-5;
+}
+#about-page .story .story-grid #about-square-6 {
+  grid-area: square-6;
+}
+#about-page .story .story-grid #about-square-7 {
+  grid-area: square-7;
+}
+#about-page .story .story-grid #about-square-8 {
+  grid-area: square-8;
+}
+#about-page .story .story-grid #about-square-9 {
+  grid-area: square-9;
+}
+#about-page .story .story-grid #about-square-10 {
+  grid-area: square-10;
+}
+#about-page .story .story-grid #about-square-11 {
+  grid-area: square-11;
+}
+#about-page .story .story-grid #about-square-12 {
+  grid-area: square-12;
+}
+#about-page .story .story-grid #about-square-13 {
+  grid-area: square-13;
+}
+#about-page .story .story-grid #about-square-14 {
+  grid-area: square-14;
+}
+#about-page .story .story-grid #about-square-15 {
+  grid-area: square-15;
+}
+#about-page .story .story-grid #about-square-16 {
+  grid-area: square-16;
+}
+#about-page .story .story-grid #about-square-17 {
+  grid-area: square-17;
+}
+#about-page .story .story-grid #about-square-18 {
+  grid-area: square-18;
+}
+#about-page .story .story-grid #about-square-19 {
+  grid-area: square-19;
+}
+#about-page .story .story-grid #about-square-20 {
+  grid-area: square-20;
+}
+#about-page .story .story-grid #about-square-21 {
+  grid-area: square-21;
+}
+#about-page .story .story-grid #about-square-22 {
+  grid-area: square-22;
+}
+#about-page .story .story-grid #about-square-23 {
+  grid-area: square-23;
+}
+#about-page .story .story-grid #about-square-24 {
+  grid-area: square-24;
+}
+#about-page .story .story-grid #about-square-25 {
+  grid-area: square-25;
+}
+#about-page .story .story-grid #about-square-26 {
+  grid-area: square-26;
+}
+#about-page .story .story-grid #about-square-27 {
+  grid-area: square-27;
+}
+#about-page .story .story-grid #about-square-28 {
+  grid-area: square-28;
+}
+#about-page .story .story-grid #about-square-29 {
+  grid-area: square-29;
+}
+#about-page .story .story-grid #about-square-30 {
+  grid-area: square-30;
+}
+#about-page .story .story-grid #about-square-31 {
+  grid-area: square-31;
+}
+#about-page .story .story-grid #about-square-32 {
+  grid-area: square-32;
+}
+#about-page .story .story-grid .square.cyan {
+  background-color: var(--cyan);
+}
+#about-page .story .story-grid .square.green {
+  background-color: var(--green);
+}
+#about-page .story .story-grid .square.desktop {
+  display: none;
+}
+@media (min-width: 768px) {
+  #about-page .story .story-grid .square.desktop {
+    display: block;
+  }
+}
+#about-page .story .story-grid .story-para {
+  grid-area: para;
   padding-bottom: 55px;
 }
 @media (min-width: 430px) {
-  #about-page .story .story-text {
+  #about-page .story .story-grid .story-para {
     padding-bottom: 77px;
   }
 }
@@ -912,10 +1042,10 @@ footer .footer-column.column3 {
 #about-page .bios-conc .bio .bio-text p {
   text-align: justify;
 }
-#about-page .bios-conc #about-square-7 {
+#about-page .bios-conc #about-square-35 {
   display: none;
 }
-#about-page .bios-conc #about-square-8 {
+#about-page .bios-conc #about-square-36 {
   display: none;
 }
 #about-page .bios-conc .conclusion {
@@ -938,8 +1068,8 @@ footer .footer-column.column3 {
   #about-page .bios-conc .bio {
     grid-column: span 3;
   }
-  #about-page .bios-conc #about-square-5,
-  #about-page .bios-conc #about-square-6 {
+  #about-page .bios-conc #about-square-33,
+  #about-page .bios-conc #about-square-34 {
     display: none;
   }
   #about-page .bios-conc .conclusion {
