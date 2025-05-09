@@ -405,7 +405,7 @@
 
                 &#about-text-2 {
                     grid-row: 4;
-                    grid-column: 5 / span 4;
+                    grid-column: 6 / span 3;
                     height: 24px;
                     display: flex;
                     align-items: center;
@@ -435,7 +435,8 @@
             }
 
             .story-para {
-                grid-area: para;
+                grid-row: 6;
+                grid-column: 1 / span 9;
                 padding-bottom: 55px;
 
                 @include sm {
@@ -444,6 +445,10 @@
 
                 @include md {
                     grid-row: 7 / span 3;
+                    grid-column: 1 / span 7;
+                }
+
+                @include lg{
                     grid-column: 1 / span 5;
                 }
             }

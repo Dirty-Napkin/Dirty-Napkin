@@ -1151,7 +1151,7 @@ footer .footer-column.column3 {
 }
 #about-page .story .story-grid .about-text#about-text-2 {
   grid-row: 4;
-  grid-column: 5/span 4;
+  grid-column: 6/span 3;
   height: 24px;
   display: flex;
   align-items: center;
@@ -1177,7 +1177,8 @@ footer .footer-column.column3 {
   grid-column: 13;
 }
 #about-page .story .story-grid .story-para {
-  grid-area: para;
+  grid-row: 6;
+  grid-column: 1/span 9;
   padding-bottom: 55px;
 }
 @media (min-width: 430px) {
@@ -1188,6 +1189,11 @@ footer .footer-column.column3 {
 @media (min-width: 768px) {
   #about-page .story .story-grid .story-para {
     grid-row: 7/span 3;
+    grid-column: 1/span 7;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page .story .story-grid .story-para {
     grid-column: 1/span 5;
   }
 }
