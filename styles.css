@@ -336,6 +336,10 @@ template {
   box-sizing: border-box;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 ul.blank-list {
   list-style: none;
   margin: 0;
@@ -423,6 +427,14 @@ h1 {
   font-size: 21.563rem;
   font-weight: 700;
   letter-spacing: 86.25px;
+  text-transform: uppercase;
+}
+
+.small-puzzle {
+  font-size: 7.2rem;
+  font-weight: 700;
+  line-height: 130%; /* 9.34375rem */
+  letter-spacing: 3.6rem;
   text-transform: uppercase;
 }
 
@@ -581,6 +593,50 @@ textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
+}
+
+.brands-content img {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+.brands-content .hover-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+.brands-content .hover-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  transform: scale(0.8);
+}
+.brands-content .brand-item {
+  position: relative;
+  cursor: pointer;
+}
+.brands-content .brand-item:hover .hover-grid {
+  pointer-events: all;
+}
+.brands-content .brand-item:hover .hover-image {
+  opacity: 1;
+  transform: scale(1);
+}
+.brands-content .brand-item:hover img {
+  transform: scale(1.05);
 }
 
 /* =============
@@ -1175,34 +1231,35 @@ footer .footer-column.column3 {
   align-items: center;
   flex-direction: column;
   transition: background-color 0.3s ease-in-out;
+  overflow: none;
 }
-.home-container .home-txt-container {
+.home-container .four-repeat-type {
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
   overflow: hidden;
 }
-.home-container .home-txt-container .home-box {
+.home-container .four-repeat-type .width-box {
   margin-top: 65vh;
   width: 60%;
   display: flex;
   flex-wrap: wrap;
 }
-.home-container .home-txt-container .home-box .home-txt {
+.home-container .four-repeat-type .width-box .row-holder {
   min-width: 100vw;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
-.home-container .home-txt-container .home-box .home-txt .home-row {
+.home-container .four-repeat-type .width-box .row-holder div {
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-bottom: 50vh;
   padding: 0;
 }
-.home-container .home-txt-container .home-box .home-txt .home-row h2 {
+.home-container .four-repeat-type .width-box .row-holder div h2 {
   width: 24ch;
   line-height: normal;
   text-align: justify;
@@ -1210,7 +1267,7 @@ footer .footer-column.column3 {
        text-align-last: justify;
   margin: 0 0 0 60%;
 }
-.home-container .home-txt-container .home-box .home-txt .home-row h2:first-of-type {
+.home-container .four-repeat-type .width-box .row-holder div h2:first-of-type {
   position: absolute;
   margin: 0;
 }
@@ -1303,37 +1360,50 @@ footer .footer-column.column3 {
   height: 100vw;
   display: grid;
   gap: 1.75rem;
-  grid-template-areas: ". . . . . ." ". TW . . . ." ". . . . LS ." ". . . . TE ." "BM . . . . ." ". . . . . ASP";
+  grid-template-areas: ". . . . . ." ". TW . . . ." ". . . . LS ." ". . . . TE ." "ASP . . . . ." ". . . . . .";
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
 }
-.home-container .brands-container .brands-content img {
+.home-container .brands-container .brands-content .brand-item {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-container .brands-container .brands-content .brand-item img {
   width: 100%;
   height: auto;
-  align-self: center;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  z-index: 2;
 }
-.home-container .brands-container .brands-content .the-window {
+.home-container .brands-container .brands-content .brand-item .more-info {
+  position: absolute;
+  z-index: -1;
+}
+.home-container .brands-container .brands-content .brand-item:nth-child(1) {
   grid-area: TW;
 }
-.home-container .brands-container .brands-content .lemonade-stand {
+.home-container .brands-container .brands-content .brand-item:nth-child(2) {
   grid-area: LS;
 }
-.home-container .brands-container .brands-content .those-eyes {
+.home-container .brands-container .brands-content .brand-item:nth-child(3) {
   grid-area: TE;
 }
-.home-container .brands-container .brands-content .branded-moments {
-  grid-area: BM;
-}
-.home-container .brands-container .brands-content .american-scripture-project {
+.home-container .brands-container .brands-content .brand-item:nth-child(4) {
   grid-area: ASP;
 }
 .home-container .collabs {
   width: 100%;
-  height: 150vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.5s ease-in-out;
+  padding-bottom: 10rem;
 }
 .home-container .collabs .collabs-paragraph {
   width: 100%;
@@ -1349,12 +1419,172 @@ footer .footer-column.column3 {
   -moz-text-align-last: justify;
        text-align-last: justify;
   margin-top: 20vh;
+  margin-bottom: 30vh;
 }
-.home-container .color-trigger {
-  height: 200vh;
+.home-container .collabs .adam-collab {
   width: 100%;
+  height: auto;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.home-container .collabs .adam-collab img {
   position: absolute;
-  margin-top: 60vh;
+  padding: 6rem;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.home-container .collabs .adam-collab h3 {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 11/6;
+  padding: 2rem;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas: "I T1 .  .  .  .  .  .  .  .  ." ". .  S  .  .  .  .  .  .  .  ." ". .  .  .  .  .  .  .  .  .  ." ". .  A  .  B  .  . T2 I2  .  ." ". .  O  U  .  .  .  M  .  .  ." ". .  .  .  .  T3 .  .  .  .  E";
+}
+.home-container .collabs .adam-collab h3 span {
+  text-align: center;
+  padding: 0;
+  letter-spacing: 0;
+}
+.home-container .collabs .adam-collab h3 .I {
+  grid-area: I;
+}
+.home-container .collabs .adam-collab h3 .T1 {
+  grid-area: T1;
+}
+.home-container .collabs .adam-collab h3 .S {
+  grid-area: S;
+}
+.home-container .collabs .adam-collab h3 .A {
+  grid-area: A;
+}
+.home-container .collabs .adam-collab h3 .B {
+  grid-area: B;
+}
+.home-container .collabs .adam-collab h3 .T2 {
+  grid-area: T2;
+}
+.home-container .collabs .adam-collab h3 .I2 {
+  grid-area: I2;
+}
+.home-container .collabs .adam-collab h3 .O {
+  grid-area: O;
+}
+.home-container .collabs .adam-collab h3 .U {
+  grid-area: U;
+}
+.home-container .collabs .adam-collab h3 .M {
+  grid-area: M;
+}
+.home-container .collabs .adam-collab h3 .T3 {
+  grid-area: T3;
+}
+.home-container .collabs .adam-collab h3 .E {
+  grid-area: E;
+}
+.home-container .collabs .adam-collab .sideways-copy {
+  z-index: 1;
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: "p1 d . . . . . . p2 .";
+}
+.home-container .collabs .adam-collab .sideways-copy p {
+  font-family: "degular-mono";
+  writing-mode: vertical-rl;
+  transform: rotate(180deg); /* optional, matches the upside-down style */
+}
+.home-container .collabs .adam-collab .sideways-copy p:last-of-type {
+  grid-area: p2;
+}
+.home-container .collabs .adam-collab .sideways-copy .sideways1 {
+  grid-area: p1;
+  justify-self: end;
+  transform: rotate(180deg) translateY(50%);
+}
+.home-container .collabs .adam-collab .sideways-copy div {
+  grid-area: d;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-right: 15%;
+}
+.home-container .testimonial {
+  width: 100%;
+  height: 100vh;
+  background-image: url("assets/home-pg/yellow ketchup.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-container .testimonial div {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.home-container .testimonial p {
+  text-transform: none;
+  text-align: justify;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+  font-weight: 500;
+  line-height: 124%; /* 2.48rem */
+  letter-spacing: 0.2rem;
+  width: 32ch;
+  color: var(--key);
+}
+.home-container .testimonial p:last-of-type {
+  text-align: left;
+  -moz-text-align-last: left;
+       text-align-last: left;
+  width: auto;
+  font-size: 1.25rem;
+}
+.home-container .testimonial p span {
+  color: transparent;
+}
+.home-container .CTA-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: none;
+}
+.home-container .CTA-container .four-repeat-type {
+  position: relative;
+}
+.home-container .CTA-container .four-repeat-type .width-box {
+  margin-top: 20vh;
+}
+.home-container .CTA-container .four-repeat-type .width-box div {
+  margin-bottom: 30vh;
+}
+.home-container .CTA-container .button-text {
+  display: block;
+  padding: 0.2rem 0.8rem 0.2rem 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 1.5rem;
+  color: var(--magenta);
+  transition: 0.2s ease-in-out;
+}
+.home-container .CTA-container .button-text:hover {
+  color: var(--white);
 }
 
 .black-background {
