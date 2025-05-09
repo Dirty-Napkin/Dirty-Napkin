@@ -1254,6 +1254,7 @@ footer .footer-column.column3 {
 }
 #about-page .bios-conc .bio .bio-text h4 {
   text-box: trim-both cap;
+  text-align: justify;
 }
 #about-page .bios-conc .bio .bio-text p {
   text-align: justify;
@@ -1265,15 +1266,15 @@ footer .footer-column.column3 {
 #about-page .bios-conc .conclusion {
   margin-bottom: 144px;
 }
-#about-page .bios-conc .conclusion p:first-of-type {
-  margin-top: 1rem;
-}
 #about-page .bios-conc .conclusion p:last-of-type {
   padding-bottom: 16px;
 }
 #about-page .bios-conc .conclusion .arrow-btn {
   margin-left: -30px;
   margin-top: 20px;
+}
+#about-page .bios-conc .spacer {
+  display: none;
 }
 @media (min-width: 768px) {
   #about-page .bios-conc {
@@ -1288,6 +1289,77 @@ footer .footer-column.column3 {
   }
   #about-page .bios-conc .conclusion {
     grid-column: 2/span 4;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page .bios-conc .bio {
+    display: contents;
+  }
+  #about-page .bios-conc .bio#dan img {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  #about-page .bios-conc .bio#dan div {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  #about-page .bios-conc .bio#noah img {
+    grid-column: 6;
+    grid-row: 1;
+  }
+  #about-page .bios-conc .bio#noah div {
+    grid-column: 6;
+    grid-row: 2;
+  }
+  #about-page .bios-conc .bio#evan img {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  #about-page .bios-conc .bio#evan div {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  #about-page .bios-conc .bio#nick img {
+    grid-column: 5;
+    grid-row: 4;
+  }
+  #about-page .bios-conc .bio#nick div {
+    grid-column: 5;
+    grid-row: 5;
+  }
+  #about-page .bios-conc .spacer {
+    display: block;
+    height: 145px;
+    grid-column: 1/span 6;
+    grid-row: 6;
+  }
+  #about-page .bios-conc .conclusion {
+    grid-column: 3/span 2;
+    grid-row: 7;
+  }
+  #about-page .bios-conc .square {
+    display: block !important;
+    justify-self: end;
+  }
+  #about-page .bios-conc .square#about-square-33 {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+  #about-page .bios-conc .square#about-square-34 {
+    grid-column: 4;
+    grid-row: 3;
+    align-self: end;
+  }
+  #about-page .bios-conc .square#about-square-35 {
+    grid-column: 2;
+    grid-row: 5;
+    align-self: end;
+  }
+  #about-page .bios-conc .square#about-square-36 {
+    grid-column: 2;
+    grid-row: 7;
+    align-self: start;
   }
 }
 
