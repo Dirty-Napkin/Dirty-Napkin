@@ -3,8 +3,9 @@
     Mixins
 ============= */
 // autocalculate grid columns where the "gaps" are actually columns
-@mixin build-grid($columnWidth, $columnCount) {
-    $gapCount: $columnCount - 1;
+@mixin build-grid($columnWidth) {
+    $columnCount: 5;
+    $gapCount: 4;
     $totalColumnWidth: $columnWidth * $columnCount;
     $gapWidth: calc((100% - #{$totalColumnWidth}) / #{$gapCount});
     $grid-columns: ();
