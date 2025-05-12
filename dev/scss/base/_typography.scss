@@ -13,12 +13,17 @@ a.no-link {
 
 /* Button Text */
 .button-text {
-    color: var(--key);
     font-size: 1rem; //16px
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
+
+    padding: .2rem .4rem .2rem .4rem;
+    color: var(--magenta);
+    transition: 0.2s ease-in-out;
+
+    &:hover {color: var(--white)}
 }
 
 .centered-text {

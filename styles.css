@@ -398,12 +398,17 @@ a.no-link {
 
 /* Button Text */
 .button-text {
-  color: var(--key);
   font-size: 1rem;
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
+  padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+  color: var(--magenta);
+  transition: 0.2s ease-in-out;
+}
+.button-text:hover {
+  color: var(--white);
 }
 
 .centered-text {
@@ -1245,6 +1250,7 @@ footer .footer-column.column3 {
   width: 60%;
   display: flex;
   flex-wrap: wrap;
+  position: relative;
 }
 .home-container .four-repeat-type .width-box .row-holder {
   min-width: 100vw;
@@ -1258,6 +1264,7 @@ footer .footer-column.column3 {
   width: 100%;
   margin-bottom: 50vh;
   padding: 0;
+  position: relative;
 }
 .home-container .four-repeat-type .width-box .row-holder div h2 {
   width: 24ch;
@@ -1360,7 +1367,7 @@ footer .footer-column.column3 {
   height: 100vw;
   display: grid;
   gap: 1.75rem;
-  grid-template-areas: ". . . . . ." ". TW . . . ." ". . . . LS ." ". . . . TE ." "ASP . . . . ." ". . . . . .";
+  grid-template-areas: ". . . . . ." ". TW . . . ." ". . . . LS ." ". . . . TE ." "ASP . . . . ." ". . PRJS . . .";
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
 }
@@ -1396,6 +1403,12 @@ footer .footer-column.column3 {
 }
 .home-container .brands-container .brands-content .brand-item:nth-child(4) {
   grid-area: ASP;
+}
+.home-container .brands-container .brands-content .brand-item:nth-child(5) {
+  grid-area: PRJS;
+  display: flex;
+  justify-content: start;
+  align-items: start;
 }
 .home-container .collabs {
   width: 100%;
@@ -1580,11 +1593,6 @@ footer .footer-column.column3 {
   width: -moz-fit-content;
   width: fit-content;
   margin-top: 1.5rem;
-  color: var(--magenta);
-  transition: 0.2s ease-in-out;
-}
-.home-container .CTA-container .button-text:hover {
-  color: var(--white);
 }
 
 .black-background {

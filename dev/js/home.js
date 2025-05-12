@@ -1,3 +1,21 @@
+// Duplicate row-holder div with red text
+document.addEventListener('DOMContentLoaded', () => {
+    const fourRepeatType = document.querySelector('.four-repeat-type');
+    const homeContainer = document.querySelector('.home-container');
+    const clone = fourRepeatType.cloneNode(true);
+    
+    // // Style the clone
+    clone.style.position = 'absolute';
+    // clone.style.top = '0';
+    // clone.style.left = '0';
+    clone.style.width = '100%';
+    clone.style.color = 'red';
+    clone.style.zIndex = '2';
+    
+    // Insert the clone inside ketchup-wrapper
+    homeContainer.appendChild(clone);
+});
+
 // For the ketchup image
 document.addEventListener("scroll", () => {
     const ketchupHero = document.querySelector(".ketchup-hero");
@@ -51,26 +69,28 @@ document.addEventListener("scroll", () => {
     let initialOffset = 0.35 * containerHeight;
     brands.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
 
-  });
-
-// For the black background
-const collabs = document.querySelector(".home-container");
-const colorTrigger = document.querySelector(".adam-collab");
-
-console.log('Color trigger element:', colorTrigger); // Debug log
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        console.log('Intersection detected:', entry.isIntersecting); // Debug log
-        if (entry.isIntersecting) {
-            collabs.classList.add("black-background");
-        } else {
-            collabs.classList.remove("black-background");
-        }
-    });
 });
 
-observer.observe(colorTrigger);
+// For the black background
+    const collabs = document.querySelector(".home-container");
+    const colorTrigger = document.querySelector(".adam-collab");
+
+    console.log('Color trigger element:', colorTrigger); // Debug log
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            console.log('Intersection detected:', entry.isIntersecting); // Debug log
+            if (entry.isIntersecting) {
+                collabs.classList.add("black-background");
+            } else {
+                collabs.classList.remove("black-background");
+            }
+        });
+    });
+
+    observer.observe(colorTrigger);
+//End of black background
+
 
 // For the brand hover effect
 document.addEventListener('DOMContentLoaded', () => {
@@ -236,4 +256,5 @@ document.addEventListener('DOMContentLoaded', () => {
         //
     });
 });
+
 
