@@ -882,6 +882,7 @@ footer .footer-column.column3 {
   display: grid;
   grid-template-columns: 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px  ;
   grid-row-gap: 40px;
+  grid-template-areas: "square-5  . .         . .        .      .         .         ." "text-1    . square-6  . .        .      square-8  .         ." "square-7  . square-11 . square-9 .      square-10 .         ." "square-13 . square-14 . .        text-2 text-2    text-2    ." "square-15 . .         . .        .      .         .         square-12" "para para para para para para para para para";
 }
 @media (min-width: 430px) {
   #about-page .story .story-grid {
@@ -896,7 +897,7 @@ footer .footer-column.column3 {
     grid-row-gap: 48px;
     padding-left: 32px;
     padding-right: 32px;
-    grid-template-areas: unset;
+    grid-template-areas: ".      square-5  .         .         .         .         .         .         square-6  .      .         . ." ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ." ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ." ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ." ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ." "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4" "para   para      para      para      para      para      para      .         .         .      .         . ." "para   para      para      para      para      para      para      square-31 .         .      .         . ." "para   para      para      para      para      para      para      .         .         .      square-32 . ." ".      .         .         .         .         .         .         .         .         .      .         . ." ".      .         .         .         .         .         .         .         .         .      .         . text-5";
   }
 }
 @media (min-width: 1024px) {
@@ -929,185 +930,6 @@ footer .footer-column.column3 {
 #about-page .story .story-grid .square.green {
   background-color: var(--green);
 }
-#about-page .story .story-grid .square#about-square-5 {
-  grid-row: 1;
-  grid-column: 1;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-5 {
-    grid-column: 2;
-  }
-}
-#about-page .story .story-grid .square#about-square-6 {
-  grid-row: 1;
-  grid-column: 9;
-}
-#about-page .story .story-grid .square#about-square-6 {
-  grid-row: 2;
-  grid-column: 3;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-6 {
-    grid-row: 1;
-    grid-column: 9;
-  }
-}
-#about-page .story .story-grid .square#about-square-7 {
-  grid-row: 3;
-  grid-column: 1;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-7 {
-    grid-row: 2;
-    grid-column: 3;
-  }
-}
-#about-page .story .story-grid .square#about-square-8 {
-  grid-row: 2;
-  grid-column: 7;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-8 {
-    grid-column: 4;
-  }
-}
-#about-page .story .story-grid .square#about-square-9 {
-  grid-row: 3;
-  grid-column: 5;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-9 {
-    grid-row: 2;
-  }
-}
-#about-page .story .story-grid .square#about-square-10 {
-  grid-row: 3;
-  grid-column: 7;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-10 {
-    grid-row: 2;
-    grid-column: 8;
-  }
-}
-#about-page .story .story-grid .square#about-square-11 {
-  grid-row: 3;
-  grid-column: 3;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-11 {
-    grid-row: 2;
-    grid-column: 9;
-  }
-}
-#about-page .story .story-grid .square#about-square-12 {
-  grid-row: 5;
-  grid-column: 9;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-12 {
-    grid-row: 3;
-    grid-column: 2;
-  }
-}
-#about-page .story .story-grid .square#about-square-13 {
-  grid-row: 4;
-  grid-column: 1;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-13 {
-    grid-row: 3;
-    grid-column: 3;
-  }
-}
-#about-page .story .story-grid .square#about-square-14 {
-  grid-row: 4;
-  grid-column: 3;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-14 {
-    grid-row: 3;
-    grid-column: 4;
-  }
-}
-#about-page .story .story-grid .square#about-square-15 {
-  grid-row: 5;
-  grid-column: 1;
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .square#about-square-15 {
-    grid-row: 3;
-    grid-column: 5;
-  }
-}
-#about-page .story .story-grid .square#about-square-16 {
-  grid-row: 3;
-  grid-column: 6;
-}
-#about-page .story .story-grid .square#about-square-17 {
-  grid-row: 3;
-  grid-column: 7;
-}
-#about-page .story .story-grid .square#about-square-18 {
-  grid-row: 3;
-  grid-column: 8;
-}
-#about-page .story .story-grid .square#about-square-19 {
-  grid-row: 4;
-  grid-column: 2;
-}
-#about-page .story .story-grid .square#about-square-20 {
-  grid-row: 4;
-  grid-column: 4;
-}
-#about-page .story .story-grid .square#about-square-21 {
-  grid-row: 4;
-  grid-column: 5;
-}
-#about-page .story .story-grid .square#about-square-22 {
-  grid-row: 4;
-  grid-column: 6;
-}
-#about-page .story .story-grid .square#about-square-23 {
-  grid-row: 4;
-  grid-column: 7;
-}
-#about-page .story .story-grid .square#about-square-24 {
-  grid-row: 5;
-  grid-column: 3;
-}
-#about-page .story .story-grid .square#about-square-25 {
-  grid-row: 5;
-  grid-column: 5;
-}
-#about-page .story .story-grid .square#about-square-26 {
-  grid-row: 5;
-  grid-column: 6;
-}
-#about-page .story .story-grid .square#about-square-27 {
-  grid-row: 5;
-  grid-column: 8;
-}
-#about-page .story .story-grid .square#about-square-28 {
-  grid-row: 6;
-  grid-column: 2;
-}
-#about-page .story .story-grid .square#about-square-29 {
-  grid-row: 6;
-  grid-column: 4;
-}
-#about-page .story .story-grid .square#about-square-30 {
-  grid-row: 6;
-  grid-column: 6;
-}
-#about-page .story .story-grid .square#about-square-31 {
-  grid-row: 8;
-  grid-column: 6;
-}
-#about-page .story .story-grid .square#about-square-32 {
-  grid-row: 9;
-  grid-column: 11;
-}
 @media (min-width: 768px) {
   #about-page .story .story-grid .square {
     width: 19.2px;
@@ -1126,8 +948,107 @@ footer .footer-column.column3 {
     width: 32px;
   }
 }
+#about-page .story .story-grid .square#about-square-5 {
+  grid-area: square-5;
+}
+#about-page .story .story-grid .square#about-square-6 {
+  grid-area: square-6;
+}
+#about-page .story .story-grid .square#about-square-7 {
+  grid-area: square-7;
+}
+#about-page .story .story-grid .square#about-square-8 {
+  grid-area: square-8;
+}
+#about-page .story .story-grid .square#about-square-9 {
+  grid-area: square-9;
+}
+#about-page .story .story-grid .square#about-square-10 {
+  grid-area: square-10;
+}
+#about-page .story .story-grid .square#about-square-11 {
+  grid-area: square-11;
+}
+#about-page .story .story-grid .square#about-square-12 {
+  grid-area: square-12;
+}
+#about-page .story .story-grid .square#about-square-13 {
+  grid-area: square-13;
+}
+#about-page .story .story-grid .square#about-square-14 {
+  grid-area: square-14;
+}
+#about-page .story .story-grid .square#about-square-15 {
+  grid-area: square-15;
+}
+#about-page .story .story-grid .square#about-square-16 {
+  grid-area: square-16;
+}
+#about-page .story .story-grid .square#about-square-17 {
+  grid-area: square-17;
+}
+#about-page .story .story-grid .square#about-square-18 {
+  grid-area: square-18;
+}
+#about-page .story .story-grid .square#about-square-19 {
+  grid-area: square-19;
+}
+#about-page .story .story-grid .square#about-square-20 {
+  grid-area: square-20;
+}
+#about-page .story .story-grid .square#about-square-21 {
+  grid-area: square-21;
+}
+#about-page .story .story-grid .square#about-square-22 {
+  grid-area: square-22;
+}
+#about-page .story .story-grid .square#about-square-23 {
+  grid-area: square-23;
+}
+#about-page .story .story-grid .square#about-square-24 {
+  grid-area: square-24;
+}
+#about-page .story .story-grid .square#about-square-25 {
+  grid-area: square-25;
+}
+#about-page .story .story-grid .square#about-square-26 {
+  grid-area: square-26;
+}
+#about-page .story .story-grid .square#about-square-27 {
+  grid-area: square-27;
+}
+#about-page .story .story-grid .square#about-square-28 {
+  grid-area: square-28;
+}
+#about-page .story .story-grid .square#about-square-29 {
+  grid-area: square-29;
+}
+#about-page .story .story-grid .square#about-square-30 {
+  grid-area: square-30;
+}
+#about-page .story .story-grid .square#about-square-31 {
+  grid-area: square-31;
+}
+#about-page .story .story-grid .square#about-square-32 {
+  grid-area: square-32;
+}
 #about-page .story .story-grid .about-text {
   white-space: nowrap;
+}
+#about-page .story .story-grid .about-text#about-text-1 {
+  grid-area: text-1;
+}
+#about-page .story .story-grid .about-text#about-text-2 {
+  grid-area: text-2;
+}
+#about-page .story .story-grid .about-text#about-text-3 {
+  grid-area: text-3;
+}
+#about-page .story .story-grid .about-text#about-text-4 {
+  grid-area: text-4;
+}
+#about-page .story .story-grid .about-text#about-text-5 {
+  grid-area: text-5;
 }
 @media (min-width: 768px) {
   #about-page .story .story-grid .about-text {
@@ -1138,20 +1059,15 @@ footer .footer-column.column3 {
   padding-right: 17px;
   justify-items: end;
   justify-self: end;
-  grid-row: 2;
-  grid-column: 1/span 2;
 }
 @media (min-width: 768px) {
   #about-page .story .story-grid .about-text#about-text-1 {
     justify-items: initial;
     justify-self: initial;
     padding-right: 0;
-    grid-column: 10;
   }
 }
 #about-page .story .story-grid .about-text#about-text-2 {
-  grid-row: 4;
-  grid-column: 6/span 3;
   height: 24px;
   display: flex;
   align-items: center;
@@ -1160,41 +1076,15 @@ footer .footer-column.column3 {
 @media (min-width: 768px) {
   #about-page .story .story-grid .about-text#about-text-2 {
     align-items: end;
-    grid-row: 6;
-    grid-column: 10;
   }
 }
-#about-page .story .story-grid .about-text#about-text-3 {
-  grid-row: 6;
-  grid-column: 1;
-}
-#about-page .story .story-grid .about-text#about-text-4 {
-  grid-row: 6;
-  grid-column: 13;
-}
-#about-page .story .story-grid .about-text#about-text-5 {
-  grid-row: 11;
-  grid-column: 13;
-}
 #about-page .story .story-grid .story-para {
-  grid-row: 6;
-  grid-column: 1/span 9;
+  grid-area: para;
   padding-bottom: 55px;
 }
 @media (min-width: 430px) {
   #about-page .story .story-grid .story-para {
     padding-bottom: 77px;
-  }
-}
-@media (min-width: 768px) {
-  #about-page .story .story-grid .story-para {
-    grid-row: 7/span 3;
-    grid-column: 1/span 7;
-  }
-}
-@media (min-width: 1024px) {
-  #about-page .story .story-grid .story-para {
-    grid-column: 1/span 5;
   }
 }
 #about-page .what-we-do {

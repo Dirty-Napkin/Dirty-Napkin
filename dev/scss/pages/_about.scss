@@ -122,6 +122,13 @@
             display: grid;
             @include build-grid(24px); //5 columns of 24px
             grid-row-gap: 40px;
+            grid-template-areas:
+                "square-5  . .         . .        .      .         .         ."
+                "text-1    . square-6  . .        .      square-8  .         ."
+                "square-7  . square-11 . square-9 .      square-10 .         ."
+                "square-13 . square-14 . .        text-2 text-2    text-2    ."
+                "square-15 . .         . .        .      .         .         square-12"
+                "para para para para para para para para para";
 
             @include sm {
                 @include build-grid(26.875px);
@@ -134,7 +141,18 @@
                 grid-row-gap: 48px;
                 padding-left: 32px;
                 padding-right: 32px;
-                grid-template-areas: unset;
+                grid-template-areas:
+                    ".      square-5  .         .         .         .         .         .         square-6  .      .         . ."
+                    ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ."
+                    ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ."
+                    ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ."
+                    ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ."
+                    "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4"
+                    "para   para      para      para      para      para      para      .         .         .      .         . ."
+                    "para   para      para      para      para      para      para      square-31 .         .      .         . ."
+                    "para   para      para      para      para      para      para      .         .         .      square-32 . ."
+                    ".      .         .         .         .         .         .         .         .         .      .         . ."
+                    ".      .         .         .         .         .         .         .         .         .      .         . text-5";
             }
 
             @include lg {
@@ -168,203 +186,6 @@
                     background-color: var(--green);
                 }
 
-                &#about-square-5 {
-                    grid-row: 1;
-                    grid-column: 1;
-
-                    @include md {
-                        grid-column: 2;
-                    }
-                }
-
-                &#about-square-6 {
-                    grid-row: 1;
-                    grid-column: 9;
-                }
-
-                &#about-square-6 {
-                    grid-row: 2;
-                    grid-column: 3;
-
-                    @include md {
-                        grid-row: 1;
-                        grid-column: 9;
-                    }
-                }
-
-                &#about-square-7 {
-                    grid-row: 3;
-                    grid-column: 1;
-
-                    @include md {
-                        grid-row: 2;
-                        grid-column: 3;
-                    }
-                }
-
-                &#about-square-8 {
-                    grid-row: 2;
-                    grid-column: 7;
-
-                    @include md {
-                        grid-column: 4;
-                    }
-                }
-
-                &#about-square-9 {
-                    grid-row: 3;
-                    grid-column: 5;
-
-                    @include md {
-                        grid-row: 2;
-                    }
-                }
-
-                &#about-square-10 {
-                    grid-row: 3;
-                    grid-column: 7;
-
-                    @include md {
-                        grid-row: 2;
-                        grid-column: 8;
-                    }
-                }
-
-                &#about-square-11 {
-                    grid-row: 3;
-                    grid-column: 3;
-
-                    @include md {
-                        grid-row: 2;
-                        grid-column: 9;
-                    }
-                }
-
-                &#about-square-12 {
-                    grid-row: 5;
-                    grid-column: 9;
-
-                    @include md {
-                        grid-row: 3;
-                        grid-column: 2;
-                    }
-                }
-
-                &#about-square-13 {
-                    grid-row: 4;
-                    grid-column: 1;
-
-                    @include md {
-                        grid-row: 3;
-                        grid-column: 3;
-                    }
-                }
-
-                &#about-square-14 {
-                    grid-row: 4;
-                    grid-column: 3;
-
-                    @include md {
-                        grid-row: 3;
-                        grid-column: 4;
-                    }
-                }
-
-                &#about-square-15 {
-                    grid-row: 5;
-                    grid-column: 1;
-
-                    @include md {
-                        grid-row: 3;
-                        grid-column: 5;
-                    }
-                }
-
-                &#about-square-16 {
-                    grid-row: 3;
-                    grid-column: 6;
-                }
-
-                &#about-square-17 {
-                    grid-row: 3;
-                    grid-column: 7;
-                }
-
-                &#about-square-18 {
-                    grid-row: 3;
-                    grid-column: 8;
-                }
-
-                &#about-square-19 {
-                    grid-row: 4;
-                    grid-column: 2;
-                }
-
-                &#about-square-20 {
-                    grid-row: 4;
-                    grid-column: 4;
-                }
-
-                &#about-square-21 {
-                    grid-row: 4;
-                    grid-column: 5;
-                }
-
-                &#about-square-22 {
-                    grid-row: 4;
-                    grid-column: 6;
-                }
-
-                &#about-square-23 {
-                    grid-row: 4;
-                    grid-column: 7;
-                }
-
-                &#about-square-24 {
-                    grid-row: 5;
-                    grid-column: 3;
-                }
-
-                &#about-square-25 {
-                    grid-row: 5;
-                    grid-column: 5;
-                }
-
-                &#about-square-26 {
-                    grid-row: 5;
-                    grid-column: 6;
-                }
-
-                &#about-square-27 {
-                    grid-row: 5;
-                    grid-column: 8;
-                }
-
-                &#about-square-28 {
-                    grid-row: 6;
-                    grid-column: 2;
-                }
-
-                &#about-square-29 {
-                    grid-row: 6;
-                    grid-column: 4;
-                }
-
-                &#about-square-30 {
-                    grid-row: 6;
-                    grid-column: 6;
-                }
-
-                &#about-square-31 {
-                    grid-row: 8;
-                    grid-column: 6;
-                }
-
-                &#about-square-32 {
-                    grid-row: 9;
-                    grid-column: 11;
-                }
-
                 @include md {
                     width: 19.2px;
                     height: 19.2px;
@@ -379,10 +200,23 @@
                     height: 32px;
                     width: 32px;
                 }
+
+                @for $i from 5 through 32 {
+                    &#about-square-#{$i} {
+                        grid-area: square-#{$i};
+                    }
+                }
+
             }
 
             .about-text {
                 white-space: nowrap;
+
+                @for $i from 1 through 5 {
+                    &#about-text-#{$i} {
+                        grid-area: text-#{$i};
+                    }
+                }
 
                 @include md {
                     transform: rotate(-90deg)
@@ -392,20 +226,15 @@
                     padding-right: 17px;
                     justify-items: end;
                     justify-self: end;
-                    grid-row: 2;
-                    grid-column: 1 / span 2;
 
                     @include md {
                         justify-items: initial;
                         justify-self: initial;
                         padding-right: 0;
-                        grid-column: 10;
                     }
                 }
 
                 &#about-text-2 {
-                    grid-row: 4;
-                    grid-column: 6 / span 3;
                     height: 24px;
                     display: flex;
                     align-items: center;
@@ -413,44 +242,18 @@
 
                     @include md {
                         align-items: end;
-                        grid-row: 6;
-                        grid-column: 10;
                     }
-                }
-
-                &#about-text-3 {
-                    grid-row: 6;
-                    grid-column: 1;
-                }
-
-                &#about-text-4 {
-                    grid-row: 6;
-                    grid-column: 13;
-                }
-
-                &#about-text-5 {
-                    grid-row: 11;
-                    grid-column: 13;
                 }
             }
 
             .story-para {
-                grid-row: 6;
-                grid-column: 1 / span 9;
+                grid-area: para;
                 padding-bottom: 55px;
 
                 @include sm {
                     padding-bottom: 77px;
                 }
 
-                @include md {
-                    grid-row: 7 / span 3;
-                    grid-column: 1 / span 7;
-                }
-
-                @include lg {
-                    grid-column: 1 / span 5;
-                }
             }
         }
     }
@@ -633,26 +436,30 @@
                 grid-column: 3 / span 2;
                 grid-row: 7;
             }
-            
-            .square{
+
+            .square {
                 display: block !important;
                 justify-self: end;
-                &#about-square-33{
+
+                &#about-square-33 {
                     grid-column: 1;
                     grid-row: 1;
                     align-self: center;
                 }
-                &#about-square-34{
+
+                &#about-square-34 {
                     grid-column: 4;
                     grid-row: 3;
                     align-self: end;
                 }
-                &#about-square-35{
+
+                &#about-square-35 {
                     grid-column: 2;
                     grid-row: 5;
                     align-self: end;
                 }
-                &#about-square-36{
+
+                &#about-square-36 {
                     grid-column: 2;
                     grid-row: 7;
                     align-self: start;
