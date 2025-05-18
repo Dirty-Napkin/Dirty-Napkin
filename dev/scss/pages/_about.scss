@@ -123,12 +123,12 @@
             @include build-grid(24px); //5 columns of 24px
             grid-row-gap: 40px;
             grid-template-areas:
-                "square-5  . .         . .        .      .         .         ."
-                "text-1    . square-6  . .        .      square-8  .         ."
-                "square-7  . square-11 . square-9 .      square-10 .         ."
-                "square-13 . square-14 . .        text-2 text-2    text-2    ."
-                "square-15 . .         . .        .      .         .         square-12"
-                "para para para para para para para para para";
+                "square-5  .    .         .    .        .      .         .      ."
+                "text-1    .    square-6  .    .        .      square-8  .      ."
+                "square-7  .    square-11 .    square-9 .      square-10 .      ."
+                "square-13 .    square-14 .    .        text-2 text-2    text-2 ."
+                "square-15 .    .         .    .        .      .         .      square-12"
+                "para      para para      para para     para   para      para   para";
 
             @include sm {
                 @include build-grid(26.875px);
