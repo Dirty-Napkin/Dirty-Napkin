@@ -330,6 +330,93 @@ template {
 }
 
 /* =============
+    Fonts
+============= */
+@font-face {
+  font-family: "Degular Text";
+  src: url("/fonts/degular_text_thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Text";
+  src: url("/fonts/degular_text_light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Text";
+  src: url("/fonts/degular_text_regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Text";
+  src: url("/fonts/degular_text_medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Text";
+  src: url("/fonts/degular_text_semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Text";
+  src: url("/fonts/degular_text_bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Text";
+  src: url("/fonts/degular_text_black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Mono";
+  src: url("/fonts/degular_mono_thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Mono";
+  src: url("/fonts/degular_mono_light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Mono";
+  src: url("/fonts/degular_mono_regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Mono";
+  src: url("/fonts/degular_mono_medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Mono";
+  src: url("/fonts/degular_mono_semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Mono";
+  src: url("/fonts/degular_mono_bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Degular Mono";
+  src: url("/fonts/degular_mono_black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+/* =============
     Base
 ============= */
 * {
@@ -378,7 +465,7 @@ img {
     Typography
 ============= */
 body {
-  font-family: "degular-mono", sans-serif;
+  font-family: "Degular Mono", sans-serif;
 }
 
 a.no-link {
@@ -456,7 +543,7 @@ h5 {
 
 .body,
 p {
-  font-family: "degular-text", sans-serif;
+  font-family: "Degular Text", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   line-height: 130%;
@@ -1401,7 +1488,7 @@ footer .footer-column.column3 {
   align-items: center;
 }
 .project-page .hero .tags-frame .tag p {
-  font-family: "degular-mono", sans-serif;
+  font-family: "Degular Mono", sans-serif;
   font-size: 0.7941875rem;
   font-weight: 600;
   line-height: 130%;
