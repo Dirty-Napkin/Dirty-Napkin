@@ -684,35 +684,47 @@ textarea {
 ============= */
 .next-project {
   display: flex;
-  margin-top: 64px;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
-  transform: scale(0.75);
+  justify-content: flex-end;
   position: relative;
   width: 100%;
-  margin-inline: auto;
+  margin: 32px auto 0;
+  transform: scale(0.75);
 }
 @media (min-width: 430px) {
   .next-project {
-    transform: none;
+    margin: 64px auto 0;
     align-items: flex-end;
     margin-inline: initial;
+    transform: none;
   }
 }
 .next-project a {
+  flex-direction: column-reverse;
   display: flex;
-  gap: 18px;
+  gap: 6px;
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
+@media (min-width: 430px) {
+  .next-project a {
+    gap: 18px;
+    flex-direction: row;
+  }
+}
 .next-project a .next-project-text {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 25px;
+  gap: 8px;
+}
+@media (min-width: 430px) {
+  .next-project a .next-project-text {
+    gap: 25px;
+  }
 }
 .next-project a .next-project-text div {
   display: flex;
@@ -723,16 +735,24 @@ textarea {
   transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .next-project a .next-project-text div p:not(:first-child) {
-  margin-left: -24px;
+  margin-left: 0;
   transition: margin-left 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.next-project a .next-project-text div .arrow-1 {
-  color: var(--magenta);
+@media (min-width: 430px) {
+  .next-project a .next-project-text div p:not(:first-child) {
+    margin-left: -24px;
+  }
 }
-.next-project a .next-project-text div p {
-  text-align: justify;
-  text-box: trim-both cap;
-  /*https://caniuse.com/mdn-css_properties_text-box*/
+.next-project a .next-project-text div .arrow-1 {
+  opacity: 1;
+  position: static;
+  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@media (min-width: 430px) {
+  .next-project a .next-project-text div .arrow-1 {
+    color: var(--magenta);
+    opacity: 0;
+  }
 }
 .next-project a .next-project-text h2 {
   margin: 0;
@@ -740,57 +760,57 @@ textarea {
   transition: font-weight 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .next-project a .next-project-img {
-  margin-top: 5px;
-  height: 185px;
   width: 185px;
+  height: 185px;
   background-size: cover;
   background-position: center;
 }
 .next-project a .next-project-img .next-project-tint-overlay {
-  height: 100%;
   width: 100%;
+  height: 100%;
   opacity: 0%;
   background-color: var(--white);
   transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .next-project a .project-floating-arrow {
-  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  transition: right 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: absolute;
   opacity: 0;
   font-size: 32px;
+  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1), right 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .next-project a .project-floating-arrow.arrow-2 {
-  position: absolute;
   top: 12.6px;
   right: 126px;
 }
 .next-project a .project-floating-arrow.arrow-3 {
-  position: absolute;
   top: 103.32px;
   right: 88px;
 }
-.next-project:hover .next-project-text div p:not(:first-child) {
+.next-project a:hover .next-project-text div p:not(:first-child) {
   margin-left: 0;
 }
-.next-project:hover .next-project-text div * {
+.next-project a:hover .next-project-text div * {
   color: var(--magenta) !important;
 }
-.next-project:hover .next-project-text h2 {
+.next-project a:hover .next-project-text div .arrow-1 {
+  opacity: 1;
+}
+.next-project a:hover .next-project-text h2 {
   font-weight: 700;
 }
-.next-project:hover .project-floating-arrow {
+.next-project a:hover .project-floating-arrow {
   opacity: 100%;
 }
-.next-project:hover .project-floating-arrow.arrow-2 {
+.next-project a:hover .project-floating-arrow.arrow-2 {
   right: 102px;
 }
-.next-project:hover .project-floating-arrow.arrow-3 {
+.next-project a:hover .project-floating-arrow.arrow-3 {
   right: 64px;
 }
-.next-project:hover .next-project-tint-overlay {
+.next-project a:hover .next-project-tint-overlay {
   opacity: 15% !important;
 }
-.next-project:active .project-floating-arrow {
+.next-project a:active .project-floating-arrow {
   opacity: 0;
   transition: opacity 200ms cubic-bezier(0.02, 0.89, 0.85, 1);
 }
