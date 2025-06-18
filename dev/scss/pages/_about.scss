@@ -270,7 +270,7 @@
             gap: 27px;
             overflow: hidden;
 
-            .mobile-squares-container {
+            .squares-container {
                 //temporary
                 background-color: #F266B9;
 
@@ -282,19 +282,44 @@
                     gap: 90px;
                 }
 
-                @include md {
-                    display: none;
-                }
-
                 .square {
                     height: 67px;
                     width: 67px;
                     //temporary
                     background-color: gray;
 
+                    &#about-square-36,
+                    &#about-square-37,
+                    &#about-square-38,
+                    &#about-square-39 {
+                        display: none;
+                    }
+
                     @include sm {
                         height: 90px;
                         width: 90px;
+                    }
+
+                    @include md {
+                        height: 70px;
+                        width: 70px;
+
+                        &#about-square-36,
+                        &#about-square-37,
+                        &#about-square-38,
+                        &#about-square-39 {
+                            display: block;
+                        }
+                    }
+
+                    @include lg {
+                        height: 93px;
+                        width: 93px;
+                    }
+
+                    @include xl {
+                        height: 116px;
+                        width: 116px;
                     }
                 }
             }
@@ -329,8 +354,8 @@
             }
         }
 
-        #about-square-35,
-        #about-square-36 {
+        #about-square-42,
+        #about-square-43 {
             display: none;
         }
 
@@ -362,8 +387,8 @@
                 grid-column: span 3;
             }
 
-            #about-square-33,
-            #about-square-34 {
+            #about-square-40,
+            #about-square-41 {
                 display: none;
             }
 
@@ -441,25 +466,25 @@
                 display: block !important;
                 justify-self: end;
 
-                &#about-square-33 {
+                &#about-square-40 {
                     grid-column: 1;
                     grid-row: 1;
                     align-self: center;
                 }
 
-                &#about-square-34 {
+                &#about-square-41 {
                     grid-column: 4;
                     grid-row: 3;
                     align-self: end;
                 }
 
-                &#about-square-35 {
+                &#about-square-42 {
                     grid-column: 2;
                     grid-row: 5;
                     align-self: end;
                 }
 
-                &#about-square-36 {
+                &#about-square-43 {
                     grid-column: 2;
                     grid-row: 7;
                     align-self: start;
