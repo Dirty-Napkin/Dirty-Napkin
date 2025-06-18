@@ -746,9 +746,6 @@ textarea {
   background-size: cover;
   background-position: center;
 }
-.next-project a .next-project-img#lemonade-stand {
-  background-image: url("https://placehold.co/185x185.png");
-}
 .next-project a .next-project-img .next-project-tint-overlay {
   height: 100%;
   width: 100%;
