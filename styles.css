@@ -460,6 +460,18 @@ img {
   width: 24px;
   height: 24px;
 }
+.square.green {
+  background-color: var(--green);
+}
+.square.cyan {
+  background-color: var(--cyan);
+}
+.square.white {
+  background-color: var(--white);
+}
+.square.magenta {
+  background-color: var(--magenta);
+}
 
 /* =============
     Typography
@@ -852,6 +864,135 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
+#about-page .square#about-square-5 {
+  grid-area: square-5;
+}
+#about-page .square#about-square-6 {
+  grid-area: square-6;
+}
+#about-page .square#about-square-7 {
+  grid-area: square-7;
+}
+#about-page .square#about-square-8 {
+  grid-area: square-8;
+}
+#about-page .square#about-square-9 {
+  grid-area: square-9;
+}
+#about-page .square#about-square-10 {
+  grid-area: square-10;
+}
+#about-page .square#about-square-11 {
+  grid-area: square-11;
+}
+#about-page .square#about-square-12 {
+  grid-area: square-12;
+}
+#about-page .square#about-square-13 {
+  grid-area: square-13;
+}
+#about-page .square#about-square-14 {
+  grid-area: square-14;
+}
+#about-page .square#about-square-15 {
+  grid-area: square-15;
+}
+#about-page .square#about-square-16 {
+  grid-area: square-16;
+}
+#about-page .square#about-square-17 {
+  grid-area: square-17;
+}
+#about-page .square#about-square-18 {
+  grid-area: square-18;
+}
+#about-page .square#about-square-19 {
+  grid-area: square-19;
+}
+#about-page .square#about-square-20 {
+  grid-area: square-20;
+}
+#about-page .square#about-square-21 {
+  grid-area: square-21;
+}
+#about-page .square#about-square-22 {
+  grid-area: square-22;
+}
+#about-page .square#about-square-23 {
+  grid-area: square-23;
+}
+#about-page .square#about-square-24 {
+  grid-area: square-24;
+}
+#about-page .square#about-square-25 {
+  grid-area: square-25;
+}
+#about-page .square#about-square-26 {
+  grid-area: square-26;
+}
+#about-page .square#about-square-27 {
+  grid-area: square-27;
+}
+#about-page .square#about-square-28 {
+  grid-area: square-28;
+}
+#about-page .square#about-square-29 {
+  grid-area: square-29;
+}
+#about-page .square#about-square-30 {
+  grid-area: square-30;
+}
+#about-page .square#about-square-31 {
+  grid-area: square-31;
+}
+#about-page .square#about-square-32 {
+  grid-area: square-32;
+}
+#about-page .square#about-square-33 {
+  grid-area: square-33;
+}
+#about-page .square#about-square-34 {
+  grid-area: square-34;
+}
+#about-page .square#about-square-35 {
+  grid-area: square-35;
+}
+#about-page .square#about-square-36 {
+  grid-area: square-36;
+}
+#about-page .square#about-square-37 {
+  grid-area: square-37;
+}
+#about-page .square#about-square-38 {
+  grid-area: square-38;
+}
+#about-page .square#about-square-39 {
+  grid-area: square-39;
+}
+#about-page .about-text#about-text-1 {
+  grid-area: text-1;
+}
+#about-page .about-text#about-text-2 {
+  grid-area: text-2;
+}
+#about-page .about-text#about-text-3 {
+  grid-area: text-3;
+}
+#about-page .about-text#about-text-4 {
+  grid-area: text-4;
+}
+#about-page .about-text#about-text-5 {
+  grid-area: text-5;
+}
+#about-page .about-text#about-text-6 {
+  grid-area: text-6;
+}
+#about-page .about-text#about-text-7 {
+  grid-area: text-7;
+}
+#about-page .about-text#about-text-8 {
+  grid-area: text-8;
+}
 #about-page .pg-title-container {
   margin-bottom: 0;
 }
@@ -955,9 +1096,6 @@ footer .footer-column.column3 {
     display: initial;
   }
 }
-#about-page .hero .content #about-square-3 {
-  background: var(--white);
-}
 #about-page .story {
   background-color: darkblue;
   color: var(--white);
@@ -1011,12 +1149,6 @@ footer .footer-column.column3 {
     display: block;
   }
 }
-#about-page .story .story-grid .square.cyan {
-  background-color: var(--cyan);
-}
-#about-page .story .story-grid .square.green {
-  background-color: var(--green);
-}
 @media (min-width: 768px) {
   #about-page .story .story-grid .square {
     width: 19.2px;
@@ -1035,107 +1167,8 @@ footer .footer-column.column3 {
     width: 32px;
   }
 }
-#about-page .story .story-grid .square#about-square-5 {
-  grid-area: square-5;
-}
-#about-page .story .story-grid .square#about-square-6 {
-  grid-area: square-6;
-}
-#about-page .story .story-grid .square#about-square-7 {
-  grid-area: square-7;
-}
-#about-page .story .story-grid .square#about-square-8 {
-  grid-area: square-8;
-}
-#about-page .story .story-grid .square#about-square-9 {
-  grid-area: square-9;
-}
-#about-page .story .story-grid .square#about-square-10 {
-  grid-area: square-10;
-}
-#about-page .story .story-grid .square#about-square-11 {
-  grid-area: square-11;
-}
-#about-page .story .story-grid .square#about-square-12 {
-  grid-area: square-12;
-}
-#about-page .story .story-grid .square#about-square-13 {
-  grid-area: square-13;
-}
-#about-page .story .story-grid .square#about-square-14 {
-  grid-area: square-14;
-}
-#about-page .story .story-grid .square#about-square-15 {
-  grid-area: square-15;
-}
-#about-page .story .story-grid .square#about-square-16 {
-  grid-area: square-16;
-}
-#about-page .story .story-grid .square#about-square-17 {
-  grid-area: square-17;
-}
-#about-page .story .story-grid .square#about-square-18 {
-  grid-area: square-18;
-}
-#about-page .story .story-grid .square#about-square-19 {
-  grid-area: square-19;
-}
-#about-page .story .story-grid .square#about-square-20 {
-  grid-area: square-20;
-}
-#about-page .story .story-grid .square#about-square-21 {
-  grid-area: square-21;
-}
-#about-page .story .story-grid .square#about-square-22 {
-  grid-area: square-22;
-}
-#about-page .story .story-grid .square#about-square-23 {
-  grid-area: square-23;
-}
-#about-page .story .story-grid .square#about-square-24 {
-  grid-area: square-24;
-}
-#about-page .story .story-grid .square#about-square-25 {
-  grid-area: square-25;
-}
-#about-page .story .story-grid .square#about-square-26 {
-  grid-area: square-26;
-}
-#about-page .story .story-grid .square#about-square-27 {
-  grid-area: square-27;
-}
-#about-page .story .story-grid .square#about-square-28 {
-  grid-area: square-28;
-}
-#about-page .story .story-grid .square#about-square-29 {
-  grid-area: square-29;
-}
-#about-page .story .story-grid .square#about-square-30 {
-  grid-area: square-30;
-}
-#about-page .story .story-grid .square#about-square-31 {
-  grid-area: square-31;
-}
-#about-page .story .story-grid .square#about-square-32 {
-  grid-area: square-32;
-}
 #about-page .story .story-grid .about-text {
   white-space: nowrap;
-}
-#about-page .story .story-grid .about-text#about-text-1 {
-  grid-area: text-1;
-}
-#about-page .story .story-grid .about-text#about-text-2 {
-  grid-area: text-2;
-}
-#about-page .story .story-grid .about-text#about-text-3 {
-  grid-area: text-3;
-}
-#about-page .story .story-grid .about-text#about-text-4 {
-  grid-area: text-4;
-}
-#about-page .story .story-grid .about-text#about-text-5 {
-  grid-area: text-5;
 }
 @media (min-width: 768px) {
   #about-page .story .story-grid .about-text {
@@ -1175,7 +1208,7 @@ footer .footer-column.column3 {
   }
 }
 #about-page .what-we-do {
-  background-color: var(--key);
+  background-color: var(--cyan);
   color: var(--white);
 }
 #about-page .what-we-do .content {
@@ -1186,50 +1219,67 @@ footer .footer-column.column3 {
   gap: 27px;
   overflow: hidden;
 }
-#about-page .what-we-do .content .squares-container {
+#about-page .what-we-do .content .mobile-squares-container {
   background-color: #F266B9;
   display: flex;
   align-items: center;
   gap: 67px;
 }
 @media (min-width: 430px) {
-  #about-page .what-we-do .content .squares-container {
+  #about-page .what-we-do .content .mobile-squares-container {
     gap: 90px;
   }
 }
-#about-page .what-we-do .content .squares-container .square {
+@media (min-width: 768px) {
+  #about-page .what-we-do .content .mobile-squares-container {
+    display: none;
+  }
+}
+#about-page .what-we-do .content .mobile-squares-container .square {
   height: 67px;
   width: 67px;
   background-color: gray;
 }
-#about-page .what-we-do .content .squares-container .square#about-square-36, #about-page .what-we-do .content .squares-container .square#about-square-37, #about-page .what-we-do .content .squares-container .square#about-square-38, #about-page .what-we-do .content .squares-container .square#about-square-39 {
-  display: none;
-}
 @media (min-width: 430px) {
-  #about-page .what-we-do .content .squares-container .square {
+  #about-page .what-we-do .content .mobile-squares-container .square {
     height: 90px;
     width: 90px;
   }
 }
+#about-page .what-we-do .content .square.desktop {
+  display: none;
+}
 @media (min-width: 768px) {
-  #about-page .what-we-do .content .squares-container .square {
+  #about-page .what-we-do .content .square.desktop {
+    display: block;
     height: 70px;
     width: 70px;
   }
-  #about-page .what-we-do .content .squares-container .square#about-square-36, #about-page .what-we-do .content .squares-container .square#about-square-37, #about-page .what-we-do .content .squares-container .square#about-square-38, #about-page .what-we-do .content .squares-container .square#about-square-39 {
-    display: block;
-  }
 }
 @media (min-width: 1024px) {
-  #about-page .what-we-do .content .squares-container .square {
+  #about-page .what-we-do .content .square.desktop {
     height: 93px;
     width: 93px;
   }
 }
 @media (min-width: 1280px) {
-  #about-page .what-we-do .content .squares-container .square {
+  #about-page .what-we-do .content .square.desktop {
     height: 116px;
     width: 116px;
+  }
+}
+@media (min-width: 768px) {
+  #about-page .what-we-do .content {
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(7, minmax(0, auto));
+    gap: 58px 40px;
+    grid-template-areas: "square-33 .       .       square-34 .      ." ".         text-6  text-6  text-6    .      ." ".         .       .       .         .      ." "square-35 .       .       square-36 .      square-37" ".         .       .       .         text-7 text-7" ".         .       .       .         text-8 text-8" ".         .       .       square-38.       square-39";
+  }
+  #about-page .what-we-do .content #about-text-7, #about-page .what-we-do .content #about-text-8 {
+    max-width: 75%;
   }
 }
 #about-page .bios-conc {

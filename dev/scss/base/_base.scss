@@ -39,4 +39,20 @@ img {
     background-color: var(--key);
     width: 24px;
     height: 24px;
+
+    &.green {
+        background-color: var(--green);
+    }
+
+    &.cyan {
+        background-color: var(--cyan);
+    }
+
+    &.white {
+        background-color: var(--white);
+    }
+
+    &.magenta {
+        background-color: var(--magenta);
+    }
 }
