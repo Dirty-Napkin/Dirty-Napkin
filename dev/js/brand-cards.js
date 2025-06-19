@@ -44,9 +44,9 @@ function createCard(imageUrl, title, description, cardLink) {
 const cardsData = [
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'Those Eyes',
+        title: 'The Window',
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'those-eyes.html'
+        cardLink: 'the-window.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg', 
@@ -56,9 +56,9 @@ const cardsData = [
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'The Window', 
+        title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'the-window.html'
+        cardLink: 'those-eyes.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',

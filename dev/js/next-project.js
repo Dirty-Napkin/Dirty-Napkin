@@ -10,6 +10,18 @@ const data = [
         "next-page": "those-eyes",
         "next-text": "Those Eyes",
         "next-img": "https://placehold.co/1312x636.png"
+    },
+    {
+        "current-page": "those-eyes",
+        "next-page": "american-scripture-project",
+        "next-text": "American Scripture Project",
+        "next-img": "https://placehold.co/1312x636.png"
+    },
+    {
+        "current-page": "american-scripture-project",
+        "next-page": "the-window",
+        "next-text": "The Window",
+        "next-img": "https://placehold.co/1312x636.png"
     }
 ];
 
