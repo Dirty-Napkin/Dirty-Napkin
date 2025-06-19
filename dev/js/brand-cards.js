@@ -52,7 +52,7 @@ const cardsData = [
         imageUrl: 'assets/test/Those Eyes image.jpg', 
         title: 'The Lemonade Stand',
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
+        cardLink: 'lemonade-stand.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
@@ -64,19 +64,7 @@ const cardsData = [
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'American Scripture Project',
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
-    },
-    {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
-    },
-    {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
+        cardLink: 'american-scripture-project.html'
     }
 ];
 
