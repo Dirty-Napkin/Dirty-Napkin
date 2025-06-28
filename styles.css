@@ -1781,6 +1781,9 @@ footer .footer-column.column3 {
     grid-template-columns: repeat(6, 1fr);
   }
 }
+.project-page .content .border {
+  border: 1px solid #000;
+}
 .project-page .content .height2 {
   grid-row: span 2;
 }
