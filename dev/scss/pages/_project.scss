@@ -4,38 +4,84 @@
 .project-page {
 
     .hero {
-        @include md {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        max-width: 100%;
+        @include md{
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-rows: repeat(4, auto);
+            grid-template-areas:
+                "title tags"
+                "desc tags"
+                "image image"
+                "adjectives adjectives";
         }
 
-        .title-frame {
-            display: flex;
-            flex-direction: column;
-            gap: 0.625rem; //10px
-            margin-bottom: 24px;
+        @include xl {
+            grid-template-columns: 1fr auto auto;
+            grid-template-rows: repeat(3, auto);
+            grid-template-areas: 
+                "title desc tags"
+                "image image image"
+                "adjectives adjectives adjectives"; 
+        }
 
+        .project-title{
+            grid-area: title;
+            font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
+            letter-spacing: 0.7rem; //11.2px
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .desc{
+            grid-area: desc;
+            align-self: end;
+        }
+        img{
+            grid-area: image;
+            width: 100vw;
+            margin-left: -24px;
+            margin-right: -24px;
+        
             @include md {
-                margin-right: 0;
+                margin-left: -32px;
+                margin-right: -32px;
+            }
+        
+            @include xl {
+                margin-left: -64px;
+                margin-right: -64px;
             }
         }
 
-        @include md {
-            img {
-                order: 1;
-            }
-        }
+        // .title-frame {
+        //     display: flex;
+        //     flex-direction: column;
+        //     gap: 0.625rem; //10px
+        //     margin-bottom: 24px;
+
+        //     @include md {
+        //         margin-right: 0;
+        //         flex-direction: row;
+        //     }
+
+        //     .project-title{
+        //         background-color: red;
+        //         width: 100%;
+        //     }
+        // }
 
         .tags-frame {
+            grid-area: tags;
             display: flex;
-            margin: 8px 24px 24px 24px;
+            // margin: 8px 24px 24px 24px;
             justify-content: space-between;
             gap: 1.6875rem; //27px
 
             @include md {
                 order: 0;
-                margin: 0 32px 20px 0;
+                // margin: 0 32px 20px 0;
                 flex-direction: column;
                 justify-content: flex-end;
                 align-items: flex-end;
@@ -64,6 +110,7 @@
                 .squares {
                     width: 8.471px;
                     height: 8.471px;
+                    background-color: var(--key);
 
                     @include md {
                         width: 16px;
@@ -74,14 +121,14 @@
         }
 
         .adjectives {
+            grid-area: adjectives;
             margin-top: 32px;
             display: flex;
             gap: 26px 28px;
             flex-wrap: wrap;
-            width: 100%;
+            // width: 100%;
 
             @include md {
-                order: 3;
                 flex-wrap: nowrap;
                 justify-content: space-between;
                 gap: unset;

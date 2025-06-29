@@ -1649,39 +1649,63 @@ footer .footer-column.column3 {
 /* =============
     Project Pages
 ============= */
+.project-page .hero {
+  max-width: 100%;
+}
 @media (min-width: 768px) {
   .project-page .hero {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas: "title tags" "desc tags" "image image" "adjectives adjectives";
   }
 }
-.project-page .hero .title-frame {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  margin-bottom: 24px;
-}
-@media (min-width: 768px) {
-  .project-page .hero .title-frame {
-    margin-right: 0;
+@media (min-width: 1280px) {
+  .project-page .hero {
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: "title desc tags" "image image image" "adjectives adjectives adjectives";
   }
+}
+.project-page .hero .project-title {
+  grid-area: title;
+  font-size: clamp(2rem, 8vw, 5rem);
+  letter-spacing: 0.7rem;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.project-page .hero .desc {
+  grid-area: desc;
+  align-self: end;
+}
+.project-page .hero img {
+  grid-area: image;
+  width: 100vw;
+  margin-left: -24px;
+  margin-right: -24px;
 }
 @media (min-width: 768px) {
   .project-page .hero img {
-    order: 1;
+    margin-left: -32px;
+    margin-right: -32px;
+  }
+}
+@media (min-width: 1280px) {
+  .project-page .hero img {
+    margin-left: -64px;
+    margin-right: -64px;
   }
 }
 .project-page .hero .tags-frame {
+  grid-area: tags;
   display: flex;
-  margin: 8px 24px 24px 24px;
   justify-content: space-between;
   gap: 1.6875rem;
 }
 @media (min-width: 768px) {
   .project-page .hero .tags-frame {
     order: 0;
-    margin: 0 32px 20px 0;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
@@ -1710,6 +1734,7 @@ footer .footer-column.column3 {
 .project-page .hero .tags-frame .tag .squares {
   width: 8.471px;
   height: 8.471px;
+  background-color: var(--key);
 }
 @media (min-width: 768px) {
   .project-page .hero .tags-frame .tag .squares {
@@ -1718,15 +1743,14 @@ footer .footer-column.column3 {
   }
 }
 .project-page .hero .adjectives {
+  grid-area: adjectives;
   margin-top: 32px;
   display: flex;
   gap: 26px 28px;
   flex-wrap: wrap;
-  width: 100%;
 }
 @media (min-width: 768px) {
   .project-page .hero .adjectives {
-    order: 3;
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: unset;
