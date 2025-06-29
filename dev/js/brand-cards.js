@@ -71,10 +71,12 @@ const cardsData = [
 console.log("ready to populate cards!");
 
 
-// Create and append all cards when DOM loads
+// Create and append all cards when DOM loads - ONLY on brands page
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on the brands page by looking for the brand-card-grid container
     const gridContainer = document.querySelector('.brand-card-grid');
     if (gridContainer) {
+        console.log("Brands page detected - creating cards...");
         cardsData.forEach(cardData => {
             const card = createCard(
                 cardData.imageUrl,
