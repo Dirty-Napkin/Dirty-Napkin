@@ -68,8 +68,6 @@ const cardsData = [
     }
 ];
 
-console.log("ready to populate cards!");
-
 
 // Create and append all cards when DOM loads - ONLY on brands page
 document.addEventListener('DOMContentLoaded', () => {

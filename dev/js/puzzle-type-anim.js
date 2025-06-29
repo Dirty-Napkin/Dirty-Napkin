@@ -32,10 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!originalText) {
                 originalText = element.textContent;
                 element.dataset.originalText = originalText;
-                console.log('[PuzzleType] Stored original text:', originalText);
             }
-            
-            console.log('[PuzzleType] Using text for wrapping:', originalText);
             
             // Remove all child spans (reset) but preserve the original text
             while (element.firstChild) {
@@ -73,8 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 // For non-project titles, just use the original text as one row
                 rows = [originalText];
             }
-            
-            console.log('[PuzzleType] Final rows:', rows);
             
             // Set up container
             element.style.position = 'relative';
