@@ -2058,3 +2058,25 @@ footer .footer-column.column3 {
   background-color: var(--key);
   color: var(--white);
 }
+
+/* =============
+    Feedback Page
+============= */
+#feedbackPage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+#feedbackPage #feedbackLogo {
+  width: 100px;
+}
+#feedbackPage iframe {
+  width: 400px;
+}
+@media (min-width: 430px) {
+  #feedbackPage iframe {
+    width: 80vw !important;
+    height: 800px;
+  }
+}
