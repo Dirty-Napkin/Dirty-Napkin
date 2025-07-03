@@ -34,10 +34,11 @@
             white-space: nowrap;
         }
 
-        .desc{
+        h5{
             grid-area: desc;
             align-self: end;
         }
+        
         img{
             grid-area: image;
             width: 100vw;

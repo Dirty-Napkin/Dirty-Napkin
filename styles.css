@@ -1675,7 +1675,7 @@ footer .footer-column.column3 {
   overflow: hidden;
   white-space: nowrap;
 }
-.project-page .hero .desc {
+.project-page .hero h5 {
   grid-area: desc;
   align-self: end;
 }
