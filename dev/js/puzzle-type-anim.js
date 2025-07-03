@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Word wrapping logic - only for project titles
             let rows = [];
+            let extraTopRow = false;
             if (element.classList.contains("project-title")) {
                 // Split into rows of max 14 characters for project titles
                 const words = originalText.split(' ');
@@ -66,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (currentRow) {
                     rows.push(currentRow);
                 }
+                extraTopRow = true;
             } else {
                 // For non-project titles, just use the original text as one row
                 rows = [originalText];
@@ -81,7 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // Calculate cell dimensions
             const fontSize = window.getComputedStyle(element).fontSize;
             const cellSize = parseFloat(fontSize) * spacingFactor;
-            const numRows = Math.max(3, rows.length); // At least 3 rows for animation
+            let numRows = Math.max(3, rows.length);
+            if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
             
             // Create spans for each character
             let spanIndex = 0;
@@ -98,16 +101,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     span.dataset.spanNumber = spanIndex;
                     
                     // Resting position: bottom rows, with longer titles using multiple rows
+                    // Shift all resting rows down by 1 if extraTopRow is true
                     const restingRow = Math.max(0, numRows - rows.length + rowIndex);
+                    const shiftedRestingRow = extraTopRow ? restingRow : restingRow;
                     const initialX = charIndex * cellSize;
-                    const initialY = cellSize * restingRow;
+                    const initialY = cellSize * shiftedRestingRow;
                     
                     span.style.left = `${initialX}px`;
                     span.style.top = `${initialY}px`;
                     span.dataset.initialX = initialX;
                     span.dataset.initialY = initialY;
                     span.dataset.initialCol = charIndex;
-                    span.dataset.initialRow = restingRow;
+                    span.dataset.initialRow = shiftedRestingRow;
                     span.dataset.rowIndex = rowIndex;
                     span.dataset.charIndex = charIndex;
                     
@@ -214,16 +219,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Add random puzzle on load for puzzle-auto elements
         if (textElement.classList.contains("puzzle-auto")) {
+            // Calculate the actual number of rows for this element
+            let actualNumRows = Math.max(3, textElement.querySelectorAll('span').length > 0 ? 
+                Math.max(...Array.from(textElement.querySelectorAll('span')).map(span => 
+                    parseInt(span.dataset.initialRow) + 1
+                )) : 3);
+            
             setTimeout(() => {
-                randomizeLetters(textElement, 3, cellSize);
+                randomizeLetters(textElement, actualNumRows, cellSize);
             }, 1); 
 
             setTimeout(() => {
-                randomizeLetters(textElement, 3, cellSize);
+                randomizeLetters(textElement, actualNumRows, cellSize);
             }, 1000);
 
             setTimeout(() => {
-                randomizeLetters(textElement, 3, cellSize);
+                randomizeLetters(textElement, actualNumRows, cellSize);
             }, 2000);
 
             setTimeout(() => {
