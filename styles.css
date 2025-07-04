@@ -1657,17 +1657,24 @@ footer .footer-column.column3 {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: repeat(4, auto);
-    grid-template-areas: "title tags" "desc tags" "image image" "adjectives adjectives";
+    grid-template-areas: "titleframe tags" "image image" "adjectives adjectives";
   }
 }
 @media (min-width: 1280px) {
   .project-page .hero {
     grid-template-columns: 1fr auto auto;
     grid-template-rows: repeat(3, auto);
-    grid-template-areas: "title desc tags" "image image image" "adjectives adjectives adjectives";
+    grid-template-areas: "titleframe tags tags" "image image image" "adjectives adjectives adjectives";
   }
 }
-.project-page .hero .project-title {
+.project-page .hero .title-frame {
+  grid-area: titleframe;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.project-page .hero .title-frame .project-title {
   grid-area: title;
   font-size: clamp(2rem, 8vw, 5rem);
   letter-spacing: 0.7rem;
@@ -1675,9 +1682,13 @@ footer .footer-column.column3 {
   overflow: hidden;
   white-space: nowrap;
 }
-.project-page .hero h5 {
-  grid-area: desc;
-  align-self: end;
+.project-page .hero .title-frame h5 {
+  position: static;
+  left: unset;
+  top: unset;
+  margin-left: 0;
+  align-self: flex-start;
+  justify-self: unset;
 }
 .project-page .hero img {
   grid-area: image;
@@ -1698,6 +1709,7 @@ footer .footer-column.column3 {
   }
 }
 .project-page .hero .tags-frame {
+  margin-left: 8px;
   grid-area: tags;
   display: flex;
   justify-content: space-between;
@@ -1754,20 +1766,6 @@ footer .footer-column.column3 {
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: unset;
-  }
-}
-.project-page .hero .adjectives p {
-  font-family: "Degular Mono" sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 130%;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-}
-@media (min-width: 768px) {
-  .project-page .hero .adjectives p {
-    font-size: 1.5rem;
-    letter-spacing: 2.4px;
   }
 }
 .project-page .intro {

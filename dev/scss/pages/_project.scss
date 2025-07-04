@@ -5,13 +5,13 @@
 
     .hero {
         max-width: 100%;
-        @include md{
+
+        @include md {
             display: grid;
             grid-template-columns: 1fr auto;
             grid-template-rows: repeat(4, auto);
             grid-template-areas:
-                "title tags"
-                "desc tags"
+                "titleframe tags"
                 "image image"
                 "adjectives adjectives";
         }
@@ -19,61 +19,57 @@
         @include xl {
             grid-template-columns: 1fr auto auto;
             grid-template-rows: repeat(3, auto);
-            grid-template-areas: 
-                "title desc tags"
+            grid-template-areas:
+                "titleframe tags tags"
                 "image image image"
-                "adjectives adjectives adjectives"; 
+                "adjectives adjectives adjectives";
         }
 
-        .project-title{
-            grid-area: title;
-            font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
-            letter-spacing: 0.7rem; //11.2px
-            max-width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
+        .title-frame {
+            grid-area: titleframe;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+
+            .project-title {
+                grid-area: title;
+                font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
+                letter-spacing: 0.7rem; //11.2px
+                max-width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            h5 {
+                position: static;
+                left: unset;
+                top: unset;
+                margin-left: 0;
+                align-self: flex-start;
+                justify-self: unset;
+            }
         }
 
-        h5{
-            grid-area: desc;
-            align-self: end;
-        }
-        
-        img{
+        img {
             grid-area: image;
             width: 100vw;
             margin-left: -24px;
             margin-right: -24px;
-        
+
             @include md {
                 margin-left: -32px;
                 margin-right: -32px;
             }
-        
+
             @include xl {
                 margin-left: -64px;
                 margin-right: -64px;
             }
         }
 
-        // .title-frame {
-        //     display: flex;
-        //     flex-direction: column;
-        //     gap: 0.625rem; //10px
-        //     margin-bottom: 24px;
-
-        //     @include md {
-        //         margin-right: 0;
-        //         flex-direction: row;
-        //     }
-
-        //     .project-title{
-        //         background-color: red;
-        //         width: 100%;
-        //     }
-        // }
-
         .tags-frame {
+            margin-left: 8px;
             grid-area: tags;
             display: flex;
             // margin: 8px 24px 24px 24px;
@@ -134,20 +130,6 @@
                 justify-content: space-between;
                 gap: unset;
             }
-
-            p {
-                font-family: "Degular Mono" sans-serif;
-                font-size: 1rem; //16px
-                font-weight: 400;
-                line-height: 130%;
-                letter-spacing: 1.6px;
-                text-transform: uppercase;
-
-                @include md {
-                    font-size: 1.5rem; //24px
-                    letter-spacing: 2.4px;
-                }
-            }
         }
     }
 
@@ -185,7 +167,7 @@
             grid-template-columns: repeat(6, 1fr);
         }
 
-        .border{
+        .border {
             border: 1px solid #000;
         }
 

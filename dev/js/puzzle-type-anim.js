@@ -43,29 +43,41 @@ document.addEventListener("DOMContentLoaded", () => {
             let rows = [];
             let extraTopRow = false;
             if (element.classList.contains("project-title")) {
-                // Split into rows of max 14 characters for project titles
-                const words = originalText.split(' ');
-                let currentRow = '';
+                const charCount = originalText.length;
                 
-                for (let i = 0; i < words.length; i++) {
-                    const word = words[i];
-                    const testRow = currentRow + (currentRow ? ' ' : '') + word;
+                if (charCount <= 10) {
+                    // Single line on row 4 (bottom row)
+                    rows = [originalText];
+                } else {
+                    // Split into two lines - words on row 3 and row 4
+                    const words = originalText.split(' ');
                     
-                    if (testRow.length <= 14) {
-                        currentRow = testRow;
+                    if (words.length === 1) {
+                        // Single word longer than 10 chars - split it
+                        const midPoint = Math.ceil(originalText.length / 2);
+                        rows = [
+                            originalText.substring(0, midPoint),
+                            originalText.substring(midPoint)
+                        ];
                     } else {
-                        if (currentRow) {
-                            rows.push(currentRow);
-                            currentRow = word;
-                        } else {
-                            // Single word longer than 14 chars - split it
-                            rows.push(word.substring(0, 14));
-                            currentRow = word.substring(14);
+                        // Multiple words - find the best split point
+                        let firstLine = '';
+                        let secondLine = '';
+                        
+                        // Try to balance the lines by putting more words on the bottom
+                        const totalWords = words.length;
+                        const wordsForFirstLine = Math.floor(totalWords / 2);
+                        
+                        firstLine = words.slice(0, wordsForFirstLine).join(' ');
+                        secondLine = words.slice(wordsForFirstLine).join(' ');
+                        
+                        // If first line is longer, swap them to put longer section on bottom
+                        if (firstLine.length > secondLine.length) {
+                            [firstLine, secondLine] = [secondLine, firstLine];
                         }
+                        
+                        rows = [firstLine, secondLine];
                     }
-                }
-                if (currentRow) {
-                    rows.push(currentRow);
                 }
                 extraTopRow = true;
             } else {
@@ -78,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
             element.style.display = 'inline-block';
             element.style.margin = `12px 0 0 0`;
             element.style.padding = '0';
-            element.style.transform = `translateY(-${spacingTranslate}%)`;
             
             // Calculate cell dimensions
             const fontSize = window.getComputedStyle(element).fontSize;
@@ -101,18 +112,30 @@ document.addEventListener("DOMContentLoaded", () => {
                     span.dataset.spanNumber = spanIndex;
                     
                     // Resting position: bottom rows, with longer titles using multiple rows
-                    // Shift all resting rows down by 1 if extraTopRow is true
-                    const restingRow = Math.max(0, numRows - rows.length + rowIndex);
-                    const shiftedRestingRow = extraTopRow ? restingRow : restingRow;
+                    // For project titles: row 3 and row 4 (bottom two rows)
+                    let restingRow;
+                    if (element.classList.contains("project-title")) {
+                        if (rows.length === 1) {
+                            // Single line - all on row 4 (bottom row)
+                            restingRow = 3; // 0-indexed, so row 4 is index 3
+                        } else {
+                            // Two lines - first line on row 3, second line on row 4
+                            restingRow = rowIndex === 0 ? 2 : 3; // row 3 = index 2, row 4 = index 3
+                        }
+                    } else {
+                        // For non-project titles, use the original logic
+                        restingRow = Math.max(0, numRows - rows.length + rowIndex);
+                    }
+                    
                     const initialX = charIndex * cellSize;
-                    const initialY = cellSize * shiftedRestingRow;
+                    const initialY = cellSize * restingRow;
                     
                     span.style.left = `${initialX}px`;
                     span.style.top = `${initialY}px`;
                     span.dataset.initialX = initialX;
                     span.dataset.initialY = initialY;
                     span.dataset.initialCol = charIndex;
-                    span.dataset.initialRow = shiftedRestingRow;
+                    span.dataset.initialRow = restingRow;
                     span.dataset.rowIndex = rowIndex;
                     span.dataset.charIndex = charIndex;
                     
@@ -123,12 +146,75 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Calculate container dimensions
             const maxRowLength = Math.max(...rows.map(row => row.length));
-            if (element.classList.contains("project-title")) {
-                element.style.width = `${14 * cellSize}px`; // Always 14 characters wide for project titles
-            } else {
-                element.style.width = `${maxRowLength * cellSize}px`; // Use actual text width for others
-            }
+            element.style.width = `${maxRowLength * cellSize}px`; // Use actual text width for all elements
             element.style.height = `${(numRows + 0.5) * cellSize}px`; // Add extra space for bottom letters
+
+            // Position tagline for XL breakpoint based on bottom row character count
+            if (element.classList.contains("project-title")) {
+                const tagline = element.parentElement.querySelector('h5');
+                if (tagline) {
+                    // Remove previous resize listener if it exists
+                    if (tagline.taglineResizeListener) {
+                        window.removeEventListener('resize', tagline.taglineResizeListener);
+                    }
+                    // Responsive positioning function
+                    const positionTagline = () => {
+                        if (window.innerWidth >= 1200) {
+                            const bottomRowCharCount = rows[rows.length - 1].length;
+                            if (bottomRowCharCount <= 10) {
+                                tagline.style.position = '';
+                                tagline.style.left = '';
+                                tagline.style.top = '';
+                                tagline.style.marginLeft = '0';
+                                tagline.style.alignSelf = 'end';
+                                tagline.style.justifySelf = 'start';
+                            } else {
+                                const hero = element.closest('.title-frame');
+                                if (hero) hero.style.position = 'relative';
+                                const spans = Array.from(element.querySelectorAll('span'));
+                                let charCount = 0;
+                                let targetSpan = null;
+                                for (let span of spans) {
+                                    if (parseInt(span.dataset.initialRow) === 3) {
+                                        if (charCount === 10) {
+                                            targetSpan = span;
+                                            break;
+                                        }
+                                        charCount++;
+                                    }
+                                }
+                                let thirdRowSpan = spans.find(span => parseInt(span.dataset.initialRow) === 2);
+                                if (targetSpan && thirdRowSpan) {
+                                    const projectTitle = element;
+                                    const titleFrame = projectTitle.closest('.title-frame');
+                                    const projectTitleOffset = projectTitle.offsetTop;
+                                    const thirdRowTop = thirdRowSpan.offsetTop;
+                                    const capHeightNudge = thirdRowSpan.offsetHeight * 0.15;
+                                    tagline.style.position = 'absolute';
+                                    tagline.style.left = `${targetSpan.offsetLeft}px`;
+                                    tagline.style.top = `${projectTitleOffset + thirdRowTop + capHeightNudge}px`;
+                                } else {
+                                    tagline.style.position = '';
+                                    tagline.style.left = '';
+                                    tagline.style.top = '';
+                                }
+                            }
+                        } else {
+                            // Reset tagline to static/default for non-XL
+                            tagline.style.position = '';
+                            tagline.style.left = '';
+                            tagline.style.top = '';
+                            tagline.style.marginLeft = '';
+                            tagline.style.alignSelf = '';
+                            tagline.style.justifySelf = '';
+                        }
+                    };
+                    tagline.taglineResizeListener = positionTagline;
+                    window.addEventListener('resize', positionTagline);
+                    // Call immediately
+                    positionTagline();
+                }
+            }
 
             // --- Hover animation event listeners ---
             if (element.classList.contains("puzzle-hover")) {
@@ -154,18 +240,15 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Use different grid sizes based on element type
             let maxCols, maxRows;
+            const maxRowLength = Math.max(...Array.from(letterSpans).map(span => 
+                parseInt(span.dataset.initialCol) + 1
+            ));
             if (element.classList.contains("project-title")) {
-                // Always use 14 columns per row for project titles
-                maxCols = 14;
-                maxRows = numRows;
+                maxCols = Math.min(10, maxRowLength); // Limit to 10 columns for animation
             } else {
-                // Use actual text width for other elements
-                const maxRowLength = Math.max(...Array.from(letterSpans).map(span => 
-                    parseInt(span.dataset.initialCol) + 1
-                ));
                 maxCols = maxRowLength;
-                maxRows = numRows;
             }
+            maxRows = numRows;
             
             // Helper functions
             function isPositionOccupied(col, row, occupiedPositions) {
