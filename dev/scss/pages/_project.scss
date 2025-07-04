@@ -16,29 +16,29 @@
                 "adjectives adjectives";
         }
 
-        @include xl {
-            grid-template-columns: 1fr auto auto;
-            grid-template-rows: repeat(3, auto);
-            grid-template-areas:
-                "titleframe tags tags"
-                "image image image"
-                "adjectives adjectives adjectives";
-        }
-
         .title-frame {
             grid-area: titleframe;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             width: 100%;
-
+            
+            @include md {
+                // Ensure title frame doesn't push tags frame into margins
+                max-width: calc(100% - 150px); // Leave space for tags frame
+            }
+            
             .project-title {
+                border: 1px solid #000;
                 grid-area: title;
                 font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
                 letter-spacing: 0.7rem; //11.2px
                 max-width: 100%;
-                overflow: hidden;
-                white-space: nowrap;
+                
+                @include md {
+                    // Use maximum font size unless layout requires shrinking
+                    font-size: clamp(2rem, 6vw, 5rem);
+                }
             }
 
             h5 {
@@ -69,14 +69,14 @@
         }
 
         .tags-frame {
-            margin-left: 8px;
             grid-area: tags;
             display: flex;
             // margin: 8px 24px 24px 24px;
             justify-content: space-between;
             gap: 1.6875rem; //27px
-
+            
             @include md {
+                margin-left: 24px;
                 order: 0;
                 // margin: 0 32px 20px 0;
                 flex-direction: column;
@@ -168,7 +168,7 @@
         }
 
         .border {
-            border: 1px solid #000;
+            border: 1px solid var(--key);
         }
 
         .height2 {

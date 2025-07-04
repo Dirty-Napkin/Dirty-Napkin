@@ -39,50 +39,89 @@ document.addEventListener("DOMContentLoaded", () => {
                 element.removeChild(element.firstChild);
             }
             
+            // Defensive check: ensure element is a valid Element
+            if (!(element instanceof Element)) {
+                console.warn('puzzle-type: element is not a valid Element', element);
+                return;
+            }
+
             // Word wrapping logic - only for project titles
             let rows = [];
             let extraTopRow = false;
             if (element.classList.contains("project-title")) {
                 const charCount = originalText.length;
-                
-                if (charCount <= 10) {
-                    // Single line on row 4 (bottom row)
-                    rows = [originalText];
-                } else {
-                    // Split into two lines - words on row 3 and row 4
+                const isSmallScreen = window.innerWidth < 768;
+                const maxLines = 4;
+                if (isSmallScreen) {
+                    // Small screens: up to 4 lines, 10 chars max per line
+                    const maxLineLength = 10;
                     const words = originalText.split(' ');
-                    
-                    if (words.length === 1) {
-                        // Single word longer than 10 chars - split it
-                        const midPoint = Math.ceil(originalText.length / 2);
-                        rows = [
-                            originalText.substring(0, midPoint),
-                            originalText.substring(midPoint)
-                        ];
-                    } else {
-                        // Multiple words - find the best split point
-                        let firstLine = '';
-                        let secondLine = '';
-                        
-                        // Try to balance the lines by putting more words on the bottom
-                        const totalWords = words.length;
-                        const wordsForFirstLine = Math.floor(totalWords / 2);
-                        
-                        firstLine = words.slice(0, wordsForFirstLine).join(' ');
-                        secondLine = words.slice(wordsForFirstLine).join(' ');
-                        
-                        // If first line is longer, swap them to put longer section on bottom
-                        if (firstLine.length > secondLine.length) {
-                            [firstLine, secondLine] = [secondLine, firstLine];
+                    let lines = [];
+                    let currentLine = '';
+                    for (let i = 0; i < words.length; i++) {
+                        const word = words[i];
+                        if (currentLine.length === 0) {
+                            currentLine = word;
+                        } else if ((currentLine.length + 1 + word.length) <= maxLineLength) {
+                            currentLine += ' ' + word;
+                        } else {
+                            lines.push(currentLine);
+                            currentLine = word;
                         }
-                        
-                        rows = [firstLine, secondLine];
                     }
+                    if (currentLine.length > 0) {
+                        lines.push(currentLine);
+                    }
+                    while (lines.length < maxLines) {
+                        lines.unshift('');
+                    }
+                    rows = lines;
+                } else {
+                    // Large screens: special logic
+                    const words = originalText.split(' ');
+                    let line1 = '';
+                    let line2 = '';
+                    if (originalText.length <= 10) {
+                        // All on bottom line
+                        rows = ["", "", "", originalText];
+                    } else {
+                        // Try all possible splits, pick the one where line1 <= 10 chars, line2 is the rest, and line2 is longer if possible
+                        let bestSplit = {line1: '', line2: '', diff: Infinity};
+                        for (let i = 1; i < words.length; i++) {
+                            let part1 = words.slice(0, i).join(' ');
+                            let part2 = words.slice(i).join(' ');
+                            if (part1.length <= 10) {
+                                let diff = part2.length - part1.length;
+                                // For 3+ words, prefer bottom line longer
+                                if (words.length >= 3 && diff < 0) continue;
+                                if (diff < bestSplit.diff) {
+                                    bestSplit = {line1: part1, line2: part2, diff};
+                                }
+                            }
+                        }
+                        if (bestSplit.line1) {
+                            line1 = bestSplit.line1;
+                            line2 = bestSplit.line2;
+                        } else {
+                            // Fallback: just split at first word
+                            line1 = words[0];
+                            line2 = words.slice(1).join(' ');
+                        }
+                        rows = ["", "", line1, line2];
+                    }
+                    // Always pad to 4 lines (already done above)
                 }
                 extraTopRow = true;
+                console.log('Final rows:', rows);
             } else {
                 // For non-project titles, just use the original text as one row
                 rows = [originalText];
+            }
+            
+            // Defensive check: ensure rows is not empty
+            if (!rows || rows.length === 0) {
+                console.warn('puzzle-type: rows is empty for element', element, rows);
+                return;
             }
             
             // Set up container
@@ -91,16 +130,47 @@ document.addEventListener("DOMContentLoaded", () => {
             element.style.margin = `12px 0 0 0`;
             element.style.padding = '0';
             
+            // Debugging logs
+            console.log('puzzle-type: element and rows before getComputedStyle', element, rows);
+
             // Calculate cell dimensions
             const fontSize = window.getComputedStyle(element).fontSize;
-            const cellSize = parseFloat(fontSize) * spacingFactor;
+            let cellSize = parseFloat(fontSize) * spacingFactor;
             let numRows = Math.max(3, rows.length);
             if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
             
+            console.log('Initial cell size calculation:', { fontSize, cellSize, numRows });
+            
+            // Responsive grid sizing for project titles
+            let maxCols = 10; // Default 10-character limit
+            if (element.classList.contains("project-title")) {
+                if (window.innerWidth < 768) {
+                    // On smaller screens, calculate cell size to fit 10 characters in available width
+                    const containerWidth = window.innerWidth - 48; // Full width minus margins
+                    const calculatedCellSize = containerWidth / 10;
+                    // Use the calculated cell size, but ensure it's not too small
+                    cellSize = Math.max(calculatedCellSize, 20); // Minimum 20px cell size
+                    console.log('Small screen cell size:', { containerWidth, calculatedCellSize, finalCellSize: cellSize });
+                } else {
+                    // On larger screens, ensure we don't exceed the container width
+                    const titleFrame = element.closest('.title-frame');
+                    if (titleFrame) {
+                        const frameWidth = titleFrame.offsetWidth;
+                        const maxCellSize = frameWidth / 10;
+                        // Only shrink if absolutely necessary to fit
+                        if (maxCellSize < cellSize) {
+                            cellSize = maxCellSize;
+                        }
+                    }
+                }
+            }
+            
             // Create spans for each character
             let spanIndex = 0;
+            let measuredCellSize = null;
             for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
                 const row = rows[rowIndex];
+                const offsetRow = 4 - rows.length;
                 for (let charIndex = 0; charIndex < row.length; charIndex++) {
                     const span = document.createElement('span');
                     span.textContent = row[charIndex];
@@ -109,27 +179,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     span.style.transition = 'all 0.3s ease';
                     span.style.margin = '0';
                     span.style.padding = '0';
+                    span.style.lineHeight = '1';
                     span.dataset.spanNumber = spanIndex;
-                    
-                    // Resting position: bottom rows, with longer titles using multiple rows
-                    // For project titles: row 3 and row 4 (bottom two rows)
-                    let restingRow;
-                    if (element.classList.contains("project-title")) {
-                        if (rows.length === 1) {
-                            // Single line - all on row 4 (bottom row)
-                            restingRow = 3; // 0-indexed, so row 4 is index 3
-                        } else {
-                            // Two lines - first line on row 3, second line on row 4
-                            restingRow = rowIndex === 0 ? 2 : 3; // row 3 = index 2, row 4 = index 3
-                        }
-                    } else {
-                        // For non-project titles, use the original logic
-                        restingRow = Math.max(0, numRows - rows.length + rowIndex);
+                    // Offset so text is always bottom-aligned
+                    let restingRow = offsetRow + rowIndex;
+                    // Temporarily append to measure height
+                    element.appendChild(span);
+                    if (measuredCellSize === null) {
+                        measuredCellSize = span.offsetHeight;
                     }
-                    
+                    element.removeChild(span);
                     const initialX = charIndex * cellSize;
-                    const initialY = cellSize * restingRow;
-                    
+                    const initialY = (measuredCellSize || cellSize) * restingRow;
                     span.style.left = `${initialX}px`;
                     span.style.top = `${initialY}px`;
                     span.dataset.initialX = initialX;
@@ -138,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     span.dataset.initialRow = restingRow;
                     span.dataset.rowIndex = rowIndex;
                     span.dataset.charIndex = charIndex;
-                    
                     element.appendChild(span);
                     spanIndex++;
                 }
@@ -146,8 +206,26 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Calculate container dimensions
             const maxRowLength = Math.max(...rows.map(row => row.length));
-            element.style.width = `${maxRowLength * cellSize}px`; // Use actual text width for all elements
-            element.style.height = `${(numRows + 0.5) * cellSize}px`; // Add extra space for bottom letters
+            if (element.classList.contains("project-title") && window.innerWidth < 768) {
+                // On small screens, always use height for 4 rows
+                const containerWidth = window.innerWidth - 48; // Full width minus margins
+                element.style.width = `${containerWidth}px`;
+                element.style.height = `${(4 + 0.5) * cellSize}px`;
+            } else if (element.classList.contains("project-title")) {
+                // On larger screens, use calculated width but respect container constraints
+                const titleFrame = element.closest('.title-frame');
+                if (titleFrame) {
+                    const frameWidth = titleFrame.offsetWidth;
+                    const calculatedWidth = maxRowLength * cellSize;
+                    element.style.width = `${Math.min(calculatedWidth, frameWidth)}px`;
+                } else {
+                    element.style.width = `${maxRowLength * cellSize}px`;
+                }
+                element.style.height = `${(numRows + 0.5) * cellSize}px`;
+            } else {
+                element.style.width = `${maxRowLength * cellSize}px`; // Use actual text width for all elements
+                element.style.height = `${(numRows + 0.5) * cellSize}px`;
+            }
 
             // Position tagline for XL breakpoint based on bottom row character count
             if (element.classList.contains("project-title")) {
@@ -218,11 +296,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // --- Hover animation event listeners ---
             if (element.classList.contains("puzzle-hover")) {
-                // Remove previous listeners by setting to null
                 element.onmouseenter = null;
                 element.onmouseleave = null;
                 element.addEventListener("mouseenter", () => {
-                    randomizeLetters(element, numRows, cellSize);
+                    randomizeLetters(element, 4, cellSize);
                 });
                 element.addEventListener("mouseleave", () => {
                     const letterSpans = element.querySelectorAll('span');
@@ -232,29 +309,31 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 });
             }
+
+            // After all spans are created:
+            if (measuredCellSize) {
+                element.style.height = `${4 * measuredCellSize}px`;
+            }
         }
 
         // Function to randomize letter positions
-        function randomizeLetters(element, numRows, cellSize) {
+        function randomizeLetters(element, numRows, measuredCellSize) {
+            if (!measuredCellSize || measuredCellSize <= 0) return;
             const letterSpans = element.querySelectorAll('span');
-            
-            // Use different grid sizes based on element type
             let maxCols, maxRows;
-            const maxRowLength = Math.max(...Array.from(letterSpans).map(span => 
-                parseInt(span.dataset.initialCol) + 1
-            ));
             if (element.classList.contains("project-title")) {
-                maxCols = Math.min(10, maxRowLength); // Limit to 10 columns for animation
+                maxCols = 10;
+                maxRows = 4;
             } else {
+                const maxRowLength = Math.max(...Array.from(letterSpans).map(span => 
+                    parseInt(span.dataset.initialCol) + 1
+                ));
                 maxCols = maxRowLength;
+                maxRows = numRows;
             }
-            maxRows = numRows;
-            
-            // Helper functions
             function isPositionOccupied(col, row, occupiedPositions) {
                 return occupiedPositions.some(pos => pos.col === col && pos.row === row);
             }
-            
             function getRandomPosition(occupiedPositions) {
                 let col, row;
                 do {
@@ -263,28 +342,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 } while (isPositionOccupied(col, row, occupiedPositions));
                 return { col, row };
             }
-            
             function getPixelPosition(col, row) {
                 return {
-                    x: col * cellSize,
-                    y: row * cellSize
+                    x: col * measuredCellSize,
+                    y: row * measuredCellSize
                 };
             }
-            
-            // Randomize
             const occupiedPositions = [];
             const positions = [];
-            
             for(let i = 0; i < letterSpans.length; i++) {
                 const newPos = getRandomPosition(occupiedPositions);
                 occupiedPositions.push(newPos);
                 positions.push(newPos);
             }
-            
-            // Sort positions left to right to maintain word order
             positions.sort((a, b) => a.row - b.row || a.col - b.col);
-            
-            // Apply positions
             letterSpans.forEach((span, index) => {
                 const pixelPos = getPixelPosition(positions[index].col, positions[index].row);
                 span.style.left = `${pixelPos.x}px`;
@@ -302,24 +373,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Add random puzzle on load for puzzle-auto elements
         if (textElement.classList.contains("puzzle-auto")) {
-            // Calculate the actual number of rows for this element
-            let actualNumRows = Math.max(3, textElement.querySelectorAll('span').length > 0 ? 
-                Math.max(...Array.from(textElement.querySelectorAll('span')).map(span => 
-                    parseInt(span.dataset.initialRow) + 1
-                )) : 3);
-            
+            let actualNumRows = 4;
             setTimeout(() => {
-                randomizeLetters(textElement, actualNumRows, cellSize);
-            }, 1); 
-
+                randomizeLetters(textElement, 4, cellSize);
+            }, 1);
             setTimeout(() => {
-                randomizeLetters(textElement, actualNumRows, cellSize);
+                randomizeLetters(textElement, 4, cellSize);
             }, 1000);
-
             setTimeout(() => {
-                randomizeLetters(textElement, actualNumRows, cellSize);
+                randomizeLetters(textElement, 4, cellSize);
             }, 2000);
-
             setTimeout(() => {
                 letterSpans.forEach(span => {
                     span.style.left = `${span.dataset.initialX}px`;

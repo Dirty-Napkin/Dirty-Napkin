@@ -1660,13 +1660,6 @@ footer .footer-column.column3 {
     grid-template-areas: "titleframe tags" "image image" "adjectives adjectives";
   }
 }
-@media (min-width: 1280px) {
-  .project-page .hero {
-    grid-template-columns: 1fr auto auto;
-    grid-template-rows: repeat(3, auto);
-    grid-template-areas: "titleframe tags tags" "image image image" "adjectives adjectives adjectives";
-  }
-}
 .project-page .hero .title-frame {
   grid-area: titleframe;
   display: flex;
@@ -1674,13 +1667,22 @@ footer .footer-column.column3 {
   align-items: flex-start;
   width: 100%;
 }
+@media (min-width: 768px) {
+  .project-page .hero .title-frame {
+    max-width: calc(100% - 150px);
+  }
+}
 .project-page .hero .title-frame .project-title {
+  border: 1px solid #000;
   grid-area: title;
   font-size: clamp(2rem, 8vw, 5rem);
   letter-spacing: 0.7rem;
   max-width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+}
+@media (min-width: 768px) {
+  .project-page .hero .title-frame .project-title {
+    font-size: clamp(2rem, 6vw, 5rem);
+  }
 }
 .project-page .hero .title-frame h5 {
   position: static;
@@ -1709,7 +1711,6 @@ footer .footer-column.column3 {
   }
 }
 .project-page .hero .tags-frame {
-  margin-left: 8px;
   grid-area: tags;
   display: flex;
   justify-content: space-between;
@@ -1717,6 +1718,7 @@ footer .footer-column.column3 {
 }
 @media (min-width: 768px) {
   .project-page .hero .tags-frame {
+    margin-left: 24px;
     order: 0;
     flex-direction: column;
     justify-content: flex-end;
@@ -1804,7 +1806,7 @@ footer .footer-column.column3 {
   }
 }
 .project-page .content .border {
-  border: 1px solid #000;
+  border: 1px solid var(--key);
 }
 .project-page .content .height2 {
   grid-row: span 2;
