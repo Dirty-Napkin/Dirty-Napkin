@@ -9,21 +9,90 @@ Puzzle type animations
 
 document.addEventListener("DOMContentLoaded", () => {
     const textElements = document.querySelectorAll(".puzzle-type")
-    
+
 
     textElements.forEach((textElement) => {
-    // Here is where to adjust the spacing of the grid, if you want the tracking to be more or less
+        // Here is where to adjust the spacing of the grid, if you want the tracking to be more or less
 
-    /* --------------------------------------------------------------------------------
+        /* --------------------------------------------------------------------------------
+        
+        Here I need to fix the spacing Factor so that it can scale proportionally based on screen size in addition to the font size scaling.
     
-    Here I need to fix the spacing Factor so that it can scale proportionally based on screen size in addition to the font size scaling.
-
-    It works well on page load, but if you scale the browswer while you're using it, the spacing does not change. Maybe this is an issue we don't worry about fixing?
-
-    -----------------------------------------------------------------------------------*/
+        It works well on page load, but if you scale the browswer while you're using it, the spacing does not change. Maybe this is an issue we don't worry about fixing?
     
+        -----------------------------------------------------------------------------------*/
+
         const spacingFactor = .75;
-        const spacingTranslate = 13;
+
+        // Function to create rows for project titles
+        function projectTitleRows(originalText) {
+            let rows = [];
+            let extraTopRow = false;
+            const isSmallScreen = window.innerWidth < 768;
+            const maxLines = 4;
+            if (isSmallScreen) {
+                // Small screens: up to 4 lines, 10 chars max per line
+                const maxLineLength = 10;
+                const words = originalText.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    if (currentLine.length === 0) {
+                        currentLine = word;
+                    } else if ((currentLine.length + 1 + word.length) <= maxLineLength) {
+                        currentLine += ' ' + word;
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    }
+                }
+                if (currentLine.length > 0) {
+                    lines.push(currentLine);
+                }
+                while (lines.length < maxLines) {
+                    lines.unshift('');
+                }
+                rows = lines;
+            } else {
+                // Large screens: special logic
+                const words = originalText.split(' ');
+                let line1 = '';
+                let line2 = '';
+                if (originalText.length <= 10) {
+                    // All on bottom line
+                    rows = ["", "", "", originalText];
+                } else {
+                    // Try all possible splits, pick the one where line1 <= 10 chars, line2 is the rest, and line2 is longer if possible
+                    let bestSplit = { line1: '', line2: '', diff: Infinity };
+                    for (let i = 1; i < words.length; i++) {
+                        let part1 = words.slice(0, i).join(' ');
+                        let part2 = words.slice(i).join(' ');
+                        if (part1.length <= 10) {
+                            let diff = part2.length - part1.length;
+                            // For 3+ words, prefer bottom line longer
+                            if (words.length >= 3 && diff < 0) continue;
+                            if (diff < bestSplit.diff) {
+                                bestSplit = { line1: part1, line2: part2, diff };
+                            }
+                        }
+                    }
+                    if (bestSplit.line1) {
+                        line1 = bestSplit.line1;
+                        line2 = bestSplit.line2;
+                    } else {
+                        // Fallback: just split at first word
+                        line1 = words[0];
+                        line2 = words.slice(1).join(' ');
+                    }
+                    rows = ["", "", line1, line2];
+                }
+                // Always pad to 4 lines (already done above)
+            }
+            extraTopRow = true;
+            console.log('Final rows:', rows);
+            return { rows, extraTopRow };
+        }
 
         // Function to wrap each letter in a span
         function wrapLetters(element) {
@@ -33,12 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 originalText = element.textContent;
                 element.dataset.originalText = originalText;
             }
-            
+
             // Remove all child spans (reset) but preserve the original text
             while (element.firstChild) {
                 element.removeChild(element.firstChild);
             }
-            
+
             // Defensive check: ensure element is a valid Element
             if (!(element instanceof Element)) {
                 console.warn('puzzle-type: element is not a valid Element', element);
@@ -49,87 +118,26 @@ document.addEventListener("DOMContentLoaded", () => {
             let rows = [];
             let extraTopRow = false;
             if (element.classList.contains("project-title")) {
-                const charCount = originalText.length;
-                const isSmallScreen = window.innerWidth < 768;
-                const maxLines = 4;
-                if (isSmallScreen) {
-                    // Small screens: up to 4 lines, 10 chars max per line
-                    const maxLineLength = 10;
-                    const words = originalText.split(' ');
-                    let lines = [];
-                    let currentLine = '';
-                    for (let i = 0; i < words.length; i++) {
-                        const word = words[i];
-                        if (currentLine.length === 0) {
-                            currentLine = word;
-                        } else if ((currentLine.length + 1 + word.length) <= maxLineLength) {
-                            currentLine += ' ' + word;
-                        } else {
-                            lines.push(currentLine);
-                            currentLine = word;
-                        }
-                    }
-                    if (currentLine.length > 0) {
-                        lines.push(currentLine);
-                    }
-                    while (lines.length < maxLines) {
-                        lines.unshift('');
-                    }
-                    rows = lines;
-                } else {
-                    // Large screens: special logic
-                    const words = originalText.split(' ');
-                    let line1 = '';
-                    let line2 = '';
-                    if (originalText.length <= 10) {
-                        // All on bottom line
-                        rows = ["", "", "", originalText];
-                    } else {
-                        // Try all possible splits, pick the one where line1 <= 10 chars, line2 is the rest, and line2 is longer if possible
-                        let bestSplit = {line1: '', line2: '', diff: Infinity};
-                        for (let i = 1; i < words.length; i++) {
-                            let part1 = words.slice(0, i).join(' ');
-                            let part2 = words.slice(i).join(' ');
-                            if (part1.length <= 10) {
-                                let diff = part2.length - part1.length;
-                                // For 3+ words, prefer bottom line longer
-                                if (words.length >= 3 && diff < 0) continue;
-                                if (diff < bestSplit.diff) {
-                                    bestSplit = {line1: part1, line2: part2, diff};
-                                }
-                            }
-                        }
-                        if (bestSplit.line1) {
-                            line1 = bestSplit.line1;
-                            line2 = bestSplit.line2;
-                        } else {
-                            // Fallback: just split at first word
-                            line1 = words[0];
-                            line2 = words.slice(1).join(' ');
-                        }
-                        rows = ["", "", line1, line2];
-                    }
-                    // Always pad to 4 lines (already done above)
-                }
-                extraTopRow = true;
-                console.log('Final rows:', rows);
+                const result = projectTitleRows(originalText);
+                rows = result.rows;
+                extraTopRow = result.extraTopRow;
             } else {
                 // For non-project titles, just use the original text as one row
                 rows = [originalText];
             }
-            
+
             // Defensive check: ensure rows is not empty
             if (!rows || rows.length === 0) {
                 console.warn('puzzle-type: rows is empty for element', element, rows);
                 return;
             }
-            
+
             // Set up container
             element.style.position = 'relative';
             element.style.display = 'inline-block';
             element.style.margin = `12px 0 0 0`;
             element.style.padding = '0';
-            
+
             // Debugging logs
             console.log('puzzle-type: element and rows before getComputedStyle', element, rows);
 
@@ -138,11 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let cellSize = parseFloat(fontSize) * spacingFactor;
             let numRows = Math.max(3, rows.length);
             if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
-            
+
             console.log('Initial cell size calculation:', { fontSize, cellSize, numRows });
-            
+
             // Responsive grid sizing for project titles
-            let maxCols = 10; // Default 10-character limit
             if (element.classList.contains("project-title")) {
                 if (window.innerWidth < 768) {
                     // On smaller screens, calculate cell size to fit 10 characters in available width
@@ -164,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             }
-            
+
             // Create spans for each character
             let spanIndex = 0;
             let measuredCellSize = null;
@@ -203,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     spanIndex++;
                 }
             }
-            
+
             // Calculate container dimensions
             const maxRowLength = Math.max(...rows.map(row => row.length));
             if (element.classList.contains("project-title") && window.innerWidth < 768) {
@@ -264,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 let thirdRowSpan = spans.find(span => parseInt(span.dataset.initialRow) === 2);
                                 if (targetSpan && thirdRowSpan) {
                                     const projectTitle = element;
-                                    const titleFrame = projectTitle.closest('.title-frame');
                                     const projectTitleOffset = projectTitle.offsetTop;
                                     const thirdRowTop = thirdRowSpan.offsetTop;
                                     const capHeightNudge = thirdRowSpan.offsetHeight * 0.15;
@@ -325,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 maxCols = 10;
                 maxRows = 4;
             } else {
-                const maxRowLength = Math.max(...Array.from(letterSpans).map(span => 
+                const maxRowLength = Math.max(...Array.from(letterSpans).map(span =>
                     parseInt(span.dataset.initialCol) + 1
                 ));
                 maxCols = maxRowLength;
@@ -350,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             const occupiedPositions = [];
             const positions = [];
-            for(let i = 0; i < letterSpans.length; i++) {
+            for (let i = 0; i < letterSpans.length; i++) {
                 const newPos = getRandomPosition(occupiedPositions);
                 occupiedPositions.push(newPos);
                 positions.push(newPos);
@@ -365,15 +371,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Wrap all letters in spans
         wrapLetters(textElement);
-        
+
         // Get all letter spans for initial setup
         const letterSpans = textElement.querySelectorAll('span');
-        const numColumns = letterSpans.length;
         const cellSize = parseFloat(window.getComputedStyle(letterSpans[0]).fontSize) * spacingFactor;
 
         // Add random puzzle on load for puzzle-auto elements
         if (textElement.classList.contains("puzzle-auto")) {
-            let actualNumRows = 4;
             setTimeout(() => {
                 randomizeLetters(textElement, 4, cellSize);
             }, 1);
