@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     // Responsive positioning function
                     const positionTagline = () => {
-                        if (window.innerWidth >= 1200) {
+                        if (window.innerWidth >= 1280) {
                             const bottomRowCharCount = rows[rows.length - 1].length;
                             if (bottomRowCharCount <= 10) {
                                 tagline.style.position = '';
