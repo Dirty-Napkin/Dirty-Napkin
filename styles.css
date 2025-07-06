@@ -1895,11 +1895,11 @@ footer .footer-column.column3 {
     width: calc((100% - 80px) / 3 * 2 + 40px);
   }
 }
-.project-page .content .vert-center {
+.project-page .content p {
   align-self: center;
 }
 @media (min-width: 768px) {
-  .project-page .content .vert-center {
+  .project-page .content p {
     padding-left: 24px;
     padding-right: 24px;
   }
