@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Always pad to 4 lines (already done above)
             }
             extraTopRow = true;
-            console.log('Final rows:', rows);
             return { rows, extraTopRow };
         }
 
@@ -138,16 +137,11 @@ document.addEventListener("DOMContentLoaded", () => {
             element.style.margin = `12px 0 0 0`;
             element.style.padding = '0';
 
-            // Debugging logs
-            console.log('puzzle-type: element and rows before getComputedStyle', element, rows);
-
             // Calculate cell dimensions
             const fontSize = window.getComputedStyle(element).fontSize;
             let cellSize = parseFloat(fontSize) * spacingFactor;
             let numRows = Math.max(3, rows.length);
             if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
-
-            console.log('Initial cell size calculation:', { fontSize, cellSize, numRows });
 
             // Responsive grid sizing for project titles
             if (element.classList.contains("project-title")) {
@@ -157,7 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const calculatedCellSize = containerWidth / 10;
                     // Use the calculated cell size, but ensure it's not too small
                     cellSize = Math.max(calculatedCellSize, 20); // Minimum 20px cell size
-                    console.log('Small screen cell size:', { containerWidth, calculatedCellSize, finalCellSize: cellSize });
                 } else {
                     // On larger screens, ensure we don't exceed the container width
                     const titleFrame = element.closest('.title-frame');
@@ -177,7 +170,15 @@ document.addEventListener("DOMContentLoaded", () => {
             let measuredCellSize = null;
             for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
                 const row = rows[rowIndex];
-                const offsetRow = 4 - rows.length;
+                // Calculate offset based on element type
+                let offsetRow;
+                if (element.classList.contains("project-title")) {
+                    // Project titles: bottom-aligned
+                    offsetRow = 4 - rows.length;
+                } else {
+                    // Non-project titles: center-aligned
+                    offsetRow = Math.floor((4 - rows.length) / 2);
+                }
                 for (let charIndex = 0; charIndex < row.length; charIndex++) {
                     const span = document.createElement('span');
                     span.textContent = row[charIndex];
@@ -188,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     span.style.padding = '0';
                     span.style.lineHeight = '1';
                     span.dataset.spanNumber = spanIndex;
-                    // Offset so text is always bottom-aligned
+                    // Calculate resting row position
                     let restingRow = offsetRow + rowIndex;
                     // Temporarily append to measure height
                     element.appendChild(span);
@@ -219,14 +220,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 element.style.width = `${containerWidth}px`;
                 element.style.height = `${(4 + 0.5) * cellSize}px`;
             } else if (element.classList.contains("project-title")) {
-                // On larger screens, use calculated width but respect container constraints
+                // On larger screens (md breakpoint and up), use the maximum of:
+                // 1. The width of the resting position spans (actual rightmost span's offset)
+                // 2. The width of 10 characters (10 * cellSize)
+                const spans = element.querySelectorAll('span');
+                let maxRight = 0;
+                spans.forEach(span => {
+                    const initialX = parseFloat(span.dataset.initialX) || 0;
+                    const rightEdge = initialX + span.offsetWidth;
+                    maxRight = Math.max(maxRight, rightEdge);
+                });
+                const tenCharWidth = 10 * cellSize;
+                const calculatedWidth = Math.max(maxRight, tenCharWidth);
                 const titleFrame = element.closest('.title-frame');
                 if (titleFrame) {
                     const frameWidth = titleFrame.offsetWidth;
-                    const calculatedWidth = maxRowLength * cellSize;
                     element.style.width = `${Math.min(calculatedWidth, frameWidth)}px`;
                 } else {
-                    element.style.width = `${maxRowLength * cellSize}px`;
+                    element.style.width = `${calculatedWidth}px`;
                 }
                 element.style.height = `${(numRows + 0.5) * cellSize}px`;
             } else {
@@ -305,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 element.onmouseenter = null;
                 element.onmouseleave = null;
                 element.addEventListener("mouseenter", () => {
-                    randomizeLetters(element, 4, cellSize);
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
                 });
                 element.addEventListener("mouseleave", () => {
                     const letterSpans = element.querySelectorAll('span');
@@ -320,10 +331,30 @@ document.addEventListener("DOMContentLoaded", () => {
             if (measuredCellSize) {
                 element.style.height = `${4 * measuredCellSize}px`;
             }
+
+            // Add random puzzle on load for puzzle-auto elements
+            if (element.classList.contains("puzzle-auto")) {
+                setTimeout(() => {
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
+                }, 1);
+                setTimeout(() => {
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
+                }, 1000);
+                setTimeout(() => {
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
+                }, 2000);
+                setTimeout(() => {
+                    const letterSpans = element.querySelectorAll('span');
+                    letterSpans.forEach(span => {
+                        span.style.left = `${span.dataset.initialX}px`;
+                        span.style.top = `${span.dataset.initialY}px`;
+                    });
+                }, 3000);
+            }
         }
 
         // Function to randomize letter positions
-        function randomizeLetters(element, numRows, measuredCellSize) {
+        function randomizeLetters(element, numRows, cellSize, measuredCellSize) {
             if (!measuredCellSize || measuredCellSize <= 0) return;
             const letterSpans = element.querySelectorAll('span');
             let maxCols, maxRows;
@@ -350,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             function getPixelPosition(col, row) {
                 return {
-                    x: col * measuredCellSize,
+                    x: col * cellSize,
                     y: row * measuredCellSize
                 };
             }
@@ -371,29 +402,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Wrap all letters in spans
         wrapLetters(textElement);
-
-        // Get all letter spans for initial setup
-        const letterSpans = textElement.querySelectorAll('span');
-        const cellSize = parseFloat(window.getComputedStyle(letterSpans[0]).fontSize) * spacingFactor;
-
-        // Add random puzzle on load for puzzle-auto elements
-        if (textElement.classList.contains("puzzle-auto")) {
-            setTimeout(() => {
-                randomizeLetters(textElement, 4, cellSize);
-            }, 1);
-            setTimeout(() => {
-                randomizeLetters(textElement, 4, cellSize);
-            }, 1000);
-            setTimeout(() => {
-                randomizeLetters(textElement, 4, cellSize);
-            }, 2000);
-            setTimeout(() => {
-                letterSpans.forEach(span => {
-                    span.style.left = `${span.dataset.initialX}px`;
-                    span.style.top = `${span.dataset.initialY}px`;
-                });
-            }, 3000);
-        }
 
         // Add window resize listener to re-wrap letters when font size changes
         window.addEventListener('resize', () => {

@@ -22,19 +22,18 @@
             flex-direction: column;
             align-items: flex-start;
             width: 100%;
-            
-            @include md {
-                // Ensure title frame doesn't push tags frame into margins
-                max-width: calc(100% - 150px); // Leave space for tags frame
+
+            @include xl {
+                flex-direction: row;
             }
-            
+
             .project-title {
-                border: 1px solid #000;
+                margin-top: 0;
                 grid-area: title;
                 font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
                 letter-spacing: 0.7rem; //11.2px
                 max-width: 100%;
-                
+
                 @include md {
                     // Use maximum font size unless layout requires shrinking
                     font-size: clamp(2rem, 6vw, 5rem);
@@ -48,6 +47,25 @@
                 margin-left: 0;
                 align-self: flex-start;
                 justify-self: unset;
+
+                @include xl {
+                    max-width: 50%;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    hyphens: none;
+                    white-space: normal;
+                    width: 19ch;
+                    padding-bottom: 7px;
+
+                    // When positioned absolutely by JS, ensure proper text wrapping
+                    &[style*="position: absolute"] {
+                        width: 300px;
+                        word-wrap: break-word;
+                        overflow-wrap: break-word;
+                        hyphens: none;
+                        white-space: normal;
+                    }
+                }
             }
         }
 
@@ -74,7 +92,7 @@
             // margin: 8px 24px 24px 24px;
             justify-content: space-between;
             gap: 1.6875rem; //27px
-            
+
             @include md {
                 margin-left: 24px;
                 order: 0;
@@ -82,6 +100,10 @@
                 flex-direction: column;
                 justify-content: flex-end;
                 align-items: flex-end;
+            }
+
+            @include xl {
+                padding-bottom: 7px;
             }
 
             .tag {
