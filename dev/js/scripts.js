@@ -61,19 +61,32 @@ Header spacing
 function headerSpacing() {
     const header = document.querySelector("header");
     const main = document.querySelector("main");
-    const headerHeight = header.offsetHeight;
+    if (!header || !main) {
+        console.warn("Header or main element not found");
+        return 0;
+    }
+
+    const headerHeight = header.getBoundingClientRect().height;
     main.style.paddingTop = headerHeight + "px";
     return headerHeight;
 }
 
-headerSpacing();
+document.addEventListener("DOMContentLoaded", function () {
+    // Small delay to ensure CSS is applied
+    setTimeout(() => {
+        headerSpacing();
+    }, 10);
+});
 
 /*-----------------
 Debounced resize listener
 -----------------*/
-function onResize(){
+function onResize() {
     repeatedText();
-    headerSpacing();
+    // Small delay to ensure layout is stable after resize
+    setTimeout(() => {
+        headerSpacing();
+    }, 50);
 }
 
 let resizeTimeout;
