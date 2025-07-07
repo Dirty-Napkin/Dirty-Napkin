@@ -45,13 +45,13 @@ const cardsData = [
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'The Window',
-        description: 'Prepare to be psychologically thrilled',
+        description: "Philly's new hole in the wall",
         cardLink: 'the-window.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg', 
         title: 'The Lemonade Stand',
-        description: 'Prepare to be psychologically thrilled',
+        description: 'DIY performing arts gets juicy',
         cardLink: 'lemonade-stand.html'
     },
     {
@@ -63,7 +63,7 @@ const cardsData = [
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled',
+        description: 'Unity through shared experiences',
         cardLink: 'american-scripture-project.html'
     }
 ];
