@@ -492,7 +492,7 @@ img {
     Typography
 ============= */
 body {
-  font-family: "Degular Mono", sans-serif;
+  font-family: "Degular Mono", monospace;
 }
 
 a.no-link {
@@ -1807,6 +1807,13 @@ footer .footer-column.column3 {
     justify-content: space-between;
     gap: unset;
   }
+}
+.project-page .hero .adjectives p {
+  font-family: "Degular Mono", monospace;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.15rem;
 }
 .project-page .intro {
   display: flex;
