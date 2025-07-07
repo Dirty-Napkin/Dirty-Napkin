@@ -1833,10 +1833,12 @@ footer .footer-column.column3 {
 }
 .project-page .intro h5 {
   max-width: 50ch;
+  width: 100%;
+}
+.project-page .intro h5:not(.no-justify) {
   text-align: justify;
   -moz-text-align-last: justify;
        text-align-last: justify;
-  width: 100%;
 }
 .project-page .content {
   display: flex;

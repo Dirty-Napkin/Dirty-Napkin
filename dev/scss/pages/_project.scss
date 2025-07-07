@@ -180,9 +180,12 @@
 
         h5 {
             max-width: 50ch;
-            text-align: justify;
-            text-align-last: justify;
             width: 100%;
+            
+            &:not(.no-justify) {
+                text-align: justify;
+                text-align-last: justify;
+            }
         }
     }
 
