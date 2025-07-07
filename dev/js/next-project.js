@@ -3,25 +3,25 @@ const data = [
         "current-page": "the-window",
         "next-page": "lemonade-stand",
         "next-text": "The Lemonade Stand",
-        "next-img": "https://placehold.co/1312x636.png"
+        "next-img": "assets/home-pg/lemonade-stand.png"
     },
     {
         "current-page": "lemonade-stand",
         "next-page": "those-eyes",
         "next-text": "Those Eyes",
-        "next-img": "https://placehold.co/1312x636.png"
+        "next-img": "assets/home-pg/those-eyes.png"
     },
     {
         "current-page": "those-eyes",
         "next-page": "american-scripture-project",
         "next-text": "American Scripture Project",
-        "next-img": "https://placehold.co/1312x636.png"
+        "next-img": "assets/home-pg/asp.png"
     },
     {
         "current-page": "american-scripture-project",
         "next-page": "the-window",
         "next-text": "The Window",
-        "next-img": "https://placehold.co/1312x636.png"
+        "next-img": "assets/home-pg/the-window.png"
     }
 ];
 
