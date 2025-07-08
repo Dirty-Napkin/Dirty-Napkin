@@ -18,6 +18,12 @@ a.no-link {
     line-height: normal;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
+
+    padding: .2rem .4rem .2rem .4rem;
+    color: var(--magenta);
+    transition: 0.2s ease-in-out;
+
+    &:hover {color: var(--white)}
 }
 
 .centered-text {
@@ -42,6 +48,15 @@ h1 {
     font-weight: 700;
 
     letter-spacing: 86.25px;
+    text-transform: uppercase;
+}
+
+.small-puzzle {
+    font-size: 7.2rem;
+    font-weight: 700;
+    line-height: 130%; /* 9.34375rem */
+
+    letter-spacing: 3.6rem;
     text-transform: uppercase;
 }
 
