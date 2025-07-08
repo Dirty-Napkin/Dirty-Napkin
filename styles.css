@@ -89,8 +89,7 @@ a {
 abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -191,8 +190,7 @@ button,
 [type=reset],
 [type=submit] {
   -webkit-appearance: button;
-  -moz-appearance: button;
-       appearance: button;
+  appearance: button;
 }
 
 /**
@@ -276,8 +274,7 @@ textarea {
  */
 [type=search] {
   -webkit-appearance: textfield; /* 1 */
-  -moz-appearance: textfield;
-       appearance: textfield;
+  appearance: textfield;
   outline-offset: -2px; /* 2 */
 }
 
@@ -528,8 +525,7 @@ a.no-link {
 }
 
 .justified-text {
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
 }
 
 .big-puzzle,
@@ -708,8 +704,7 @@ input[type=email],
 input[type=password],
 textarea {
   -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
+  appearance: none;
 }
 
 .brands-content img {
@@ -781,9 +776,7 @@ textarea {
   flex-direction: column-reverse;
   display: flex;
   gap: 6px;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
 }
 @media (min-width: 430px) {
@@ -989,7 +982,6 @@ footer .footer-column.column1 {
 footer .footer-column.column1 div:nth-child(1) {
   display: flex;
   flex-direction: column;
-  width: -moz-fit-content;
   width: fit-content;
 }
 footer .footer-column.column2 {
@@ -1212,8 +1204,7 @@ footer .footer-column.column3 {
 }
 #about-page h3 {
   text-align: justify;
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
 }
 @media (min-width: 430px) {
   #about-page .hero .square,
@@ -1671,8 +1662,7 @@ footer .footer-column.column3 {
   left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .brand-card-grid .card__content {
   width: 100%;
@@ -1900,8 +1890,7 @@ footer .footer-column.column3 {
 }
 .project-page .intro h5:not(.no-justify) {
   text-align: justify;
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
 }
 .project-page .content {
   display: flex;
@@ -2016,8 +2005,7 @@ footer .footer-column.column3 {
   width: 24ch;
   line-height: normal;
   text-align: justify;
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
   margin: 0 0 0 60%;
 }
 .home-container .four-repeat-type .width-box .row-holder div h2:first-of-type {
@@ -2061,8 +2049,7 @@ footer .footer-column.column3 {
   grid-template-rows: repeat(4, 1.25em);
 }
 .home-container .brands-container .brands-paragraphs span {
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
   padding-left: 12%;
 }
 .home-container .brands-container .brands-paragraphs span:nth-of-type(1) {
@@ -2098,8 +2085,7 @@ footer .footer-column.column3 {
 .home-container .brands-container .brands-paragraphs div h3 {
   color: var(--key);
   text-align: justify;
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
   width: 34ch;
   position: absolute;
   align-self: center;
@@ -2129,8 +2115,7 @@ footer .footer-column.column3 {
 .home-container .brands-container .brands-content .brand-item img {
   width: 100%;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   position: relative;
   z-index: 2;
 }
@@ -2175,15 +2160,13 @@ footer .footer-column.column3 {
 .home-container .collabs .collabs-paragraph h2 {
   grid-area: p;
   text-align: justify;
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
   margin-top: 20vh;
   margin-bottom: 30vh;
 }
 .home-container .collabs .adam-collab {
   width: 100%;
   height: auto;
-  min-height: -moz-fit-content;
   min-height: fit-content;
   display: flex;
   justify-content: center;
@@ -2196,8 +2179,7 @@ footer .footer-column.column3 {
   max-width: 100%;
   max-height: 100%;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .home-container .collabs .adam-collab h3 {
   width: 100%;
@@ -2300,8 +2282,7 @@ footer .footer-column.column3 {
 .home-container .testimonial p {
   text-transform: none;
   text-align: justify;
-  -moz-text-align-last: justify;
-       text-align-last: justify;
+  text-align-last: justify;
   font-weight: 500;
   line-height: 124%; /* 2.48rem */
   letter-spacing: 0.2rem;
@@ -2310,8 +2291,7 @@ footer .footer-column.column3 {
 }
 .home-container .testimonial p:last-of-type {
   text-align: left;
-  -moz-text-align-last: left;
-       text-align-last: left;
+  text-align-last: left;
   width: auto;
   font-size: 1.25rem;
 }
@@ -2336,7 +2316,6 @@ footer .footer-column.column3 {
 .home-container .CTA-container .button-text {
   display: block;
   padding: 0.2rem 0.8rem 0.2rem 0;
-  width: -moz-fit-content;
   width: fit-content;
   margin-top: 1.5rem;
 }
