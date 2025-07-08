@@ -1,0 +1,23 @@
+/* =============
+    Feedback Page
+============= */
+
+#feedbackPage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+
+    #feedbackLogo {
+        width: 100px;
+    }
+
+    iframe {
+        width: 400px;
+
+        @include sm {
+            width: 80vw !important;
+            height: 800px;
+        }
+    }
+}

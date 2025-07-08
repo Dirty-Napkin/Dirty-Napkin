@@ -26,7 +26,7 @@ footer {
     .footer-column {
         &.column1,
         &.column2 {
-            .squares {
+            .square {
                 display: none;
             }
         }
@@ -100,7 +100,7 @@ footer {
         gap: 40px;
         grid-template-areas: "column2 column1 column3";
 
-        .squares {
+        .square {
             display: block !important;
         }
 
@@ -130,7 +130,7 @@ footer {
                     grid-area: spacer;
                 }
 
-                .squares {
+                .square {
                     grid-area: square;
                 }
             }
@@ -140,7 +140,7 @@ footer {
                 padding-top: 0;
                 flex-direction: row !important;
 
-                .squares {
+                .square {
                     order: 1;
                 }
             }

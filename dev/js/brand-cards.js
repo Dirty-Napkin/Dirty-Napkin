@@ -44,49 +44,37 @@ function createCard(imageUrl, title, description, cardLink) {
 const cardsData = [
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'Those Eyes',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
+        title: 'The Window',
+        description: "Philly's new hole in the wall",
+        cardLink: 'the-window.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg', 
         title: 'The Lemonade Stand',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
+        description: 'DIY performing arts gets juicy',
+        cardLink: 'lemonade-stand.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'The Window', 
+        title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'the-window.html'
-    },
-    {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
+        cardLink: 'those-eyes.html'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
-    },
-    {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
-        title: 'American Scripture Project',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'google.com'
+        description: 'Unity through shared experiences',
+        cardLink: 'american-scripture-project.html'
     }
 ];
 
-console.log("ready to populate cards!");
 
-
-// Create and append all cards when DOM loads
+// Create and append all cards when DOM loads - ONLY on brands page
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on the brands page by looking for the brand-card-grid container
     const gridContainer = document.querySelector('.brand-card-grid');
     if (gridContainer) {
+        console.log("Brands page detected - creating cards...");
         cardsData.forEach(cardData => {
             const card = createCard(
                 cardData.imageUrl,

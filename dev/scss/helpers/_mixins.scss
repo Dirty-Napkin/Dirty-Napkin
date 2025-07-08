@@ -2,6 +2,25 @@
 /* =============
     Mixins
 ============= */
+// autocalculate grid columns where the "gaps" are actually columns
+@mixin build-grid($columnWidth) {
+    $columnCount: 5;
+    $gapCount: 4;
+    $totalColumnWidth: $columnWidth * $columnCount;
+    $gapWidth: calc((100% - #{$totalColumnWidth}) / #{$gapCount});
+    $grid-columns: ();
+  
+    @for $i from 1 through ($columnCount * 2 - 1) {
+      @if $i % 2 == 1 {
+        $grid-columns: append($grid-columns, $columnWidth);
+      } @else {
+        $grid-columns: append($grid-columns, $gapWidth);
+      }
+    }
+  
+    grid-template-columns: #{join($grid-columns, " ")};
+  }
+  
 /* ---------------- Media Queries ---------------- */
 // Small devices
 @mixin sm {

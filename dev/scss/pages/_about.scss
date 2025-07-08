@@ -1,0 +1,503 @@
+/* =============
+    About Page
+============= */
+
+#about-page {
+    .square {
+        @for $i from 5 through 39 {
+            &#about-square-#{$i} {
+                grid-area: square-#{$i};
+            }
+        }
+    }
+
+    .about-text {
+        @for $i from 1 through 8 {
+            &#about-text-#{$i} {
+                grid-area: text-#{$i};
+            }
+        }
+    }
+
+    .pg-title-container {
+        margin-bottom: 0;
+    }
+
+    h3 {
+        text-align: justify;
+        text-align-last: justify;
+    }
+
+    .hero .square,
+    .story .square {
+        @include sm {
+            height: 26.875px;
+            width: 26.875px;
+        }
+
+        @include md {
+            height: 19.2px;
+            width: 19.2px;
+        }
+
+        @include lg {
+            height: 25.6px;
+            width: 25.6px;
+        }
+
+        @include xl {
+            height: 32px;
+            width: 32px;
+        }
+
+        @include xxl {
+            height: 24px;
+            width: 24px;
+        }
+    }
+
+    .hero {
+        //temporary
+        background-color: gray;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-bottom: 12px;
+
+            @include md {
+                display: block;
+            }
+
+            .repeated-container {
+                .repeated-text {
+                    @include sm {
+                        font-size: 2.016rem;
+                    }
+
+                    @include md {
+                        font-size: 1.125rem;
+                        width: 24ch;
+                    }
+
+                    @include lg {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                @include md {
+                    gap: 328.7px 210.6px;
+                    z-index: 2;
+                    position: absolute;
+                }
+            }
+
+            .team-pic-container {
+                z-index: 1;
+                position: relative;
+
+                picture {
+                    display: block;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                #about-square-1 {
+                    position: absolute;
+                    top: calc(310 / 354 * 100%);
+                    left: calc(180 / 272 * 100%);
+                }
+            }
+
+            #about-square-2 {
+                display: none;
+
+                @include md {
+                    display: initial;
+                }
+            }
+        }
+    }
+
+    .story {
+        // background-color: var(--cyan);
+        background-color: darkblue;
+        color: var(--white);
+
+        .story-grid {
+            padding-top: 28px;
+            padding-left: 24px;
+            padding-right: 24px;
+            display: grid;
+            @include build-grid(24px); //5 columns of 24px
+            grid-row-gap: 40px;
+            grid-template-areas:
+                "square-5  .    .         .    .        .      .         .      ."
+                "text-1    .    square-6  .    .        .      square-8  .      ."
+                "square-7  .    square-11 .    square-9 .      square-10 .      ."
+                "square-13 .    square-14 .    .        text-2 text-2    text-2 ."
+                "square-15 .    .         .    .        .      .         .      square-12"
+                "para      para para      para para     para   para      para   para";
+
+            @include sm {
+                @include build-grid(26.875px);
+                grid-row-gap: 56px;
+            }
+
+            @include md {
+                grid-template-columns: repeat(13, 19.2px);
+                grid-column-gap: calc((100% - 249.6px)/12);
+                grid-row-gap: 48px;
+                padding-left: 32px;
+                padding-right: 32px;
+                grid-template-areas:
+                    ".      square-5  .         .         .         .         .         .         square-6  .      .         . ."
+                    ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ."
+                    ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ."
+                    ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ."
+                    ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ."
+                    "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4"
+                    "para   para      para      para      para      para      para      .         .         .      .         . ."
+                    "para   para      para      para      para      para      para      square-31 .         .      .         . ."
+                    "para   para      para      para      para      para      para      .         .         .      square-32 . ."
+                    ".      .         .         .         .         .         .         .         .         .      .         . ."
+                    ".      .         .         .         .         .         .         .         .         .      .         . text-5";
+            }
+
+            @include lg {
+                grid-template-columns: repeat(13, 25.6px);
+                grid-column-gap: calc((100% - 332.8px)/12);
+                grid-row-gap: 64px;
+            }
+
+            @include xl {
+                grid-template-columns: repeat(13, 32px);
+                grid-column-gap: calc((100% - 416px)/12);
+                grid-row-gap: 80px;
+                padding-left: 64px;
+                padding-right: 64px;
+            }
+
+            .desktop {
+                display: none;
+
+                @include md {
+                    display: block;
+                }
+            }
+
+            .square {
+                @include md {
+                    width: 19.2px;
+                    height: 19.2px;
+                }
+
+                @include lg {
+                    height: 25.6px;
+                    width: 25.6px;
+                }
+
+                @include xl {
+                    height: 32px;
+                    width: 32px;
+                }
+            }
+
+            .about-text {
+                white-space: nowrap;
+
+                @include md {
+                    transform: rotate(-90deg)
+                }
+
+                &#about-text-1 {
+                    padding-right: 17px;
+                    justify-items: end;
+                    justify-self: end;
+
+                    @include md {
+                        justify-items: initial;
+                        justify-self: initial;
+                        padding-right: 0;
+                    }
+                }
+
+                &#about-text-2 {
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    overflow: visible;
+
+                    @include md {
+                        align-items: end;
+                    }
+                }
+            }
+
+            .story-para {
+                grid-area: para;
+                padding-bottom: 55px;
+
+                @include sm {
+                    padding-bottom: 77px;
+                }
+
+            }
+        }
+    }
+
+    .what-we-do {
+        background-color: var(--cyan);
+        color: var(--white);
+
+        .content {
+            display: flex;
+            padding: 90px 24px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 27px;
+            overflow: hidden;
+
+            .mobile-squares-container {
+                //temporary
+                background-color: #F266B9;
+
+                display: flex;
+                align-items: center;
+                gap: 67px;
+
+                @include sm {
+                    gap: 90px;
+                }
+
+                @include md {
+                    display: none;
+                }
+
+                .square {
+                    height: 67px;
+                    width: 67px;
+                    //temporary
+                    background-color: gray;
+
+                    @include sm {
+                        height: 90px;
+                        width: 90px;
+                    }
+                }
+            }
+
+            .square.desktop {
+                display: none;
+
+                @include md {
+                    display: block;
+                    height: 70px;
+                    width: 70px;
+
+                }
+
+                @include lg {
+                    height: 93px;
+                    width: 93px;
+                }
+
+                @include xl {
+                    height: 116px;
+                    width: 116px;
+                }
+            }
+
+            @include md {
+                padding-right: 0 !important;
+                padding-bottom: 0 !important;
+                display: grid;
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                grid-template-rows: repeat(7, minmax(0, auto));
+                gap: 58px 40px;
+                grid-template-areas:
+                    "square-33 .       .       square-34 .      ."
+                    ".         text-6  text-6  text-6    .      ."
+                    ".         .       .       .         .      ."
+                    "square-35 .       .       square-36 .      square-37"
+                    ".         .       .       .         text-7 text-7"
+                    ".         .       .       .         text-8 text-8"
+                    ".         .       .       square-38.       square-39";
+
+                #about-text-7, #about-text-8 {
+                    max-width: 75%;
+                }
+            }
+        }
+    }
+
+    .bios-conc {
+        margin-top: 47px;
+        display: grid;
+        gap: 40px;
+
+        .bio {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            .bio-text {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+
+                h4 {
+                    text-box: trim-both cap;
+                    text-align: justify;
+
+                }
+
+                p {
+                    text-align: justify;
+                }
+            }
+        }
+
+        #about-square-42,
+        #about-square-43 {
+            display: none;
+        }
+
+        .conclusion {
+            margin-bottom: 144px;
+
+            // p:first-of-type {
+            //     margin-top: 1rem;
+            // }
+
+            p:last-of-type {
+                padding-bottom: 16px;
+            }
+
+            .arrow-btn {
+                margin-left: -30px;
+                margin-top: 20px;
+            }
+        }
+
+        .spacer {
+            display: none;
+        }
+
+        @include md {
+            grid-template-columns: repeat(6, 1fr);
+
+            .bio {
+                grid-column: span 3;
+            }
+
+            #about-square-40,
+            #about-square-41 {
+                display: none;
+            }
+
+            .conclusion {
+                grid-column: 2 / span 4;
+            }
+        }
+
+        @include lg {
+            .bio {
+                display: contents;
+
+                &#dan {
+                    img {
+                        grid-column: 3;
+                        grid-row: 1;
+                    }
+
+                    div {
+                        grid-column: 3;
+                        grid-row: 2;
+                    }
+                }
+
+                &#noah {
+                    img {
+                        grid-column: 6;
+                        grid-row: 1;
+                    }
+
+                    div {
+                        grid-column: 6;
+                        grid-row: 2;
+                    }
+                }
+
+                &#evan {
+                    img {
+                        grid-column: 1;
+                        grid-row: 2;
+                    }
+
+                    div {
+                        grid-column: 1;
+                        grid-row: 3;
+                    }
+                }
+
+                &#nick {
+                    img {
+                        grid-column: 5;
+                        grid-row: 4;
+                    }
+
+                    div {
+                        grid-column: 5;
+                        grid-row: 5;
+                    }
+                }
+            }
+
+            .spacer {
+                display: block;
+                height: 145px;
+                grid-column: 1 / span 6;
+                grid-row: 6;
+            }
+
+            .conclusion {
+                grid-column: 3 / span 2;
+                grid-row: 7;
+            }
+
+            .square {
+                display: block !important;
+                justify-self: end;
+
+                &#about-square-40 {
+                    grid-column: 1;
+                    grid-row: 1;
+                    align-self: center;
+                }
+
+                &#about-square-41 {
+                    grid-column: 4;
+                    grid-row: 3;
+                    align-self: end;
+                }
+
+                &#about-square-42 {
+                    grid-column: 2;
+                    grid-row: 5;
+                    align-self: end;
+                }
+
+                &#about-square-43 {
+                    grid-column: 2;
+                    grid-row: 7;
+                    align-self: start;
+                }
+            }
+        }
+    }
+}

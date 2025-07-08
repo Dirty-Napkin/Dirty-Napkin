@@ -20,8 +20,8 @@ ul.blank-list {
 }
 
 img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 .margins {
@@ -39,16 +39,40 @@ img {
     }
 }
 
-.squares {
+.square {
     background-color: var(--key);
+    width: 24px;
+    height: 24px;
 
-    &.squares-sm {
-        width: 24px;
-        height: 24px;
+    &.green {
+        background-color: var(--green);
     }
 
-    &.squares-lg {
-        width: 116px;
-        height: 116px;
+    &.cyan {
+        background-color: var(--cyan);
+    }
+
+    &.white {
+        background-color: var(--white);
+    }
+
+    &.magenta {
+        background-color: var(--magenta);
+    }
+}
+
+.puzzle-type {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    margin: 12px 0 0 0;
+
+    span {
+        display: block;
+        position: absolute;
+        transition: all 0.3s ease;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
     }
 }

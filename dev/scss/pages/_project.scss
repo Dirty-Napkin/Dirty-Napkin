@@ -4,43 +4,106 @@
 .project-page {
 
     .hero {
+        max-width: 100%;
+
         @include md {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-rows: repeat(4, auto);
+            grid-template-areas:
+                "titleframe tags"
+                "image image"
+                "adjectives adjectives";
         }
 
         .title-frame {
+            grid-area: titleframe;
             display: flex;
             flex-direction: column;
-            gap: 0.625rem; //10px
-            margin-bottom: 24px;
+            align-items: flex-start;
+            width: 100%;
 
-            @include md {
-                margin-right: 0;
+            @include xl {
+                flex-direction: row;
+            }
+
+            .project-title {
+                margin-top: 0;
+                grid-area: title;
+                font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
+                letter-spacing: 0.7rem; //11.2px
+                max-width: 100%;
+
+                @include md {
+                    // Use maximum font size unless layout requires shrinking
+                    font-size: clamp(2rem, 6vw, 5rem);
+                }
+            }
+
+            h5 {
+                position: static;
+                left: unset;
+                top: unset;
+                margin-left: 0;
+                align-self: flex-start;
+                justify-self: unset;
+
+                @include xl {
+                    max-width: 50%;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    hyphens: none;
+                    white-space: normal;
+                    width: 19ch;
+                    padding-bottom: 7px;
+
+                    // When positioned absolutely by JS, ensure proper text wrapping
+                    &[style*="position: absolute"] {
+                        width: 300px;
+                        word-wrap: break-word;
+                        overflow-wrap: break-word;
+                        hyphens: none;
+                        white-space: normal;
+                    }
+                }
             }
         }
 
         img {
-            width: 100%;
+            grid-area: image;
+            width: 100vw;
+            margin-left: -24px;
+            margin-right: -24px;
 
             @include md {
-                order: 1;
+                margin-left: -32px;
+                margin-right: -32px;
+            }
+
+            @include xl {
+                margin-left: -64px;
+                margin-right: -64px;
             }
         }
 
         .tags-frame {
+            grid-area: tags;
             display: flex;
-            margin: 8px 24px 24px 24px;
+            // margin: 8px 24px 24px 24px;
             justify-content: space-between;
             gap: 1.6875rem; //27px
 
             @include md {
+                margin-left: 24px;
                 order: 0;
-                margin: 0 32px 20px 0;
+                // margin: 0 32px 20px 0;
                 flex-direction: column;
                 justify-content: flex-end;
                 align-items: flex-end;
+            }
+
+            @include xl {
+                padding-bottom: 7px;
             }
 
             .tag {
@@ -49,7 +112,7 @@
                 align-items: center;
 
                 p {
-                    font-family: "degular-mono", sans-serif;
+                    font-family: "Degular Mono", sans-serif;
                     font-size: 0.7941875rem; //12.707px
                     font-weight: 600;
                     line-height: 130%;
@@ -66,6 +129,7 @@
                 .squares {
                     width: 8.471px;
                     height: 8.471px;
+                    background-color: var(--key);
 
                     @include md {
                         width: 16px;
@@ -76,32 +140,25 @@
         }
 
         .adjectives {
+            grid-area: adjectives;
             margin-top: 32px;
             display: flex;
             gap: 26px 28px;
             flex-wrap: wrap;
-            width: 100%;
+            // width: 100%;
 
             @include md {
-                order: 3;
                 flex-wrap: nowrap;
                 justify-content: space-between;
-                padding-left: 32px;
-                padding-right: 32px;
+                gap: unset;
             }
 
             p {
-                font-family: "Degular Mono" sans-serif;
-                font-size: 1rem; //16px
-                font-weight: 400;
-                line-height: 130%;
-                letter-spacing: 1.6px;
+                font-family: "Degular Mono", monospace;
                 text-transform: uppercase;
-
-                @include md {
-                    font-size: 1.5rem; //24px
-                    letter-spacing: 2.4px;
-                }
+                font-size: 1.5rem; //24px
+                font-weight: 400;
+                letter-spacing: 0.15rem; //2.4px
             }
         }
     }
@@ -111,7 +168,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 100%;
+        max-width: 100%;
         gap: 1rem;
         margin-top: 120px;
         margin-bottom: 120px;
@@ -123,9 +180,12 @@
 
         h5 {
             max-width: 50ch;
-            text-align: justify;
-            text-align-last: justify;
             width: 100%;
+            
+            &:not(.no-justify) {
+                text-align: justify;
+                text-align-last: justify;
+            }
         }
     }
 
@@ -140,9 +200,8 @@
             grid-template-columns: repeat(6, 1fr);
         }
 
-        img {
-            width: 100%;
-            height: auto;
+        .border {
+            border: 1px solid var(--key);
         }
 
         .height2 {
@@ -201,7 +260,7 @@
             }
         }
 
-        .vert-center {
+        p {
             align-self: center;
 
             @include md {
@@ -210,127 +269,4 @@
             }
         }
     }
-
-    .next-project {
-        display: flex;
-        margin-top: 64px;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-        transform: scale(0.75);
-        border: 1px solid #000;
-        position: relative;
-        // width: fit-content;
-        width: 100%;
-        margin-inline: auto;
-
-        @include sm {
-            transform: none;
-            align-items: flex-end;
-            margin-inline: initial;
-        }
-
-        a {
-            display: flex;
-            gap: 18px;
-            width: fit-content;
-            height: fit-content;
-            border: 1px solid #000;
-
-            .next-project-text {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                gap: 25px;
-
-                div {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    p{
-                        transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
-                    }
-
-                    .arrow-1 {
-                        color: var(--magenta);
-                    }
-
-                    p {
-                        text-align: justify;
-                        text-box: trim-both cap;
-                        /*https://caniuse.com/mdn-css_properties_text-box*/
-                    }
-                }
-
-                h2 {
-                    margin: 0;
-                    text-align: right;
-                    transition: font-weight 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
-                }
-            }
-
-            .next-project-img {
-                margin-top: 5px;
-                height: 185px;
-                width: 185px;
-                background-size: cover;
-                background-position: center;
-
-                &#lemonade-stand {
-                    background-image: url("https://placehold.co/185x185.png");
-                }
-
-                .next-project-tint-overlay {
-                    height: 100%;
-                    width: 100%;
-                    opacity: 0%;
-                    background-color: var(--white);
-                    transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
-                }
-            }
-
-            .project-floating-arrow {
-                // white-space: nowrap;
-                transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); /* easeOutBack */
-                opacity: 0;
-                font-size: 32px;
-
-                &.arrow-2 {
-                    position: absolute;
-                    top: 12.6px;
-                    right: 126px;
-                }
-
-                &.arrow-3 {
-                    position: absolute;
-                    top: 103.32px;
-                    right: 88px;
-                }
-            }
-        }
-
-        &:hover{
-            .next-project-text{
-                div>*{
-                    color: var(--magenta) !important;
-                }
-                h2{
-                    font-weight: 700;
-                }
-            }
-            .project-floating-arrow{
-                opacity: 100%;
-            }
-            .next-project-tint-overlay{
-                opacity: 15% !important;
-            }
-        }
-        &:active{
-            .project-floating-arrow{
-                opacity: 0;
-                transition: opacity 200ms cubic-bezier(0.02, 0.89, 0.85, 1);
-            }
-        }
-    }
-
 }

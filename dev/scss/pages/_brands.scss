@@ -63,16 +63,13 @@
     .card__title {
         padding: 0.25rem 0 0 0;
         font-size: 1.25rem;
-        font-weight: bold;
-        text-transform: uppercase;
+        font-weight: 700;
         margin: 0 0 0.2rem 0;
         background-color: var(--white);
         // position: relative; 
     }
 
     .card__description {
-        font-size: 1rem;
-        margin: 0 ;
         // position: relative;
         z-index: -1;
     }

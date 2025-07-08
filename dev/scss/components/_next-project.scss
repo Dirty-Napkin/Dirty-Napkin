@@ -1,0 +1,166 @@
+/* =============
+    Next Project
+============= */
+
+.next-project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+    margin: 32px auto 0;
+
+    @include sm {
+        margin: 64px auto 0;
+        align-items: flex-end;
+        margin-inline: initial;
+        transform: none;
+    }
+
+    // Default state (non-hover)
+    transform: scale(0.75);
+
+    a {
+        flex-direction: column-reverse;
+        display: flex;
+        gap: 6px;
+        width: fit-content;
+        height: fit-content;
+
+        @include sm {
+            gap: 18px;
+            flex-direction: row;
+        }
+
+        .next-project-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+
+            @include sm {
+                gap: 25px;
+            }
+
+            div {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                p {
+                    transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1); // easeOutBack
+
+                    &:not(:first-child) {
+                        margin-left: 0;
+                        transition: margin-left 300ms cubic-bezier(0.34, 1.56, 0.64, 1); // easeOutBack
+
+                        @include sm {
+                            margin-left: -24px;
+                        }
+                    }
+                }
+
+                .arrow-1 {
+                    opacity: 1;
+                    position: static;
+                    transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); // easeOutBack
+                    
+                    @include sm {
+                        color: var(--magenta);
+                        opacity: 0;
+                    }
+                }
+            }
+
+            h2 {
+                margin: 0;
+                text-align: right;
+                transition: font-weight 300ms cubic-bezier(0.4, 0, 0.2, 1); //Better bezier for font-weight
+            }
+        }
+
+        .next-project-img {
+            width: 185px;
+            height: 185px;
+            background-size: cover;
+            background-position: center;
+
+            .next-project-tint-overlay {
+                width: 100%;
+                height: 100%;
+                opacity: 0%;
+                background-color: var(--white);
+                transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1); // easeOutBack
+            }
+        }
+
+        .project-floating-arrow {
+            position: absolute;
+            opacity: 0;
+            font-size: 32px;
+            transition:
+                opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1), // easeOutBack
+                right 300ms cubic-bezier(0.34, 1.56, 0.64, 1); // easeOutBack
+            // transition: opacity 300ms ease-in-out;
+            // transition: right 300ms ease-in-out;
+
+            &.arrow-2 {
+                top: 12.6px;
+                right: 126px;
+            }
+
+            &.arrow-3 {
+                top: 103.32px;
+                right: 88px;
+            }
+        }
+
+        // Hover state
+        &:hover {
+            .next-project-text {
+                div {
+                    p:not(:first-child) {
+                        margin-left: 0;
+                    }
+
+                    * {
+                        color: var(--magenta) !important;
+                    }
+
+                    .arrow-1 {
+                        opacity: 1;
+                    }
+                }
+
+                h2 {
+                    font-weight: 700;
+                }
+            }
+
+            .project-floating-arrow {
+                opacity: 100%;
+
+                &.arrow-2 {
+                    right: 102px;
+                }
+
+                &.arrow-3 {
+                    right: 64px;
+                }
+            }
+
+            .next-project-tint-overlay {
+                opacity: 15% !important;
+            }
+        }
+
+        // Active state
+        &:active {
+            .project-floating-arrow {
+                opacity: 0;
+                transition: opacity 200ms cubic-bezier(0.02, 0.89, 0.85, 1);
+            }
+        }
+    }
+}

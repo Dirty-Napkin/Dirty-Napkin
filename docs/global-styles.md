@@ -2,8 +2,7 @@
 - **`ul.blank-list`**: removes bullet formatting from an unordered list
 - **`.margins`**: adds responsive left and right margins
 - **`.squares`**: formats divs into squares
-    - **`.squares.squares-sm`**: 24px squares
-    - **`.squares.squares-lg`**: 116px squares
+    - 24px black by default
 - **`a.no-link`**: removes all link-specific default formatting
 
 ### Typography styles
