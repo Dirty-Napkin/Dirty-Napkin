@@ -35,43 +35,43 @@ if (document.querySelector('.home-container')) {
     })
 
     //For the paralax type
-    document.addEventListener("scroll", () => {
-        const container = document.querySelector(".brands-paragraphs");
-        const paragraphs = container.querySelectorAll('div');
-        const letters = container.querySelectorAll('span');
-        const brands = document.querySelector('.brands-content');
+    // document.addEventListener("scroll", () => {
+    //     const container = document.querySelector(".brands-paragraphs");
+    //     const paragraphs = container.querySelectorAll('div');
+    //     const letters = container.querySelectorAll('span');
+    //     const brands = document.querySelector('.brands-content');
 
-        const scrolled = window.scrollY;
-        const vh = window.innerHeight;
+    //     const scrolled = window.scrollY;
+    //     const vh = window.innerHeight;
 
 
-        // Adjust this value to control the initial offset
+    //     // Adjust this value to control the initial offset
 
-        paragraphs.forEach((paragraph, index) => {
-            // Optionally, you can vary the speed a little based on index
-            let speed = -0.2; // First one slower, next faster, etc.
+    //     paragraphs.forEach((paragraph, index) => {
+    //         // Optionally, you can vary the speed a little based on index
+    //         let speed = -0.2; // First one slower, next faster, etc.
 
-            let initialOffset = .45 * vh + (index * 150);
+    //         let initialOffset = .45 * vh + (index * 150);
 
-            paragraph.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
-        });
+    //         paragraph.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
+    //     });
 
-        letters.forEach((letter) => {
-            // Optionally, you can vary the speed a little based on index
-            let speed = 0.4;
+    //     letters.forEach((letter) => {
+    //         // Optionally, you can vary the speed a little based on index
+    //         let speed = 0.4;
 
-            let initialOffset = -.7 * vh;
+    //         let initialOffset = -.7 * vh;
 
-            letter.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
-        });
+    //         letter.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
+    //     });
 
-        let speed = 0.3; // First one slower, next faster, etc.
+    //     let speed = 0.3; // First one slower, next faster, etc.
 
-        const containerHeight = container.offsetHeight;
-        let initialOffset = 0.35 * containerHeight;
-        brands.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
+    //     const containerHeight = container.offsetHeight;
+    //     let initialOffset = 0.35 * containerHeight;
+    //     brands.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
 
-    });
+    // });
 
     // For the black background
     const collabs = document.querySelector(".home-container");
