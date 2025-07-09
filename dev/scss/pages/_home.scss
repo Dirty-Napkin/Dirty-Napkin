@@ -96,27 +96,36 @@
         align-items: center;
         overflow: hidden;
     }
-    
+
+    .brand-paragraphs, .brand-letters { // grid layout for the brand letters and paragraphs
+        display: grid;
+        width: 114%;
+        max-width: 1641.6px; //114 % of 1440
+        
+
+        grid-template-areas: 
+            "b r . . . ."
+            "a p1 p1 p1 n ."
+            ". . p2 p2 p2 d"
+            ". . s . . ."
+        ;
+        grid-template-columns: repeat(6, 1fr); // 6 equal columns
+        grid-template-rows: repeat(4, 1.25em); // 4 equal rows
+
+        div {
+           grid-area: p1;
+        }
+    }
     
     .brands-container { //styling for the brand letters and paragraphs
-
+        
         // Setting up brands type grid and applying styling for the paragraphs.
         $span-areas: b, r, a, n, d, s;
         $div-areas: p1, p2;
 
         .brand-letters {
-            display: grid;
-            width: 114%;
-            max-width: 1641.6px; //114 % of 1440
+            position: absolute;
 
-            grid-template-areas: 
-                "b r . . . ."
-                "a . . . n ."
-                ". .  . . . d"
-                ". . s . . ."
-            ;
-            grid-template-columns: repeat(6, 1fr); // 6 equal columns
-            grid-template-rows: repeat(4, 1.25em); // 4 equal rows
 
             span { // each individual letter
 
@@ -126,90 +135,32 @@
                     }
                 }    
 
-                padding-left: 15.5%;
-
+                padding-left: 14%;
+                letter-spacing: -0.5rem;
             }
-
         }
 
         .brand-paragraphs {
-            display: grid;
-            align-items: center;
-            grid-template-areas: 
-                "b r . . . ."
-                "a p1 p1 . n ."
-            ;
-            grid-template-columns: repeat(6, 1fr); // 3 equal columns
-            grid-template-rows: repeat(4, 1.25em); // 2 rows
+            
+            div {// each paragraph
+                @for $i from 1 through length($div-areas) {
+                    &:nth-of-type(#{$i}) {
+                    grid-area: nth($div-areas, $i);
+                    }
+                }
+                
+                display: flex;
+                align-items: center;
+                justify-content: center;  
+    
+                h3 {
+                    text-align: justify;
+                    text-align-last: justify;
+                    width: 34ch;
+                }
+        }
         }
     }
-        
-    // .brands-paragraphs {
-    //     color: var(--green);
-    //     width: 114%;
-    //     max-width: 1641.6px; //114 % of 1440
-    //     position: relative;
-
-    //     transform-style: preserve-3d;
-
-
-
-    //     display: grid;
-    //     align-items: center;
-    //     grid-template-areas: 
-    //         "b r . . . ."
-    //         "a p1 p1 . n ."
-    //         ". .  p2 p2 . d"
-    //         ". . s . . ."
-    //     ;
-    //     grid-template-columns: repeat(6, 1fr); // 3 equal columns
-    //     grid-template-rows: repeat(4, 1.25em); // 2 rows
-
-
-
-    //     // Setting up brands type grid and applying styling for the paragraphs.
-    //     $span-areas: b, r, a, n, d, s;
-    //     $div-areas: p1, p2;
-
-    //     span {
-    //         @for $i from 1 through length($span-areas) {
-    //             &:nth-of-type(#{$i}) {
-    //             grid-area: nth($span-areas, $i);
-    //             }
-    //         }    
-
-    //         text-align-last: justify;
-    //         padding-left: 12%;
-
-    //         //To get parallax to work
-    //         transform: translateZ(-200px) scale(4);
-
-    //     }
-
-    //     // Setting up brands type grid and applying styling for the paragraphs.
-    //     div {
-    //         @for $i from 1 through length($div-areas) {
-    //             &:nth-of-type(#{$i}) {
-    //             grid-area: nth($div-areas, $i);
-    //             }
-    //         }
-
-    //         display: flex;
-    //         align-items: center;
-    //         justify-content: center;    
-
-
-    //         h3 {
-    //             color: var(--key);
-    //             text-align: justify;
-    //             text-align-last: justify;
-    //             width: 34ch;
-    //             position: absolute;
-    //             align-self: center;
-
-    //         }
-    //     }  
-    // }
 
     .brands-content {
         width: 100%;
@@ -271,7 +222,6 @@
         }
     }
     
-
     .collabs {
         width: 100%;
         display: flex;
@@ -279,6 +229,7 @@
         align-items: center;
         transition: all 0.5s ease-in-out;
         padding-bottom: 10rem;
+        display: none;
 
         .collabs-paragraph {
             width: 100%;
@@ -370,7 +321,7 @@
 
 
                 p {
-                    font-family: "degular-mono";
+                    font-family: "Degular Mono";
                     writing-mode: vertical-rl;
                     transform: rotate(180deg); /* optional, matches the upside-down style */
 

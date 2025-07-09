@@ -2034,16 +2034,23 @@ footer .footer-column.column3 {
   align-items: center;
   overflow: hidden;
 }
-.home-container .brands-container .brand-letters {
+.home-container .brand-paragraphs, .home-container .brand-letters {
   display: grid;
   width: 114%;
   max-width: 1641.6px;
-  grid-template-areas: "b r . . . ." "a . . . n ." ". .  . . . d" ". . s . . .";
+  grid-template-areas: "b r . . . ." "a p1 p1 p1 n ." ". . p2 p2 p2 d" ". . s . . .";
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 1.25em);
 }
+.home-container .brand-paragraphs div, .home-container .brand-letters div {
+  grid-area: p1;
+}
+.home-container .brands-container .brand-letters {
+  position: absolute;
+}
 .home-container .brands-container .brand-letters span {
-  padding-left: 15.5%;
+  padding-left: 14%;
+  letter-spacing: -0.5rem;
 }
 .home-container .brands-container .brand-letters span:nth-of-type(1) {
   grid-area: b;
@@ -2063,12 +2070,21 @@ footer .footer-column.column3 {
 .home-container .brands-container .brand-letters span:nth-of-type(6) {
   grid-area: s;
 }
-.home-container .brands-container .brand-paragraphs {
-  display: grid;
+.home-container .brands-container .brand-paragraphs div {
+  display: flex;
   align-items: center;
-  grid-template-areas: "b r . . . ." "a p1 p1 . n .";
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(4, 1.25em);
+  justify-content: center;
+}
+.home-container .brands-container .brand-paragraphs div:nth-of-type(1) {
+  grid-area: p1;
+}
+.home-container .brands-container .brand-paragraphs div:nth-of-type(2) {
+  grid-area: p2;
+}
+.home-container .brands-container .brand-paragraphs div h3 {
+  text-align: justify;
+  text-align-last: justify;
+  width: 34ch;
 }
 .home-container .brands-content {
   width: 100%;
@@ -2129,6 +2145,7 @@ footer .footer-column.column3 {
   align-items: center;
   transition: all 0.5s ease-in-out;
   padding-bottom: 10rem;
+  display: none;
 }
 .home-container .collabs .collabs-paragraph {
   width: 100%;
@@ -2225,7 +2242,7 @@ footer .footer-column.column3 {
   grid-template-areas: "p1 d . . . . . . p2 .";
 }
 .home-container .collabs .adam-collab .sideways-copy p {
-  font-family: "degular-mono";
+  font-family: "Degular Mono";
   writing-mode: vertical-rl;
   transform: rotate(180deg); /* optional, matches the upside-down style */
 }
