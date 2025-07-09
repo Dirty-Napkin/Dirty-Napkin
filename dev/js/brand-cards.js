@@ -48,28 +48,28 @@ const cardsData = [
         title: 'The Window',
         description: "Philly's new hole in the wall",
         cardLink: 'the-window.html',
-        id: ' B1'
+        id: 'B1'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg', 
         title: 'The Lemonade Stand',
         description: 'DIY performing arts gets juicy',
         cardLink: 'lemonade-stand.html',
-        id: ' B2'
+        id: 'B2'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
         cardLink: 'those-eyes.html',
-        id: ' B3'
+        id: 'B3'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'American Scripture Project',
         description: 'Unity through shared experiences',
         cardLink: 'american-scripture-project.html',
-        id: ' B4'
+        id: 'B4'
     }
 ];
 
