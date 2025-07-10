@@ -1970,21 +1970,25 @@ footer .footer-column.column3 {
   align-items: center;
   flex-direction: column;
   transition: background-color 0.3s ease-in-out;
-  overflow: none;
+  contain: paint;
+  width: 100%;
 }
 .home-container .four-repeat-type {
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
-  overflow: hidden;
+  height: 230vh;
+  contain: paint;
 }
 .home-container .four-repeat-type .width-box {
-  margin-top: 40vh;
   width: 60%;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
+  top: 60vh;
+  max-height: 100vh;
+  color: red;
+  position: sticky;
 }
 .home-container .four-repeat-type .width-box .row-holder {
   min-width: 100vw;
@@ -1996,7 +2000,7 @@ footer .footer-column.column3 {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-bottom: 50vh;
+  margin-bottom: 40vh;
   padding: 0;
   position: relative;
 }
@@ -2013,18 +2017,19 @@ footer .footer-column.column3 {
 }
 .home-container .ketchup-wrapper {
   width: 100vw;
-  height: 180vh;
+  height: 230vh;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 .home-container .ketchup-wrapper .ketchup-hero {
   position: sticky;
   top: 0;
   align-self: flex-start;
-  width: 60%;
+  width: 100vw;
   height: auto;
-  margin-top: 90vh;
   z-index: -1;
+  transform: translateX(600px);
 }
 .home-container .brands-container {
   position: relative;
@@ -2032,7 +2037,6 @@ footer .footer-column.column3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
 }
 .home-container .brand-paragraphs, .home-container .brand-letters {
   display: grid;
@@ -2047,6 +2051,7 @@ footer .footer-column.column3 {
 }
 .home-container .brands-container .brand-letters {
   position: absolute;
+  color: var(--green);
 }
 .home-container .brands-container .brand-letters span {
   padding-left: 14%;
@@ -2085,6 +2090,7 @@ footer .footer-column.column3 {
   text-align: justify;
   text-align-last: justify;
   width: 34ch;
+  margin: 0;
 }
 .home-container .brands-content {
   width: 100%;
@@ -2301,12 +2307,17 @@ footer .footer-column.column3 {
   align-items: center;
   flex-direction: column;
   overflow: none;
+  height: auto;
 }
 .home-container .CTA-container .four-repeat-type {
   position: relative;
+  height: auto;
+  margin-bottom: 15vh;
 }
 .home-container .CTA-container .four-repeat-type .width-box {
   margin-top: 20vh;
+  position: relative;
+  top: 0;
 }
 .home-container .CTA-container .four-repeat-type .width-box div {
   margin-bottom: 30vh;

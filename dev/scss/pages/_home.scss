@@ -1,24 +1,30 @@
+
 .home-container {
     display: flex;
     align-items: center;
     flex-direction: column;
     transition: background-color 0.3s ease-in-out;
-    overflow: none;
+    contain: paint;
+    width: 100%;
 
-
+    
     .four-repeat-type { //main container for the repeat effect - this applies for the first and last sections
         width: 100%;
         display: flex;
         justify-content: center;
         position: absolute;
-        overflow: hidden;
+        height: 230vh;
+        contain: paint;
 
         .width-box { //Sets the width and margins for the text
-            margin-top: 40vh;
             width: 60%;
             display: flex;
             flex-wrap: wrap;
-            position: relative;
+            top: 60vh;
+            max-height: 100vh;
+            color: red;
+            position: sticky;
+
 
             .row-holder { //container for the rows
                 min-width: 100vw;
@@ -30,7 +36,7 @@
                     display: flex;
                     flex-direction: row;
                     width: 100%;
-                    margin-bottom: 50vh;
+                    margin-bottom: 40vh;
                     padding: 0;
                     position: relative;
                     
@@ -51,42 +57,27 @@
         }
     }
 
-    
             
     .ketchup-wrapper {
         width: 100vw;
-        height: 180vh;
-        // background-color: red;
+        height: 230vh;
         display: flex;
         justify-content: center;
-        // align-items: top;
-
-
+        position: relative;
 
         .ketchup-hero{
             position: sticky;
             top: 0;
             align-self: flex-start;
-            width: 60%;
+            width: 100vw;
             height: auto;
-            margin-top: 90vh;
             z-index: -1;
+
+            transform: translateX(600px);
         }
     }    
     
-    // .brands-container {
-    //     position: relative;
-    //     height: 100vh;
-    //     width: 100vw;
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-        
-    //     //To get parallax to work
-    //     overflow-y: auto;
-    //     overflow-x: hidden;
-    //     perspective: 100px;
-    // }
+   
 
     .brands-container {//basic styling for the brands container
         position: relative;
@@ -94,7 +85,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        overflow: hidden;
+        // overflow: hidden;
     }
 
     .brand-paragraphs, .brand-letters { // grid layout for the brand letters and paragraphs
@@ -123,9 +114,10 @@
         $span-areas: b, r, a, n, d, s;
         $div-areas: p1, p2;
 
+
         .brand-letters {
             position: absolute;
-
+            color: var(--green);
 
             span { // each individual letter
 
@@ -157,8 +149,9 @@
                     text-align: justify;
                     text-align-last: justify;
                     width: 34ch;
+                    margin: 0;
                 }
-        }
+            }
         }
     }
 
@@ -396,12 +389,20 @@
         align-items: center;
         flex-direction: column;
         overflow: none;
+        height: auto;
 
         .four-repeat-type {
             position: relative;
+            height: auto;
+            margin-bottom: 15vh;
+            
+
             
             .width-box { //Sets the width and margins for the text
                 margin-top: 20vh;
+                position: relative;
+                top: 0;
+
 
                 div {
                     margin-bottom: 30vh;

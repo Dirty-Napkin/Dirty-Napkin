@@ -1,94 +1,129 @@
 // Only run script if .home-container is present
 if (document.querySelector('.home-container')) {
-    // Duplicate row-holder div with red text
-    document.addEventListener('DOMContentLoaded', () => {
-        const fourRepeatType = document.querySelector('.four-repeat-type');
-        const homeContainer = document.querySelector('.home-container');
-        const clone = fourRepeatType.cloneNode(true);
+    
+    
+    // //Duplicate row-holder div with red text
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const fourRepeatType = document.querySelector('.four-repeat-type');
+    //     const homeContainer = document.querySelector('.home-container');
+    //     const clone = fourRepeatType.cloneNode(true);
 
-        // // Style the clone
-        clone.style.position = 'absolute';
-        // clone.style.top = '0';
-        // clone.style.left = '0';
-        clone.style.width = '100%';
-        clone.style.color = 'red';
-        clone.style.zIndex = '2';
+    //     // // Style the clone
+    //     clone.style.position = 'absolute';
+    //     clone.style.width = '100%';
+    //     clone.style.color = 'red';
+    //     clone.style.zIndex = '2';
 
-        // Insert the clone inside ketchup-wrapper
-        homeContainer.appendChild(clone);
-    });
-
-    // For the ketchup image
-    document.addEventListener("scroll", () => {
-        const ketchupHero = document.querySelector(".ketchup-hero");
-        // const ketchupWrapper = document.querySelector(".ketchup-wrapper");
-
-        window.addEventListener("scroll", () => {
-            let scrollPosition = window.scrollY;
-            // let size = scrollPosition * 0.1;
-            ketchupHero.style.marginTop = `calc(90vh - ${scrollPosition * .9}px)`;
-            let widthPercentage = Math.min(100, 60 + scrollPosition * 0.1);
-            ketchupHero.style.width = `${widthPercentage}vw`;
-
-        })
-
-    })
-
-    //For the paralax type
-    // document.addEventListener("scroll", () => {
-    //     const container = document.querySelector(".brands-paragraphs");
-    //     const paragraphs = container.querySelectorAll('div');
-    //     const letters = container.querySelectorAll('span');
-    //     const brands = document.querySelector('.brands-content');
-
-    //     const scrolled = window.scrollY;
-    //     const vh = window.innerHeight;
-
-
-    //     // Adjust this value to control the initial offset
-
-    //     paragraphs.forEach((paragraph, index) => {
-    //         // Optionally, you can vary the speed a little based on index
-    //         let speed = -0.2; // First one slower, next faster, etc.
-
-    //         let initialOffset = .45 * vh + (index * 150);
-
-    //         paragraph.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
-    //     });
-
-    //     letters.forEach((letter) => {
-    //         // Optionally, you can vary the speed a little based on index
-    //         let speed = 0.4;
-
-    //         let initialOffset = -.7 * vh;
-
-    //         letter.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
-    //     });
-
-    //     let speed = 0.3; // First one slower, next faster, etc.
-
-    //     const containerHeight = container.offsetHeight;
-    //     let initialOffset = 0.35 * containerHeight;
-    //     brands.style.transform = `translateY(${initialOffset + scrolled * speed}px)`;
-
+    //     // Insert the clone inside ketchup-wrapper
+    //     homeContainer.appendChild(clone);
     // });
 
-    // For the black background
-    const collabs = document.querySelector(".home-container");
-    const colorTrigger = document.querySelector(".adam-collab");
 
-    console.log('Color trigger element:', colorTrigger); // Debug log
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            console.log('Intersection detected:', entry.isIntersecting); // Debug log
-            if (entry.isIntersecting) {
-                collabs.classList.add("black-background");
+    const ketchupHero = document.querySelector('.ketchup-hero');
+    const ketchupWrapper = document.querySelector('.ketchup-wrapper');
+
+    //this function controls the ketchup scaling animation
+    if (ketchupHero && ketchupWrapper) {
+      // Ensure ketchupHero is sticky
+      ketchupHero.style.position = 'sticky';
+
+      // Parameters for scaling and top position
+      const endScale = 1.0;
+      const startScale = 0.60;
+      const endPoint = .35; // as a % of the total distance for scaling
+      const maxTop = 60; // vh, starting top value
+      const minTop = 0;  // vh, ending top value
+      const topEndPoint = 0.35; // as a % of the total distance for top value
+
+      //------------DO NOT TOUCH BELOW THIS LINE - I don't know what it does but it works --------------------------------------------------------------
+
+      // Helper to get progress (0 to 1) based on scroll relative to ketchupWrapper height
+      function getProgress() {
+        const wrapperHeight = ketchupWrapper.offsetHeight;
+        const scrollY = window.scrollY;
+        // Use the height of the ketchupWrapper as the scrollable distance
+        return Math.min(scrollY / wrapperHeight, 1);
+      }
+
+      // Set top and scale based on scroll
+      function updateKetchupHero() {
+        const progress = getProgress();
+
+        // Top position interpolation with its own endpoint
+        const clampedTopProgress = Math.min(progress, topEndPoint);
+        const topVH = maxTop - (maxTop - minTop) * (clampedTopProgress / topEndPoint);
+        ketchupHero.style.top = `${topVH}vh`;
+
+        // Scale interpolation
+        const clampedScaleProgress = Math.min(progress, endPoint);
+        const scale = startScale + (endScale - startScale) * (clampedScaleProgress / endPoint);
+        ketchupHero.style.transform = `scale(${scale})`;
+      }
+
+      updateKetchupHero();
+      window.addEventListener('scroll', updateKetchupHero);
+    }
+
+    //mask function
+    // Select only .width-box elements that are NOT inside .CTA-container
+    const textBoxes = document.querySelectorAll('.width-box:not(.CTA-container .width-box) h2');
+
+    if (textBoxes && ketchupWrapper && ketchupHero) {
+        // Start point: progress before this = no mask, after this = mask grows
+        const startPoint = 0.65;
+        
+        function updateTextBoxClipPath() {
+            const scrollY = window.scrollY;
+            const wrapperHeight = ketchupWrapper.offsetHeight;
+            
+            // Calculate the scroll position where the mask should start
+            const startScrollPosition = startPoint * wrapperHeight;
+            
+            let insetTop;
+            if (scrollY < startScrollPosition) {
+                // Before start point, no mask
+                insetTop = 0;
             } else {
-                collabs.classList.remove("black-background");
+                // After start point, insetTop increases 1:1 with scroll position
+                // Calculate how much we've scrolled past the start point
+                const scrollPastStart = scrollY - startScrollPosition;
+                insetTop = scrollPastStart;
             }
+
+            // textBox is just the name of the parameter in the forEach callback below.
+            // It refers to each individual element in the textBoxes NodeList.
+            textBoxes.forEach(function(textBox) {
+                textBox.style.clipPath = `inset(${insetTop}px 0 0 0)`;
+            });
+        }
+
+        // Set initial state
+        updateTextBoxClipPath();
+        window.addEventListener('scroll', () => {
+            updateTextBoxClipPath();
         });
-    });
+    
+    }
+   
+    
+
+    // For the black background
+        const collabs = document.querySelector(".home-container");
+        const colorTrigger = document.querySelector(".adam-collab");
+
+        console.log('Color trigger element:', colorTrigger); // Debug log
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                console.log('Intersection detected:', entry.isIntersecting); // Debug log
+                if (entry.isIntersecting) {
+                    collabs.classList.add("black-background");
+                } else {
+                    collabs.classList.remove("black-background");
+                }
+            });
+        });
 
     observer.observe(colorTrigger);
     //End of black background
