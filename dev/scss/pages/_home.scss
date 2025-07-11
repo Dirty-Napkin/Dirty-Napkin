@@ -1,24 +1,32 @@
+
 .home-container {
     display: flex;
     align-items: center;
     flex-direction: column;
     transition: background-color 0.3s ease-in-out;
-    overflow: none;
+    contain: paint;
+    width: 100%;
 
+   
 
     .four-repeat-type { //main container for the repeat effect - this applies for the first and last sections
         width: 100%;
         display: flex;
         justify-content: center;
         position: absolute;
-        overflow: hidden;
+        height: 230vh;
+        contain: paint;
+
 
         .width-box { //Sets the width and margins for the text
-            margin-top: 65vh;
             width: 60%;
             display: flex;
             flex-wrap: wrap;
-            position: relative;
+            top: 60vh;
+            max-height: 100vh;
+            color: var(--black);
+            position: sticky;
+
 
             .row-holder { //container for the rows
                 min-width: 100vw;
@@ -30,7 +38,7 @@
                     display: flex;
                     flex-direction: row;
                     width: 100%;
-                    margin-bottom: 50vh;
+                    margin-bottom: 40vh;
                     padding: 0;
                     position: relative;
                     
@@ -47,165 +55,177 @@
                         }
                     }
                 }
-            }
+            }   
         }
     }
 
-    
+    > .four-repeat-type {
+            color: var(--white);
+    }
 
+    .four-repeat-type.clone {
+        color: var(--black);
+    }
             
     .ketchup-wrapper {
         width: 100vw;
-        height: 180vh;
-        // background-color: red;
+        height: 230vh;
         display: flex;
         justify-content: center;
-        // align-items: top;
-
-
+        position: relative;
 
         .ketchup-hero{
             position: sticky;
             top: 0;
             align-self: flex-start;
-            width: 60%;
-            height: auto;
-            margin-top: 90vh;
+            width: 100vw;
+            height: 120vh;
             z-index: -1;
+
+            transform: translateX(600px);
         }
     }    
     
-    .brands-container {
+   
+
+    .brands-container {//basic styling for the brands container
         position: relative;
-        height: auto;
-        width: 100vw;
+        max-width: 100vw;
         display: flex;
-        overflow: hidden;
-        transform: translateY(-30vh);
-        padding-bottom: 110vw;
-        // background-color: green;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        .brands-paragraphs {
-            color: var(--green);
-            width: 114%;
-            position: relative;
-            align-self: top;
-            top: 50vh;
-            // left: 50%;
-            // transform: translateX(-50%);
-            display: grid;
-            align-items: center;
-            grid-template-areas: 
-                "b r . p1 p1 ."
-                "a p2 p2 . n ."
-                ". . . . . d"
-                ". . s . . ."
-            ;
-            grid-template-columns: repeat(6, 1fr); // 3 equal columns
-            grid-template-rows: repeat(4, 1.25em); // 2 rows
+    .brand-paragraphs, .brand-letters { // grid layout for the brand letters and paragraphs
+        display: grid;
+        width: 114%;
+        max-width: 1641.6px; //114 % of 1440
+        
+
+        grid-template-areas: 
+            "b r . . . ."
+            "a p1 p1 . n ."
+            ". . p2 p2 . d"
+            ". . s . . ."
+        ;
+        grid-template-columns: repeat(6, 1fr); // 6 equal columns
+        grid-template-rows: repeat(4, 1.25em); // 4 equal rows
+        
+        div {
+           grid-area: p1;
+        }
+    }
     
+    .brands-container { //styling for the brand letters and paragraphs
+        
+        // Setting up brands type grid and applying styling for the paragraphs.
+        $span-areas: b, r, a, n, d, s;
+        $div-areas: p1, p2;
 
 
-            // Setting up brands type grid and applying styling for the paragraphs.
-            $span-areas: b, r, a, n, d, s;
-            $div-areas: p1, p2;
+        .brand-letters {
+            position: sticky;
+            top: 0;
+            color: var(--green);           
 
-            span {
+            span { // each individual letter
+
                 @for $i from 1 through length($span-areas) {
                     &:nth-of-type(#{$i}) {
                     grid-area: nth($span-areas, $i);
                     }
                 }    
 
-                text-align-last: justify;
-                padding-left: 12%;                
-
+                padding-left: 14%;
+                letter-spacing: -0.5rem;
             }
+        }
 
-            div {
+        .brand-paragraphs {
+            position: absolute;
+            
+            div {// each paragraph
                 @for $i from 1 through length($div-areas) {
                     &:nth-of-type(#{$i}) {
                     grid-area: nth($div-areas, $i);
                     }
                 }
-
+                
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
-                transform: translateY(-200vh);
-
-
+    
                 h3 {
-                    color: var(--key);
                     text-align: justify;
                     text-align-last: justify;
                     width: 34ch;
-                    position: absolute;
-                    align-self: center;
-
+                    margin: 0;
                 }
-            }  
-        }
-
-        .brands-content {
-            width: 100%;
-            align-items: center;
-            padding: 4rem;
-            position: absolute;
-            width: 100vw;
-            height: 100vw;
-            display: grid;
-            gap: 1.75rem;
-            grid-template-areas: 
-                ". . . . . ."
-                ". TW . . . ."
-                ". . . . LS ."
-                ". . . . TE ."
-                "ASP . . . . ."
-                ". . PRJS . . .";
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(6, 1fr);
-
-            .brand-item {
-                position: relative;
-                cursor: pointer;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                    object-fit: contain;
-                    position: relative;
-                    z-index: 2;
-                }
-
-                .more-info {
-                    position: absolute;
-                    z-index: -1;
-                }
-
-                // Apply grid areas to the brand-item divs
-                &:nth-child(1) { grid-area: TW; }  // The Window
-                &:nth-child(2) { grid-area: LS; }  // Lemonade Stand
-                &:nth-child(3) { grid-area: TE; }  // Those Eyes
-                &:nth-child(4) { grid-area: ASP; }  // American Scripture Project
-                
-                &:nth-child(5) {  // See brands
-                    grid-area: PRJS; 
-                    // background-color: red;
-                    display: flex;
-                    justify-content: start;
-                    align-items: start;
-                } 
             }
         }
     }
 
+    .brands-content {
+        width: 100%;
+        align-items: center;
+        padding: 0 4rem 0 4rem;
+        margin-bottom: 120vh;
+        margin-top: -20vh;
+
+        // position: absolute;
+        width: 100vw;
+        max-width: 1440px;
+        display: grid;
+        gap: 1.75rem;
+        grid-template-areas: 
+            ". TW . . . ."
+            ". . . . LS ."
+            ". . . . TE ."
+            "ASP . . . . ."
+            ". . PRJS . . .";
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        box-sizing: border-box;
+
+
+        .brand-item {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                position: relative;
+                z-index: 2;
+            }
+
+            .more-info {
+                position: absolute;
+                z-index: -1;
+            }
+
+            // Apply grid areas to the brand-item divs
+            &:nth-child(1) { grid-area: TW; }  // The Window
+            &:nth-child(2) { grid-area: LS; }  // Lemonade Stand
+            &:nth-child(3) { grid-area: TE; }  // Those Eyes
+            &:nth-child(4) { grid-area: ASP; }  // American Scripture Project
+            
+            &:nth-child(5) {  // See brands
+                grid-area: PRJS; 
+                // background-color: red;
+                display: flex;
+                justify-content: start;
+                align-items: start;
+            } 
+        }
+    }
+    
     .collabs {
         width: 100%;
         display: flex;
@@ -213,6 +233,7 @@
         align-items: center;
         transition: all 0.5s ease-in-out;
         padding-bottom: 10rem;
+        display: none;
 
         .collabs-paragraph {
             width: 100%;
@@ -304,7 +325,7 @@
 
 
                 p {
-                    font-family: "degular-mono";
+                    font-family: "Degular Mono";
                     writing-mode: vertical-rl;
                     transform: rotate(180deg); /* optional, matches the upside-down style */
 
@@ -332,13 +353,18 @@
         }
     }
 
+    .yellow-ketchup-section {
+        position: relative;
+        margin-top: -110vh;
+    }
+
     .testimonial {
         width: 100%;
         height: 100vh;
-        background-image: url('assets/home-pg/yellow ketchup.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+        position: absolute;
+        top: 0;
+        margin-top: 10vh;
+
 
         display: flex;
         justify-content: center;
@@ -373,18 +399,26 @@
         }
     }
 
-
     .CTA-container {
         display: flex;
         align-items: center;
         flex-direction: column;
         overflow: none;
+        height: auto;
+        
 
         .four-repeat-type {
             position: relative;
+            height: auto;
+            margin-bottom: 15vh;
+            
+
             
             .width-box { //Sets the width and margins for the text
                 margin-top: 20vh;
+                position: relative;
+                top: 0;
+
 
                 div {
                     margin-bottom: 30vh;
@@ -402,7 +436,15 @@
         }
         
     }
+
+    .yellow-ketchup-img {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+    }
 }
+
 
 .black-background {
     background-color: var(--key);

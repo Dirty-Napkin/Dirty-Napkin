@@ -1971,21 +1971,25 @@ footer .footer-column.column3 {
   align-items: center;
   flex-direction: column;
   transition: background-color 0.3s ease-in-out;
-  overflow: none;
+  contain: paint;
+  width: 100%;
 }
 .home-container .four-repeat-type {
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
-  overflow: hidden;
+  height: 230vh;
+  contain: paint;
 }
 .home-container .four-repeat-type .width-box {
-  margin-top: 65vh;
   width: 60%;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
+  top: 60vh;
+  max-height: 100vh;
+  color: var(--black);
+  position: sticky;
 }
 .home-container .four-repeat-type .width-box .row-holder {
   min-width: 100vw;
@@ -1997,7 +2001,7 @@ footer .footer-column.column3 {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-bottom: 50vh;
+  margin-bottom: 40vh;
   padding: 0;
   position: relative;
 }
@@ -2012,98 +2016,109 @@ footer .footer-column.column3 {
   position: absolute;
   margin: 0;
 }
+.home-container > .four-repeat-type {
+  color: var(--white);
+}
+.home-container .four-repeat-type.clone {
+  color: var(--black);
+}
 .home-container .ketchup-wrapper {
   width: 100vw;
-  height: 180vh;
+  height: 230vh;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 .home-container .ketchup-wrapper .ketchup-hero {
   position: sticky;
   top: 0;
   align-self: flex-start;
-  width: 60%;
-  height: auto;
-  margin-top: 90vh;
+  width: 100vw;
+  height: 120vh;
   z-index: -1;
+  transform: translateX(600px);
 }
 .home-container .brands-container {
   position: relative;
-  height: auto;
-  width: 100vw;
+  max-width: 100vw;
   display: flex;
-  overflow: hidden;
-  transform: translateY(-30vh);
-  padding-bottom: 110vw;
-}
-.home-container .brands-container .brands-paragraphs {
-  color: var(--green);
-  width: 114%;
-  position: relative;
-  align-self: top;
-  top: 50vh;
-  display: grid;
+  flex-direction: column;
   align-items: center;
-  grid-template-areas: "b r . p1 p1 ." "a p2 p2 . n ." ". . . . . d" ". . s . . .";
+}
+.home-container .brand-paragraphs, .home-container .brand-letters {
+  display: grid;
+  width: 114%;
+  max-width: 1641.6px;
+  grid-template-areas: "b r . . . ." "a p1 p1 . n ." ". . p2 p2 . d" ". . s . . .";
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 1.25em);
 }
-.home-container .brands-container .brands-paragraphs span {
-  text-align-last: justify;
-  padding-left: 12%;
+.home-container .brand-paragraphs div, .home-container .brand-letters div {
+  grid-area: p1;
 }
-.home-container .brands-container .brands-paragraphs span:nth-of-type(1) {
+.home-container .brands-container .brand-letters {
+  position: sticky;
+  top: 0;
+  color: var(--green);
+}
+.home-container .brands-container .brand-letters span {
+  padding-left: 14%;
+  letter-spacing: -0.5rem;
+}
+.home-container .brands-container .brand-letters span:nth-of-type(1) {
   grid-area: b;
 }
-.home-container .brands-container .brands-paragraphs span:nth-of-type(2) {
+.home-container .brands-container .brand-letters span:nth-of-type(2) {
   grid-area: r;
 }
-.home-container .brands-container .brands-paragraphs span:nth-of-type(3) {
+.home-container .brands-container .brand-letters span:nth-of-type(3) {
   grid-area: a;
 }
-.home-container .brands-container .brands-paragraphs span:nth-of-type(4) {
+.home-container .brands-container .brand-letters span:nth-of-type(4) {
   grid-area: n;
 }
-.home-container .brands-container .brands-paragraphs span:nth-of-type(5) {
+.home-container .brands-container .brand-letters span:nth-of-type(5) {
   grid-area: d;
 }
-.home-container .brands-container .brands-paragraphs span:nth-of-type(6) {
+.home-container .brands-container .brand-letters span:nth-of-type(6) {
   grid-area: s;
 }
-.home-container .brands-container .brands-paragraphs div {
+.home-container .brands-container .brand-paragraphs {
+  position: absolute;
+}
+.home-container .brands-container .brand-paragraphs div {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-200vh);
 }
-.home-container .brands-container .brands-paragraphs div:nth-of-type(1) {
+.home-container .brands-container .brand-paragraphs div:nth-of-type(1) {
   grid-area: p1;
 }
-.home-container .brands-container .brands-paragraphs div:nth-of-type(2) {
+.home-container .brands-container .brand-paragraphs div:nth-of-type(2) {
   grid-area: p2;
 }
-.home-container .brands-container .brands-paragraphs div h3 {
-  color: var(--key);
+.home-container .brands-container .brand-paragraphs div h3 {
   text-align: justify;
   text-align-last: justify;
   width: 34ch;
-  position: absolute;
-  align-self: center;
+  margin: 0;
 }
-.home-container .brands-container .brands-content {
+.home-container .brands-content {
   width: 100%;
   align-items: center;
-  padding: 4rem;
-  position: absolute;
+  padding: 0 4rem 0 4rem;
+  margin-bottom: 120vh;
+  margin-top: -20vh;
   width: 100vw;
-  height: 100vw;
+  max-width: 1440px;
   display: grid;
   gap: 1.75rem;
-  grid-template-areas: ". . . . . ." ". TW . . . ." ". . . . LS ." ". . . . TE ." "ASP . . . . ." ". . PRJS . . .";
+  grid-template-areas: ". TW . . . ." ". . . . LS ." ". . . . TE ." "ASP . . . . ." ". . PRJS . . .";
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  box-sizing: border-box;
 }
-.home-container .brands-container .brands-content .brand-item {
+.home-container .brands-content .brand-item {
   position: relative;
   cursor: pointer;
   width: 100%;
@@ -2112,30 +2127,30 @@ footer .footer-column.column3 {
   align-items: center;
   justify-content: center;
 }
-.home-container .brands-container .brands-content .brand-item img {
+.home-container .brands-content .brand-item img {
   width: 100%;
   height: auto;
   object-fit: contain;
   position: relative;
   z-index: 2;
 }
-.home-container .brands-container .brands-content .brand-item .more-info {
+.home-container .brands-content .brand-item .more-info {
   position: absolute;
   z-index: -1;
 }
-.home-container .brands-container .brands-content .brand-item:nth-child(1) {
+.home-container .brands-content .brand-item:nth-child(1) {
   grid-area: TW;
 }
-.home-container .brands-container .brands-content .brand-item:nth-child(2) {
+.home-container .brands-content .brand-item:nth-child(2) {
   grid-area: LS;
 }
-.home-container .brands-container .brands-content .brand-item:nth-child(3) {
+.home-container .brands-content .brand-item:nth-child(3) {
   grid-area: TE;
 }
-.home-container .brands-container .brands-content .brand-item:nth-child(4) {
+.home-container .brands-content .brand-item:nth-child(4) {
   grid-area: ASP;
 }
-.home-container .brands-container .brands-content .brand-item:nth-child(5) {
+.home-container .brands-content .brand-item:nth-child(5) {
   grid-area: PRJS;
   display: flex;
   justify-content: start;
@@ -2148,6 +2163,7 @@ footer .footer-column.column3 {
   align-items: center;
   transition: all 0.5s ease-in-out;
   padding-bottom: 10rem;
+  display: none;
 }
 .home-container .collabs .collabs-paragraph {
   width: 100%;
@@ -2244,7 +2260,7 @@ footer .footer-column.column3 {
   grid-template-areas: "p1 d . . . . . . p2 .";
 }
 .home-container .collabs .adam-collab .sideways-copy p {
-  font-family: "degular-mono";
+  font-family: "Degular Mono";
   writing-mode: vertical-rl;
   transform: rotate(180deg); /* optional, matches the upside-down style */
 }
@@ -2263,13 +2279,16 @@ footer .footer-column.column3 {
   justify-content: center;
   padding-right: 15%;
 }
+.home-container .yellow-ketchup-section {
+  position: relative;
+  margin-top: -110vh;
+}
 .home-container .testimonial {
   width: 100%;
   height: 100vh;
-  background-image: url("assets/home-pg/yellow ketchup.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  position: absolute;
+  top: 0;
+  margin-top: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2303,12 +2322,17 @@ footer .footer-column.column3 {
   align-items: center;
   flex-direction: column;
   overflow: none;
+  height: auto;
 }
 .home-container .CTA-container .four-repeat-type {
   position: relative;
+  height: auto;
+  margin-bottom: 15vh;
 }
 .home-container .CTA-container .four-repeat-type .width-box {
   margin-top: 20vh;
+  position: relative;
+  top: 0;
 }
 .home-container .CTA-container .four-repeat-type .width-box div {
   margin-bottom: 30vh;
@@ -2318,6 +2342,12 @@ footer .footer-column.column3 {
   padding: 0.2rem 0.8rem 0.2rem 0;
   width: fit-content;
   margin-top: 1.5rem;
+}
+.home-container .yellow-ketchup-img {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
 }
 
 .black-background {

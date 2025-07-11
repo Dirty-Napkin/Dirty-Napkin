@@ -59,6 +59,11 @@ Header spacing
 -----------------*/
 
 function headerSpacing() {
+    // Don't run on the home page
+    if (document.querySelector('.home-container')) {
+        return 0;
+    }
+
     const header = document.querySelector("header");
     const main = document.querySelector("main");
     if (!header || !main) {
