@@ -1,9 +1,10 @@
 // Function to create a card component
-function createCard(imageUrl, title, description, cardLink) {
+function createCard(imageUrl, title, description, cardLink, id) {
     // Create the main card container
     const card = document.createElement('a');
     card.className = 'brand-card';
     card.href = cardLink;
+    card.id = id;
 
 
     // Create the image container
@@ -46,25 +47,29 @@ const cardsData = [
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'The Window',
         description: "Philly's new hole in the wall",
-        cardLink: 'the-window.html'
+        cardLink: 'the-window.html',
+        id: 'B1'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg', 
         title: 'The Lemonade Stand',
         description: 'DIY performing arts gets juicy',
-        cardLink: 'lemonade-stand.html'
+        cardLink: 'lemonade-stand.html',
+        id: 'B2'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'those-eyes.html'
+        cardLink: 'those-eyes.html',
+        id: 'B3'
     },
     {
         imageUrl: 'assets/test/Those Eyes image.jpg',
         title: 'American Scripture Project',
         description: 'Unity through shared experiences',
-        cardLink: 'american-scripture-project.html'
+        cardLink: 'american-scripture-project.html',
+        id: 'B4'
     }
 ];
 
@@ -80,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 cardData.imageUrl,
                 cardData.title,
                 cardData.description,
-                cardData.cardLink
+                cardData.cardLink,
+                cardData.id
             );
             gridContainer.appendChild(card);
         });

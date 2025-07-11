@@ -566,8 +566,5 @@ if (document.querySelector('.home-container')) {
         });
     });
 
-    observer.observe(colorTrigger);
-   
-
-    
+    observer.observe(colorTrigger);   
 }

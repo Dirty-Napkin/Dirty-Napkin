@@ -140,8 +140,13 @@ document.addEventListener("DOMContentLoaded", () => {
             // Calculate cell dimensions
             const fontSize = window.getComputedStyle(element).fontSize;
             let cellSize = parseFloat(fontSize) * spacingFactor;
-            let numRows = Math.max(3, rows.length);
-            if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
+            let numRows;
+            if (element.classList.contains("project-title")) {
+                numRows = Math.max(4, rows.length);
+                if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
+            } else {
+                numRows = Math.max(3, rows.length); // Use 3 rows for non-project titles
+            }
 
             // Responsive grid sizing for project titles
             if (element.classList.contains("project-title")) {
@@ -329,7 +334,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // After all spans are created:
             if (measuredCellSize) {
-                element.style.height = `${4 * measuredCellSize}px`;
+                if (element.classList.contains("project-title")) {
+                    element.style.height = `${4 * measuredCellSize}px`;
+                } else {
+                    element.style.height = `${3 * measuredCellSize}px`;
+                }
             }
 
             // Add random puzzle on load for puzzle-auto elements
@@ -366,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     parseInt(span.dataset.initialCol) + 1
                 ));
                 maxCols = maxRowLength;
-                maxRows = numRows;
+                maxRows = 3; // Use 3 rows for non-project titles
             }
             function isPositionOccupied(col, row, occupiedPositions) {
                 return occupiedPositions.some(pos => pos.col === col && pos.row === row);

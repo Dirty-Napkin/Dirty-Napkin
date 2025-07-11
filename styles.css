@@ -1000,19 +1000,20 @@ footer .footer-column.column2 p {
 footer .footer-column.column2 .footer-icon-tray {
   grid-area: icons;
   display: flex;
-  gap: 4px;
+  gap: 8px;
   align-items: flex-start;
 }
 footer .footer-column.column2 .footer-icon-tray .footer-icon {
-  background: url("/assets/spritesheet.gif") no-repeat;
-  height: 20px;
   width: 20px;
-  background-size: cover;
-  margin: 6px;
-  background-position: 0 0;
+  height: 20px;
+  fill: var(--key);
+  transition: fill 0.2s, transform 0.3s ease;
+  vertical-align: middle;
+  display: inline-block;
 }
-footer .footer-column.column2 .footer-icon-tray .footer-icon.linkedin {
-  background-position: -21px 0;
+footer .footer-column.column2 .footer-icon-tray .footer-icon:hover {
+  fill: var(--white);
+  transform: scale(1.1);
 }
 footer .footer-column.column3 {
   grid-area: column3;
