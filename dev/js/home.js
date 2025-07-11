@@ -1,29 +1,75 @@
 // Only run script if .home-container is present
 if (document.querySelector('.home-container')) {
     
+    // Helper to get the offsetTop of an element relative to the document
+    function getOffsetTop(elem) {
+        let offsetTop = 0;
+        while (elem) {
+            offsetTop += elem.offsetTop;
+            elem = elem.offsetParent;
+        }
+        return offsetTop;
+    }
+
+    // Helper function for scroll-based transform logic
+    function applyScrollTransform({ element, container, maxTranslateY }) {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const containerTop = getOffsetTop(container);
+        const containerHeight = container.offsetHeight;
+        const elemHeight = element.offsetHeight;
+
+        const stickyStart = containerTop;
+        const stickyEnd = containerTop + containerHeight - elemHeight;
+
+        if (scrollY >= stickyStart && scrollY <= stickyEnd) {
+            const progress = (scrollY - stickyStart) / (stickyEnd - stickyStart);
+            const clamped = Math.max(0, Math.min(1, progress));
+            const translateY = clamped * maxTranslateY;
+            element.style.transform = `translateY(${translateY}px)`;
+        } else if (scrollY < stickyStart) {
+            element.style.transform = `translateY(0px)`;
+        } else {
+            element.style.transform = `translateY(${maxTranslateY}px)`;
+        }
+    }
+
+    // Helper function to generate grid positions
+    function generateGridPositions(movement, imageWidth) {
+        const positions = [];
+        let labelCount = 1;
+        for (let y = -2; y <= 2; y++) {
+            for (let x = -2; x <= 2; x++) {
+                positions.push({
+                    x: x * movement,
+                    y: y * movement,
+                    label: `${labelCount++}`
+                });
+            }
+        }
+        return positions;
+    }
     
-    // //Duplicate row-holder div with red text
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const fourRepeatType = document.querySelector('.four-repeat-type');
-    //     const homeContainer = document.querySelector('.home-container');
-    //     const clone = fourRepeatType.cloneNode(true);
+    //--------------Duplicate hero text in black-------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        const fourRepeatType = document.querySelector('.four-repeat-type');
+        const homeContainer = document.querySelector('.home-container');
+        const clone = fourRepeatType.cloneNode(true);
 
-    //     // // Style the clone
-    //     clone.style.position = 'absolute';
-    //     clone.style.width = '100%';
-    //     clone.style.color = 'red';
-    //     clone.style.zIndex = '2';
+        // Add the .clone class to the cloned element
+        clone.classList.add('clone');
 
-    //     // Insert the clone inside ketchup-wrapper
-    //     homeContainer.appendChild(clone);
-    // });
+        // // Style the clone
+        clone.style.position = 'absolute';
+        clone.style.width = '100%';
+        clone.style.zIndex = '-2';
 
+        // Insert the clone inside ketchup-wrapper
+        homeContainer.appendChild(clone);
+    });
 
-
+    //--------------Ketchup scaling animation-------------------
     const ketchupHero = document.querySelector('.ketchup-hero');
     const ketchupWrapper = document.querySelector('.ketchup-wrapper');
-
-    //this function controls the ketchup scaling animation
     if (ketchupHero && ketchupWrapper) {
       // Ensure ketchupHero is sticky
       ketchupHero.style.position = 'sticky';
@@ -31,12 +77,16 @@ if (document.querySelector('.home-container')) {
       // Parameters for scaling and top position
       const endScale = 1.0;
       const startScale = 0.60;
-      const endPoint = .35; // as a % of the total distance for scaling
+      const endPoint = 0.35; // as a % of the total distance for scaling
       const maxTop = 60; // vh, starting top value
       const minTop = 0;  // vh, ending top value
       const topEndPoint = 0.35; // as a % of the total distance for top value
 
-      //------------DO NOT TOUCH BELOW THIS LINE - I don't know what it does but it works --------------------------------------------------------------
+      // How far (in px) to move ketchup upwards after endPoint is reached
+      const postEndTranslateY = -300; // adjust as needed
+
+      // How far (in px) to move ketchup DOWN after sticky ends (opposite direction)
+      const afterStickyTranslateY = 100; // adjust as needed
 
       // Helper to get progress (0 to 1) based on scroll relative to ketchupWrapper height
       function getProgress() {
@@ -46,7 +96,40 @@ if (document.querySelector('.home-container')) {
         return Math.min(scrollY / wrapperHeight, 1);
       }
 
-      // Set top and scale based on scroll
+      // Helper to get scroll progress after endPoint (0 to 1)
+      function getPostEndProgress() {
+        const wrapperHeight = ketchupWrapper.offsetHeight;
+        const scrollY = window.scrollY;
+        // The scroll at which endPoint is reached
+        const endScroll = endPoint * wrapperHeight;
+        // The scroll at which postEndTranslateY is fully applied (let's use 1.0 progress == wrapperHeight)
+        const postEndRange = wrapperHeight - endScroll;
+        if (scrollY <= endScroll) return 0;
+        if (postEndRange <= 0) return 1;
+        return Math.min((scrollY - endScroll) / postEndRange, 1);
+      }
+
+      // Helper to get the sticky boundaries for ketchupHero inside ketchupWrapper
+      function getStickyBounds() {
+        // Find the offsetTop of the wrapper and the ketchupHero
+        const getOffsetTop = (elem) => {
+          let offsetTop = 0;
+          while (elem) {
+            offsetTop += elem.offsetTop;
+            elem = elem.offsetParent;
+          }
+          return offsetTop;
+        };
+        const wrapperTop = getOffsetTop(ketchupWrapper);
+        const wrapperHeight = ketchupWrapper.offsetHeight;
+        const heroHeight = ketchupHero.offsetHeight;
+        const stickyStart = wrapperTop;
+        const stickyEnd = wrapperTop + wrapperHeight - heroHeight;
+        return { stickyStart, stickyEnd };
+      }
+
+      // Set top and scale based on scroll, and move ketchup up after endPoint,
+      // then after sticky ends, move ketchup in the opposite direction (down)
       function updateKetchupHero() {
         const progress = getProgress();
 
@@ -58,78 +141,177 @@ if (document.querySelector('.home-container')) {
         // Scale interpolation
         const clampedScaleProgress = Math.min(progress, endPoint);
         const scale = startScale + (endScale - startScale) * (clampedScaleProgress / endPoint);
-        ketchupHero.style.transform = `scale(${scale})`;
+
+        // Calculate scroll position and sticky bounds
+        const scrollY = window.scrollY;
+        const { stickyStart, stickyEnd } = getStickyBounds();
+
+        // Calculate the translateY value up to the end of sticky
+        let translateY = 0;
+        if (progress <= endPoint) {
+          // Before endPoint: only scale
+          ketchupHero.style.transform = `scale(${scale})`;
+        } else if (scrollY < stickyEnd) {
+          // After endPoint, but still sticky: move up
+          const postEndProgress = getPostEndProgress();
+          translateY = postEndTranslateY * postEndProgress;
+          ketchupHero.style.transform = `scale(${endScale}) translateY(${translateY}px)`;
+        } else {
+          // After sticky ends: move in the opposite direction (down)
+          // First, get the translateY at the end of sticky (i.e., at stickyEnd)
+          // This is the last value from the previous phase
+          const wrapperHeight = ketchupWrapper.offsetHeight;
+          const endScroll = endPoint * wrapperHeight;
+          const postEndRange = wrapperHeight - endScroll;
+          let translateYAtStickyEnd = 0;
+          if (postEndRange > 0) {
+            translateYAtStickyEnd = postEndTranslateY * ((stickyEnd - endScroll) / postEndRange);
+            // Clamp to postEndTranslateY if over
+            if (translateYAtStickyEnd < postEndTranslateY) translateYAtStickyEnd = postEndTranslateY;
+            if (translateYAtStickyEnd > 0) translateYAtStickyEnd = 0;
+          }
+
+          // Now, as the user scrolls past stickyEnd, move in the opposite direction
+          // We'll use a fixed range (e.g., 1x ketchupHero height) for the "after" animation
+          const afterRange = ketchupHero.offsetHeight * 1.2; // how much scroll triggers the full after effect
+          const afterProgress = Math.min(
+            Math.max((scrollY - stickyEnd) / afterRange, 0),
+            1
+          );
+          // Move from translateYAtStickyEnd to translateYAtStickyEnd + afterStickyTranslateY
+          translateY = translateYAtStickyEnd + afterStickyTranslateY * afterProgress;
+          ketchupHero.style.transform = `scale(${endScale}) translateY(${translateY}px)`;
+        }
       }
 
       updateKetchupHero();
       window.addEventListener('scroll', updateKetchupHero);
+      window.addEventListener('resize', updateKetchupHero);
     }
 
-    //mask function
-    // Select only .width-box elements that are NOT inside .CTA-container
+    //--------------Masking out hero type with scroll-------------------
     const textBoxes = document.querySelectorAll('.width-box:not(.CTA-container .width-box) h2');
-
     if (textBoxes && ketchupWrapper && ketchupHero) {
-        // Start point: progress before this = no mask, after this = mask grows
-        const startPoint = 0.65;
-        
+        // Custom start points for each text box (as a fraction of wrapper height)
+        // Adjust these values as needed for your design
+        const startPoints = [0.47, 0.47, 0.67, 0.67];
+
         function updateTextBoxClipPath() {
             const scrollY = window.scrollY;
             const wrapperHeight = ketchupWrapper.offsetHeight;
-            
-            // Calculate the scroll position where the mask should start
-            const startScrollPosition = startPoint * wrapperHeight;
-            
-            let insetTop;
-            if (scrollY < startScrollPosition) {
-                // Before start point, no mask
-                insetTop = 0;
-            } else {
-                // After start point, insetTop increases 1:1 with scroll position
-                // Calculate how much we've scrolled past the start point
-                const scrollPastStart = scrollY - startScrollPosition;
-                insetTop = scrollPastStart;
-            }
 
-            // textBox is just the name of the parameter in the forEach callback below.
-            // It refers to each individual element in the textBoxes NodeList.
-            textBoxes.forEach(function(textBox) {
+            textBoxes.forEach((textBox, i) => {
+                // Use the custom startPoint for this text box, or fallback to the first if not enough values
+                const startPoint = startPoints[i] !== undefined ? startPoints[i] : startPoints[0];
+                const startScroll = startPoint * wrapperHeight;
+                const insetTop = Math.max(0, scrollY - startScroll);
                 textBox.style.clipPath = `inset(${insetTop}px 0 0 0)`;
             });
         }
 
         // Set initial state
         updateTextBoxClipPath();
-        window.addEventListener('scroll', () => {
-            updateTextBoxClipPath();
-        });
-    
+        window.addEventListener('scroll', updateTextBoxClipPath);
     }
-   
-    
 
-    // For the black background
-        const collabs = document.querySelector(".home-container");
-        const colorTrigger = document.querySelector(".adam-collab");
+    //--------------Clip white hero type to ketchup hero-------------------
+    function updateRepeatTypeClip() {
+        // Select the reference and target elements
+        const ketchupHero = document.querySelector('.ketchup-hero');
+        const repeatType = document.querySelector('.four-repeat-type');
+        if (!ketchupHero || !repeatType) return; // Exit if either is missing
 
-        console.log('Color trigger element:', colorTrigger); // Debug log
+        // Get bounding rect of .ketchup-hero relative to viewport
+        const heroRect = ketchupHero.getBoundingClientRect();
+        const repeatRect = repeatType.getBoundingClientRect();
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                console.log('Intersection detected:', entry.isIntersecting); // Debug log
-                if (entry.isIntersecting) {
-                    collabs.classList.add("black-background");
-                } else {
-                    collabs.classList.remove("black-background");
-                }
+        // Calculate the top and bottom relative to the .four-repeat-type container
+        // This ensures the mask aligns visually with ketchup-hero inside the repeatType context
+        let top = heroRect.top - repeatRect.top;
+        let bottom = repeatRect.bottom - heroRect.bottom;
+
+        // Clamp to 0 if negative (shouldn't be, but for safety)
+        top = Math.max(0, Math.round(top));
+        bottom = Math.max(0, Math.round(bottom));
+
+        // X values (left/right) are already correct, but let's also use relative to repeatType for robustness
+        let left = heroRect.left - repeatRect.left;
+        let right = repeatRect.right - heroRect.right;
+
+        left = Math.max(0, Math.round(left));
+        right = Math.max(0, Math.round(right));
+
+        // --- Y OFFSET CORRECTION ---
+        // The Y value is still about 10px off. The most robust way to solve this is to account for any
+        // margin, border, or scroll offset that may be affecting the position.
+        // We'll use getComputedStyle to check for margin/border, and also check for scroll offset.
+
+        // 1. Account for scroll offset of the container (if any)
+        // (If .four-repeat-type is not scrollable, this will be 0)
+        const repeatTypeScrollTop = repeatType.scrollTop || 0;
+
+        // 2. Account for border and padding of .four-repeat-type
+        const repeatTypeStyle = window.getComputedStyle(repeatType);
+        const borderTop = parseFloat(repeatTypeStyle.borderTopWidth) || 0;
+        const paddingTop = parseFloat(repeatTypeStyle.paddingTop) || 0;
+
+        // 3. Account for margin of .ketchup-hero (if any)
+        const heroStyle = window.getComputedStyle(ketchupHero);
+        const heroMarginTop = parseFloat(heroStyle.marginTop) || 0;
+
+        // 4. Add up all corrections
+        // If the mask is too low, we need to subtract from 'top'
+        // If the mask is too high, we need to add to 'top'
+        // Empirically, the issue is usually due to border/padding/margin or subpixel rounding.
+        // We'll also allow a manual fudge factor for fine-tuning.
+        const manualFudge = 0; // Try -10px to correct the 10px offset
+
+        // Final top and bottom with all corrections
+        const finalTop = Math.max(
+            0,
+            top - repeatTypeScrollTop - borderTop - paddingTop + heroMarginTop + manualFudge
+        );
+        // For bottom, we want to keep the same fudge as before, but you can adjust if needed
+        const fudgeBottom = 0;
+        const finalBottom = Math.max(0, bottom + fudgeBottom);
+
+        // Build the clip-path string
+        const clipPath = `inset(${finalTop}px ${right}px ${finalBottom}px ${left}px)`;
+
+        // Apply the clip-path to the target element
+        repeatType.style.clipPath = clipPath;
+        repeatType.style.webkitClipPath = clipPath; // For Safari support
+    }
+
+    // Run once on DOMContentLoaded, and on scroll/resize
+    document.addEventListener('DOMContentLoaded', updateRepeatTypeClip);
+    window.addEventListener('resize', updateRepeatTypeClip);
+    window.addEventListener('scroll', updateRepeatTypeClip);
+
+    //--------------Brands large type movement-------------------
+    (function() {
+        const brandLetters = document.querySelector('.brand-letters');
+        const brandsContainer = document.querySelector('.brands-container');
+        if (!brandLetters || !brandsContainer) return;
+
+        // Editable variable: how far up (in px) brand-letters should move at max
+        const maxTranslateY = -1100; // Change this value for more/less movement
+
+        function updateBrandLettersPosition() {
+            applyScrollTransform({
+                element: brandLetters,
+                container: brandsContainer,
+                maxTranslateY: maxTranslateY
             });
-        });
+        }
 
-    observer.observe(colorTrigger);
-    //End of black background
+        // Initial set
+        updateBrandLettersPosition();
+        window.addEventListener('scroll', updateBrandLettersPosition);
+        window.addEventListener('resize', updateBrandLettersPosition);
+    })();    
 
-
-    // For the brand hover effect
+    //--------------Brand hover effect-------------------
     document.addEventListener('DOMContentLoaded', () => {
         const brandItems = document.querySelectorAll('.brand-item');
 
@@ -142,34 +324,7 @@ if (document.querySelector('.home-container')) {
             const movement = imageWidth + 28; // 28px is 1.75rem gap
 
             // Calculate grid positions based on the image width and gap
-            const gridPositions = [
-                // Outer ring (16 positions)
-                { x: -(2 * movement), y: -(2 * movement), label: '1' },  // far top left
-                { x: -movement, y: -(2 * movement), label: '2' },      // top left outer
-                { x: 0, y: -(2 * movement), label: '3' },              // top center outer
-                { x: movement, y: -(2 * movement), label: '4' },       // top right outer
-                { x: (2 * movement), y: -(2 * movement), label: '5' },   // far top right
-                { x: -(2 * movement), y: -movement, label: '6' },      // left top outer
-                { x: -movement, y: -movement, label: '7' },          // top left
-                { x: 0, y: -movement, label: '8' },                  // top center
-                { x: movement, y: -movement, label: '9' },           // top right
-                { x: (2 * movement), y: -movement, label: '10' },      // right top outer
-                { x: -(2 * movement), y: 0, label: '11' },             // left center outer
-                { x: -movement, y: 0, label: '12' },                 // left center
-                { x: movement, y: 0, label: '14' },                  // right center
-                { x: (2 * movement), y: 0, label: '15' },              // right center outer
-                { x: -(2 * movement), y: movement, label: '16' },      // left bottom outer
-                { x: -movement, y: movement, label: '17' },          // bottom left
-                { x: 0, y: movement, label: '18' },                  // bottom center
-                { x: movement, y: movement, label: '19' },           // bottom right
-                { x: (2 * movement), y: movement, label: '20' },       // right bottom outer
-                { x: -(2 * movement), y: (2 * movement), label: '21' },  // far bottom left
-                { x: -movement, y: (2 * movement), label: '22' },      // bottom left outer
-                { x: 0, y: (2 * movement), label: '23' },              // bottom center outer
-                { x: movement, y: (2 * movement), label: '24' },       // bottom right outer
-                { x: (2 * movement), y: (2 * movement), label: '25' },   // far bottom right
-                { x: 0, y: 0, label: '25' }                          // center (original position)
-            ];
+            const gridPositions = generateGridPositions(movement, imageWidth);
 
             // Position indicators
             // Create container for position indicators
@@ -293,4 +448,126 @@ if (document.querySelector('.home-container')) {
             //
         });
     });
+
+    //--------------Yellow Ketchup Section-------------------
+    (function() {
+        // Select the yellow ketchup section and image
+        const yellowSection = document.querySelector('.yellow-ketchup-section');
+        const yellowKetchupImg = yellowSection ? yellowSection.querySelector('img') : null;
+
+        // Editable variable: how far up (in px) the yellow ketchup image should move at max
+        const maxTranslateY = -400; // Adjust as needed for effect
+
+        function updateYellowKetchupPosition() {
+            if (!yellowSection || !yellowKetchupImg) return;
+
+            applyScrollTransform({
+                element: yellowKetchupImg,
+                container: yellowSection,
+                maxTranslateY: maxTranslateY
+            });
+        }
+
+        // Initial set
+        updateYellowKetchupPosition();
+        window.addEventListener('scroll', updateYellowKetchupPosition);
+        window.addEventListener('resize', updateYellowKetchupPosition);
+    })();
+    
+    //--------------Testimonial scroll animation-------------------
+    (function() {
+        // Editable variable: how far down (in px) the testimonial should move at start
+        const testimonialStartOffset = 500; // Change this value for more/less movement
+
+        const yellowSection = document.querySelector('.yellow-ketchup-section');
+        const testimonial = document.querySelector('.testimonial');
+        if (!yellowSection || !testimonial) return;
+
+
+
+        function animateTestimonial() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const sectionTop = getOffsetTop(yellowSection);
+            const sectionBottom = sectionTop + yellowSection.offsetHeight;
+
+            // When does yellow-ketchup-section first enter the viewport?
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            const sectionEnters = sectionTop - viewportHeight;
+            const sectionHitsTop = sectionTop;
+
+            if (scrollY < sectionEnters) {
+                // Before yellow-ketchup-section enters, reset testimonial
+                testimonial.style.transform = `translateY(0px)`;
+            } else if (scrollY >= sectionEnters && scrollY < sectionHitsTop) {
+                // Animate from offset to 0 as yellow-ketchup-section moves from entering to top
+                const progress = (scrollY - sectionEnters) / (sectionHitsTop - sectionEnters);
+                const clamped = Math.max(0, Math.min(1, progress));
+                const translateY = testimonialStartOffset * (1 - clamped);
+                testimonial.style.transform = `translateY(${translateY}px)`;
+
+            } else {
+                // When yellow-ketchup-section hits the top, testimonial at 0
+                testimonial.style.transform = `translateY(0px)`;
+
+            }
+        }
+
+        // Initial set
+        animateTestimonial();
+        window.addEventListener('scroll', animateTestimonial);
+        window.addEventListener('resize', animateTestimonial);
+    })();
+
+    //--------------masking out CTA text on scroll-------------------
+    //--------------Masking out hero type with scroll-------------------
+    // Masking out CTA text on scroll (inset decreases from bottom as you scroll)
+    const ctaTextBoxes = document.querySelectorAll('.CTA-container .width-box h2');
+    if (ctaTextBoxes && ketchupWrapper && ketchupHero) {
+        // Custom start points for each CTA text box (as a fraction of wrapper height)
+        // Adjust these values as needed for your design
+        const ctaStartPoints = [2.74, 2.74, 0, 0];
+
+        function updateCtaTextBoxClipPath() {
+            const scrollY = window.scrollY;
+            const wrapperHeight = ketchupWrapper.offsetHeight;
+
+            ctaTextBoxes.forEach((textBox, i) => {
+                // Use the custom startPoint for this text box, or fallback to the first if not enough values
+                const startPoint = ctaStartPoints[i] !== undefined ? ctaStartPoints[i] : ctaStartPoints[0];
+                const startScroll = startPoint * wrapperHeight;
+                // As scroll increases, insetBottom decreases from full height to 0
+                const textBoxHeight = textBox.offsetHeight;
+                let insetBottom = Math.max(0, textBoxHeight - Math.max(0, scrollY - startScroll));
+                // Clamp to textBoxHeight so it never goes negative
+                insetBottom = Math.min(textBoxHeight, insetBottom);
+                textBox.style.clipPath = `inset(0 0 ${insetBottom}px 0)`;
+            });
+        }
+
+        // Set initial state
+        updateCtaTextBoxClipPath();
+        window.addEventListener('scroll', updateCtaTextBoxClipPath);
+    }
+
+    //--------------Black Background anim-------------------
+    const collabs = document.querySelector(".home-container");
+    const colorTrigger = document.querySelector(".adam-collab");
+
+    console.log('Color trigger element:', colorTrigger); // Debug log
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            console.log('Intersection detected:', entry.isIntersecting); // Debug log
+            if (entry.isIntersecting) {
+                collabs.classList.add("black-background");
+            } else {
+                collabs.classList.remove("black-background");
+            }
+        });
+    });
+
+    observer.observe(colorTrigger);
+   
+
+    
 }

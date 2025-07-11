@@ -1987,7 +1987,7 @@ footer .footer-column.column3 {
   flex-wrap: wrap;
   top: 60vh;
   max-height: 100vh;
-  color: red;
+  color: var(--black);
   position: sticky;
 }
 .home-container .four-repeat-type .width-box .row-holder {
@@ -2015,6 +2015,12 @@ footer .footer-column.column3 {
   position: absolute;
   margin: 0;
 }
+.home-container > .four-repeat-type {
+  color: var(--white);
+}
+.home-container .four-repeat-type.clone {
+  color: var(--black);
+}
 .home-container .ketchup-wrapper {
   width: 100vw;
   height: 230vh;
@@ -2027,7 +2033,7 @@ footer .footer-column.column3 {
   top: 0;
   align-self: flex-start;
   width: 100vw;
-  height: auto;
+  height: 120vh;
   z-index: -1;
   transform: translateX(600px);
 }
@@ -2042,7 +2048,7 @@ footer .footer-column.column3 {
   display: grid;
   width: 114%;
   max-width: 1641.6px;
-  grid-template-areas: "b r . . . ." "a p1 p1 p1 n ." ". . p2 p2 p2 d" ". . s . . .";
+  grid-template-areas: "b r . . . ." "a p1 p1 . n ." ". . p2 p2 . d" ". . s . . .";
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 1.25em);
 }
@@ -2050,7 +2056,8 @@ footer .footer-column.column3 {
   grid-area: p1;
 }
 .home-container .brands-container .brand-letters {
-  position: absolute;
+  position: sticky;
+  top: 0;
   color: var(--green);
 }
 .home-container .brands-container .brand-letters span {
@@ -2075,6 +2082,9 @@ footer .footer-column.column3 {
 .home-container .brands-container .brand-letters span:nth-of-type(6) {
   grid-area: s;
 }
+.home-container .brands-container .brand-paragraphs {
+  position: absolute;
+}
 .home-container .brands-container .brand-paragraphs div {
   display: flex;
   align-items: center;
@@ -2096,7 +2106,8 @@ footer .footer-column.column3 {
   width: 100%;
   align-items: center;
   padding: 0 4rem 0 4rem;
-  margin-top: -100px;
+  margin-bottom: 120vh;
+  margin-top: -20vh;
   width: 100vw;
   max-width: 1440px;
   display: grid;
@@ -2267,13 +2278,16 @@ footer .footer-column.column3 {
   justify-content: center;
   padding-right: 15%;
 }
+.home-container .yellow-ketchup-section {
+  position: relative;
+  margin-top: -110vh;
+}
 .home-container .testimonial {
   width: 100%;
   height: 100vh;
-  background-image: url("assets/home-pg/yellow ketchup.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  position: absolute;
+  top: 0;
+  margin-top: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2327,6 +2341,12 @@ footer .footer-column.column3 {
   padding: 0.2rem 0.8rem 0.2rem 0;
   width: fit-content;
   margin-top: 1.5rem;
+}
+.home-container .yellow-ketchup-img {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
 }
 
 .black-background {
