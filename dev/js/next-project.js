@@ -3,25 +3,25 @@ const data = [
         "current-page": "the-window",
         "next-page": "lemonade-stand",
         "next-text": "The Lemonade Stand",
-        "next-img": "assets/home-pg/lemonade-stand.png"
+        "next-img": "assets/company-pages/h3_lemonade-stand-thumbnail.jpg"
     },
     {
         "current-page": "lemonade-stand",
         "next-page": "those-eyes",
         "next-text": "Those Eyes",
-        "next-img": "assets/home-pg/those-eyes.png"
+        "next-img": "assets/company-pages/h4_those-eyes-thumbnail.jpg"
     },
     {
         "current-page": "those-eyes",
         "next-page": "american-scripture-project",
         "next-text": "American Scripture Project",
-        "next-img": "assets/home-pg/asp.png"
+        "next-img": "assets/company-pages/h6_asp-thumbnail.jpg"
     },
     {
         "current-page": "american-scripture-project",
         "next-page": "the-window",
         "next-text": "The Window",
-        "next-img": "assets/home-pg/the-window.png"
+        "next-img": "assets/company-pages/h2_the-window-thumbnail.jpg"
     }
 ];
 

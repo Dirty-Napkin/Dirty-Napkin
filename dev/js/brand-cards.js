@@ -44,28 +44,28 @@ function createCard(imageUrl, title, description, cardLink, id) {
 // Create multiple cards with different content
 const cardsData = [
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'https://placehold.co/1272x820.jpg',
         title: 'The Window',
         description: "Philly's new hole in the wall",
         cardLink: 'the-window.html',
         id: 'B1'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg', 
+        imageUrl: 'https://placehold.co/1272x820.jpg', 
         title: 'The Lemonade Stand',
         description: 'DIY performing arts gets juicy',
         cardLink: 'lemonade-stand.html',
         id: 'B2'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'assets/company-pages/b3_those-eyes-thumbnail.jpg',
         title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
         cardLink: 'those-eyes.html',
         id: 'B3'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'https://placehold.co/1272x820.jpg',
         title: 'American Scripture Project',
         description: 'Unity through shared experiences',
         cardLink: 'american-scripture-project.html',
