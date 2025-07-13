@@ -1,3 +1,90 @@
+//--------------Multi-Trigger Background Animation-------------------
+function createMultiTriggerBackgroundAnimation(triggerConfigs) {
+    // Validate input
+    if (!Array.isArray(triggerConfigs) || triggerConfigs.length === 0) {
+        console.error('triggerConfigs must be a non-empty array');
+        return;
+    }
+
+    // Validate each config object
+    triggerConfigs.forEach((config, index) => {
+        if (!config.trigger || !config.target || !config.className) {
+            console.error(`Invalid config at index ${index}:`, config);
+            return;
+        }
+    });
+
+    // Create intersection observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Find the matching config for this entry
+            const config = triggerConfigs.find(c => 
+                document.querySelector(c.trigger) === entry.target
+            );
+            
+            if (!config) return;
+
+            // Get the target element
+            const targetElement = document.querySelector(config.target);
+            if (!targetElement) {
+                console.warn(`Target element not found: ${config.target}`);
+                return;
+            }
+
+            // Toggle the class based on intersection
+            if (entry.isIntersecting) {
+                // Remove all other classes from this target before adding the new one
+                triggerConfigs.forEach(otherConfig => {
+                    if (otherConfig.target === config.target && otherConfig.className !== config.className) {
+                        targetElement.classList.remove(otherConfig.className);
+                    }
+                });
+                
+                targetElement.classList.add(config.className);
+                console.log(`Added ${config.className} to ${config.target} (triggered by ${config.trigger})`);
+            } else {
+                targetElement.classList.remove(config.className);
+                console.log(`Removed ${config.className} from ${config.target} (triggered by ${config.trigger})`);
+            }
+        });
+    });
+
+    // Observe all trigger elements
+    triggerConfigs.forEach(config => {
+        const triggerElement = document.querySelector(config.trigger);
+        if (triggerElement) {
+            observer.observe(triggerElement);
+            console.log(`Now observing: ${config.trigger}`);
+        } else {
+            console.warn(`Trigger element not found: ${config.trigger}`);
+        }
+    });
+
+    return observer; // Return observer in case you need to disconnect it later
+}
+
+// Example usage:
+const backgroundTriggers = [
+    {
+        trigger: '.story-grid',
+        target: '#about-page', 
+        className: 'cyan-background'
+    },
+    {
+        trigger: '.what-we-do',
+        target: '#about-page', 
+        className: 'black-background'
+    },
+    {
+        trigger: '.bios-conc',
+        target: '#about-page', 
+        className: 'white-background'
+    }
+];
+
+// Initialize the multi-trigger system
+const backgroundObserver = createMultiTriggerBackgroundAnimation(backgroundTriggers);
+
 /*-----------------
 Repeated text effect
 
