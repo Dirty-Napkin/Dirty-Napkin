@@ -58,7 +58,7 @@ const cardsData = [
         id: 'B2'
     },
     {
-        imageUrl: 'assets/company-pages/b3_those-eyes-thumbnail.jpg',
+        imageUrl: 'https://placehold.co/1272x820.jpg',
         title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
         cardLink: 'those-eyes.html',
