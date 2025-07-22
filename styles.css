@@ -489,6 +489,22 @@ img {
   line-height: 1;
 }
 
+.background-transition {
+  transition: background-color 0.3s ease-in-out;
+}
+.background-transition.cyan-background {
+  background-color: var(--cyan);
+  color: var(--white);
+}
+.background-transition.black-background {
+  background-color: var(--key);
+  color: var(--white);
+}
+.background-transition.white-background {
+  background-color: var(--white) !important;
+  color: var(--key);
+}
+
 /* =============
     Typography
 ============= */
@@ -1070,21 +1086,6 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
-#about-page {
-  transition: background-color 0.3s ease-in-out;
-}
-#about-page.cyan-background {
-  background-color: var(--cyan);
-  color: var(--white);
-}
-#about-page.black-background {
-  background-color: var(--key);
-  color: var(--white);
-}
-#about-page.white-background {
-  background-color: var(--white) !important;
-  color: var(--key);
-}
 #about-page .square#about-square-5 {
   grid-area: square-5;
 }
@@ -2357,11 +2358,6 @@ footer .footer-column.column3 {
   top: 0;
   width: 100%;
   height: 100vh;
-}
-
-.black-background {
-  background-color: var(--key);
-  color: var(--white);
 }
 
 /* =============

@@ -3,21 +3,6 @@
 ============= */
 
 #about-page {
-    transition: background-color 0.3s ease-in-out;
-    &.cyan-background {
-        background-color: var(--cyan);
-        color: var(--white);
-    }
-
-    &.black-background {
-        background-color: var(--key);
-        color: var(--white);
-    }
-    &.white-background {
-        background-color:  var(--white) !important;
-        color: var(--key);
-    }
-
     .square {
         @for $i from 5 through 39 {
             &#about-square-#{$i} {

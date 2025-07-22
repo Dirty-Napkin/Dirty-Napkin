@@ -76,3 +76,20 @@ img {
         line-height: 1;
     }
 }
+
+.background-transition{
+    transition: background-color 0.3s ease-in-out;
+    &.cyan-background {
+        background-color: var(--cyan);
+        color: var(--white);
+    }
+
+    &.black-background {
+        background-color: var(--key);
+        color: var(--white);
+    }
+    &.white-background {
+        background-color:  var(--white) !important;
+        color: var(--key);
+    }
+}

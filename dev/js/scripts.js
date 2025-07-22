@@ -61,6 +61,12 @@ const backgroundTriggers = [
         target: '#about-page', 
         className: 'white-background',
         offsetPercent: 40
+    },
+    {
+        trigger: '.adam-collab',
+        target: '.home-container', 
+        className: 'black-background',
+        offsetPercent: 0
     }
 ];
 
