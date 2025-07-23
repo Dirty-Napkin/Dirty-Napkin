@@ -3,18 +3,23 @@
 ============= */
 
 #about-page {
-    //transition doesn't work
-    // transition: background-image 0.3s ease-in-out;
-    background-image: url(../assets/company-pages/a6_black-ketchup-about.png);
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+    .about-bg-img {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+        pointer-events: none;
+        transition: opacity 0.5s;
+        display: none;
+    }
 
     &.cyan-background{
-        background-image: url(../assets/company-pages/a7_green-ketchup-about.png);
     }
 
     &.black-background{
-        background-image: url(../assets/company-pages/a8_magenta-ketchup-about.png);
         .story-grid>.square{
             opacity: 0;
         }
@@ -26,6 +31,9 @@
             background-color: var(--key) !important;
         }
     }
+
+    
+
     .square {
         @for $i from 5 through 39 {
             &#about-square-#{$i} {

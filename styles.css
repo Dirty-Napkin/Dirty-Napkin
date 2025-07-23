@@ -1086,16 +1086,17 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
-#about-page {
-  background-image: url(../assets/company-pages/a6_black-ketchup-about.png);
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-}
-#about-page.cyan-background {
-  background-image: url(../assets/company-pages/a7_green-ketchup-about.png);
-}
-#about-page.black-background {
-  background-image: url(../assets/company-pages/a8_magenta-ketchup-about.png);
+#about-page .about-bg-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  display: none;
 }
 #about-page.black-background .story-grid > .square {
   opacity: 0;
