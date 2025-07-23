@@ -1087,7 +1087,6 @@ footer .footer-column.column3 {
     About Page
 ============= */
 #about-page {
-  transition: background-image 0.3s ease-in-out;
   background-image: url(../assets/company-pages/a6_black-ketchup-about.png);
   background-size: 100% auto;
   background-repeat: no-repeat;
@@ -1097,6 +1096,9 @@ footer .footer-column.column3 {
 }
 #about-page.black-background {
   background-image: url(../assets/company-pages/a8_magenta-ketchup-about.png);
+}
+#about-page.black-background .story-grid > .square {
+  opacity: 0;
 }
 #about-page.white-background {
   background-image: none;
@@ -1384,6 +1386,9 @@ footer .footer-column.column3 {
   #about-page .story-grid .desktop {
     display: block;
   }
+}
+#about-page .story-grid .square {
+  transition: opacity 0.3s ease-in-out;
 }
 @media (min-width: 768px) {
   #about-page .story-grid .square {

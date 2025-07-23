@@ -3,7 +3,8 @@
 ============= */
 
 #about-page {
-    transition: background-image 0.3s ease-in-out;
+    //transition doesn't work
+    // transition: background-image 0.3s ease-in-out;
     background-image: url(../assets/company-pages/a6_black-ketchup-about.png);
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -14,6 +15,9 @@
 
     &.black-background{
         background-image: url(../assets/company-pages/a8_magenta-ketchup-about.png);
+        .story-grid>.square{
+            opacity: 0;
+        }
     }
 
     &.white-background{
@@ -206,6 +210,7 @@
         }
 
         .square {
+            transition: opacity 0.3s ease-in-out;
             @include md {
                 width: 19.2px;
                 height: 19.2px;

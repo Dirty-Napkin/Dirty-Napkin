@@ -1,46 +1,64 @@
-//--------------Multi-Trigger Background Animation-------------------
-function createMultiTriggerBackgroundAnimation(triggerConfigs) {
-    if (!Array.isArray(triggerConfigs) || triggerConfigs.length === 0) {
-        console.error('triggerConfigs must be a non-empty array');
-        return;
-    }
-
-    // For each config, create a separate observer with its own rootMargin
-    triggerConfigs.forEach(config => {
-        if (!config.trigger || !config.target || !config.className || typeof config.offsetPercent !== 'number') {
-            console.error('Invalid config:', config);
-            return;
+//--------------Multi-Trigger Background Animation (Throttled Scroll)-------------------
+function throttle(fn, wait) {
+    let lastTime = 0;
+    return function(...args) {
+        const now = Date.now();
+        if (now - lastTime >= wait) {
+            lastTime = now;
+            fn.apply(this, args);
         }
+    };
+}
 
-        const triggerElement = document.querySelector(config.trigger);
-        const targetElement = document.querySelector(config.target);
-        if (!triggerElement || !targetElement) return;
+function createMultiTriggerBackgroundAnimation(triggerConfigs) {
+    // Only run if at least one target is present in the DOM
+    const shouldRun = triggerConfigs.some(cfg => document.querySelector(cfg.target));
+    if (!shouldRun) return;
 
-        // Calculate rootMargin: negative value moves the bottom threshold up
-        const offsetPx = (config.offsetPercent / 100) * window.innerHeight;
-        let rootMargin = `0px 0px -${offsetPx}px 0px`;
+    // Get all unique targets
+    const uniqueTargets = Array.from(new Set(triggerConfigs.map(cfg => cfg.target)));
 
-        // If offsetPx is 0, don't add negative margin
-        if (offsetPx === 0) rootMargin = '0px';
+    function handleSectionBackgrounds() {
+        // For each target, determine which trigger is currently active
+        uniqueTargets.forEach(targetSelector => {
+            const targetElement = document.querySelector(targetSelector);
+            if (!targetElement) return;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Remove all other classes for this target
-                    triggerConfigs.forEach(otherConfig => {
-                        if (otherConfig.target === config.target && otherConfig.className !== config.className) {
-                            targetElement.classList.remove(otherConfig.className);
-                        }
-                    });
-                    targetElement.classList.add(config.className);
-                } else {
-                    targetElement.classList.remove(config.className);
+            // Find all triggers for this target
+            const triggers = triggerConfigs.filter(cfg => cfg.target === targetSelector);
+
+            // Find the trigger whose top is closest to (but not greater than) the offset threshold from the top of the viewport
+            let activeConfig = null;
+            let minDistance = Infinity;
+            triggers.forEach(cfg => {
+                const triggerElement = document.querySelector(cfg.trigger);
+                if (!triggerElement) return;
+                const rect = triggerElement.getBoundingClientRect();
+                const offsetPx = (cfg.offsetPercent / 100) * window.innerHeight;
+                // Distance from trigger top to offset threshold
+                const distance = rect.top - (window.innerHeight - offsetPx);
+                // We want the trigger that is above or at the threshold, and closest to it
+                if (distance <= 0 && Math.abs(distance) < minDistance) {
+                    minDistance = Math.abs(distance);
+                    activeConfig = cfg;
                 }
             });
-        }, { root: null, rootMargin });
 
-        observer.observe(triggerElement);
-    });
+            // Remove all possible classes for this target
+            triggers.forEach(cfg => targetElement.classList.remove(cfg.className));
+            // Add the active class if found
+            if (activeConfig) {
+                targetElement.classList.add(activeConfig.className);
+            }
+        });
+    }
+
+    // Throttle the handler
+    const throttledHandler = throttle(handleSectionBackgrounds, 50);
+    window.addEventListener('scroll', throttledHandler);
+    window.addEventListener('resize', throttledHandler);
+    // Initial run
+    handleSectionBackgrounds();
 }
 
 const backgroundTriggers = [
