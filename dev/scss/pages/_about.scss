@@ -492,4 +492,7 @@
             }
         }
     }
+    &.white-background .square {
+        background-color: var(--key) !important;
+    }
 }
