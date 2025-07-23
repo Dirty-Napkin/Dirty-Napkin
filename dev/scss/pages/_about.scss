@@ -3,6 +3,37 @@
 ============= */
 
 #about-page {
+    .about-bg-img {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+        pointer-events: none;
+        transition: opacity 0.5s;
+        display: none;
+    }
+
+    &.cyan-background{
+    }
+
+    &.black-background{
+        .story-grid>.square{
+            opacity: 0;
+        }
+    }
+
+    &.white-background{
+        background-image: none;
+        .square {
+            background-color: var(--key) !important;
+        }
+    }
+
+    
+
     .square {
         @for $i from 5 through 39 {
             &#about-square-#{$i} {
@@ -17,6 +48,11 @@
                 grid-area: text-#{$i};
             }
         }
+    }
+
+    .button-text {
+        color: inherit;
+        transition: color none;
     }
 
     .pg-title-container {
@@ -57,9 +93,6 @@
     }
 
     .hero {
-        //temporary
-        background-color: gray;
-
         .content {
             display: flex;
             flex-direction: column;
@@ -122,138 +155,129 @@
         }
     }
 
-    .story {
-        // background-color: var(--cyan);
-        background-color: darkblue;
-        color: var(--white);
+    .story-grid {
+        padding-top: 28px;
+        padding-left: 24px;
+        padding-right: 24px;
+        display: grid;
+        @include build-grid(24px); //5 columns of 24px
+        grid-row-gap: 40px;
+        grid-template-areas:
+            "square-5  .    .         .    .        .      .         .      ."
+            "text-1    .    square-6  .    .        .      square-8  .      ."
+            "square-7  .    square-11 .    square-9 .      square-10 .      ."
+            "square-13 .    square-14 .    .        text-2 text-2    text-2 ."
+            "square-15 .    .         .    .        .      .         .      square-12"
+            "para      para para      para para     para   para      para   para";
 
-        .story-grid {
-            padding-top: 28px;
-            padding-left: 24px;
-            padding-right: 24px;
-            display: grid;
-            @include build-grid(24px); //5 columns of 24px
-            grid-row-gap: 40px;
+        @include sm {
+            @include build-grid(26.875px);
+            grid-row-gap: 56px;
+        }
+
+        @include md {
+            grid-template-columns: repeat(13, 19.2px);
+            grid-column-gap: calc((100% - 249.6px)/12);
+            grid-row-gap: 48px;
+            padding-left: 32px;
+            padding-right: 32px;
             grid-template-areas:
-                "square-5  .    .         .    .        .      .         .      ."
-                "text-1    .    square-6  .    .        .      square-8  .      ."
-                "square-7  .    square-11 .    square-9 .      square-10 .      ."
-                "square-13 .    square-14 .    .        text-2 text-2    text-2 ."
-                "square-15 .    .         .    .        .      .         .      square-12"
-                "para      para para      para para     para   para      para   para";
+                ".      square-5  .         .         .         .         .         .         square-6  .      .         . ."
+                ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ."
+                ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ."
+                ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ."
+                ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ."
+                "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4"
+                "para   para      para      para      para      para      para      .         .         .      .         . ."
+                "para   para      para      para      para      para      para      square-31 .         .      .         . ."
+                "para   para      para      para      para      para      para      .         .         .      square-32 . ."
+                ".      .         .         .         .         .         .         .         .         .      .         . ."
+                ".      .         .         .         .         .         .         .         .         .      .         . text-5";
+        }
 
-            @include sm {
-                @include build-grid(26.875px);
-                grid-row-gap: 56px;
-            }
+        @include lg {
+            grid-template-columns: repeat(13, 25.6px);
+            grid-column-gap: calc((100% - 332.8px)/12);
+            grid-row-gap: 64px;
+        }
+
+        @include xl {
+            grid-template-columns: repeat(13, 32px);
+            grid-column-gap: calc((100% - 416px)/12);
+            grid-row-gap: 80px;
+            padding-left: 64px;
+            padding-right: 64px;
+        }
+
+        .desktop {
+            display: none;
 
             @include md {
-                grid-template-columns: repeat(13, 19.2px);
-                grid-column-gap: calc((100% - 249.6px)/12);
-                grid-row-gap: 48px;
-                padding-left: 32px;
-                padding-right: 32px;
-                grid-template-areas:
-                    ".      square-5  .         .         .         .         .         .         square-6  .      .         . ."
-                    ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ."
-                    ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ."
-                    ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ."
-                    ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ."
-                    "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4"
-                    "para   para      para      para      para      para      para      .         .         .      .         . ."
-                    "para   para      para      para      para      para      para      square-31 .         .      .         . ."
-                    "para   para      para      para      para      para      para      .         .         .      square-32 . ."
-                    ".      .         .         .         .         .         .         .         .         .      .         . ."
-                    ".      .         .         .         .         .         .         .         .         .      .         . text-5";
+                display: block;
+            }
+        }
+
+        .square {
+            transition: opacity 0.3s ease-in-out;
+            @include md {
+                width: 19.2px;
+                height: 19.2px;
             }
 
             @include lg {
-                grid-template-columns: repeat(13, 25.6px);
-                grid-column-gap: calc((100% - 332.8px)/12);
-                grid-row-gap: 64px;
+                height: 25.6px;
+                width: 25.6px;
             }
 
             @include xl {
-                grid-template-columns: repeat(13, 32px);
-                grid-column-gap: calc((100% - 416px)/12);
-                grid-row-gap: 80px;
-                padding-left: 64px;
-                padding-right: 64px;
+                height: 32px;
+                width: 32px;
+            }
+        }
+
+        .about-text {
+            white-space: nowrap;
+
+            @include md {
+                transform: rotate(-90deg)
             }
 
-            .desktop {
-                display: none;
+            &#about-text-1 {
+                padding-right: 17px;
+                justify-items: end;
+                justify-self: end;
 
                 @include md {
-                    display: block;
+                    justify-items: initial;
+                    justify-self: initial;
+                    padding-right: 0;
                 }
             }
 
-            .square {
-                @include md {
-                    width: 19.2px;
-                    height: 19.2px;
-                }
-
-                @include lg {
-                    height: 25.6px;
-                    width: 25.6px;
-                }
-
-                @include xl {
-                    height: 32px;
-                    width: 32px;
-                }
-            }
-
-            .about-text {
-                white-space: nowrap;
+            &#about-text-2 {
+                height: 24px;
+                display: flex;
+                align-items: center;
+                overflow: visible;
 
                 @include md {
-                    transform: rotate(-90deg)
-                }
-
-                &#about-text-1 {
-                    padding-right: 17px;
-                    justify-items: end;
-                    justify-self: end;
-
-                    @include md {
-                        justify-items: initial;
-                        justify-self: initial;
-                        padding-right: 0;
-                    }
-                }
-
-                &#about-text-2 {
-                    height: 24px;
-                    display: flex;
-                    align-items: center;
-                    overflow: visible;
-
-                    @include md {
-                        align-items: end;
-                    }
+                    align-items: end;
                 }
             }
+        }
 
-            .story-para {
-                grid-area: para;
-                padding-bottom: 55px;
+        .story-para {
+            grid-area: para;
+            padding-bottom: 55px;
 
-                @include sm {
-                    padding-bottom: 77px;
-                }
-
+            @include sm {
+                padding-bottom: 77px;
             }
+
         }
     }
 
-    .what-we-do {
-        background-color: var(--cyan);
-        color: var(--white);
-
-        .content {
+    .what-we-do > .content {
             display: flex;
             padding: 90px 24px;
             flex-direction: column;
@@ -327,11 +351,11 @@
                     ".         .       .       .         text-8 text-8"
                     ".         .       .       square-38.       square-39";
 
-                #about-text-7, #about-text-8 {
+                #about-text-7,
+                #about-text-8 {
                     max-width: 75%;
                 }
             }
-        }
     }
 
     .bios-conc {

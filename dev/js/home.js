@@ -548,23 +548,4 @@ if (document.querySelector('.home-container')) {
         updateCtaTextBoxClipPath();
         window.addEventListener('scroll', updateCtaTextBoxClipPath);
     }
-
-    //--------------Black Background anim-------------------
-    const collabs = document.querySelector(".home-container");
-    const colorTrigger = document.querySelector(".adam-collab");
-
-    console.log('Color trigger element:', colorTrigger); // Debug log
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            console.log('Intersection detected:', entry.isIntersecting); // Debug log
-            if (entry.isIntersecting) {
-                collabs.classList.add("black-background");
-            } else {
-                collabs.classList.remove("black-background");
-            }
-        });
-    });
-
-    observer.observe(colorTrigger);   
 }
