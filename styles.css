@@ -1086,6 +1086,24 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
+#about-page {
+  transition: background-image 0.3s ease-in-out;
+  background-image: url(../assets/company-pages/a6_black-ketchup-about.png);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+#about-page.cyan-background {
+  background-image: url(../assets/company-pages/a7_green-ketchup-about.png);
+}
+#about-page.black-background {
+  background-image: url(../assets/company-pages/a8_magenta-ketchup-about.png);
+}
+#about-page.white-background {
+  background-image: none;
+}
+#about-page.white-background .square {
+  background-color: var(--key) !important;
+}
 #about-page .square#about-square-5 {
   grid-area: square-5;
 }
@@ -1622,9 +1640,6 @@ footer .footer-column.column3 {
     grid-row: 7;
     align-self: start;
   }
-}
-#about-page.white-background .square {
-  background-color: var(--key) !important;
 }
 
 /* =============

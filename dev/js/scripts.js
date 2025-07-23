@@ -74,6 +74,30 @@ const backgroundTriggers = [
 const backgroundObserver = createMultiTriggerBackgroundAnimation(backgroundTriggers);
 
 /*-----------------
+About Page Background Image Positioning
+-----------------*/
+function positionBackgroundImage() {
+    const aboutPage = document.querySelector('#about-page');
+    const storyGrid = document.querySelector('.story-grid');
+    
+    if (!aboutPage || !storyGrid) return;
+    
+    // Get the position of .story-grid relative to the viewport
+    const storyGridRect = storyGrid.getBoundingClientRect();
+    const scrollY = window.scrollY || window.pageYOffset;
+    
+    // Calculate the absolute position of .story-grid
+    const storyGridTop = storyGridRect.top + scrollY - 0;
+    
+    // Set the background position to align with .story-grid
+    aboutPage.style.backgroundPosition = `center ${storyGridTop}px`;
+}
+
+// Initialize background positioning
+document.addEventListener('DOMContentLoaded', positionBackgroundImage);
+window.addEventListener('resize', positionBackgroundImage);
+
+/*-----------------
 Repeated text effect
 
 add the class .repeated-container and .repeated-text to the container and text respectively
