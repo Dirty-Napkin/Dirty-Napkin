@@ -1129,6 +1129,9 @@ footer .footer-column.column3 {
 #about-page.white-background .square {
   background-color: var(--key) !important;
 }
+#about-page .square {
+  transition: background-color 0.3s ease-in-out;
+}
 #about-page .square#about-square-5 {
   grid-area: square-5;
 }

@@ -60,6 +60,7 @@
 
 
     .square {
+        transition: background-color 0.3s ease-in-out;
         @for $i from 5 through 39 {
             &#about-square-#{$i} {
                 grid-area: square-#{$i};
