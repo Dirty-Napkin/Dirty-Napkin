@@ -4,6 +4,7 @@
 
 #about-page {
     position: relative;
+
     .about-bg-img {
         position: absolute;
         left: 0;
@@ -16,40 +17,47 @@
         z-index: -1;
         pointer-events: none;
         transition: opacity 0.5s;
+
         // top will be set dynamically
-        .about-bg-cyan, .about-bg-black{
+        &.about-bg-cyan,
+        &.about-bg-black {
             opacity: 0;
         }
     }
 
-    &.cyan-background{
-        .about-bg-cyan{
+    &.cyan-background {
+        .about-bg-cyan {
             opacity: 1;
         }
-        .about-bg-black, .about-bg-white{
+
+        .about-bg-black,
+        .about-bg-white {
             opacity: 0;
         }
     }
 
-    &.black-background{
-        .story-grid>.square, .about-bg-cyan, .about-bg-white{
+    &.black-background {
+        .about-bg-cyan,
+        .about-bg-white {
             opacity: 0;
         }
-        .about-bg-black{
+
+        .about-bg-black {
             opacity: 1;
         }
     }
 
-    &.white-background{
-        .about-bg-img{
+    &.white-background {
+        .about-bg-img {
             opacity: 0;
         }
+
         .square {
             background-color: var(--key) !important;
         }
     }
 
-    
+
 
     .square {
         @for $i from 5 through 39 {
@@ -71,7 +79,8 @@
         color: inherit;
         transition: color none;
     }
-    p>span{
+
+    p>span {
         padding-left: 0;
     }
 
@@ -169,7 +178,7 @@
                 display: none;
 
                 @include md {
-                    display: initial;
+                    display: block;
                 }
             }
         }
@@ -238,7 +247,7 @@
         }
 
         .square {
-            transition: opacity 0.3s ease-in-out;
+
             @include md {
                 width: 19.2px;
                 height: 19.2px;
@@ -297,85 +306,85 @@
         }
     }
 
-    .what-we-do > .content {
+    .what-we-do>.content {
+        display: flex;
+        padding: 90px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 27px;
+        overflow: hidden;
+
+        .mobile-squares-container {
+            //temporary
+            background-color: #F266B9;
+
             display: flex;
-            padding: 90px 24px;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 27px;
-            overflow: hidden;
+            align-items: center;
+            gap: 67px;
 
-            .mobile-squares-container {
-                //temporary
-                background-color: #F266B9;
-
-                display: flex;
-                align-items: center;
-                gap: 67px;
-
-                @include sm {
-                    gap: 90px;
-                }
-
-                @include md {
-                    display: none;
-                }
-
-                .square {
-                    height: 67px;
-                    width: 67px;
-                    //temporary
-                    background-color: gray;
-
-                    @include sm {
-                        height: 90px;
-                        width: 90px;
-                    }
-                }
-            }
-
-            .square.desktop {
-                display: none;
-
-                @include md {
-                    display: block;
-                    height: 70px;
-                    width: 70px;
-
-                }
-
-                @include lg {
-                    height: 93px;
-                    width: 93px;
-                }
-
-                @include xl {
-                    height: 116px;
-                    width: 116px;
-                }
+            @include sm {
+                gap: 90px;
             }
 
             @include md {
-                padding-right: 0 !important;
-                padding-bottom: 0 !important;
-                display: grid;
-                grid-template-columns: repeat(6, minmax(0, 1fr));
-                grid-template-rows: repeat(7, minmax(0, auto));
-                gap: 58px 40px;
-                grid-template-areas:
-                    "square-33 .       .       square-34 .      ."
-                    ".         text-6  text-6  text-6    .      ."
-                    ".         .       .       .         .      ."
-                    "square-35 .       .       square-36 .      square-37"
-                    ".         .       .       .         text-7 text-7"
-                    ".         .       .       .         text-8 text-8"
-                    ".         .       .       square-38.       square-39";
+                display: none;
+            }
 
-                #about-text-7,
-                #about-text-8 {
-                    max-width: 75%;
+            .square {
+                height: 67px;
+                width: 67px;
+                //temporary
+                background-color: gray;
+
+                @include sm {
+                    height: 90px;
+                    width: 90px;
                 }
             }
+        }
+
+        .square.desktop {
+            display: none;
+
+            @include md {
+                display: block;
+                height: 70px;
+                width: 70px;
+
+            }
+
+            @include lg {
+                height: 93px;
+                width: 93px;
+            }
+
+            @include xl {
+                height: 116px;
+                width: 116px;
+            }
+        }
+
+        @include md {
+            padding-right: 0 !important;
+            padding-bottom: 0 !important;
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-rows: repeat(7, minmax(0, auto));
+            gap: 58px 40px;
+            grid-template-areas:
+                "square-33 .       .       square-34 .      ."
+                ".         text-6  text-6  text-6    .      ."
+                ".         .       .       .         .      ."
+                "square-35 .       .       square-36 .      square-37"
+                ".         .       .       .         text-7 text-7"
+                ".         .       .       .         text-8 text-8"
+                ".         .       .       square-38.       square-39";
+
+            #about-text-7,
+            #about-text-8 {
+                max-width: 75%;
+            }
+        }
     }
 
     .bios-conc {

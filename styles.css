@@ -1106,16 +1106,18 @@ footer .footer-column.column3 {
   pointer-events: none;
   transition: opacity 0.5s;
 }
-#about-page .about-bg-img .about-bg-cyan, #about-page .about-bg-img .about-bg-black {
+#about-page .about-bg-img.about-bg-cyan, #about-page .about-bg-img.about-bg-black {
   opacity: 0;
 }
 #about-page.cyan-background .about-bg-cyan {
   opacity: 1;
 }
-#about-page.cyan-background .about-bg-black, #about-page.cyan-background .about-bg-white {
+#about-page.cyan-background .about-bg-black,
+#about-page.cyan-background .about-bg-white {
   opacity: 0;
 }
-#about-page.black-background .story-grid > .square, #about-page.black-background .about-bg-cyan, #about-page.black-background .about-bg-white {
+#about-page.black-background .about-bg-cyan,
+#about-page.black-background .about-bg-white {
   opacity: 0;
 }
 #about-page.black-background .about-bg-black {
@@ -1359,7 +1361,7 @@ footer .footer-column.column3 {
 }
 @media (min-width: 768px) {
   #about-page .hero .content #about-square-2 {
-    display: initial;
+    display: block;
   }
 }
 #about-page .story-grid {
@@ -1410,9 +1412,6 @@ footer .footer-column.column3 {
   #about-page .story-grid .desktop {
     display: block;
   }
-}
-#about-page .story-grid .square {
-  transition: opacity 0.3s ease-in-out;
 }
 @media (min-width: 768px) {
   #about-page .story-grid .square {

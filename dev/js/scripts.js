@@ -199,7 +199,7 @@ window.addEventListener('load', function () {
 Debounced resize listener
 -----------------*/
 function onResize() {
-    repeatedText(); 
+    repeatedText();
     // Small delay to ensure layout is stable after resize
     setTimeout(() => {
         headerSpacing();
