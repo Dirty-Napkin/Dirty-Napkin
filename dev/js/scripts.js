@@ -104,19 +104,6 @@ const backgroundTriggers = [
 const backgroundObserver = createMultiTriggerBackgroundAnimation(backgroundTriggers);
 
 /*-----------------
-About Page Background Image Positioning
------------------*/
-function positionBackgroundImage() {
-    const aboutPage = document.querySelector('#about-page');
-    const storyGrid = document.querySelector('.story-grid');
-    if (!aboutPage || !storyGrid) return;
-    const storyGridRect = storyGrid.getBoundingClientRect();
-    const scrollY = window.scrollY || window.pageYOffset;
-    const storyGridTop = storyGridRect.top + scrollY;
-    aboutPage.style.backgroundPosition = `center ${storyGridTop}px`;
-}
-
-/*-----------------
 Repeated text effect
 
 add the class .repeated-container and .repeated-text to the container and text respectively
@@ -194,30 +181,10 @@ function headerSpacing() {
     return headerHeight;
 }
 
-function observeStoryGridPosition() {
-    const storyGrid = document.querySelector('.story-grid');
-    if (!storyGrid) return;
-
-    // Call once initially
-    positionBackgroundImage();
-
-    // Observe for any size/position changes
-    const ro = new ResizeObserver(() => {
-        positionBackgroundImage();
-    });
-
-    ro.observe(storyGrid);
-
-    // Optionally, observe the parent/main container as well if header spacing or other layout changes affect it
-    const main = document.querySelector('main');
-    if (main) ro.observe(main);
-}
-
 // Call this after window.onload
 window.addEventListener('load', function () {
     setTimeout(() => {
         headerSpacing();
-        observeStoryGridPosition();
     }, 10);
 });
 
@@ -229,7 +196,6 @@ function onResize() {
     // Small delay to ensure layout is stable after resize
     setTimeout(() => {
         headerSpacing();
-        positionBackgroundImage();
     }, 50);
 }
 
