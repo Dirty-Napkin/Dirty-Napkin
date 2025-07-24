@@ -27,3 +27,12 @@ $screen-xxl-min: 1440px;
   --green: #8EC1AE;
 }
 
+// Responsive margins variable using SCSS maps
+$margins: (
+  min: 24px,
+  md: 32px,
+  xl: 64px
+);
+
+
+
