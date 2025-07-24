@@ -39,22 +39,29 @@ function createMultiTriggerBackgroundAnimation(triggerConfigs) {
             // Find all triggers for this target
             const triggers = triggerConfigs.filter(cfg => cfg.target === targetSelector);
 
-            // Find the trigger whose top is closest to (but not greater than) the threshold from the bottom of the viewport
+            // Find all triggers whose threshold has been crossed and are at least partially visible
+            const eligibleTriggers = triggers
+                .map(cfg => {
+                    const triggerElement = document.querySelector(cfg.trigger);
+                    if (!triggerElement) return null;
+                    const rect = triggerElement.getBoundingClientRect();
+                    const offsetPx = (cfg.offsetPercent / 100) * window.innerHeight;
+                    const threshold = window.innerHeight - offsetPx;
+                    const thresholdCrossed = rect.top < threshold;
+                    const stillVisible = rect.bottom > 0;
+                    return {
+                        cfg,
+                        thresholdCrossed,
+                        stillVisible
+                    };
+                })
+                .filter(item => item && item.thresholdCrossed && item.stillVisible);
+
+            // Pick the last eligible trigger (deepest in the page)
             let activeConfig = null;
-            let minDistance = Infinity;
-            triggers.forEach(cfg => {
-                const triggerElement = document.querySelector(cfg.trigger);
-                if (!triggerElement) return;
-                const rect = triggerElement.getBoundingClientRect();
-                const offsetPx = (cfg.offsetPercent / 100) * window.innerHeight;
-                const threshold = window.innerHeight - offsetPx;
-                const distance = rect.top - threshold;
-                // Only consider triggers in or below the viewport
-                if (rect.top >= 0 && rect.top < threshold && Math.abs(distance) < minDistance) {
-                    minDistance = Math.abs(distance);
-                    activeConfig = cfg;
-                }
-            });
+            if (eligibleTriggers.length > 0) {
+                activeConfig = eligibleTriggers[eligibleTriggers.length - 1].cfg;
+            }
 
             // Remove all possible classes for this target
             triggers.forEach(cfg => targetElement.classList.remove(cfg.className));

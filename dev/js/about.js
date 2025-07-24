@@ -1,16 +1,25 @@
-// Only run script if .home-container is present
+// Only run script if #about-page is present
 if (document.querySelector('#about-page')) {
     /*-----------------
     About Page Background Image Positioning
     -----------------*/
-    function positionBackgroundImage() {
-        const aboutPage = document.querySelector('#about-page');
+    function positionAboutBgImages() {
         const storyGrid = document.querySelector('.story-grid');
-        if (!aboutPage || !storyGrid) return;
-        const storyGridRect = storyGrid.getBoundingClientRect();
-        const scrollY = window.scrollY || window.pageYOffset;
-        const storyGridTop = storyGridRect.top + scrollY;
-        aboutPage.style.backgroundPosition = `center ${storyGridTop}px`;
+        const bgImgs = document.querySelectorAll('.about-bg-img');
+        if (!storyGrid || !bgImgs.length) return;
+
+        const aboutPage = document.getElementById('about-page');
+        let top = storyGrid.offsetTop;
+        if (aboutPage && storyGrid.offsetParent !== aboutPage) {
+            const storyRect = storyGrid.getBoundingClientRect();
+            const aboutRect = aboutPage.getBoundingClientRect();
+            top = storyRect.top - aboutRect.top + aboutPage.scrollTop;
+        }
+        top = top - 100; // Move 50px above the top of story-grid
+
+        bgImgs.forEach(img => {
+            img.style.top = `${top}px`;
+        });
     }
 
     function observeStoryGridPosition() {
@@ -18,11 +27,11 @@ if (document.querySelector('#about-page')) {
         if (!storyGrid) return;
 
         // Call once initially
-        positionBackgroundImage();
+        positionAboutBgImages();
 
         // Observe for any size/position changes
         const ro = new ResizeObserver(() => {
-            positionBackgroundImage();
+            positionAboutBgImages();
         });
 
         ro.observe(storyGrid);
@@ -37,11 +46,10 @@ if (document.querySelector('#about-page')) {
             observeStoryGridPosition();
         }, 10);
     });
-    // Debounced resize listener for positionBackgroundImage only
+    // Debounced resize listener for positionAboutBgImages only
     function onResizeAbout() {
-        // Only update background image position
         setTimeout(() => {
-            positionBackgroundImage();
+            positionAboutBgImages();
         }, 50);
     }
 

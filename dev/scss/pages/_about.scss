@@ -3,30 +3,47 @@
 ============= */
 
 #about-page {
+    position: relative;
     .about-bg-img {
-        position: fixed;
-        top: 0;
+        position: absolute;
         left: 0;
+        right: 0;
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
+        height: auto;
+        bottom: 0;
         object-fit: cover;
         z-index: -1;
         pointer-events: none;
         transition: opacity 0.5s;
-        display: none;
-    }
-
-    &.cyan-background{
-    }
-
-    &.black-background{
-        .story-grid>.square{
+        // top will be set dynamically
+        .about-bg-cyan, .about-bg-black{
             opacity: 0;
         }
     }
 
+    &.cyan-background{
+        .about-bg-cyan{
+            opacity: 1;
+        }
+        .about-bg-black, .about-bg-white{
+            opacity: 0;
+        }
+    }
+
+    &.black-background{
+        .story-grid>.square, .about-bg-cyan, .about-bg-white{
+            opacity: 0;
+        }
+        .about-bg-black{
+            opacity: 1;
+        }
+    }
+
     &.white-background{
-        background-image: none;
+        .about-bg-img{
+            opacity: 0;
+        }
         .square {
             background-color: var(--key) !important;
         }
@@ -53,6 +70,9 @@
     .button-text {
         color: inherit;
         transition: color none;
+    }
+    p>span{
+        padding-left: 0;
     }
 
     .pg-title-container {

@@ -1090,23 +1090,39 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
+#about-page {
+  position: relative;
+}
 #about-page .about-bg-img {
-  position: fixed;
-  top: 0;
+  position: absolute;
   left: 0;
+  right: 0;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
+  bottom: 0;
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
   transition: opacity 0.5s;
-  display: none;
 }
-#about-page.black-background .story-grid > .square {
+#about-page .about-bg-img .about-bg-cyan, #about-page .about-bg-img .about-bg-black {
   opacity: 0;
 }
-#about-page.white-background {
-  background-image: none;
+#about-page.cyan-background .about-bg-cyan {
+  opacity: 1;
+}
+#about-page.cyan-background .about-bg-black, #about-page.cyan-background .about-bg-white {
+  opacity: 0;
+}
+#about-page.black-background .story-grid > .square, #about-page.black-background .about-bg-cyan, #about-page.black-background .about-bg-white {
+  opacity: 0;
+}
+#about-page.black-background .about-bg-black {
+  opacity: 1;
+}
+#about-page.white-background .about-bg-img {
+  opacity: 0;
 }
 #about-page.white-background .square {
   background-color: var(--key) !important;
@@ -1243,6 +1259,9 @@ footer .footer-column.column3 {
 #about-page .button-text {
   color: inherit;
   transition: color none;
+}
+#about-page p > span {
+  padding-left: 0;
 }
 #about-page .pg-title-container {
   margin-bottom: 0;
