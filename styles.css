@@ -434,7 +434,7 @@ ul.blank-list {
   list-style-type: disc !important;
 }
 
-img {
+img, video {
   width: 100%;
   height: auto;
 }
@@ -609,6 +609,10 @@ p {
 .body.paragraph-spacing,
 p.paragraph-spacing {
   margin-top: 0.5rem;
+}
+.body .italics,
+p .italics {
+  font-style: italic;
 }
 
 .txt24pt {
@@ -1812,20 +1816,20 @@ footer .footer-column.column3 {
     white-space: normal;
   }
 }
-.project-page .hero img {
+.project-page .hero img, .project-page .hero video {
   grid-area: image;
   width: 100vw;
   margin-left: -24px;
   margin-right: -24px;
 }
 @media (min-width: 768px) {
-  .project-page .hero img {
+  .project-page .hero img, .project-page .hero video {
     margin-left: -32px;
     margin-right: -32px;
   }
 }
 @media (min-width: 1280px) {
-  .project-page .hero img {
+  .project-page .hero img, .project-page .hero video {
     margin-left: -64px;
     margin-right: -64px;
   }
@@ -1983,7 +1987,7 @@ footer .footer-column.column3 {
   align-items: center;
 }
 @media (min-width: 768px) {
-  .project-page .content .small-img img {
+  .project-page .content .small-img img, .project-page .content .small-img video {
     /* 2 columns + 1 gap
         (100% - (2 x gap)) / 3 = column width
         column width x 2 + gap = img width*/
