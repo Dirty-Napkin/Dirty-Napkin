@@ -73,6 +73,14 @@ if (document.querySelector('#about-page')) {
         '--green': '--cyan'
     };
 
+    // 3. Color cache for all background states
+    const colorCache = {
+        'default': {}, // white background
+        'cyan-background': {}, // green ketchup
+        'black-background': {}, // magenta ketchup
+        'white-background': {} // black ketchup
+    };
+
     function rgbToHex(r, g, b) {
         return (
             '#' +
@@ -140,6 +148,73 @@ if (document.querySelector('#about-page')) {
         callback(finalColor);
     }
 
+    // Pre-calculate colors for all background states
+    function precalculateAllColors() {
+        const backgroundStates = [
+            { class: 'default', img: '.about-bg-white' },
+            { class: 'cyan-background', img: '.about-bg-cyan' },
+            { class: 'black-background', img: '.about-bg-black' },
+            { class: 'white-background', img: null } // No image for white background
+        ];
+
+        backgroundStates.forEach(state => {
+            if (state.img === null) {
+                // White background: all squares get --key color
+                document.querySelectorAll('.square.color-change').forEach(square => {
+                    const squareId = square.id;
+                    colorCache[state.class][squareId] = 'var(--key)';
+                });
+                return;
+            }
+
+            const img = document.querySelector(state.img);
+            if (!img || !img.complete) return;
+
+            const imgRect = img.getBoundingClientRect();
+            const imgNaturalWidth = img.naturalWidth;
+            const imgNaturalHeight = img.naturalHeight;
+
+            document.querySelectorAll('.square.color-change').forEach(square => {
+                const squareId = square.id;
+                const squareRect = square.getBoundingClientRect();
+                const relLeft = squareRect.left - imgRect.left;
+                const relTop = squareRect.top - imgRect.top;
+                const scaleX = imgNaturalWidth / imgRect.width;
+                const scaleY = imgNaturalHeight / imgRect.height;
+                const region = {
+                    x: Math.max(0, Math.round(relLeft * scaleX)),
+                    y: Math.max(0, Math.round(relTop * scaleY)),
+                    width: Math.max(1, Math.round(squareRect.width * scaleX)),
+                    height: Math.max(1, Math.round(squareRect.height * scaleY))
+                };
+
+                getRegionDominantColor(img, region, color => {
+                    if (typeof color === 'string' && color.startsWith('--')) {
+                        colorCache[state.class][squareId] = `var(${color})`;
+                    } else {
+                        colorCache[state.class][squareId] = color;
+                    }
+                }, square);
+            });
+        });
+    }
+
+    // Apply cached colors instantly
+    function applyCachedColors(backgroundClass) {
+        const cacheKey = backgroundClass || 'default';
+        const colors = colorCache[cacheKey];
+        
+        if (!colors) return;
+
+        document.querySelectorAll('.square.color-change').forEach(square => {
+            const squareId = square.id;
+            const cachedColor = colors[squareId];
+            if (cachedColor) {
+                square.style.backgroundColor = cachedColor;
+            }
+        });
+    }
+
     function updateSquaresWithImageColors() {
         const img = getCurrentBgImage();
         if (!img || !img.complete) {
@@ -179,7 +254,14 @@ if (document.querySelector('#about-page')) {
     window.addEventListener('load', function () {
         setTimeout(() => {
             observeStoryGridPosition();
-            updateSquaresWithImageColors();
+            // Pre-calculate all colors first
+            precalculateAllColors();
+            // Then apply current state
+            const aboutPage = document.getElementById('about-page');
+            const currentClass = Array.from(aboutPage.classList).find(cls => 
+                ['cyan-background', 'black-background', 'white-background'].includes(cls)
+            );
+            applyCachedColors(currentClass);
         }, 10);
     });
     function onResizeAbout() {
@@ -200,19 +282,12 @@ if (document.querySelector('#about-page')) {
         const observer = new MutationObserver(() => {
             if (aboutPage.className !== lastClass) {
                 lastClass = aboutPage.className;
-                // Find the new visible image
-                const img = getCurrentBgImage();
-                if (img && !img.complete) {
-                    img.addEventListener('load', () => {
-                        setTimeout(() => {
-                            updateSquaresWithImageColors();
-                        }, 50);
-                    }, { once: true });
-                } else {
-                    setTimeout(() => {
-                        updateSquaresWithImageColors();
-                    }, 50);
-                }
+                // Find the new background class
+                const newClass = Array.from(aboutPage.classList).find(cls => 
+                    ['cyan-background', 'black-background', 'white-background'].includes(cls)
+                );
+                // Apply cached colors instantly (no delay!)
+                applyCachedColors(newClass);
             }
         });
         observer.observe(aboutPage, { attributes: true, attributeFilter: ['class'] });
