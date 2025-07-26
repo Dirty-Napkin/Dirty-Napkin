@@ -52,6 +52,7 @@ if (document.querySelector('#about-page')) {
     };
 
     // Utility to ensure all keys and values in HEX_TO_VAR are lowercase
+    // Why is this necessary I don't understand
     function normalizeHexToVar(map) {
         const out = {};
         for (const k in map) {
@@ -100,7 +101,6 @@ if (document.querySelector('#about-page')) {
         return document.querySelector('.about-bg-white');
     }
 
-    // Remove getBgHexFromAncestor and fallbackHex logic
     // Dominant color calculation with mapping
     function getRegionDominantColor(img, region, callback, square) {
         const canvas = document.createElement('canvas');

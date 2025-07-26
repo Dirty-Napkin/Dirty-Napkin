@@ -1104,7 +1104,7 @@ footer .footer-column.column3 {
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
-  transition: opacity 0.5s;
+  transition: opacity 0.3s ease-in-out;
 }
 #about-page .about-bg-img.about-bg-cyan, #about-page .about-bg-img.about-bg-black {
   opacity: 0;

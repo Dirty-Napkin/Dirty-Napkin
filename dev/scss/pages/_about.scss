@@ -16,9 +16,8 @@
         object-fit: cover;
         z-index: -1;
         pointer-events: none;
-        transition: opacity 0.5s;
+        transition: opacity 0.3s ease-in-out;
 
-        // top will be set dynamically
         &.about-bg-cyan,
         &.about-bg-black {
             opacity: 0;
