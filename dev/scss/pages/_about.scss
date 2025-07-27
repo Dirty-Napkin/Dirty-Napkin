@@ -36,6 +36,7 @@
     }
 
     &.black-background {
+
         .about-bg-cyan,
         .about-bg-white {
             opacity: 0;
@@ -60,7 +61,8 @@
 
     .square {
         transition: background-color 0.3s ease-in-out;
-        @for $i from 5 through 39 {
+
+        @for $i from 5 through 43 {
             &#about-square-#{$i} {
                 grid-area: square-#{$i};
             }
@@ -122,64 +124,62 @@
     }
 
     .hero {
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            padding-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding-bottom: 12px;
+
+        @include md {
+            display: block;
+        }
+
+        .repeated-container {
+            .repeated-text {
+                @include sm {
+                    font-size: 2.016rem;
+                }
+
+                @include md {
+                    font-size: 1.125rem;
+                    width: 24ch;
+                }
+
+                @include lg {
+                    font-size: 1.5rem;
+                }
+            }
+
+            @include md {
+                gap: 328.7px 210.6px;
+                z-index: 2;
+                position: absolute;
+            }
+        }
+
+        .team-pic-container {
+            z-index: 1;
+            position: relative;
+
+            picture {
+                display: block;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            #about-square-1 {
+                position: absolute;
+                top: calc(310 / 354 * 100%);
+                left: calc(180 / 272 * 100%);
+            }
+        }
+
+        #about-square-2 {
+            display: none;
 
             @include md {
                 display: block;
-            }
-
-            .repeated-container {
-                .repeated-text {
-                    @include sm {
-                        font-size: 2.016rem;
-                    }
-
-                    @include md {
-                        font-size: 1.125rem;
-                        width: 24ch;
-                    }
-
-                    @include lg {
-                        font-size: 1.5rem;
-                    }
-                }
-
-                @include md {
-                    gap: 328.7px 210.6px;
-                    z-index: 2;
-                    position: absolute;
-                }
-            }
-
-            .team-pic-container {
-                z-index: 1;
-                position: relative;
-
-                picture {
-                    display: block;
-
-                    img {
-                        width: 100%;
-                    }
-                }
-
-                #about-square-1 {
-                    position: absolute;
-                    top: calc(310 / 354 * 100%);
-                    left: calc(180 / 272 * 100%);
-                }
-            }
-
-            #about-square-2 {
-                display: none;
-
-                @include md {
-                    display: block;
-                }
             }
         }
     }
@@ -315,8 +315,6 @@
         overflow: hidden;
 
         .mobile-squares-container {
-            //temporary
-            background-color: #F266B9;
 
             display: flex;
             align-items: center;
@@ -333,8 +331,6 @@
             .square {
                 height: 67px;
                 width: 67px;
-                //temporary
-                background-color: gray;
 
                 @include sm {
                     height: 90px;
@@ -423,10 +419,6 @@
         .conclusion {
             margin-bottom: 144px;
 
-            // p:first-of-type {
-            //     margin-top: 1rem;
-            // }
-
             p:last-of-type {
                 padding-bottom: 16px;
             }
@@ -459,98 +451,66 @@
         }
 
         @include lg {
+            grid-template-areas:
+                "square-40 .         dan-pic  .         .         noah-pic"
+                "evan-pic  .         dan-text .         .         noah-text"
+                "evan-text .         .        square-41 .         ."
+                ".         .         .        .         nick-pic  ."
+                ".         square-42 .        .         nick-text ."
+                "spacer    spacer    spacer   spacer    spacer    spacer"
+                ".         square-43 conc     conc      .         .";
+
             .bio {
                 display: contents;
 
-                &#dan {
+                $bio-names: (
+                    dan,
+                    noah,
+                    evan,
+                    nick
+                );
+
+            @each $name in $bio-names {
+                &##{$name} {
                     img {
-                        grid-column: 3;
-                        grid-row: 1;
+                        grid-area: #{$name}-pic;
                     }
 
                     div {
-                        grid-column: 3;
-                        grid-row: 2;
+                        grid-area: #{$name}-text;
                     }
-                }
-
-                &#noah {
-                    img {
-                        grid-column: 6;
-                        grid-row: 1;
-                    }
-
-                    div {
-                        grid-column: 6;
-                        grid-row: 2;
-                    }
-                }
-
-                &#evan {
-                    img {
-                        grid-column: 1;
-                        grid-row: 2;
-                    }
-
-                    div {
-                        grid-column: 1;
-                        grid-row: 3;
-                    }
-                }
-
-                &#nick {
-                    img {
-                        grid-column: 5;
-                        grid-row: 4;
-                    }
-
-                    div {
-                        grid-column: 5;
-                        grid-row: 5;
-                    }
-                }
-            }
-
-            .spacer {
-                display: block;
-                height: 145px;
-                grid-column: 1 / span 6;
-                grid-row: 6;
-            }
-
-            .conclusion {
-                grid-column: 3 / span 2;
-                grid-row: 7;
-            }
-
-            .square {
-                display: block !important;
-                justify-self: end;
-
-                &#about-square-40 {
-                    grid-column: 1;
-                    grid-row: 1;
-                    align-self: center;
-                }
-
-                &#about-square-41 {
-                    grid-column: 4;
-                    grid-row: 3;
-                    align-self: end;
-                }
-
-                &#about-square-42 {
-                    grid-column: 2;
-                    grid-row: 5;
-                    align-self: end;
-                }
-
-                &#about-square-43 {
-                    grid-column: 2;
-                    grid-row: 7;
-                    align-self: start;
                 }
             }
         }
+
+        .spacer {
+            display: block;
+            height: 145px;
+            grid-area: spacer;
+        }
+
+        .conclusion {
+            grid-area: conc;
+        }
+
+        .square {
+            display: block !important;
+            justify-self: end;
+
+            // Optimized square styling using Sass map
+            $square-alignments: (
+                40: center,
+                41: end,
+                42: end,
+                43: start
+            );
+
+        @each $square-num, $alignment in $square-alignments {
+            &#about-square-#{$square-num} {
+                align-self: #{$alignment};
+            }
+        }
     }
+}
+}
 }

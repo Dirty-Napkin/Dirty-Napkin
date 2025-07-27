@@ -208,20 +208,17 @@
             grid-row: span 2;
         }
 
-        .width2 {
-            grid-column: span 2;
-        }
+        $width-spans: (
+            width2: 2,
+            width3: 3,
+            width4: 4,
+            width6: 6
+        );
 
-        .width3 {
-            grid-column: span 3;
-        }
-
-        .width4 {
-            grid-column: span 4;
-        }
-
-        .width6 {
-            grid-column: span 6;
+        @each $class, $span in $width-spans {
+            .#{$class} {
+                grid-column: span #{$span};
+            }
         }
 
         .narrow-text {

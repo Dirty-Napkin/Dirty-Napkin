@@ -19,7 +19,8 @@ ul.blank-list {
     list-style-type: disc !important;
 }
 
-img, video {
+img,
+video {
     width: 100%;
     height: auto;
 }
@@ -39,27 +40,25 @@ img, video {
     }
 }
 
+$square-colors: (
+    green: var(--green),
+    cyan: var(--cyan),
+    white: var(--white),
+    magenta: var(--magenta)
+);
+
 .square {
-    background-color: var(--key);
     width: 24px;
     height: 24px;
+    background-color: var(--key);
 
-    &.green {
-        background-color: var(--green);
-    }
-
-    &.cyan {
-        background-color: var(--cyan);
-    }
-
-    &.white {
-        background-color: var(--white);
-    }
-
-    &.magenta {
-        background-color: var(--magenta);
+    @each $name, $color in $square-colors {
+        &.#{$name} {
+            background-color: $color;
+        }
     }
 }
+
 
 .puzzle-type {
     position: relative;
@@ -77,8 +76,9 @@ img, video {
     }
 }
 
-.background-transition{
+.background-transition {
     transition: background-color 0.3s ease-in-out;
+
     &.cyan-background {
         background-color: var(--cyan);
         color: var(--white);
@@ -88,8 +88,9 @@ img, video {
         background-color: var(--key);
         color: var(--white);
     }
+
     &.white-background {
-        background-color:  var(--white) !important;
+        background-color: var(--white) !important;
         color: var(--key);
     }
 }
