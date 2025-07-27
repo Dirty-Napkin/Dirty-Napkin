@@ -1,25 +1,35 @@
 // Only run script if #about-page is present
 if (document.querySelector('#about-page')) {
+    // Cache frequently used jQuery objects
+    const $aboutPage = $('#about-page');
+    const $storyGrid = $('.story-grid');
+    const $bgImgs = $('.about-bg-img');
+    const $squares = $('.square.color-change');
+    const $main = $('main');
+    
+    // Cache background image selectors
+    const $bgWhite = $('.about-bg-white');
+    const $bgCyan = $('.about-bg-cyan');
+    const $bgBlack = $('.about-bg-black');
+    
+    // Background class constants
+    const BACKGROUND_CLASSES = ['cyan-background', 'black-background', 'white-background'];
+    
     /*-----------------
     About Page Background Image Positioning
     -----------------*/
     function positionAboutBgImages() {
-        const storyGrid = document.querySelector('.story-grid');
-        const bgImgs = document.querySelectorAll('.about-bg-img');
-        if (!storyGrid || !bgImgs.length) return;
+        if (!$storyGrid.length || !$bgImgs.length) return;
 
-        const aboutPage = document.getElementById('about-page');
-        let top = storyGrid.offsetTop;
-        if (aboutPage && storyGrid.offsetParent !== aboutPage) {
-            const storyRect = storyGrid.getBoundingClientRect();
-            const aboutRect = aboutPage.getBoundingClientRect();
-            top = storyRect.top - aboutRect.top + aboutPage.scrollTop;
+        let top = $storyGrid[0].offsetTop;
+        if ($aboutPage.length && $storyGrid[0].offsetParent !== $aboutPage[0]) {
+            const storyRect = $storyGrid[0].getBoundingClientRect();
+            const aboutRect = $aboutPage[0].getBoundingClientRect();
+            top = storyRect.top - aboutRect.top + $aboutPage[0].scrollTop;
         }
         top = top - 100; // Move 100px above the top of story-grid
 
-        bgImgs.forEach(img => {
-            img.style.top = `${top}px`;
-        });
+        $bgImgs.css('top', `${top}px`);
     }
 
     function updateAboutPageBgPositioning() {
@@ -27,15 +37,14 @@ if (document.querySelector('#about-page')) {
     }
 
     function observeStoryGridPosition() {
-        const storyGrid = document.querySelector('.story-grid');
-        if (!storyGrid) return;
+        if (!$storyGrid.length) return;
+        
         updateAboutPageBgPositioning();
         const ro = new ResizeObserver(() => {
             updateAboutPageBgPositioning();
         });
-        ro.observe(storyGrid);
-        const main = document.querySelector('main');
-        if (main) ro.observe(main);
+        ro.observe($storyGrid[0]);
+        if ($main.length) ro.observe($main[0]);
     }
 
     /*-----------------
@@ -94,19 +103,19 @@ if (document.querySelector('#about-page')) {
     }
 
     function getCurrentBgImage() {
-        const aboutPage = document.getElementById('about-page');
-        if (!aboutPage) return null;
-        if (aboutPage.classList.contains('cyan-background')) {
-            return document.querySelector('.about-bg-cyan');
+        if (!$aboutPage.length) return null;
+        
+        if ($aboutPage.hasClass('cyan-background')) {
+            return $bgCyan[0];
         }
-        if (aboutPage.classList.contains('black-background')) {
-            return document.querySelector('.about-bg-black');
+        if ($aboutPage.hasClass('black-background')) {
+            return $bgBlack[0];
         }
-        if (aboutPage.classList.contains('white-background')) {
+        if ($aboutPage.hasClass('white-background')) {
             return null;
         }
         // Default: no class or other class
-        return document.querySelector('.about-bg-white');
+        return $bgWhite[0];
     }
 
     // Dominant color calculation with mapping
@@ -124,7 +133,10 @@ if (document.querySelector('#about-page')) {
         const colorCounts = {};
         let maxCount = 0;
         let dominantHex = '#000000';
-        for (let i = 0; i < data.length; i += 4) {
+        
+        // Optimize: process every 4th pixel for better performance on large regions
+        const step = region.width * region.height > 10000 ? 8 : 4;
+        for (let i = 0; i < data.length; i += step) {
             let r = data[i], g = data[i + 1], b = data[i + 2];
             let hex = rgbToHex(r, g, b).toLowerCase();
             colorCounts[hex] = (colorCounts[hex] || 0) + 1;
@@ -133,17 +145,20 @@ if (document.querySelector('#about-page')) {
                 dominantHex = hex;
             }
         }
+        
         const detectedVar = HEX_TO_VAR_NORM[dominantHex];
         let mappedVar = detectedVar ? COLOR_MAP[detectedVar] : null;
+        
         // Special case for black
         if (dominantHex === '#000000') {
-            const imgClass = img.classList;
-            if (imgClass.contains('about-bg-black')) {
+            const $img = $(img);
+            if ($img.hasClass('about-bg-black')) {
                 mappedVar = '--magenta';
-            } else if (imgClass.contains('about-bg-white')) {
+            } else if ($img.hasClass('about-bg-white')) {
                 mappedVar = '--white';
             }
         }
+        
         const finalColor = mappedVar || detectedVar || dominantHex;
         callback(finalColor);
     }
@@ -151,32 +166,32 @@ if (document.querySelector('#about-page')) {
     // Pre-calculate colors for all background states
     function precalculateAllColors() {
         const backgroundStates = [
-            { class: 'default', img: '.about-bg-white' },
-            { class: 'cyan-background', img: '.about-bg-cyan' },
-            { class: 'black-background', img: '.about-bg-black' },
+            { class: 'default', img: $bgWhite },
+            { class: 'cyan-background', img: $bgCyan },
+            { class: 'black-background', img: $bgBlack },
             { class: 'white-background', img: null } // No image for white background
         ];
 
         backgroundStates.forEach(state => {
             if (state.img === null) {
                 // White background: all squares get --key color
-                document.querySelectorAll('.square.color-change').forEach(square => {
-                    const squareId = square.id;
+                $squares.each(function() {
+                    const squareId = this.id;
                     colorCache[state.class][squareId] = 'var(--key)';
                 });
                 return;
             }
 
-            const img = document.querySelector(state.img);
+            const img = state.img[0];
             if (!img || !img.complete) return;
 
             const imgRect = img.getBoundingClientRect();
             const imgNaturalWidth = img.naturalWidth;
             const imgNaturalHeight = img.naturalHeight;
 
-            document.querySelectorAll('.square.color-change').forEach(square => {
-                const squareId = square.id;
-                const squareRect = square.getBoundingClientRect();
+            $squares.each(function() {
+                const squareId = this.id;
+                const squareRect = this.getBoundingClientRect();
                 const relLeft = squareRect.left - imgRect.left;
                 const relTop = squareRect.top - imgRect.top;
                 const scaleX = imgNaturalWidth / imgRect.width;
@@ -194,7 +209,7 @@ if (document.querySelector('#about-page')) {
                     } else {
                         colorCache[state.class][squareId] = color;
                     }
-                }, square);
+                }, this);
             });
         });
     }
@@ -206,11 +221,11 @@ if (document.querySelector('#about-page')) {
         
         if (!colors) return;
 
-        document.querySelectorAll('.square.color-change').forEach(square => {
-            const squareId = square.id;
+        $squares.each(function() {
+            const squareId = this.id;
             const cachedColor = colors[squareId];
             if (cachedColor) {
-                square.style.backgroundColor = cachedColor;
+                $(this).css('backgroundColor', cachedColor);
             }
         });
     }
@@ -224,8 +239,9 @@ if (document.querySelector('#about-page')) {
         const imgRect = img.getBoundingClientRect();
         const imgNaturalWidth = img.naturalWidth;
         const imgNaturalHeight = img.naturalHeight;
-        document.querySelectorAll('.square.color-change').forEach(square => {
-            const squareRect = square.getBoundingClientRect();
+        
+        $squares.each(function() {
+            const squareRect = this.getBoundingClientRect();
             const relLeft = squareRect.left - imgRect.left;
             const relTop = squareRect.top - imgRect.top;
             const scaleX = imgNaturalWidth / imgRect.width;
@@ -238,11 +254,11 @@ if (document.querySelector('#about-page')) {
             };
             getRegionDominantColor(img, region, color => {
                 if (typeof color === 'string' && color.startsWith('--')) {
-                    square.style.backgroundColor = `var(${color})`;
+                    $(this).css('backgroundColor', `var(${color})`);
                 } else {
-                    square.style.backgroundColor = color;
+                    $(this).css('backgroundColor', color);
                 }
-            }, square);
+            }, this);
         });
     }
 
@@ -251,64 +267,64 @@ if (document.querySelector('#about-page')) {
         updateSquaresWithImageColors();
     }
 
-    window.addEventListener('load', function () {
+    // Optimized initialization with jQuery ready
+    $(function() {
         setTimeout(() => {
             observeStoryGridPosition();
             // Pre-calculate all colors first
             precalculateAllColors();
             // Then apply current state
-            const aboutPage = document.getElementById('about-page');
-            const currentClass = Array.from(aboutPage.classList).find(cls => 
-                ['cyan-background', 'black-background', 'white-background'].includes(cls)
-            );
+            const currentClass = BACKGROUND_CLASSES.find(cls => $aboutPage.hasClass(cls));
             applyCachedColors(currentClass);
         }, 10);
     });
+
+    // Optimized resize handling with jQuery throttling
     function onResizeAbout() {
         setTimeout(() => {
             updateAboutPageSquares();
         }, 50);
     }
+    
     let resizeTimeoutAbout;
-    window.addEventListener("resize", function () {
+    $(window).on('resize', function() {
         clearTimeout(resizeTimeoutAbout);
         resizeTimeoutAbout = setTimeout(onResizeAbout, 200);
     });
 
     // Watch for background image changes on #about-page
-    const aboutPage = document.getElementById('about-page');
-    if (aboutPage) {
-        let lastClass = aboutPage.className;
+    if ($aboutPage.length) {
+        let lastClass = $aboutPage[0].className;
         const observer = new MutationObserver(() => {
-            if (aboutPage.className !== lastClass) {
-                lastClass = aboutPage.className;
+            if ($aboutPage[0].className !== lastClass) {
+                lastClass = $aboutPage[0].className;
                 // Find the new background class
-                const newClass = Array.from(aboutPage.classList).find(cls => 
-                    ['cyan-background', 'black-background', 'white-background'].includes(cls)
-                );
+                const newClass = BACKGROUND_CLASSES.find(cls => $aboutPage.hasClass(cls));
                 // Apply cached colors instantly (no delay!)
                 applyCachedColors(newClass);
             }
         });
-        observer.observe(aboutPage, { attributes: true, attributeFilter: ['class'] });
+        observer.observe($aboutPage[0], { attributes: true, attributeFilter: ['class'] });
     }
 
     // Debug function to get color mapping output for a given square id
     window.debugSquareColor = function(squareId) {
-        const square = document.getElementById('about-square-' + squareId);
-        if (!square) {
+        const $square = $('#about-square-' + squareId);
+        if (!$square.length) {
             console.log('No square found with id:', squareId);
             return;
         }
+        
         const img = getCurrentBgImage();
         if (!img || !img.complete) {
             console.log('No visible image or image not loaded.');
             return;
         }
+        
         const imgRect = img.getBoundingClientRect();
         const imgNaturalWidth = img.naturalWidth;
         const imgNaturalHeight = img.naturalHeight;
-        const squareRect = square.getBoundingClientRect();
+        const squareRect = $square[0].getBoundingClientRect();
         const relLeft = squareRect.left - imgRect.left;
         const relTop = squareRect.top - imgRect.top;
         const scaleX = imgNaturalWidth / imgRect.width;
@@ -319,6 +335,7 @@ if (document.querySelector('#about-page')) {
             width: Math.max(1, Math.round(squareRect.width * scaleX)),
             height: Math.max(1, Math.round(squareRect.height * scaleY))
         };
+        
         getRegionDominantColor(img, region, function(color) {
             // For debugging, rerun the dominant color logic here to get all the details
             const canvas = document.createElement('canvas');
@@ -347,12 +364,12 @@ if (document.querySelector('#about-page')) {
             const mappedVar = detectedVar ? COLOR_MAP[detectedVar] : null;
             const finalColor = mappedVar || detectedVar || dominantHex;
             console.log('DebugSquareColor:', {
-                square,
+                square: $square[0],
                 dominantHex,
                 detectedVar,
                 mappedVar,
                 finalColor
             });
-        }, square);
+        }, $square[0]);
     };
 }
