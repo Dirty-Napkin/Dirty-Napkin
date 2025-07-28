@@ -1795,13 +1795,18 @@ footer .footer-column.column3 {
   flex-direction: column;
   align-items: flex-start;
 }
-.brand-card-grid .card__image-container {
+.brand-card-grid .brand-card .card__image-container {
   position: relative;
   width: 100%;
   padding-top: 100%;
   overflow: hidden;
 }
-.brand-card-grid .card__image {
+@media (min-width: 430px) {
+  .brand-card-grid .brand-card .card__image-container {
+    padding-top: 56.25%;
+  }
+}
+.brand-card-grid .brand-card .card__image-container .card__image {
   position: absolute;
   top: 0;
   left: 0;
@@ -1809,19 +1814,38 @@ footer .footer-column.column3 {
   height: 100%;
   object-fit: cover;
 }
-.brand-card-grid .card__content {
+@media (min-width: 768px) {
+  .brand-card-grid .brand-card .card__image-container .card__image {
+    transition: all 0.3s ease;
+  }
+}
+.brand-card-grid .brand-card .card__content {
   width: 100%;
   box-sizing: border-box;
 }
-.brand-card-grid .card__title {
+.brand-card-grid .brand-card .card__content .card__title {
   padding: 0.25rem 0 0 0;
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0 0 0.2rem 0;
   background-color: var(--white);
 }
-.brand-card-grid .card__description {
+@media (min-width: 768px) {
+  .brand-card-grid .brand-card .card__content .card__title {
+    font-size: 1.625rem;
+  }
+}
+.brand-card-grid .brand-card .card__content .card__description {
   z-index: -1;
+}
+@media (min-width: 768px) {
+  .brand-card-grid .brand-card .card__content .card__description {
+    transform: translateY(-110%);
+    position: relative;
+    z-index: -1;
+    transition: transform 0.3s ease;
+    font-size: 1.5rem;
+  }
 }
 @media (min-width: 430px) {
   .brand-card-grid {
@@ -1829,28 +1853,12 @@ footer .footer-column.column3 {
     grid-template-columns: repeat(2, 1fr);
     gap: 4rem max(1rem, 3.6%);
   }
-  .brand-card-grid .card__image-container {
-    padding-top: 56.25%;
-  }
 }
 @media (min-width: 768px) {
-  .brand-card-grid .brand-card .card__title {
-    font-size: 1.625rem;
-  }
-  .brand-card-grid .brand-card .card__description {
-    transform: translateY(-110%);
-    position: relative;
-    z-index: -1;
-    transition: transform 0.3s ease;
-    font-size: 1.5rem;
-  }
-  .brand-card-grid .brand-card .card__image {
-    transition: all 0.3s ease;
-  }
   .brand-card-grid .brand-card:hover .card__image-container {
     background-color: #fff;
   }
-  .brand-card-grid .brand-card:hover .card__image {
+  .brand-card-grid .brand-card:hover .card__image-container .card__image {
     transform: scale(1.05);
     opacity: 90%;
   }

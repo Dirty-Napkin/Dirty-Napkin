@@ -2,7 +2,7 @@
     Brands Page
 ============= */
 /*---- Page title ----*/
-.pg-title-container{
+.pg-title-container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -17,11 +17,8 @@
         @include md {
             font-size: 5rem;
         }
-
-        }
-
+    }
 }
-
 
 /*---- Brand Cards ----*/
 .brand-card-grid {
@@ -30,96 +27,92 @@
     padding: 0 max(1.25rem, 4.5%) max(2rem, 7.2%) max(1.25rem, 4.5%);
     gap: 2.7rem;
 
-
     .brand-card {
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-    }
 
-    .card__image-container {
-        position: relative;
-        width: 100%;
-        padding-top: 100%; // padding is exactly 100% width (makes square image)
-        overflow: hidden;
-    }
+        .card__image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; // padding is exactly 100% width (makes square image)
+            overflow: hidden;
 
-    .card__image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+            @include sm {
+                padding-top: 56.25%; // 16:9 aspect ratio (9/16 = 0.5625)
+            }
 
-    .card__content {
-        width: 100%;
-        box-sizing: border-box;
-    }
+            .card__image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
 
-    .card__title {
-        padding: 0.25rem 0 0 0;
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin: 0 0 0.2rem 0;
-        background-color: var(--white);
-        // position: relative; 
-    }
+                @include md{
+                    transition: all 0.3s ease;
+                }
+            }
+        }
 
-    .card__description {
-        // position: relative;
-        z-index: -1;
+        .card__content {
+            width: 100%;
+            box-sizing: border-box;
+
+            .card__title {
+                padding: 0.25rem 0 0 0;
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin: 0 0 0.2rem 0;
+                background-color: var(--white);
+                // position: relative; 
+
+                @include md{
+                    font-size: 1.625rem;
+                }
+            }
+
+            .card__description {
+                // position: relative;
+                z-index: -1;
+
+                @include md{
+                    transform: translateY(-110%);
+                    position: relative;
+                    z-index: -1;
+                    transition: transform 0.3s ease;
+                    font-size: 1.5rem;
+                    // align-items: stretch;
+                }
+            }
+        }
     }
 
     @include sm {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 4rem max(1rem, 3.6%);
-
-        .card__image-container {
-            padding-top: 56.25%; // 16:9 aspect ratio (9/16 = 0.5625)
-        }
     }
 
     @include md {
-       
         .brand-card {
-
-            .card__title {
-                font-size: 1.625rem;
-
-            }
-            .card__description {
-                transform: translateY(-110%);
-                position: relative;
-                z-index: -1;
-                transition: transform 0.3s ease;
-                font-size: 1.5rem;
-                // align-items: stretch;
-            }
-            .card__image {
-                transition: all 0.3s ease;
-            }
-
             &:hover {
                 .card__image-container {
                     background-color: #fff;
+                    
+                    .card__image {
+                        transform: scale(1.05);
+                        opacity: 90%;
+                    }
                 }
-                .card__image {
-                    transform: scale(1.05);
-                    opacity: 90%;
-                }
+
                 .card__description {
                     transform: translateY(0);
                 }
             }
         }
-       
-
     }
-
 }
-
