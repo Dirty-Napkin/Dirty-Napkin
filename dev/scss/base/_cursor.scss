@@ -24,6 +24,9 @@
 }
 
 // Hide the default cursor for the entire document
-html, body, * {
-    cursor: none;
+@include lg {
+    html, body, * {
+        cursor: none;
+    }
 }
+

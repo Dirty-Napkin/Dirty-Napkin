@@ -1,64 +1,191 @@
 /*-------------------- FOR MOBILE --------------------*/
 
 .home-container {
-
+  // Only show on lg and above
     .four-repeat-type {
-        height: 80vh;
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        flex-direction: column;
-        gap: 1rem;
+    display: none;
 
-        .width-box {
-            width: 100%;
-            padding: 0 map-get($margins, min);
-            
-            .row-holder {
+    height: 80vh;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+    gap: 1rem;
+
+    .width-box {
+        width: 100%;
+        padding: 0 map-get($margins, min);
         
-                h2 {
-                    width: 100%;
-                    line-height: normal;
-                    text-align: justify;
-                    text-align-last: justify;
-                    color: var(--black);
+        .row-holder {
+            min-width: 100vw;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+    
+            h2 {
+                width: 100%;
+                line-height: normal;
+                text-align: justify;
+                text-align-last: justify;
+                color: var(--black);
 
-                    display: none;
+                display: none;
 
-                    @include lg {
-                        display: block;
-                    }
-                }
-
-                div {
-                    position: relative;
-                }
-
-                .clone {
-                    color: var(--white);
-                    color: transparent;
-                }
-                
-                .main-hero-text {
+                @include lg {
                     display: block;
                 }
             }
+
+            div {
+                position: relative;
+            }
+
+            .clone {
+                color: var(--white);
+                color: transparent;
+            }
+            
+            .main-hero-text {
+                display: block;
+            }
         }
-       
+    }
+   
     }
 
+
+
+    // only show on sm and md
+    .hero-section-mobile {
+        height: 240vh; //This is the total height of the section plus the 60vh transform that the JS applies to the p-child
+
+        @include lg {
+            display: none;
+        }
+
+        .ketchup-parent {
+            height: 100vh;
+            background-image: url('../../assets/home-pg/hero-ketchup-mobile.jpg');
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .p-parent {
+            
+            position: sticky;
+            top: 0;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            flex-direction: column;
+            gap: 1rem;
+            // transform: translateY(-40vh);
+
+            .p-child {
+                padding: 0 map-get($margins, min);
+                width: 100%;
+                line-height: normal;
+                text-align: justify;
+                text-align-last: justify;
+                color: var(--white);
+                z-index: 1;
+                position: absolute;
+                margin-bottom: 5vh;
+
+                @include md {
+                    width: 75%;
+                }
+            }
+        }
+    }
+
+    .hero-section-lg {
+        display: none;
+    }
+
+    @include lg {
+        .hero-section-lg {
+            display: block;
+            height: 80vh;
+
+
+            .hero-repeat-text {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                position: sticky;
+                height: 230vh;
+                contain: paint;
+
+                .width-box {
+                    width: 60%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    top: 60vh;
+                    max-height: 100vh;
+                    color: var(--black);
+                    position: sticky;
+
+                    .row-holder {
+                        min-width: 100vw;
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    margin-bottom: 40vh;
+                    padding: 0;
+                    position: relative;
+                }
+
+                h2 {
+                    width: 24ch;
+                    line-height: normal;
+                    text-align: justify;
+                    text-align-last: justify;
+                    margin: 0 0 0 60%;
+
+                    &:first-of-type {
+                        position: absolute;
+                        margin: 0;
+                    }
+                }
+
+            }
+
+            .ketchup-wrapper {
+                .ketchup-hero {
+
+                }
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+  
+
     .ketchup-wrapper {
+        display: none;
+
+    
         height: 100vh;
         width: 100vw;
-        background-image: url(../assets/home-pg/hero-ketchup-mobile.jpg);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         position: sticky;
-
-        img {
-            display: none;
-        }
     }
 
     .brands-container {
@@ -70,6 +197,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: -60vh;
+
+
+        @include md {
+            height: calc((80vh + 125vh + 120vh)); // brand-paragraphs + brand-content + translateY value from JS
+        }
 
 
         .brand-letters {
@@ -77,7 +210,6 @@
             position: absolute;
             top: 0;
             color: var(--green);           
-
             display: grid;
             width: 124%;
 
@@ -87,12 +219,24 @@
             grid-template-areas: 
                 "b r . "
                 ". r a"
-                ". . ."
                 "n d ."
                 ". . s"
             ;
             grid-template-columns: repeat(3, 1fr); // 6 equal columns
-            grid-template-rows: repeat(5, 1.25em); // 4 equal rows
+            grid-template-rows: repeat(4, 1.25em); // 4 equal rows
+
+            @include md {
+
+                position: sticky;
+                grid-template-areas: 
+                    "b r . . . ."
+                    "a . . . n ."
+                    ". . . . . d"
+                    ". . s . . ."
+                ;
+                grid-template-columns: repeat(6, 1fr); // 6 equal columns
+                grid-template-rows: repeat(4, 1.25em); // 4 equal rows
+            }
         
             span { // each individual letter
 
@@ -110,8 +254,14 @@
 
         .brand-paragraphs {
             padding: 0 map-get($margins, min);
-            position: relative;
             width: 100%;
+
+            @include md {
+                width: 60%;
+                position: absolute;
+                height: 80vh;
+
+            }
             
 
             div {
@@ -122,15 +272,35 @@
                 margin-top: 14.5rem;
 
                 &:last-of-type {
-                    margin-bottom: 10rem;
+                    margin-top: 12rem;
+                    margin-bottom: 9rem;
                 }
             }
         }
 
         .brands-content {
-            padding: 0 map-get($margins, min);
+            padding: 0 map-get($margins, min) 10rem;
             width: 100%;
-            position: relative;         
+            
+            @include md {
+
+                position: absolute;
+                height: 125vh;
+                margin-top: 80vh;
+
+                width: 100vw;
+                max-width: 1440px;
+                display: grid;
+                gap: 1.75rem;
+                grid-template-areas: 
+                    ". TW . ."
+                    ". . . LS"
+                    ". . TE ."
+                    "ASP . PRJS .";
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+                box-sizing: border-box;
+            }
 
             .brand-item {
                 width: 100%;
@@ -141,15 +311,41 @@
                 justify-content: center;
                 padding-bottom: 3rem;
 
+                @include md {
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0;
+
+
+                    &:nth-child(1) { grid-area: TW; }  // The Window
+                    &:nth-child(2) { grid-area: LS; }  // Lemonade Stand
+                    &:nth-child(3) { grid-area: TE; }  // Those Eyes
+                    &:nth-child(4) { grid-area: ASP; }  // American Scripture Project
+                }
+
                 img {
                     width: 100%;
+
+                    @include md{
+                        height: auto;
+                        object-fit: contain;
+                        position: relative;
+                        z-index: 2;
+                    }
                 }
     
                 .more-info {
                     display: none;
+
+                    @include md {
+                        display: flex;
+                        position: absolute;
+                        top: 0;
+                        z-index: -1;
+                    }
                 }
 
-                div {
+                div { // New item description
                     width: 100%;
                     display: flex;
                     flex-direction: column;
@@ -165,7 +361,6 @@
                         text-transform: none;
                     }
                 }
-
                 
             }
 
@@ -173,8 +368,14 @@
                 display: flex;
                 align-items: center;
                 margin: 3rem 0;
+                cursor: default;
 
-
+                @include md {
+                    grid-area: PRJS; 
+                    justify-content: end;
+                    margin: 0;
+                    padding-bottom: 3rem;
+                }
             }
 
           
@@ -185,9 +386,60 @@
         display: none;
     }
 
+
+
+
+
+
+
+
+
     .yellow-ketchup-section {
-        .testimonial {
+        position: relative;
+        height: 160vh;
+        
+        @include md {
+            margin-top: -120vh;
+        }
+       
+        .mobile-yellow-ketchup-img {
+            width: 100%;
+            height: 100vh;
+            background-image: url('../../assets/home-pg/yellow ketchup.png');
+            background-size: cover;
+            background-position: right center;
+            position: sticky;
+            top: 0;
+        }
+
+       
+
+        .yellow-ketchup-img {
+            display: none;
+        }
+       
+        .yellow-text-section {
             padding: 0 map-get($margins, min);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial {
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+
+            @include md {
+                width: 75%;
+            }
 
             p {
                 text-transform: none;
@@ -229,6 +481,28 @@
 
 
         }
+
+        .CTA-container {
+            display: flex;
+            height: 30vh;
+
+
+            h2 {
+                width: 100%;
+                line-height: normal;
+                text-align: justify;
+                text-align-last: justify;
+                color: var(--black);
+                margin: auto;
+
+                @include md {
+                    width: 75%;
+                }
+            }
+        }
+
+        
+
     }
 }
 
@@ -247,7 +521,7 @@
 
 
 
-@include lg {
+@include xl {
     .home-container {
         display: flex;
         align-items: center;
@@ -473,13 +747,13 @@
                 &:nth-child(3) { grid-area: TE; }  // Those Eyes
                 &:nth-child(4) { grid-area: ASP; }  // American Scripture Project
                 
-                &:nth-child(5) {  // See brands
-                    grid-area: PRJS; 
-                    // background-color: red;
-                    display: flex;
-                    justify-content: start;
-                    align-items: start;
-                } 
+                // &:nth-child(5) {  // See brands
+                //     grid-area: PRJS; 
+                //     // background-color: red;
+                //     display: flex;
+                //     justify-content: start;
+                //     align-items: start;
+                // } 
             }
         }
         
