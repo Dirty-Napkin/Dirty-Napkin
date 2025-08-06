@@ -529,7 +529,7 @@ a.no-link {
   color: var(--magenta);
   transition: 0.2s ease-in-out;
 }
-.button-text:hover {
+.button-text:not(#mobile-menu-button):hover {
   color: var(--white);
 }
 
@@ -1045,6 +1045,9 @@ header .logo-container #desktop-logo {
     display: none;
   }
 }
+header nav button.menu-active {
+  color: var(--white);
+}
 header nav ul {
   display: none;
   gap: 48px;
@@ -1058,6 +1061,57 @@ header .test {
   text-transform: uppercase;
 }
 
+/* =============
+    Mobile Menu Squares Overlay
+============= */
+.mobile-nav-squares-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 100; /* Lower than header (999) but above main content */
+  display: none;
+}
+.mobile-nav-squares-overlay.active {
+  display: block;
+  pointer-events: auto; /* Allow interactions when active */
+}
+
+.menu-square {
+  position: absolute;
+  background-color: var(--cyan);
+  transform: scale(0);
+  opacity: 0;
+}
+.menu-square.animate-in {
+  animation: squareSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.menu-square.animate-out {
+  animation: squareSlideOut 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes squareSlideIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes squareSlideOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
 /* =============
     Footer
 ============= */
