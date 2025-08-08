@@ -16,12 +16,71 @@ $(document).ready(() => {
     const $navUl = $('nav .blank-list'); // Merged nav container
     const $navItems = $navUl.find('.mobile-nav-item'); // Mobile nav items
     
+    // Function to calculate and set fixed width for menu items
+    function setMenuItemsFixedWidth() {
+        if ($(window).width() < 900) {
+            // Width calculation is deferred to when the menu is first opened
+            // for accurate measurement in the proper context
+        }
+    }
+    
+    // Function to measure and apply widths when menu is actually visible
+    function measureAndApplyWidths() {
+        if ($(window).width() < 900) {
+            $navItems.find('a').each(function() {
+                const $link = $(this);
+                
+                // Check if width is already applied
+                if ($link.data('widthApplied')) {
+                    return;
+                }
+                
+                // Temporarily disable animation and set to final state
+                const originalAnimation = $link.css('animation');
+                const originalLetterSpacing = $link.css('letter-spacing');
+                
+                $link.css({
+                    'animation': 'none',
+                    'letter-spacing': '0.3em'
+                });
+                
+                // Force a reflow to ensure styles are applied
+                $link[0].offsetHeight;
+                
+                // Measure the width without animation interference
+                const finalWidth = $link[0].getBoundingClientRect().width;
+                
+                // Reset animation and letter-spacing, then apply fixed width
+                $link.css({
+                    'animation': originalAnimation,
+                    'letter-spacing': originalLetterSpacing,
+                    'width': finalWidth + 'px'
+                });
+                
+                // Mark as applied so we don't re-measure
+                $link.data('widthApplied', true);
+            });
+        }
+    }
+    
     // Remove puzzle classes from mobile nav links only on mobile devices
     if ($(window).width() < 900) {
         $navItems.find('a').removeClass('puzzle-type puzzle-hover').attr('data-no-puzzle', 'true');
         
         // Remove any existing puzzle spans that might have been created
         $navItems.find('a span').remove();
+        
+        // Restore original text for mobile nav items
+        $navItems.find('a').each(function() {
+            const $link = $(this);
+            const originalText = $link.data('originalText');
+            if (originalText) {
+                $link.text(originalText);
+            }
+        });
+        
+        // Set fixed widths
+        setMenuItemsFixedWidth();
     }
     
     // Configuration for mobile only (hidden at md breakpoint)
@@ -89,6 +148,18 @@ $(document).ready(() => {
             // Mobile: remove puzzle classes
             $navItems.find('a').removeClass('puzzle-type puzzle-hover').attr('data-no-puzzle', 'true');
             $navItems.find('a span').remove();
+            
+            // Restore original text for mobile nav items
+            $navItems.find('a').each(function() {
+                const $link = $(this);
+                const originalText = $link.data('originalText');
+                if (originalText) {
+                    $link.text(originalText);
+                }
+            });
+            
+            // Set fixed widths
+            setMenuItemsFixedWidth();
         }
         
         if (!isMenuOpen) {
@@ -181,6 +252,11 @@ $(document).ready(() => {
         $menuButton.text('close').addClass('menu-active');
         $dnLogo.attr('src', 'assets/logo_white_trans.svg');
         $navUl.addClass('active'); // Show nav container
+        
+        // Measure and apply widths on first open
+        setTimeout(() => {
+            measureAndApplyWidths();
+        }, 10); // Small delay to ensure menu is fully rendered
     }
     
     // Close menu animation

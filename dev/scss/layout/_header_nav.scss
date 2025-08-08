@@ -12,7 +12,7 @@ header {
     align-items: center;
     z-index: 999;
 
-    img{
+    img {
         width: auto;
         height: 100%;
     }
@@ -22,7 +22,7 @@ header {
     }
 
     @include md {
-        padding: 1.5rem /*24px*/ 4rem /*64px*/;
+        padding: 1.5rem 4rem; //24px 64px
     }
 
     .logo-container {
@@ -44,16 +44,16 @@ header {
     }
 
     nav {
-        button{
-            @include md{
+        button {
+            @include md {
                 display: none;
             }
-            
+
             &.menu-active {
                 color: var(--white) !important;
             }
         }
-        
+
         ul {
             display: none;
             gap: 48px;
@@ -62,7 +62,7 @@ header {
                 display: flex;
             }
         }
-        
+
         .blank-list {
             display: none;
             gap: 48px;
@@ -70,11 +70,13 @@ header {
             @include md {
                 display: flex;
             }
-            
+
             // Mobile menu styles
-            @media (max-width: 899px) {
+            @media (max-width: #{$screen-md-min}) {
                 display: none;
-                
+                font-size: 3.125rem; //50px
+                font-weight: 500;
+
                 &.active {
                     display: flex !important;
                     position: fixed !important;
@@ -85,28 +87,35 @@ header {
                     gap: 2rem;
                     text-align: center;
                     z-index: 102;
-                    padding: 12px 24px;
+                    padding: 0 24px;
                     margin: 0;
                     width: 100%;
-                    
+
+                    @include sm {
+                        padding: 0 32.25px;
+                    }
+
+                    @include md {
+                        padding: 0 4rem;
+                    }
+
                     .mobile-nav-item {
-                        opacity: 0;
-                        transform: scale(0);
-                        transform-origin: center;
-                        animation: menuItemGrowIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s forwards;
                         width: 100%;
-                        
-                        a{
-                            width: 100% !important;
+                        display: flex;
+                        justify-content: flex-end;
+
+                        a {
+                            display: inline-block;
                             color: var(--white) !important;
-                            text-align: right;
-                            display: block;
-                            font-size: 50px;
-                            font-weight: 500;
+                            letter-spacing: 0;
+                            animation: menuItemLetterSpacingIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s forwards;
+                            width: fit-content;
                         }
-                        
+
                         &.closing {
-                            animation: menuItemGrowOut 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                            a {
+                                animation: menuItemLetterSpacingOut 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                            }
                         }
                     }
                 }
@@ -130,74 +139,82 @@ header {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: 100; /* Lower than header (999) but above main content */
+    z-index: 100; // Lower than header (999) but above main content
     display: none;
-    
+
     &.active {
         display: block;
-        pointer-events: auto; /* Allow interactions when active */
+        pointer-events: auto; // Allow interactions when active
+    }
+
+    .menu-square {
+        position: absolute;
+        background-color: var(--cyan);
+        transform: scale(0);
+        opacity: 1;
+
+        &.animate-in {
+            animation: squareSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        &.animate-out {
+            animation: squareSlideOut 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
     }
 }
 
-@keyframes menuItemGrowIn {
+@keyframes menuItemLetterSpacingIn {
     0% {
-        transform: scale(0);
-        opacity: 0;
+        letter-spacing: 0;
     }
+
     60% {
-        transform: scale(1.1);
-        opacity: 1;
+        letter-spacing: 0.4em;
     }
+
     100% {
-        transform: scale(1);
-        opacity: 1;
+        letter-spacing: 0.3em;
     }
 }
 
-@keyframes menuItemGrowOut {
+@keyframes menuItemLetterSpacingOut {
     0% {
-        transform: scale(1);
-        opacity: 1;
+        letter-spacing: 0.3em;
     }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
-}
 
-.menu-square {
-    position: absolute;
-    background-color: var(--cyan);
-    transform: scale(0);
-    opacity: 0;
-    
-    &.animate-in {
-        animation: squareSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    40% {
+        letter-spacing: 0.4em;
     }
-    
-    &.animate-out {
-        animation: squareSlideOut 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+
+    100% {
+        letter-spacing: 0;
     }
 }
 
 @keyframes squareSlideIn {
     0% {
         transform: scale(0);
-        opacity: 0;
     }
+
+    60% {
+        transform: scale(1.1);
+    }
+
     100% {
         transform: scale(1);
-        opacity: 1;
     }
 }
 
 @keyframes squareSlideOut {
     0% {
         transform: scale(1);
-        opacity: 1;
     }
+
+    40% {
+        transform: scale(1.1);
+    }
+
     100% {
         transform: scale(0);
-        opacity: 0;
     }
 }
