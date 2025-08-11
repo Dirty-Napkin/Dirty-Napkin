@@ -697,7 +697,7 @@ function mobileTestimonialScroll () {
   
 }
 
-
+// --------------Mobile Brand Section------------------- //
 function mobileBrandScroll() {
     const letters = document.querySelector('.brand-letters');
     const brandImages = document.querySelector('.brands-content');
@@ -745,10 +745,186 @@ function mobileBrandScroll() {
     window.addEventListener('scroll', updateScrollAnimation); // Attach scroll listener
 }
   
+// LG BREAKPOINT
 
+// HERO--------------Scrolling behavior for LG hero text------------------- //
+function lgHeroScroll() {
+  const pParent = Array.from(document.querySelectorAll('.p-parent')).find(el => {
+    const style = window.getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden' && el.offsetParent !== null;
+  });
 
+  const ketchupParent = Array.from(document.querySelectorAll('.ketchup-parent')).find(el => {
+    const style = window.getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden' && el.offsetParent !== null;
+  });
 
+  if (!pParent || !ketchupParent) return;
 
+  // Step 2: Set initial transform
+  const initialTranslateY = 62;
+  pParent.style.transform = `translateY(${initialTranslateY}vh)`;
+
+  const triggerLocation = 10;
+  const calcTriggerLocation = window.innerHeight * (triggerLocation / 100);
+  // Function to save distanceFromBottom at initial load state
+  let initialDistanceFromBottom = null;
+  function saveInitialDistanceFromBottom() {
+    const ketchupRect = ketchupParent.getBoundingClientRect();
+    initialDistanceFromBottom = calcTriggerLocation - ketchupRect.bottom;
+  }
+
+  // Save initial distance on load
+  saveInitialDistanceFromBottom();
+
+  function updateScrollAnimation() {
+    if (initialDistanceFromBottom === null) {
+      saveInitialDistanceFromBottom();
+      if (initialDistanceFromBottom === null) return;
+    }
+    const ketchupRect = ketchupParent.getBoundingClientRect();
+    const distanceFromBottom = calcTriggerLocation - ketchupRect.bottom;
+    const progress = Math.min(Math.max(1 - (distanceFromBottom / initialDistanceFromBottom), 0), 1);  // Calculate progress based on the difference from initial
+    const translateY = initialTranslateY + -150 * progress; // Step 5: translateY up to -60vh
+    pParent.style.transform = `translateY(${translateY}vh)`;
+
+    
+  }
+
+  window.addEventListener('scroll', updateScrollAnimation); // Attach scroll listener
+}
+
+// HERO--------------Scale up ketchup on scroll for LG breakpoint------------------- //
+function lgKetchupScale() {
+    const ketchupParent = Array.from(document.querySelectorAll('.ketchup-parent')).find(el => {
+        const style = window.getComputedStyle(el);
+        return style.display !== 'none' && style.visibility !== 'hidden' && el.offsetParent !== null;
+    });
+
+    if (!ketchupParent) return;
+
+    // Set initial transform and CSS properties
+    ketchupParent.style.transformOrigin = 'center center';
+    ketchupParent.style.willChange = 'transform';
+    ketchupParent.style.transform = 'translateX(-50%) scaleX(1) scaleY(1)';
+
+    // Scaling parameters
+    const maxScrollDistance = 60 * window.innerHeight / 100; // 195vh in pixels
+    const scaleXMax = 100 / 60; // 1.6667
+    const scaleYMax = 120 / 72; // 1.6667
+
+    function updateKetchupScale() {
+        const scrollY = window.scrollY;
+        const progress = Math.min(scrollY / maxScrollDistance, 1); // Clamp to 0-1
+
+        // Calculate scales
+        const scaleX = 1 + (scaleXMax - 1) * progress;
+        const scaleY = 1 + (scaleYMax - 1) * progress;
+
+        // Apply transform (combine translateX for centering with scaling)
+        ketchupParent.style.transform = `translateX(-50%) scaleX(${scaleX}) scaleY(${scaleY})`;
+    }
+
+    // Initial call
+    updateKetchupScale();
+
+    // Add scroll listener with passive option for better performance
+    window.addEventListener('scroll', updateKetchupScale, { passive: true });
+}
+
+// HERO--------------Create black hero text for LG breakpoint------------------- //
+function lgBlackHeroText() {
+  const mainHeroText = document.querySelector('.hero-section-lg .p-child');
+
+  if (!mainHeroText) return;
+  
+  // Clone and modify the main text
+  const clone = mainHeroText.cloneNode(true);
+  clone.classList.add('clone');
+  mainHeroText.parentNode.insertBefore(clone, mainHeroText.nextSibling);
+
+  const ketchup = document.querySelector('.hero-section-lg .ketchup-parent');
+  const mainTextOnly = document.querySelector('.hero-section-lg .p-child:not(.clone)');
+  
+
+  function updateHeroTextClip() {
+      if (!ketchup || !mainTextOnly) return;
+
+      const ketchupRect = ketchup.getBoundingClientRect();
+      const textRect = mainHeroText.getBoundingClientRect();
+
+      let top = ketchupRect.top - textRect.top;
+      let bottom = textRect.bottom - ketchupRect.bottom;
+      let left = ketchupRect.left - textRect.left;
+      let right = textRect.right - ketchupRect.right;
+
+      top = Math.max(0, Math.round(top));
+      bottom = Math.max(0, Math.round(bottom));
+      left = Math.max(0, Math.round(left));
+      right = Math.max(0, Math.round(right));
+      
+      const clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px)`;
+
+      mainTextOnly.style.clipPath = clipPath;
+      mainTextOnly.style.webkitClipPath = clipPath; // For Safari support
+  }
+
+  // Run once initially
+  updateHeroTextClip();
+  // Add event listener to update on scroll
+  window.addEventListener('scroll', updateHeroTextClip);
+}
+
+// HERO--------------Masking out hero type with scroll for LG breakpoint------------------- //
+function lgHeroTextMask() {
+    const textBoxes = document.querySelectorAll('.hero-section-lg .p-child h2');
+    const blackText = document.querySelector('.hero-section-lg .p-child.clone');
+
+    if (!textBoxes.length) return;
+
+    // Custom start points for each text box (as a percentage of viewport height: 0 = top, 100 = bottom)
+    // e.g. 47 means 47% down the viewport
+    const startPoints = [22, 22, 32, 32];
+
+    function updateTextBoxClipPath() {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        textBoxes.forEach((textBox, i) => {
+            // Use the custom startPoint for this text box, or fallback to the first if not enough values
+            const startPointPercent = startPoints[i] !== undefined ? startPoints[i] : startPoints[0];
+            // The Y position in the viewport where the clip should "stick"
+            const stickyClipY = (startPointPercent / 100) * viewportHeight;
+
+            // Get the top of the textBox in the document
+            const textBoxRect = textBox.getBoundingClientRect();
+            const textBoxTop = scrollY + textBoxRect.top;
+
+            // The distance from the stickyClipY (in viewport) to the top of the textBox (in document)
+            // As you scroll, the clip path should appear to stay at stickyClipY in the viewport
+            let insetTop = Math.max(0, scrollY + stickyClipY - textBoxTop);
+
+            textBox.style.clipPath = `inset(${insetTop}px 0 0 0)`;
+            textBox.style.webkitClipPath = `inset(${insetTop}px 0 0 0)`; // For Safari support
+        });
+
+        // When scroll position is 1 full vh, the black text opacity turns to 0
+        if (blackText) {
+            if (scrollY >= (window.innerHeight || document.documentElement.clientHeight)) {
+                blackText.style.opacity = "0";
+            } else {
+                blackText.style.opacity = "";
+            }
+        }
+    }
+
+    // Set initial state
+    updateTextBoxClipPath();
+    window.addEventListener('scroll', updateTextBoxClipPath);
+    window.addEventListener('resize', updateTextBoxClipPath);
+}
+
+// HERO--------------Scale up ketchup on scroll for LG breakpoint------------------- //
 function ketchupHeroScale () {
     const ketchupHero = document.querySelector('.ketchup-hero');
         const ketchupWrapper = document.querySelector('.ketchup-wrapper');
@@ -871,7 +1047,50 @@ function ketchupHeroScale () {
 }
 
 
+// BRANDS--------------Scrolling behavior for desktop brands section------------------- //
+function lgBrandScroll() {
+  const letters = document.querySelector('.brand-letters');
+  const brandImages = document.querySelector('.brands-content');
+  const brandParent = document.querySelector('.brands-container');
 
+  if (!letters || !brandParent) return;
+
+  // Set initial transform
+  letters.style.transform = 'translateY(0vh)';
+
+  // Function to save distanceFromBottom at initial load state
+  let initialDistanceFromBottom = null;
+  function saveInitialDistanceFromBottom() {
+      // Trigger when brandParent reaches the top of the screen
+      const brandRect = brandParent.getBoundingClientRect();
+
+      if (brandRect.top <= 0) {
+          // Measure distance from top of viewport to bottom of brandImages
+          const imagesRect = brandImages.getBoundingClientRect();
+          initialDistanceFromBottom = imagesRect.bottom;
+      }
+  }
+
+  // Save initial distance on load
+  saveInitialDistanceFromBottom();
+
+  function updateScrollAnimation() {
+      if (initialDistanceFromBottom === null) {
+          saveInitialDistanceFromBottom();
+          if (initialDistanceFromBottom === null) return;
+      }
+      
+      const imagesRect = brandImages.getBoundingClientRect();
+      const distanceFromBottom = imagesRect.bottom;
+
+      // Calculate progress: 0 when images are at initial position, 1 when images reach top
+      const progress = Math.min(Math.max((initialDistanceFromBottom - distanceFromBottom) / initialDistanceFromBottom, 0), 1);
+      const translateY = -120 * progress; 
+      letters.style.transform = `translateY(${translateY}vh)`; 
+  }
+
+  window.addEventListener('scroll', updateScrollAnimation); // Attach scroll listener
+}
 
 
 
@@ -924,12 +1143,24 @@ function setupResponsiveJS() {
             console.log('XL breakpoint active');
             // Add desktop-specific JS here
             ketchupHeroScale();
+            lgHeroScroll();
+            lgKetchupScale();
+            lgBlackHeroText();
+            lgHeroTextMask();
+            lgBrandScroll();
+
             
         } else if (breakpoints.lg.matches) {
             // LG breakpoint - Desktop behavior
             console.log('LG breakpoint active');
             // Add desktop-specific JS here
             ketchupHeroScale();
+            lgHeroScroll();
+            lgKetchupScale();
+            lgBlackHeroText();
+            lgHeroTextMask();
+            lgBrandScroll();
+
             
         } else if (breakpoints.md.matches) {
             // MD breakpoint - Tablet behavior
