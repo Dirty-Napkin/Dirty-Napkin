@@ -924,6 +924,24 @@ function lgHeroTextMask() {
     window.addEventListener('resize', updateTextBoxClipPath);
 }
 
+// CTA--------------Create grid layout for CTA container on LG breakpoint------------------- //
+function lgCtaGrid() {
+    const ctaContainer = document.querySelector('.CTA-container');
+    const originalH2 = ctaContainer ? ctaContainer.querySelector('h2') : null;
+
+    if (!ctaContainer || !originalH2) return;
+
+    // Check if we already have the grid setup (to prevent duplicates)
+    const existingGridH2s = ctaContainer.querySelectorAll('h2');
+    if (existingGridH2s.length >= 4) return;
+
+    // Clone the original h2 three more times to create four total
+    for (let i = 0; i < 3; i++) {
+        const clone = originalH2.cloneNode(true);
+        ctaContainer.appendChild(clone);
+    }
+}
+
 // HERO--------------Scale up ketchup on scroll for LG breakpoint------------------- //
 function ketchupHeroScale () {
     const ketchupHero = document.querySelector('.ketchup-hero');
@@ -1068,6 +1086,8 @@ function lgBrandScroll() {
           // Measure distance from top of viewport to bottom of brandImages
           const imagesRect = brandImages.getBoundingClientRect();
           initialDistanceFromBottom = imagesRect.bottom;
+          // Log the total initial distance between the top of the screen and the bottom of brandImages
+          console.log('Initial distance from top of screen to bottom of brandImages:', initialDistanceFromBottom);
       }
   }
 
@@ -1082,18 +1102,90 @@ function lgBrandScroll() {
       
       const imagesRect = brandImages.getBoundingClientRect();
       const distanceFromBottom = imagesRect.bottom;
-
+      console.log('Distance from top of screen to bottom of brandImages:', distanceFromBottom);
       // Calculate progress: 0 when images are at initial position, 1 when images reach top
       const progress = Math.min(Math.max((initialDistanceFromBottom - distanceFromBottom) / initialDistanceFromBottom, 0), 1);
-      const translateY = -120 * progress; 
+      const translateY = -170 * progress; 
       letters.style.transform = `translateY(${translateY}vh)`; 
   }
 
   window.addEventListener('scroll', updateScrollAnimation); // Attach scroll listener
 }
 
+// YELLOW--------------Scrolling behavior for desktop testimonial section------------------- //
+function lgTestimonialScroll () {
+  const yellowParent = document.querySelector('.yellow-ketchup-section');
+  const ketchup = document.querySelector('.mobile-yellow-ketchup-img');
 
+  if (!yellowParent || !ketchup) return;
 
+  let initialDistance = null;
+
+  function onScroll() {
+      const rect = yellowParent.getBoundingClientRect();
+      // When the top of yellowParent reaches the top of the viewport (or above)
+      if (rect.top <= 0) {
+         
+          if (initialDistance === null) {
+              initialDistance = window.innerHeight - yellowParent.getBoundingClientRect().bottom;
+          }
+
+          const distanceFromBottom = window.innerHeight - yellowParent.getBoundingClientRect().bottom;
+          const progress = Math.min(Math.max(1 - (distanceFromBottom / initialDistance), 0), 1);
+          const translateY = -40 * progress;
+          ketchup.style.transform = `translateY(${translateY}vh)`;
+
+      }
+  }
+
+  window.addEventListener('scroll', onScroll);
+
+}
+
+// CTA--------------Mask text in on scroll for desktop CTA section------------------- //
+function lgCtaTextMask() {
+  const textBoxes = document.querySelectorAll('.CTA-container h2');
+
+  if (!textBoxes.length) return;
+
+  // Custom start points for each text box (as a percentage of viewport height: 0 = top, 100 = bottom)
+  // e.g. 47 means 47% down the viewport
+  const startPoints = [65, 65, 90, 90];
+
+  function updateTextBoxClipPath() {
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      textBoxes.forEach((textBox, i) => {
+          // Use the custom startPoint for this text box, or fallback to the first if not enough values
+          const startPointPercent = startPoints[i] !== undefined ? startPoints[i] : startPoints[0];
+          // The Y position in the viewport where the clip should "stick"
+          const stickyClipY = (startPointPercent / 100) * viewportHeight;
+
+          // Get the top of the textBox in the document
+          const textBoxRect = textBox.getBoundingClientRect();
+          const textBoxTop = scrollY + textBoxRect.top;
+          const textBoxHeight = textBox.offsetHeight;
+
+          // The distance from the stickyClipY (in viewport) to the top of the textBox (in document)
+          // As you scroll, the clip path should appear to stay at stickyClipY in the viewport
+          let insetTop = Math.max(0, scrollY + stickyClipY - textBoxTop);
+          
+          // For masking IN, we want to reveal from top to bottom
+          // So we start with the full height masked and reduce the insetTop as we scroll
+          const revealProgress = Math.min(insetTop / textBoxHeight, 1);
+          const insetBottom = textBoxHeight - (revealProgress * textBoxHeight);
+
+          textBox.style.clipPath = `inset(0 0 ${insetBottom}px 0)`;
+          textBox.style.webkitClipPath = `inset(0 0 ${insetBottom}px 0)`; // For Safari support
+      });
+  }
+
+  // Set initial state
+  updateTextBoxClipPath();
+  window.addEventListener('scroll', updateTextBoxClipPath);
+  window.addEventListener('resize', updateTextBoxClipPath);
+}
 
 
 
@@ -1147,7 +1239,10 @@ function setupResponsiveJS() {
             lgKetchupScale();
             lgBlackHeroText();
             lgHeroTextMask();
+            lgCtaGrid(); // Added lgCtaGrid
+            lgCtaTextMask(); // Added lgCtaTextMask
             lgBrandScroll();
+            lgTestimonialScroll();
 
             
         } else if (breakpoints.lg.matches) {
@@ -1159,7 +1254,10 @@ function setupResponsiveJS() {
             lgKetchupScale();
             lgBlackHeroText();
             lgHeroTextMask();
+            lgCtaGrid(); // Added lgCtaGrid
+            lgCtaTextMask(); // Added lgCtaTextMask
             lgBrandScroll();
+            lgTestimonialScroll();
 
             
         } else if (breakpoints.md.matches) {

@@ -190,18 +190,14 @@
         margin-top: -60vh;
 
         @include md {
-            height: calc((80vh + 125vh + 120vh)); // brand-paragraphs + brand-content + translateY value from JS
+            height: calc((80vh + 150vh + 120vh)); // brand-paragraphs + brand-content + translateY value from JS
         }
 
         @include lg {
             margin-top: -155vh;
-            height: 210rem;
-            background-color: red;
+            height:calc((96rem + 96rem + 80rem)); // height of brand letters + height of brand paragraphs + height of brand images
         }
         
-        
-    
-    
 
         .brand-letters {
             font-size: 14rem;
@@ -263,10 +259,6 @@
                 width: 60%;
                 position: absolute;
                 height: 80vh;
-            }
-
-            @include lg {
-
             }
 
          
@@ -376,10 +368,9 @@
                 ". TW . . . ."
                 ". . . . LS ."
                 ". . . . TE ."
-                "ASP . . . . ."
-                ". . . PRJS . .";
+                "ASP . . PRJS  . .";
                 grid-template-columns: repeat(6, 1fr);
-                grid-template-rows: repeat(5, 1fr);
+                grid-template-rows: repeat(4, 1fr);
                 box-sizing: border-box;
             }
 
@@ -485,7 +476,8 @@
         }
 
         @include lg {
-            margin-top: 100vh;
+            margin-top: -80rem;
+            height: 200vh;
         }
        
         .mobile-yellow-ketchup-img {
@@ -512,6 +504,7 @@
             top: 0;
             display: flex;
             flex-direction: column;
+            contain: paint;
         }
 
         .testimonial {
@@ -527,10 +520,20 @@
                 width: 75%;
             }
 
+               
+
             p {
                 text-transform: none;
                 font-weight: 400;
                 text-align: justify;
+                
+
+                @include lg {
+                    font-weight: 500;
+                    line-height: 124%; /* 2.48rem */
+                    letter-spacing: 0.2rem;
+                    width: 32ch;
+                }
             }
 
             .with-breaks {
@@ -581,17 +584,64 @@
                 color: var(--black);
                 margin: auto;
 
+                .button-text {
+                    margin-top: 1rem;
+                    display: block;
+                    text-align: left;
+                    text-align-last: left;
+                }
+
                 @include md {
                     width: 75%;
                 }
+
+                @include lg {
+                    padding: 0;
+                    margin: 0;
+                    width: 24ch;
+                    line-height: normal;
+                    text-align: justify;
+                    text-align-last: justify;
+                    color: var(--black);
+
+                    &:nth-of-type(1) {
+                        grid-area: area2;
+                    }
+                    &:nth-of-type(2) {
+                        grid-area: area3;
+                    }
+                    &:nth-of-type(3) {
+                        grid-area: area5;
+                    }
+                    &:nth-of-type(4) {
+                        grid-area: area6;
+                    }
+                    &:nth-last-of-type(-n+2) {
+                        align-self: end;
+                    }
+                }
+            }
+
+            @include lg {
+                display: grid;
+                height: 85vh;
+                grid-template-columns: 20% 60% 20%;
+                grid-template-rows: repeat(2, 1fr);
+                align-items: center;
+                justify-content: center;
+
+                grid-template-areas:
+                    "area1 area2 area3"
+                    "area4 area5 area6";
             }
         }
-
-        
 
     }
 }
 
+footer {
+    margin-top: 10rem;
+}
 
 
 
