@@ -753,6 +753,7 @@ function setupResponsiveJS() {
 // Initialize when DOM is loaded
 window.addEventListener('DOMContentLoaded', function() {
     setupResponsiveJS();
+    console.log("If you're looking at this. you're a nerd :)");
 });
 
 function reloadOnResize() {

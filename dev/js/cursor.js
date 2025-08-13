@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Only create cursor for lg breakpoints and larger
             if (breakpoints.lg.matches) {
-                console.log('Cursor active - LG breakpoint or larger');
                 
                 // Create the custom cursor element
                 cursor = document.createElement("div");

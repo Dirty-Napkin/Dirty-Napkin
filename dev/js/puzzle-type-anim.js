@@ -414,5 +414,3 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 })
-
-console.log("Puzzle Type Loaded");
