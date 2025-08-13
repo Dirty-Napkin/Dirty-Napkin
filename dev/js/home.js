@@ -1112,34 +1112,223 @@ function lgBrandScroll() {
   window.addEventListener('scroll', updateScrollAnimation); // Attach scroll listener
 }
 
+// BRANDS--------------Hover effect for brand images------------------- //
+// Helper function to generate grid positions
+function generateGridPositions(movement, imageWidth) {
+    const positions = [];
+    let labelCount = 1;
+    for (let y = -2; y <= 2; y++) {
+        for (let x = -2; x <= 2; x++) {
+            positions.push({
+                x: x * movement,
+                y: y * movement,
+                label: `${labelCount++}`
+            });
+        }
+    }
+    return positions;
+}
+
+function lgBrandHover() {
+    const brandItems = document.querySelectorAll('.brand-item');
+
+    brandItems.forEach(item => {
+        const mainImage = item.querySelector('img:not(.more-info)');
+        const moreInfoImages = item.querySelectorAll('.more-info');
+        const textDivs = item.querySelectorAll('div:not(.position-indicators)'); // Get text divs, excluding position indicators
+
+        // Calculate movement based on image width plus gap
+        const imageWidth = mainImage.offsetWidth;
+        const movement = imageWidth + 28; // 28px is 1.75rem gap
+
+        // Calculate grid positions based on the image width and gap
+        const gridPositions = generateGridPositions(movement, imageWidth);
+
+        // Position indicators
+        // Create container for position indicators
+        const positionIndicators = document.createElement('div');
+        positionIndicators.className = 'position-indicators';
+        positionIndicators.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        item.appendChild(positionIndicators);
+
+        // Create position indicators
+        gridPositions.forEach(pos => {
+            const indicator = document.createElement('div');
+            indicator.className = 'position-indicator';
+            indicator.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: ${imageWidth}px;
+                height: ${imageWidth}px;
+                background-color: rgba(128, 128, 128, 0.2);
+                border: 1px solid rgba(128, 128, 128, 0.4);
+                transform: translate(-50%, -50%) translate(${pos.x}px, ${pos.y}px);
+                opacity: 0;
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+
+            // Create text box for the label
+            const textBox = document.createElement('div');
+            textBox.style.cssText = `
+                padding: 4px 8px;
+                color: black;
+                font-size: 24px;
+                font-weight: bold;
+                font-family: monospace;
+                display: inline-block;
+                text-align: center;
+                min-width: 1.5em;
+                letter-spacing: -1px;
+            `;
+            textBox.textContent = pos.label;
+
+            indicator.appendChild(textBox);
+            positionIndicators.appendChild(indicator);
+        });
+        //
+
+
+        // Position each more-info image and text div
+        // Get the brand name from the first image's class
+        const brandName = item.querySelector('img:not(.more-info)').className;
+
+        // Define custom positions for each brand's more-info images and text divs
+        const customPositions = {
+            'the-window': [7, 8, 14, 15, 17, 19, 18],      // Last position (13) is for the text div
+            'lemonade-stand': [8, 11, 14, 17, 19, 12],     // Last position (16) is for the text div
+            'those-eyes': [7, 11, 12, 19, 22, 18],         // Last position (18) is for the text div
+            'branded-moments': [13, 14, 15, 16, 20],       // Last position (20) is for the text div
+            'american-scripture-project': [8, 10, 14, 19, 20, 18] // Last position (21) is for the text div
+        };
+
+        // Position more-info images
+        moreInfoImages.forEach((img, index) => {
+            // Get the target position number for this image
+            const targetPosition = customPositions[brandName][index];
+            // Find the corresponding grid position
+            const pos = gridPositions.find(p => p.label === targetPosition.toString());
+
+            // Start at center (behind main image)
+            img.style.transform = 'translate(0, 0)';
+            img.style.opacity = '0';
+        });
+
+        // Position text divs
+        textDivs.forEach((div, index) => {
+            // Get the target position number for this text div (last position in the array)
+            const targetPosition = customPositions[brandName][customPositions[brandName].length - 1];
+            // Find the corresponding grid position
+            const pos = gridPositions.find(p => p.label === targetPosition.toString());
+
+            // Start at center (behind main image)
+            div.style.transform = 'translate(0, 0)';
+            div.style.opacity = '0';
+        });
+
+        // Add hover effect
+        let showIndicators = false; //Set to false to hide indicators    
+
+        item.querySelector('img:not(.more-info)').addEventListener('mouseenter', () => {
+            // Show position indicators only if enabled
+            if (showIndicators) {
+                const indicators = positionIndicators.querySelectorAll('.position-indicator');
+                indicators.forEach(indicator => {
+                    indicator.style.opacity = '1';
+                });
+            }
+
+            // Move images
+            moreInfoImages.forEach((img, index) => {
+                const targetPosition = customPositions[brandName][index];
+                const pos = gridPositions.find(p => p.label === targetPosition.toString());
+
+                img.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+                img.style.opacity = '1';
+            });
+
+            // Move text divs
+            textDivs.forEach((div, index) => {
+                const targetPosition = customPositions[brandName][customPositions[brandName].length - 1];
+                const pos = gridPositions.find(p => p.label === targetPosition.toString());
+
+                div.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+                div.style.opacity = '1';
+            });
+        });
+
+        // On hover out
+        item.querySelector('img:not(.more-info)').addEventListener('mouseleave', () => {
+            // Hide position indicators only if enabled
+            if (showIndicators) {
+                const indicators = positionIndicators.querySelectorAll('.position-indicator');
+                indicators.forEach(indicator => {
+                    indicator.style.opacity = '0';
+                });
+            }
+
+            // Move images back
+            moreInfoImages.forEach(img => {
+                img.style.transform = 'translate(0, 0)';
+                img.style.opacity = '0';
+            });
+
+            // Move text divs back
+            textDivs.forEach(div => {
+                div.style.transform = 'translate(0, 0)';
+                div.style.opacity = '0';
+            });
+        });
+        //
+    });
+}
+      
+
 // YELLOW--------------Scrolling behavior for desktop testimonial section------------------- //
-function lgTestimonialScroll () {
-  const yellowParent = document.querySelector('.yellow-ketchup-section');
-  const ketchup = document.querySelector('.mobile-yellow-ketchup-img');
+// function lgTestimonialScroll () {
+//   const yellowParent = document.querySelector('.yellow-ketchup-section');
+//   const ketchup = document.querySelector('.mobile-yellow-ketchup-img');
 
-  if (!yellowParent || !ketchup) return;
+//   if (!yellowParent || !ketchup) return;
 
-  let initialDistance = null;
+//   let initialDistance = null;
 
-  function onScroll() {
-      const rect = yellowParent.getBoundingClientRect();
-      // When the top of yellowParent reaches the top of the viewport (or above)
-      if (rect.top <= 0) {
+//   function onScroll() {
+//       const rect = yellowParent.getBoundingClientRect();
+//       // When the top of yellowParent reaches the top of the viewport (or above)
+//       if (rect.top <= 0) {
          
-          if (initialDistance === null) {
-              initialDistance = window.innerHeight - yellowParent.getBoundingClientRect().bottom;
-          }
+//           if (initialDistance === null) {
+//               initialDistance = window.innerHeight - yellowParent.getBoundingClientRect().bottom;
+//           }
 
-          const distanceFromBottom = window.innerHeight - yellowParent.getBoundingClientRect().bottom;
-          const progress = Math.min(Math.max(1 - (distanceFromBottom / initialDistance), 0), 1);
-          const translateY = -40 * progress;
-          ketchup.style.transform = `translateY(${translateY}vh)`;
+//           const distanceFromBottom = window.innerHeight - yellowParent.getBoundingClientRect().bottom;
+//           const progress = Math.min(Math.max(1 - (distanceFromBottom / initialDistance), 0), 1);
+//           const translateY = -40 * progress;
+//           ketchup.style.transform = `translateY(${translateY}vh)`;
 
-      }
-  }
+//       }
+//   }
 
-  window.addEventListener('scroll', onScroll);
+//   window.addEventListener('scroll', onScroll);
 
+// }
+
+// HOPEFULLY A SCROLL THAT FINALLY WORKS
+
+function lgTestimonialScroll() {
+  console.log("This is working:");
 }
 
 // CTA--------------Mask text in on scroll for desktop CTA section------------------- //
@@ -1187,29 +1376,43 @@ function lgCtaTextMask() {
   window.addEventListener('resize', updateTextBoxClipPath);
 }
 
+// function smallSquare() {
+//   // Set element height to the height of the document
+//   const el = document.querySelector('.small-squares');
+//   function resizeElement() {
+//     el.style.height = document.documentElement.scrollHeight + 'px';
+//   }
+//   resizeElement();
+
+//   function createSmallSquares() {
+//     // Find or create the container for the squares
+//     let container = document.querySelector('.small-squares');
+//     if (!container) {
+//       container = document.createElement('div');
+//       container.className = 'small-squares';
+//       document.body.appendChild(container);
+//     }
+
+//     // Remove any existing squares to avoid duplicates
+//     container.innerHTML = '';
+
+//     for (let i = 0; i < 20; i++) {
+//       const square = document.createElement('div');
+//       square.style.width = '1.2rem';
+//       square.style.height = '1.2rem';
+//       square.style.background = 'black';
+//       // Randomly position within the container
+//       square.style.zIndex = '10';
+//       container.appendChild(square);
+//     }
+//   }
+
+//   createSmallSquares();
+// }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// window.addEventListener('resize', smallSquare);
+// window.addEventListener('load', smallSquare);
 
 // ------------- Master responsive function, runs everything! ------------- //
 function setupResponsiveJS() {
@@ -1242,6 +1445,7 @@ function setupResponsiveJS() {
             lgCtaGrid(); // Added lgCtaGrid
             lgCtaTextMask(); // Added lgCtaTextMask
             lgBrandScroll();
+            lgBrandHover(); // Added lgBrandHover
             lgTestimonialScroll();
 
             
@@ -1257,6 +1461,7 @@ function setupResponsiveJS() {
             lgCtaGrid(); // Added lgCtaGrid
             lgCtaTextMask(); // Added lgCtaTextMask
             lgBrandScroll();
+            lgBrandHover(); // Added lgBrandHover
             lgTestimonialScroll();
 
             
@@ -1286,17 +1491,6 @@ function setupResponsiveJS() {
     applyJS();
 }
 
-
-
-
-
 window.addEventListener('DOMContentLoaded', function() {
     setupResponsiveJS();
 });
-
-
-
-// window.addEventListener('scroll', function() {
-//     const brandParent = document.querySelector('.brands-container');
-//     console.log(brandParent.getBoundingClientRect());
-// });
