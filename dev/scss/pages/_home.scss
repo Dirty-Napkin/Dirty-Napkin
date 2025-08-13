@@ -1,7 +1,7 @@
-/*-------------------- FOR MOBILE --------------------*/
+/* ===== HOME PAGE STYLES ===== */
 
 .home-container {
-
+    /* ===== SMALL SQUARES GRID ===== */
     .small-squares {
         position: absolute;
         height: 100%;
@@ -9,36 +9,35 @@
         top: 0;
         z-index: 100;
         pointer-events: none;
-
         display: grid;
         grid-template-columns: repeat(15, 1fr);
         grid-template-rows: repeat(65, 1fr);
 
         div {
-            &:nth-of-type(1) {grid-row: 5; grid-column: 3;}
-            &:nth-of-type(2) {grid-row: 6; grid-column: 3;}
-            &:nth-of-type(3) {grid-row: 3; grid-column: 9;}
-            &:nth-of-type(4) {grid-row: 9; grid-column: 2;}
-            &:nth-of-type(5) {grid-row: 10; grid-column: 4;}
-            &:nth-of-type(6) {grid-row: 12; grid-column: 3;}
-            &:nth-of-type(7) {grid-row: 13; grid-column: 3;}
-            &:nth-of-type(8) {grid-row: 18; grid-column: 15;}
-            &:nth-of-type(9) {grid-row: 22; grid-column: 4;}
-            &:nth-of-type(10) {grid-row: 23; grid-column: 4;}
-            &:nth-of-type(11) {grid-row: 26; grid-column: 12;}
-            &:nth-of-type(12) {grid-row: 42; grid-column: 10;}
-            &:nth-of-type(13) {grid-row: 42; grid-column: 11;}
-            &:nth-of-type(14) {grid-row: 43; grid-column: 5;}
-            &:nth-of-type(15) {grid-row: 48; grid-column: 14;}
+            &:nth-of-type(1) { grid-row: 5; grid-column: 3; }
+            &:nth-of-type(2) { grid-row: 6; grid-column: 3; }
+            &:nth-of-type(3) { grid-row: 3; grid-column: 9; }
+            &:nth-of-type(4) { grid-row: 9; grid-column: 2; }
+            &:nth-of-type(5) { grid-row: 10; grid-column: 4; }
+            &:nth-of-type(6) { grid-row: 12; grid-column: 3; }
+            &:nth-of-type(7) { grid-row: 13; grid-column: 3; }
+            &:nth-of-type(8) { grid-row: 18; grid-column: 15; }
+            &:nth-of-type(9) { grid-row: 24; grid-column: 4; }
+            &:nth-of-type(10) { grid-row: 25; grid-column: 4; }
+            &:nth-of-type(11) { grid-row: 26; grid-column: 12; }
+            &:nth-of-type(12) { grid-row: 42; grid-column: 11; }
+            &:nth-of-type(13) { grid-row: 43; grid-column: 5; }
+            &:nth-of-type(14) { grid-row: 48; grid-column: 14; }
+            &:nth-of-type(15) { grid-row: 60; grid-column: 3; }
+            &:nth-of-type(16) { grid-row: 58; grid-column: 11; }
+            &:nth-of-type(17) { grid-row: 56; grid-column: 11; }
         }
-
     }
 
-
-// -------------- Hero Section------------------- //
-    // only show on sm and md
+    /* ===== HERO SECTION ===== */
+    // Mobile Hero Section (SM & MD only)
     .hero-section-mobile {
-        height: 240vh; //This is the total height of the section plus the 60vh transform that the JS applies to the p-child
+        height: 240vh; // Total height including 60vh transform from JS
 
         @include lg {
             display: none;
@@ -52,7 +51,6 @@
         }
 
         .p-parent {
-            
             position: sticky;
             top: 0;
             height: 80vh;
@@ -61,7 +59,6 @@
             justify-content: end;
             flex-direction: column;
             gap: 1rem;
-            // transform: translateY(-40vh);
 
             .p-child {
                 padding: 0 map-get($margins, min);
@@ -81,15 +78,13 @@
         }
     }
 
+    // Desktop Hero Section (LG+ only)
     .hero-section-lg {
         display: none;
-    }
 
-    // only show on lg+
-    @include lg {
-        .hero-section-lg {
+        @include lg {
             display: block;
-            height: calc(120vh + 85vh + 130vh); // 100vh for the ketchup, 75vh for the p-parent, 60vh for the js transform
+            height: calc(120vh + 85vh + 130vh); // 100vh for ketchup, 75vh for p-parent, 60vh for JS transform
         
             .p-parent {
                 z-index: 1;
@@ -104,8 +99,6 @@
                 overflow: hidden;
                 width: 100%;
                 margin: auto;
-                // max-width: 1440px;
-                // transform: translateY(50vh);
             }
 
             .p-child {
@@ -129,7 +122,7 @@
                 h2 { 
                     padding: 0; 
                     margin: 0;
-                    width: 24ch; // whatever makes the text the right size- check other screen sizes
+                    width: 24ch;
                     line-height: normal;
                     text-align: justify;
                     text-align-last: justify;
@@ -152,17 +145,15 @@
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%);
-                
             }
         }
     }
 
-// -------------- Brands Section------------------- //
+    /* ===== BRANDS SECTION ===== */
     .brands-container {
         $span-areas: b, r, a, n, d, s;
       
         contain: paint;
-        
         position: relative;
         max-width: 100vw;
         display: flex;
@@ -176,10 +167,10 @@
 
         @include lg {
             margin-top: -155vh;
-            height:calc((96rem + 96rem + 80rem)); // height of brand letters + height of brand paragraphs + height of brand images
+            height: calc((96rem + 96rem + 80rem)); // height of brand letters + height of brand paragraphs + height of brand images
         }
-        
 
+        // Brand Letters Grid
         .brand-letters {
             font-size: 14rem;
             position: absolute;
@@ -201,11 +192,10 @@
                 "n d ."
                 ". . s"
             ;
-            grid-template-columns: repeat(3, 1fr); // 6 equal columns
-            grid-template-rows: repeat(4, 1.25em); // 4 equal rows
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 1.25em);
 
             @include md {
-
                 width: 114%;
                 position: sticky;
                 grid-template-areas: 
@@ -214,15 +204,14 @@
                     ". . . . . d"
                     ". . s . . ."
                 ;
-                grid-template-columns: repeat(6, 1fr); // 6 equal columns
-                grid-template-rows: repeat(4, 1.25em); // 4 equal rows
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(4, 1.25em);
             }
         
-            span { // each individual letter
-
+            span {
                 @for $i from 1 through length($span-areas) {
                     &:nth-of-type(#{$i}) {
-                    grid-area: nth($span-areas, $i);
+                        grid-area: nth($span-areas, $i);
                     }
                 }    
 
@@ -232,6 +221,7 @@
             }
         }
 
+        // Brand Paragraphs
         .brand-paragraphs {
             padding: 0 map-get($margins, min);
             width: 100%;
@@ -241,9 +231,6 @@
                 position: absolute;
                 height: 80vh;
             }
-
-         
-            
 
             div {
                 width: 100%;
@@ -269,30 +256,26 @@
                 }
 
                 @include lg {
-
                     h3 {
                         text-align: justify;
                         text-align-last: justify;
                         width: 34ch;
                         margin: 0;
                     }
-                    
                 }
-
-              
             }
         }
 
-        // Grid layout for the brand letters and paragraphs
+        // Grid layout for brand letters and paragraphs (LG+)
         @include lg {
-            .brand-paragraphs, .brand-letters { // grid layout for the brand letters and paragraphs
+            .brand-paragraphs, .brand-letters {
                 display: grid;
                 $div-areas: p1, p2;
                 max-width: 1641.6px;
                 width: 114%;
     
-                grid-template-columns: repeat(6, 1fr); // 6 equal columns
-                grid-template-rows: repeat(4, 24rem); // 4 equal rows
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(4, 24rem);
 
                 grid-template-areas: 
                     "b r . . . ."
@@ -300,10 +283,8 @@
                     ". . p2 p2 . d"
                     ". . s . . ."
                 ;
-                
 
-                div {// each paragraph
-                    // Ensure first div gets p1, second gets p2
+                div {
                     &:nth-of-type(1) {
                         grid-area: p1;
                     }
@@ -314,8 +295,7 @@
             }
         }
 
-        
-    
+        // Brand Content Grid
         .brands-content {
             padding: 0 map-get($margins, min) 10rem;
             width: 100%;
@@ -324,7 +304,6 @@
                 position: absolute;
                 height: 125vh;
                 margin-top: 80vh;
-
                 width: 100vw;
                 max-width: 1440px;
                 display: grid;
@@ -337,6 +316,8 @@
                 grid-template-columns: repeat(4, 1fr);
                 grid-template-rows: repeat(4, 1fr);
                 box-sizing: border-box;
+
+                padding: 0 map-get($margins, md) 10rem;
             }
 
             @include lg {
@@ -345,13 +326,17 @@
                 margin-top: 0;
 
                 grid-template-areas: 
-                ". TW . . . ."
-                ". . . . LS ."
-                ". . . . TE ."
-                "ASP . . PRJS  . .";
+                    ". TW . . . ."
+                    ". . . . LS ."
+                    ". . . . TE ."
+                    "ASP . . PRJS  . .";
                 grid-template-columns: repeat(6, 1fr);
                 grid-template-rows: repeat(4, 1fr);
                 box-sizing: border-box;
+            }
+
+            @include xl {
+                padding: 0 map-get($margins, xl) 10rem;
             }
 
             .brand-item {
@@ -367,10 +352,8 @@
                     align-items: center;
                     justify-content: center;
                     padding: 0;
-
                     text-align: justify;
                     text-align-last: justify;
-
 
                     &:nth-child(1) { grid-area: TW; }  // The Window
                     &:nth-child(2) { grid-area: LS; }  // Lemonade Stand
@@ -381,7 +364,7 @@
                 img {
                     width: 100%;
 
-                    @include md{
+                    @include md {
                         height: auto;
                         object-fit: contain;
                         position: relative;
@@ -389,7 +372,6 @@
                         &:not(.more-info) {
                             z-index: 10;
                         }
-                        
                     }
                 }
     
@@ -405,7 +387,7 @@
                     }
                 }
 
-                div { // Item descriptions
+                div {
                     width: 100%;
                     display: flex;
                     flex-direction: column;
@@ -415,7 +397,6 @@
                     h3 {
                         margin-top: .7em;
                         margin-bottom: 0;
-                        
                     }
 
                     p {
@@ -429,12 +410,10 @@
                         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
                         height: 100%;
                     }
-
-                    
                 }
             }
 
-            .brand-item:last-of-type {
+            div.brand-item {
                 display: flex;
                 align-items: center;
                 margin: 3rem 0;
@@ -447,17 +426,15 @@
                     padding-bottom: 3rem;
                 }
             }
-
-          
         }
     }
 
-// -------------- Collabs Section------------------- //
+    /* ===== COLLABORATIONS SECTION ===== */
     .collabs {
         display: none;
     }
 
-// -------------- Yellow Ketchup Section------------------- //
+    /* ===== TESTIMONIAL SECTION ===== */
     .yellow-ketchup-section {
         position: relative;
         height: 160vh;
@@ -467,7 +444,7 @@
         }
 
         @include lg {
-            margin-top: -80rem;
+            margin-top: -100rem;
             height: 200vh;
         }
        
@@ -476,12 +453,16 @@
             height: 110vh;
             background-image: url('../../assets/home-pg/yellow ketchup.png');
             background-size: cover;
+            background-repeat: no-repeat;
             background-position: right bottom;
             position: sticky;
             top: 0;
-        }
 
-       
+            @include lg {
+                height: 100vh;
+
+            }
+        }
 
         .yellow-ketchup-img {
             display: none;
@@ -511,17 +492,14 @@
                 width: 75%;
             }
 
-               
-
             p {
                 text-transform: none;
                 font-weight: 400;
                 text-align: justify;
-                
 
                 @include lg {
                     font-weight: 500;
-                    line-height: 124%; /* 2.48rem */
+                    line-height: 124%;
                     letter-spacing: 0.2rem;
                     width: 32ch;
                 }
@@ -538,14 +516,12 @@
             }
 
             p {
-
-
                 &:last-of-type {
                     margin-top: 1rem;
                     text-align: left;
                     text-align-last: left;
                     width: auto;
-                    font-size: 1.25rem
+                    font-size: 1.25rem;
                 }
 
                 span:first-of-type {
@@ -558,14 +534,11 @@
                     font-size: 1.2rem;
                 }
             }
-
-
         }
 
         .CTA-container {
             display: flex;
             height: 30vh;
-
 
             h2 {
                 width: 100%;
@@ -626,10 +599,10 @@
                     "area4 area5 area6";
             }
         }
-
     }
 }
 
+/* ===== FOOTER ===== */
 footer {
     margin-top: 10rem;
 }
