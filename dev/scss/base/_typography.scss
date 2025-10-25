@@ -21,7 +21,7 @@ a.no-link {
 
     padding: .2rem .4rem .2rem .4rem;
     color: var(--magenta);
-    transition: 0.2s ease-in-out;
+    // transition: 0.2s ease-in-out; //I like this  no transiton look for now
 
     &:hover {color: var(--white)}
 }

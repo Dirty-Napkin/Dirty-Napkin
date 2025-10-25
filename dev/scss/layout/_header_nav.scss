@@ -63,4 +63,11 @@ header {
     .test {
         text-transform: uppercase;
     }
+
+    a {
+        &:hover {
+            position: relative;
+            z-index: 100000;
+        }
+    }
 }

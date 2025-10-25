@@ -2,12 +2,14 @@
     Footer
 ============= */
 footer {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 60px;
     width: 100%;
     padding: 18px 24px;
+    z-index: 2;
 
     @include md {
         padding: 24px 32px;
@@ -56,26 +58,35 @@ footer {
                 padding: 6px 0;
             }
 
-            .footer-icon-tray {
+            .footer-icon-tray {//Footer icon hover behavior
                 grid-area: icons;
                 display: flex;
                 gap: 4px;
                 align-items: flex-start;
 
+                a {
+                    &:hover,
+                    &:focus {
+                        filter: brightness(0) invert(1);
+                    }
+                }
+
                 .footer-icon {
-                    background: url("/assets/spritesheet.gif") no-repeat;
-                    height: 20px;
-                    width: 20px;
-                    background-size: cover;
-                    margin: 6px;
-                    background-position: 0 0;
+                background: url("/assets/spritesheet.svg") no-repeat;
+                height: 20px;
+                width: 20px;
+                background-size: cover;
+                margin: 6px;
+                background-position: 0 0;
+                // transition: 0.2s ease-in-out;
+                
+
 
                     &.linkedin {
                         background-position: -21px 0;
                     }
                 }
-            }
-
+            }   
         }
 
         &.column3 {
@@ -130,6 +141,21 @@ footer {
 
                 .square {
                     grid-area: square;
+                }
+
+                p { //Email hover behavior
+
+                    a { //Adding padding to the email so the pink hover looks better
+                        padding-right: 6px;
+                        // transition: 0.2s ease-in-out;
+
+                        &:hover,
+                        &:focus {
+                            color: var(--white);
+                        }
+                    }
+
+                   
                 }
             }
 
