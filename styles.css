@@ -1847,7 +1847,7 @@ footer .footer-column.column3 {
     font-size: 1.5rem;
   }
 }
-@media (min-width: 430px) {
+@media (min-width: 768px) {
   .brand-card-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
