@@ -43,25 +43,25 @@ function createCard(imageUrl, title, description, cardLink) {
 // Create multiple cards with different content
 const cardsData = [
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'assets/company-pages/h2_the-window-thumbnail.jpg',
         title: 'The Window',
         description: "Philly's new hole in the wall",
         cardLink: 'the-window.html'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg', 
+        imageUrl: 'assets/company-pages/h3_lemonade-stand-thumbnail.jpg', 
         title: 'The Lemonade Stand',
         description: 'DIY performing arts gets juicy',
         cardLink: 'lemonade-stand.html'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'assets/company-pages/h4_those-eyes-thumbnail.jpg',
         title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
         cardLink: 'those-eyes.html'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'assets/company-pages/h6_asp-thumbnail.jpg',
         title: 'American Scripture Project',
         description: 'Unity through shared experiences',
         cardLink: 'american-scripture-project.html'
