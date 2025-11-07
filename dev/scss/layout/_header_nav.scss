@@ -11,6 +11,7 @@ header {
     justify-content: space-between;
     z-index: 999;
     top: 0;
+    pointer-events: none;
 
     img{
         width: auto;
@@ -27,6 +28,7 @@ header {
 
     .logo-container {
         height: 2em;
+        pointer-events: auto;
 
         #desktop-logo {
             display: none;
@@ -64,6 +66,10 @@ header {
         text-transform: uppercase;
     }
 
+    a, button, img {
+        pointer-events: auto;
+    }
+    
     a {
         &:hover {
             position: relative;

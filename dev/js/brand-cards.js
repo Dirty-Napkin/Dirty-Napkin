@@ -1,4 +1,4 @@
-// Function to create a card component
+// Function to create a card component on the BRANDS page
 function createCard(imageUrl, title, description, cardLink) {
     // Create the main card container
     const card = document.createElement('a');

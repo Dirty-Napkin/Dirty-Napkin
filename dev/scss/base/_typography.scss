@@ -8,6 +8,10 @@ body {
 a.no-link {
     color: initial !important;
     text-decoration: none !important;
+    
+    &.button-text:hover {
+        color: var(--white) !important;
+    }
 }
 
 

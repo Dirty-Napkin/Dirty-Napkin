@@ -22,11 +22,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (target.tagName.toLowerCase() === 'button') {
                     cursor.classList.add('hover-button');
+                    cursor.style.transform = "scale(1.7) rotate(45deg)";
                 } else if (target.tagName.toLowerCase() === 'a') {
-                    const rect = target.getBoundingClientRect();
-                    cursor.style.setProperty('--link-width', `${rect.width + 10}px`);
-                    cursor.style.setProperty('--link-height', `${rect.height + 10}px`);
-                    cursor.classList.add('hover-link');
+                    if (target.classList.contains('hover-style-one')) {
+                        const rect = target.getBoundingClientRect();
+                        cursor.style.setProperty('--link-width', `${rect.width + 10}px`);
+                        cursor.style.setProperty('--link-height', `${rect.height + 10}px`);
+                        
+                        // Check if link is inside nav element
+                        const isInNav = target.closest('nav') !== null;
+                        if (isInNav) {
+                            cursor.classList.add('hover-link-nav');
+                        } else {
+                            cursor.classList.add('hover-one');
+                        }
+                    } else {
+                        // Default to hover-style-two (either has hover-style-two class or no class)
+                        cursor.classList.add('hover-two');
+                    }
                 }
             });
 
@@ -40,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 // On leaving any anchor/button, remove hover classes
                 if (fromEl) {
                     cursor.classList.remove('hover-button');
-                    cursor.classList.remove('hover-link');
+                    cursor.classList.remove('hover-one');
+                    cursor.classList.remove('hover-link-nav');
+                    cursor.classList.remove('hover-two');
                 }
             });
 

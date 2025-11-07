@@ -362,6 +362,11 @@
                     &:nth-child(4) { grid-area: ASP; }  // American Scripture Project
                 }
 
+                &:not(div) > a {
+                    display: inline-block;
+                    line-height: 0;
+                }
+
                 img {
                     width: 100%;
 

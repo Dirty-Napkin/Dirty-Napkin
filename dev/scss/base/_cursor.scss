@@ -8,7 +8,8 @@
     border-radius: 0px;
     transform: translate(-50%, -50%);
     transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+                height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.15s ease-in-out;
 
     &.hover-button {
         background-color: var(--key);
@@ -16,11 +17,25 @@
         height: 20px;
     }
     
-    &.hover-link {
+    &.hover-one {
         z-index: 0;
         width: var(--link-width);
         height: var(--link-height);
     }
+
+    &.hover-two {
+        transform-origin: bottom center;
+        transform: translate(-50%, -50%) scale(1.6) rotate(-25deg);
+        background-color: var(--green);
+    }
+
+    &.hover-link-nav {
+        z-index: 998;
+        width: var(--link-width);
+        height: var(--link-height);
+    }
+
+    
 }
 
 // Hide the default cursor for the entire document

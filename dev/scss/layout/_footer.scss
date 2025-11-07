@@ -69,6 +69,12 @@ footer {
                     &:focus {
                         filter: brightness(0) invert(1);
                     }
+                    height: 22px;
+                    width: 22px;
+                    margin-left: -2px;
+                    &:nth-child(2) {
+                        margin-left: 8px;
+                    }
                 }
 
                 .footer-icon {
