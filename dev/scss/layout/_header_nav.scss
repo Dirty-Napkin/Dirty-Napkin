@@ -9,8 +9,9 @@ header {
     gap: 1rem;
     padding: 12px 24px;
     justify-content: space-between;
-    align-items: center;
     z-index: 999;
+    top: 0;
+    pointer-events: none;
 
     img{
         width: auto;
@@ -27,6 +28,7 @@ header {
 
     .logo-container {
         height: 2em;
+        pointer-events: auto;
 
         #desktop-logo {
             display: none;
@@ -62,5 +64,16 @@ header {
 
     .test {
         text-transform: uppercase;
+    }
+
+    a, button, img {
+        pointer-events: auto;
+    }
+    
+    a {
+        &:hover {
+            position: relative;
+            z-index: 100000;
+        }
     }
 }

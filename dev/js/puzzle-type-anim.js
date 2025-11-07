@@ -468,26 +468,14 @@ $(document).ready(() => {
         // Initialize the element
         wrapLetters($element);
 
-        // Add window resize listener with debouncing to re-wrap letters when font size changes
-        $window.off('resize.puzzle').on('resize.puzzle', $.debounce(100, () => {
-            wrapLetters($element);
-        }));
-    });
-});
+        // Add window resize listener to re-wrap letters when font size changes
+        window.addEventListener('resize', () => {
+            clearTimeout(textElement.resizeTimeout);
+            textElement.resizeTimeout = setTimeout(() => {
+                wrapLetters(textElement);
+            }, 100);
+        });
 
-// Simple debounce utility if not already available
-if (!$.debounce) {
-    $.debounce = function (wait, func) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    };
-}
+    })
 
-// console.log("Puzzle Type Loaded");
+})

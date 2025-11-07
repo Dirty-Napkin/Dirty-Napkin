@@ -162,8 +162,10 @@ function repeatedText() {
     });
 }
 
-// Initial run
-repeatedText();
+// Initial run - wait for DOM to be ready
+document.addEventListener("DOMContentLoaded", function () {
+    repeatedText();
+});
 
 /*-----------------
 Header spacing

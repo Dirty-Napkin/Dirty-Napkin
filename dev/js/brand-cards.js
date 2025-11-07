@@ -1,5 +1,5 @@
-// Function to create a card component using jQuery
-function createCard(imageUrl, title, description, cardLink, id) {
+// Function to create a card component on the BRANDS page
+function createCard(imageUrl, title, description, cardLink) {
     // Create the main card container
     const $card = $('<a>', {
         class: 'brand-card',

@@ -35,7 +35,8 @@
         position: relative;
         cursor: pointer;
 
-        &:hover {
+        @include md {
+            &:hover {
             .hover-grid {
                 pointer-events: all;
             }
@@ -46,8 +47,15 @@
             }
 
             img {
-                transform: scale(1.05);
+                transform: scale(1.02);
+
+                @include lg {
+                    transform: scale(1.05);
+                }
             }
         }
+            
+        }
+        
     }
 } 

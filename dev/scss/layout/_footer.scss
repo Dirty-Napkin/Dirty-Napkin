@@ -2,21 +2,21 @@
     Footer
 ============= */
 footer {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 60px;
     width: 100%;
     padding: 18px 24px;
+    z-index: 2;
 
     @include md {
-        padding-left: 32px;
-        padding-right: 32px;
+        padding: 24px 32px;
     }
 
     @include xl {
-        padding-left: 64px;
-        padding-right: 64px;
+        padding: 24px 64px;
     }
 
     p {
@@ -58,27 +58,42 @@ footer {
                 padding: 6px 0;
             }
 
-            .footer-icon-tray {
+            .footer-icon-tray {//Footer icon hover behavior
                 grid-area: icons;
                 display: flex;
                 gap: 8px;
                 align-items: flex-start;
 
+                a {
+                    &:hover,
+                    &:focus {
+                        filter: brightness(0) invert(1);
+                    }
+                    height: 22px;
+                    width: 22px;
+                    margin-left: -2px;
+                    &:nth-child(2) {
+                        margin-left: 8px;
+                    }
+                }
+
                 .footer-icon {
-                    width: 20px;
-                    height: 20px;
-                    fill: var(--key);
-                    transition: fill 0.2s, transform 0.3s ease;
-                    vertical-align: middle;
-                    display: inline-block;
+                background: url("/assets/spritesheet.svg") no-repeat;
+                height: 20px;
+                width: 20px;
+                background-size: cover;
+                margin: 6px;
+                background-position: 0 0;
+                // transition: 0.2s ease-in-out;
+                
+
 
                     &:hover {
                         fill: var(--white);
                         transform: scale(1.1)
                     }
                 }
-            }
-
+            }   
         }
 
         &.column3 {
@@ -133,6 +148,21 @@ footer {
 
                 .square {
                     grid-area: square;
+                }
+
+                p { //Email hover behavior
+
+                    a { //Adding padding to the email so the pink hover looks better
+                        padding-right: 6px;
+                        // transition: 0.2s ease-in-out;
+
+                        &:hover,
+                        &:focus {
+                            color: var(--white);
+                        }
+                    }
+
+                   
                 }
             }
 

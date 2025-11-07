@@ -8,6 +8,10 @@ body {
 a.no-link {
     color: initial !important;
     text-decoration: none !important;
+    
+    &.button-text:hover {
+        color: var(--white) !important;
+    }
 }
 
 
@@ -21,7 +25,7 @@ a.no-link {
 
     padding: .2rem .4rem .2rem .4rem;
     color: var(--magenta);
-    transition: 0.2s ease-in-out;
+    // transition: 0.2s ease-in-out; //I like this  no transiton look for now
 
     &:hover {color: var(--white)}
 }
@@ -62,19 +66,32 @@ h1 {
 
 .semibold-32pt,
 h2 {
-    font-size: 2rem; //32px
+    font-size: 1.25rem; //20px
     font-weight: 600;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
+
+    @include sm {
+        font-size: 1.5rem; //24px
+    }
+
+    @include md {
+        font-size: 2rem; //32px
+    }
+
 }
 
 .semibold-24pt,
 h3 {
-    font-size: 1.5rem; //24px
+    font-size: 1.25rem; //20px
     font-weight: 600;
     line-height: 130%; //31.2px
     text-transform: uppercase;
     letter-spacing: normal;
+
+    @include md {
+        font-size: 1.5rem; //24px
+    }
 }
 
 .bold-20pt,
@@ -102,6 +119,7 @@ p {
     font-weight: 500;
     line-height: 130%; //20.8px
     margin: 0;
+    
     &.paragraph-spacing{
         margin-top: 0.5rem;
     }
