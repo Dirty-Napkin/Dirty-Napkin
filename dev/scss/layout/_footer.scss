@@ -61,7 +61,6 @@ footer {
             .footer-icon-tray {//Footer icon hover behavior
                 grid-area: icons;
                 display: flex;
-                gap: 8px;
                 align-items: flex-start;
 
                 a {
@@ -83,10 +82,15 @@ footer {
                 width: 20px;
                 background-size: cover;
                 margin: 6px;
-                background-position: 0 0;
                 // transition: 0.2s ease-in-out;
                 
+                &.linkedin {
+                    background-position: -21px 0;
+                }
 
+                &.instagram {
+                    background-position: 0 0;
+                }
 
                     &:hover {
                         fill: var(--white);

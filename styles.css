@@ -1158,7 +1158,6 @@ footer .footer-column.column2 p {
 footer .footer-column.column2 .footer-icon-tray {
   grid-area: icons;
   display: flex;
-  gap: 8px;
   align-items: flex-start;
 }
 footer .footer-column.column2 .footer-icon-tray a {
@@ -1178,6 +1177,11 @@ footer .footer-column.column2 .footer-icon-tray .footer-icon {
   width: 20px;
   background-size: cover;
   margin: 6px;
+}
+footer .footer-column.column2 .footer-icon-tray .footer-icon.linkedin {
+  background-position: -21px 0;
+}
+footer .footer-column.column2 .footer-icon-tray .footer-icon.instagram {
   background-position: 0 0;
 }
 footer .footer-column.column2 .footer-icon-tray .footer-icon:hover {
@@ -1252,47 +1256,37 @@ footer .footer-column.column3 {
   justify-content: center;
   padding: 0;
 }
-#about-page main > * {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  column-gap: 2.5rem;
+#about-page main > *:not(footer) {
   width: 100%;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  padding: 0 5rem;
+  padding: 0 24px;
 }
 #about-page main .small-square {
   width: 1.2rem;
   height: 1.2rem;
 }
 #about-page main .intro-type {
-  height: 60vh;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+  background-color: var(--white);
 }
 #about-page main .intro-type div[aria-hidden=true] {
-  grid-column: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  align-items: flex-end;
-  height: 100%;
+  display: none;
 }
-#about-page main .intro-type .small-square {
+#about-page main .intro-type::before {
+  content: "";
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
   background-color: var(--key);
-}
-#about-page main .intro-type .small-square:nth-of-type(2) {
-  margin-top: auto;
-}
-#about-page main .intro-type .small-square:nth-of-type(3) {
-  margin-top: 2rem;
-  margin-bottom: 7.8rem;
+  margin-bottom: 1.5rem;
 }
 #about-page main .intro-type h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
-  width: 23ch;
-  text-align-last: justify;
-  grid-column: 4;
-  align-self: flex-end;
+  text-transform: uppercase;
+  color: var(--key);
+  line-height: 130%;
+  margin: 0;
 }
 #about-page main .intro-type h1 .txtbold {
   font-weight: 700;
@@ -1301,7 +1295,7 @@ footer .footer-column.column3 {
   display: inline-block;
   width: 0;
   overflow: visible;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 130%;
   margin-left: -0.2rem;
 }
@@ -1309,74 +1303,73 @@ footer .footer-column.column3 {
   display: block;
   margin: 0;
   padding: 0;
-  margin-top: 6rem;
   width: 100%;
 }
 #about-page main .hero-image img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
 }
 #about-page main .share-your-story {
   position: relative;
-  padding-top: 6rem;
-  padding-bottom: 12rem;
+  padding: 4rem 24px;
   background-color: var(--key);
   overflow: hidden;
 }
+#about-page main .share-your-story .story-title {
+  margin-bottom: 2rem;
+}
+#about-page main .share-your-story .story-title .small-square {
+  background-color: var(--yellow);
+  margin-bottom: 1.5rem;
+}
 #about-page main .share-your-story .small-square {
   background-color: var(--yellow);
-  grid-column: 2;
-  justify-self: flex-end;
-  margin-top: auto;
 }
 #about-page main .share-your-story div {
-  grid-column: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1.2rem;
+  display: none;
 }
 #about-page main .share-your-story h2 {
-  width: 30ch;
   font-size: 1rem;
   font-weight: 400;
-  justify-self: flex-end;
-  position: relative;
-  margin-top: 0rem;
+  text-transform: uppercase;
   color: var(--yellow);
+  margin: 0 0 1.5rem 0;
+  line-height: 140%;
 }
 #about-page main .share-your-story h2::after {
   content: "When you share your story";
   display: block;
   margin-top: 0.5rem;
 }
-#about-page main .share-your-story h2[aria-hidden=true] {
-  position: absolute;
-  right: -7rem;
-  top: 6rem;
-  margin-top: 0rem;
+#about-page main .share-your-story h2::before {
+  content: "When you share your story";
+  display: block;
+  margin-bottom: 0.5rem;
 }
-#about-page main .share-your-story h2[aria-hidden=true]::after {
-  display: none;
+#about-page main .share-your-story h2[aria-hidden=true] {
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 #about-page main .share-your-story p {
-  grid-column: 4/span 2;
   color: var(--white);
+  text-transform: none;
+  line-height: 140%;
+  margin: 0 0 1.5rem 0;
 }
-#about-page main .share-your-story p:nth-of-type(2) {
-  margin-top: 1rem;
+#about-page main .share-your-story p:last-of-type {
+  margin-bottom: 0;
 }
 #about-page main .share-your-story p .txtbold {
   text-transform: uppercase;
+  font-weight: 700;
 }
 #about-page main .services {
   position: relative;
   overflow: hidden;
-  min-height: 6rem; /* Maintain height when h2 is absolute */
-  max-width: 100%;
-  height: 60vh;
+  padding: 4rem 0;
   background-color: var(--key);
   color: var(--cyan);
 }
@@ -1384,153 +1377,126 @@ footer .footer-column.column3 {
   white-space: nowrap;
   pointer-events: none;
   position: absolute;
-  top: 3rem;
-  left: 5rem;
+  left: 0;
+  right: 0;
   font-weight: 300;
   color: var(--cyan);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
 }
 #about-page main .services .services-bar::before {
-  content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
-  display: block;
-  width: 107vw;
-  text-transform: uppercase;
-  white-space: pre;
-  color: var(--cyan);
+  content: "SERVICES";
+}
+#about-page main .services .services-bar::after {
+  content: "SERVICE";
+}
+#about-page main .services .services-bar.top {
+  top: 1.5rem;
 }
 #about-page main .services .services-bar.bottom {
-  bottom: 3rem;
+  bottom: 1.5rem;
   top: auto;
 }
 #about-page main .services h2 {
-  margin-top: 3rem;
-  z-index: 1;
-  padding-left: 42ch;
-  width: 107vw;
-  align-items: stretch;
-  justify-content: stretch;
-  color: var(--cyan);
+  display: none;
 }
 #about-page main .two-prongs {
-  padding-top: 6rem;
-  padding-bottom: 10rem;
-  color: var(--green);
+  padding: 4rem 24px;
   background-color: var(--key);
+  color: var(--white);
 }
 #about-page main .two-prongs h2 {
-  margin: 0;
-}
-#about-page main .two-prongs h2:first-of-type {
-  grid-column: 2;
-  text-align: right;
-  justify-self: flex-end;
-  width: 14ch;
+  margin: 0 0 1.5rem 0;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 140%;
 }
 #about-page main .two-prongs h2:last-of-type {
-  grid-column: 4;
-  text-align: justify;
-  width: 23ch;
-  text-align-last: justify;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 #about-page main .two-prongs p {
   color: var(--white);
-  grid-column: 4/span 2;
-  width: 100%;
+  line-height: 140%;
+  margin: 0 0 1.5rem 0;
 }
-#about-page main .two-prongs p:nth-of-type(1) {
-  margin-bottom: 1rem;
+#about-page main .two-prongs p:last-of-type {
+  margin-bottom: 0;
 }
 #about-page main .two-prongs .small-square {
   background-color: var(--green);
-  justify-self: flex-end;
-  grid-column: 2;
-  grid-row: 2;
+  margin-bottom: 1rem;
 }
 #about-page main .two-prongs .small-square:nth-of-type(2) {
-  grid-column: 2;
-  grid-row: 3;
+  margin-top: 0.5rem;
 }
 #about-page main .team {
-  padding-top: 8rem;
-  padding-bottom: 10rem;
+  padding: 4rem 24px;
+  background-color: var(--white);
 }
 #about-page main .team .team-header {
-  grid-column: 1/span 2;
-  justify-self: flex-end;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  margin-bottom: 3rem;
 }
 #about-page main .team .team-header h2 {
   font-size: 1rem;
-  margin-top: 0rem;
+  margin: 0 0 1.5rem 0;
   line-height: 140%;
-  text-align: justify;
-  text-align-last: justify;
   text-transform: none;
+  color: var(--key);
 }
 #about-page main .team .team-header .small-square {
   background-color: var(--key);
+  margin-bottom: 0.5rem;
 }
-#about-page main .team .team-header .small-square:nth-of-type(2) {
-  margin-top: 2rem;
-}
-#about-page main .team .team-header .small-square:nth-of-type(3) {
-  margin: auto 0;
-}
-#about-page main .team .team-header .small-square:nth-of-type(4) {
-  margin-top: auto;
+#about-page main .team .team-header .small-square:last-of-type {
+  margin-bottom: 0;
 }
 #about-page main .team .team-members {
-  grid-column: 4/span 3;
+  display: flex;
+  flex-direction: column;
   gap: 3rem;
-  width: 80%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  row-gap: 4rem;
+}
+#about-page main .team .team-members > div {
+  display: flex;
+  flex-direction: column;
+}
+#about-page main .team .team-members img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  background-color: #e0e0e0;
 }
 #about-page main .team .team-members h3 {
-  text-align-last: justify;
-  margin-top: 0.7rem;
-  margin-bottom: 0rem;
-  min-width: 11ch;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--key);
 }
 #about-page main .team .team-members p {
-  text-align: justify;
-  text-align-last: justify;
-  text-wrap: balance;
+  text-transform: none;
+  line-height: 140%;
+  color: var(--key);
+  margin: 0;
 }
 #about-page main .mission {
   position: relative;
-  padding-top: 6rem;
-  padding-bottom: 12rem;
+  padding: 4rem 24px;
   background-color: var(--white);
   overflow: hidden;
 }
 #about-page main .mission .story-title {
-  grid-column: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 #about-page main .mission h2 {
-  width: 30ch;
   font-size: 1rem;
   font-weight: 400;
-  text-align: right;
-  justify-self: flex-end;
-  position: relative;
-  margin-top: 0rem;
+  text-transform: uppercase;
   color: var(--key);
-}
-#about-page main .mission h2::before {
-  content: "Our Mission is";
-  position: absolute;
-  right: 100%;
-  margin-right: -4rem;
-  top: 0;
-  white-space: nowrap;
+  margin: 0 0 1.5rem 0;
+  line-height: 140%;
 }
 #about-page main .mission h2::after {
   content: "Our Mission is";
@@ -1538,54 +1504,349 @@ footer .footer-column.column3 {
   margin-top: 0.5rem;
 }
 #about-page main .mission h2[aria-hidden=true] {
-  position: absolute;
-  right: -1rem;
-  top: 6rem;
-  margin-top: 0rem;
-}
-#about-page main .mission h2[aria-hidden=true]::after {
-  display: none;
-}
-#about-page main .mission h2[aria-hidden=true]::before {
-  display: none;
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 #about-page main .mission p {
-  grid-column: 4/span 2;
   color: var(--key);
+  line-height: 140%;
+  margin: 0 0 1.5rem 0;
 }
-#about-page main .mission p:nth-of-type(2) {
-  margin-top: 1rem;
+#about-page main .mission p:last-of-type {
+  margin-bottom: 1.5rem;
 }
 #about-page main .mission p .txtbold {
   text-transform: uppercase;
+  font-weight: 700;
 }
 #about-page main .mission a {
-  grid-column: 4/span 2;
-  margin-top: 1rem;
   display: inline-block;
-  text-align: left;
-  text-align-last: left;
-  margin-left: -0.4rem;
-  z-index: 1;
-  width: fit-content;
+  text-transform: uppercase;
+  color: var(--key);
+  margin-top: 1rem;
 }
 #about-page main .logo-row {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  overflow: hidden;
+  display: none;
 }
-#about-page main .logo-row .logo-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 105vw;
-  margin-left: -6vw;
-  gap: 2rem;
-}
-#about-page main .logo-row .logo-repeat {
-  width: auto;
-  height: 1.5rem;
-  flex-shrink: 0;
+@media (min-width: 1024px) {
+  #about-page main > *:not(footer) {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 2.5rem;
+    width: 100%;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    padding: 0 5rem;
+  }
+  #about-page main .intro-type {
+    height: 60vh;
+    padding: 0;
+  }
+  #about-page main .intro-type::before {
+    display: none;
+  }
+  #about-page main .intro-type div[aria-hidden=true] {
+    display: flex;
+    grid-column: 2;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-end;
+    height: 100%;
+  }
+  #about-page main .intro-type .small-square {
+    background-color: var(--key);
+  }
+  #about-page main .intro-type .small-square:nth-of-type(2) {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+  #about-page main .intro-type .small-square:nth-of-type(3) {
+    margin-top: 2rem;
+    margin-bottom: 7.8rem;
+  }
+  #about-page main .intro-type h1 {
+    font-size: 2rem;
+    width: 23ch;
+    text-align-last: justify;
+    grid-column: 4;
+    align-self: flex-end;
+    text-transform: none;
+  }
+  #about-page main .intro-type h1 .line-break-comma {
+    font-size: 2rem;
+  }
+  #about-page main .hero-image {
+    margin-top: 6rem;
+  }
+  #about-page main .hero-image img {
+    height: 100%;
+  }
+  #about-page main .share-your-story {
+    padding-top: 6rem;
+    padding-bottom: 12rem;
+  }
+  #about-page main .share-your-story .story-title {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.2rem;
+    margin-bottom: 0;
+  }
+  #about-page main .share-your-story .small-square {
+    grid-column: 2;
+    justify-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+  #about-page main .share-your-story div {
+    display: flex;
+    grid-column: 2;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.2rem;
+  }
+  #about-page main .share-your-story h2 {
+    width: 30ch;
+    font-size: 1rem;
+    justify-self: flex-end;
+    position: relative;
+    margin-top: 0rem;
+    grid-column: 2;
+  }
+  #about-page main .share-your-story h2::before {
+    display: none;
+  }
+  #about-page main .share-your-story h2::after {
+    content: "When you share your story";
+    display: block;
+    margin-top: 0.5rem;
+  }
+  #about-page main .share-your-story h2[aria-hidden=true] {
+    display: block;
+    position: absolute;
+    right: -7rem;
+    top: 6rem;
+    margin-top: 0rem;
+  }
+  #about-page main .share-your-story h2[aria-hidden=true]::after {
+    display: none;
+  }
+  #about-page main .share-your-story p {
+    grid-column: 4/span 2;
+    margin: 0;
+  }
+  #about-page main .share-your-story p:nth-of-type(2) {
+    margin-top: 1rem;
+  }
+  #about-page main .services {
+    min-height: 6rem;
+    height: 60vh;
+    padding: 0;
+  }
+  #about-page main .services .services-bar {
+    top: 3rem;
+    left: 5rem;
+    padding: 0;
+  }
+  #about-page main .services .services-bar::before {
+    content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
+    display: block;
+    width: 107vw;
+    white-space: pre;
+  }
+  #about-page main .services .services-bar::after {
+    display: none;
+  }
+  #about-page main .services .services-bar.bottom {
+    bottom: 3rem;
+    top: auto;
+  }
+  #about-page main .services h2 {
+    display: block;
+    margin-top: 3rem;
+    z-index: 1;
+    padding-left: 42ch;
+    width: 107vw;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+  #about-page main .two-prongs {
+    padding-top: 6rem;
+    padding-bottom: 10rem;
+    color: var(--green);
+  }
+  #about-page main .two-prongs h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  #about-page main .two-prongs h2:first-of-type {
+    grid-column: 2;
+    text-align: right;
+    justify-self: flex-end;
+    width: 14ch;
+  }
+  #about-page main .two-prongs h2:last-of-type {
+    grid-column: 4;
+    text-align: justify;
+    width: 23ch;
+    text-align-last: justify;
+    margin-bottom: 3rem;
+  }
+  #about-page main .two-prongs p {
+    grid-column: 4/span 2;
+    width: 100%;
+    margin: 0;
+  }
+  #about-page main .two-prongs p:nth-of-type(1) {
+    margin-bottom: 1rem;
+  }
+  #about-page main .two-prongs .small-square {
+    justify-self: flex-end;
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+  }
+  #about-page main .two-prongs .small-square:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  #about-page main .team {
+    padding-top: 8rem;
+    padding-bottom: 10rem;
+  }
+  #about-page main .team .team-header {
+    grid-column: 1/span 2;
+    justify-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 0;
+  }
+  #about-page main .team .team-header h2 {
+    font-size: 1rem;
+    margin-top: 0rem;
+    line-height: 140%;
+    text-align: justify;
+    text-align-last: justify;
+    text-transform: none;
+  }
+  #about-page main .team .team-header .small-square:nth-of-type(2) {
+    margin-top: 2rem;
+  }
+  #about-page main .team .team-header .small-square:nth-of-type(3) {
+    margin: auto 0;
+  }
+  #about-page main .team .team-header .small-square:nth-of-type(4) {
+    margin-top: auto;
+  }
+  #about-page main .team .team-members {
+    grid-column: 4/span 3;
+    gap: 3rem;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 4rem;
+  }
+  #about-page main .team .team-members > div {
+    display: block;
+  }
+  #about-page main .team .team-members img {
+    margin-bottom: 0;
+  }
+  #about-page main .team .team-members h3 {
+    text-align-last: justify;
+    margin-top: 0.7rem;
+    margin-bottom: 0rem;
+    min-width: 11ch;
+  }
+  #about-page main .team .team-members p {
+    text-align: justify;
+    text-align-last: justify;
+    text-wrap: balance;
+  }
+  #about-page main .mission {
+    padding-top: 6rem;
+    padding-bottom: 12rem;
+  }
+  #about-page main .mission .story-title {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.2rem;
+    margin-bottom: 0;
+  }
+  #about-page main .mission h2 {
+    width: 30ch;
+    font-size: 1rem;
+    text-align: right;
+    justify-self: flex-end;
+    position: relative;
+    margin-top: 0rem;
+    grid-column: 2;
+  }
+  #about-page main .mission h2::before {
+    content: "Our Mission is";
+    position: absolute;
+    right: 100%;
+    margin-right: -4rem;
+    top: 0;
+    white-space: nowrap;
+  }
+  #about-page main .mission h2::after {
+    content: "Our Mission is";
+    display: block;
+    margin-top: 0.5rem;
+  }
+  #about-page main .mission h2[aria-hidden=true] {
+    display: block;
+    position: absolute;
+    right: -1rem;
+    top: 6rem;
+    margin-top: 0rem;
+  }
+  #about-page main .mission h2[aria-hidden=true]::after {
+    display: none;
+  }
+  #about-page main .mission h2[aria-hidden=true]::before {
+    display: none;
+  }
+  #about-page main .mission p {
+    grid-column: 4/span 2;
+    margin: 0;
+  }
+  #about-page main .mission p:nth-of-type(2) {
+    margin-top: 1rem;
+  }
+  #about-page main .mission a {
+    grid-column: 4/span 2;
+    margin-top: 1rem;
+    margin-left: -0.4rem;
+    z-index: 1;
+    width: fit-content;
+  }
+  #about-page main .logo-row {
+    display: block;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    overflow: hidden;
+  }
+  #about-page main .logo-row .logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 105vw;
+    margin-left: -6vw;
+    gap: 2rem;
+  }
+  #about-page main .logo-row .logo-repeat {
+    width: auto;
+    height: 1.5rem;
+    flex-shrink: 0;
+  }
 }
 
 /* =============
