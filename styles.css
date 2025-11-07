@@ -2280,7 +2280,7 @@ footer .footer-column.column3 {
 }
 .home-container .hero-section-mobile .ketchup-parent {
   height: 100vh;
-  background-image: url("../../assets/home-pg/hero-ketchup-mobile.jpg");
+  background-image: url("../../assets/company-pages/hero-ketchup-mobile.jpg");
   background-size: cover;
   z-index: -1;
 }
@@ -2659,7 +2659,7 @@ footer .footer-column.column3 {
 .home-container .yellow-ketchup-section .mobile-yellow-ketchup-img {
   width: 100%;
   height: 110vh;
-  background-image: url("../../assets/home-pg/yellow ketchup.png");
+  background-image: url("../../assets/company-pages/h8_yellow-ketchup-home.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right bottom;
