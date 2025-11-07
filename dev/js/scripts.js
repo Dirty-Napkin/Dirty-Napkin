@@ -1,4 +1,115 @@
 /*-----------------
+Multi-Trigger Background Animation (Throttled Scroll)
+-----------------*/
+function throttle(fn, wait) {
+    let lastTime = 0;
+    return function (...args) {
+        const now = Date.now();
+        if (now - lastTime >= wait) {
+            lastTime = now;
+            fn.apply(this, args);
+        }
+    };
+}
+
+function createMultiTriggerBackgroundAnimation(triggerConfigs) {
+    // Only run if at least one target is present in the DOM
+    const shouldRun = triggerConfigs.some(cfg => $(cfg.target).length);
+    if (!shouldRun) return;
+
+    // Get all unique targets
+    const uniqueTargets = Array.from(new Set(triggerConfigs.map(cfg => cfg.target)));
+
+    function handleSectionBackgrounds() {
+        // If at the very top of the page, remove all background classes and return
+        if (window.scrollY === 0) {
+            uniqueTargets.forEach(targetSelector => {
+                const $targetElement = $(targetSelector);
+                if (!$targetElement.length) return;
+                const triggers = triggerConfigs.filter(cfg => cfg.target === targetSelector);
+                triggers.forEach(cfg => $targetElement.removeClass(cfg.className));
+            });
+            return;
+        }
+
+        // For each target, determine which trigger is currently active
+        uniqueTargets.forEach(targetSelector => {
+            const $targetElement = $(targetSelector);
+            if (!$targetElement.length) return;
+
+            // Find all triggers for this target
+            const triggers = triggerConfigs.filter(cfg => cfg.target === targetSelector);
+
+            // Find all triggers whose threshold has been crossed and are at least partially visible
+            const eligibleTriggers = triggers.map(cfg => {
+                const $triggerElement = $(cfg.trigger);
+                if (!$triggerElement.length) return null;
+                const rect = $triggerElement[0].getBoundingClientRect();
+                const offsetPx = (cfg.offsetPercent / 100) * window.innerHeight;
+                const threshold = window.innerHeight - offsetPx;
+                const thresholdCrossed = rect.top < threshold;
+                const stillVisible = rect.bottom > 0;
+                return {
+                    cfg,
+                    thresholdCrossed,
+                    stillVisible
+                };
+            })
+                .filter(item => item && item.thresholdCrossed && item.stillVisible);
+
+            // Pick the last eligible trigger (deepest in the page)
+            let activeConfig = null;
+            if (eligibleTriggers.length > 0) {
+                activeConfig = eligibleTriggers[eligibleTriggers.length - 1].cfg;
+            }
+
+            // Remove all possible classes for this target
+            triggers.forEach(cfg => $targetElement.removeClass(cfg.className));
+            // Add the active class if found
+            if (activeConfig) {
+                $targetElement.addClass(activeConfig.className);
+            }
+        });
+    }
+
+    // Throttle the handler
+    const throttledHandler = throttle(handleSectionBackgrounds, 50);
+    $(window).on('scroll resize', throttledHandler);
+    // Initial run (deferred to ensure layout is complete)
+    setTimeout(handleSectionBackgrounds, 0);
+}
+
+const backgroundTriggers = [
+    {
+        trigger: '.story-grid',
+        target: '#about-page',
+        className: 'cyan-background',
+        offsetPercent: 25
+    },
+    {
+        trigger: '.what-we-do',
+        target: '#about-page',
+        className: 'black-background',
+        offsetPercent: 50
+    },
+    {
+        trigger: '.bios-conc',
+        target: '#about-page',
+        className: 'white-background',
+        offsetPercent: 40
+    }/*,
+    {
+        trigger: '.adam-collab',
+        target: '.home-container', 
+        className: 'black-background',
+        offsetPercent: 0
+    }*/
+];
+
+// Initialize the multi-trigger system
+const backgroundObserver = createMultiTriggerBackgroundAnimation(backgroundTriggers);
+
+/*-----------------
 Repeated text effect
 
 add the class .repeated-container and .repeated-text to the container and text respectively
@@ -62,24 +173,24 @@ Header spacing
 
 function headerSpacing() {
     // Don't run on the home page
-    if (document.querySelector('.home-container')) {
+    if ($('.home-container').length) {
         return 0;
     }
 
-    const header = document.querySelector("header");
-    const main = document.querySelector("main");
-    if (!header || !main) {
+    const $header = $("header");
+    const $main = $("main");
+    if (!$header.length || !$main.length) {
         console.warn("Header or main element not found");
         return 0;
     }
 
-    const headerHeight = header.getBoundingClientRect().height;
-    main.style.paddingTop = headerHeight + "px";
+    const headerHeight = $header[0].getBoundingClientRect().height;
+    $main.css('paddingTop', headerHeight + "px");
     return headerHeight;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Small delay to ensure CSS is applied
+// Call this after window.onload
+$(function () {
     setTimeout(() => {
         headerSpacing();
     }, 10);
@@ -97,7 +208,7 @@ function onResize() {
 }
 
 let resizeTimeout;
-window.addEventListener("resize", function () {
+$(window).on('resize', function () {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(onResize, 200);
 });

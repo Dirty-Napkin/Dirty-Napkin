@@ -675,94 +675,364 @@ function ketchupHeroScale() {
         addScrollHandler(updateKetchupHero);
         window.addEventListener('resize', updateKetchupHero);
     }
-}
 
-// ===== MASTER RESPONSIVE FUNCTION =====
+    //--------------Masking out hero type with scroll-------------------
+    const textBoxes = document.querySelectorAll('.width-box:not(.CTA-container .width-box) h2');
+    if (textBoxes && ketchupWrapper && ketchupHero) {
+        // Custom start points for each text box (as a fraction of wrapper height)
+        // Adjust these values as needed for your design
+        const startPoints = [0.47, 0.47, 0.67, 0.67];
 
-// Master responsive function that runs everything based on breakpoint
-function setupResponsiveJS() {
-    const breakpoints = {
-        sm: window.matchMedia("(min-width: 430px)"),
-        md: window.matchMedia("(min-width: 768px)"),
-        lg: window.matchMedia("(min-width: 1024px)"),
-        xl: window.matchMedia("(min-width: 1280px)")
-    };
-  
-    function applyJS() {
-        // Always reset scroll position
-        window.history.scrollRestoration = "manual";
-        window.scrollTo(0, 0);
-        
-        // Clear scroll handlers
-        scrollHandlers.clear();
-        
-        if (breakpoints.xl.matches || breakpoints.lg.matches) {
-            // XL/LG breakpoint - Desktop behavior
-            console.log('Desktop breakpoint active');
-            ketchupHeroScale();
-            lgHeroScroll();
-            lgKetchupScale();
-            setupHeroTextClip({
-                heroSelector: '.hero-section-lg .p-child',
-                ketchupSelector: '.hero-section-lg .ketchup-parent',
-                cloneStyles: {},
-                clipDirection: 'both'
-            });
-            lgHeroTextMask();
-            lgCtaGrid();
-            lgCtaTextMask();
-            setupBrandScroll({ translateMax: -170 });
-            lgBrandHover();
-            lgTestimonialScroll();
-            smallSquares();
-        } else if (breakpoints.md.matches) {
-            // MD breakpoint - Tablet behavior
-            console.log('MD breakpoint active');
-            mobileHeroScroll();
-            mobileTestimonialScroll();
-            setupHeroTextClip({
-                heroSelector: '.p-child',
-                ketchupSelector: '.ketchup-parent',
-                cloneStyles: { color: 'var(--black)', zIndex: '-2' },
-                clipDirection: 'vertical'
-            });
-            setupBrandScroll({ translateMax: -120 });
-        } else {
-            // SM and below - Mobile behavior
-            console.log('SM breakpoint active - Mobile');
-            mobileHeroScroll();
-            mobileTestimonialScroll();
-            setupHeroTextClip({
-                heroSelector: '.p-child',
-                ketchupSelector: '.ketchup-parent',
-                cloneStyles: { color: 'var(--black)', zIndex: '-2' },
-                clipDirection: 'vertical'
+        function updateTextBoxClipPath() {
+            const scrollY = window.scrollY;
+            const wrapperHeight = ketchupWrapper.offsetHeight;
+
+            textBoxes.forEach((textBox, i) => {
+                // Use the custom startPoint for this text box, or fallback to the first if not enough values
+                const startPoint = startPoints[i] !== undefined ? startPoints[i] : startPoints[0];
+                const startScroll = startPoint * wrapperHeight;
+                const insetTop = Math.max(0, scrollY - startScroll);
+                textBox.style.clipPath = `inset(${insetTop}px 0 0 0)`;
             });
         }
+
+        // Set initial state
+        updateTextBoxClipPath();
+        window.addEventListener('scroll', updateTextBoxClipPath);
     }
-  
-    // Listen for screen size changes
-    Object.values(breakpoints).forEach(mq => {
-        mq.addEventListener('change', applyJS);
-    });
-  
-    // Run once on load
-    applyJS();
-}
 
-// Initialize when DOM is loaded
-window.addEventListener('DOMContentLoaded', function() {
-    setupResponsiveJS();
-    console.log("If you're looking at this. you're a nerd :)");
-});
+    //--------------Clip white hero type to ketchup hero-------------------
+    function updateRepeatTypeClip() {
+        // Select the reference and target elements
+        const ketchupHero = document.querySelector('.ketchup-hero');
+        const repeatType = document.querySelector('.four-repeat-type');
+        if (!ketchupHero || !repeatType) return; // Exit if either is missing
 
-function reloadOnResize() {
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-            window.location.reload();
-        }, 200);
+        // Get bounding rect of .ketchup-hero relative to viewport
+        const heroRect = ketchupHero.getBoundingClientRect();
+        const repeatRect = repeatType.getBoundingClientRect();
+
+        // Calculate the top and bottom relative to the .four-repeat-type container
+        // This ensures the mask aligns visually with ketchup-hero inside the repeatType context
+        let top = heroRect.top - repeatRect.top;
+        let bottom = repeatRect.bottom - heroRect.bottom;
+
+        // Clamp to 0 if negative (shouldn't be, but for safety)
+        top = Math.max(0, Math.round(top));
+        bottom = Math.max(0, Math.round(bottom));
+
+        // X values (left/right) are already correct, but let's also use relative to repeatType for robustness
+        let left = heroRect.left - repeatRect.left;
+        let right = repeatRect.right - heroRect.right;
+
+        left = Math.max(0, Math.round(left));
+        right = Math.max(0, Math.round(right));
+
+        // --- Y OFFSET CORRECTION ---
+        // The Y value is still about 10px off. The most robust way to solve this is to account for any
+        // margin, border, or scroll offset that may be affecting the position.
+        // We'll use getComputedStyle to check for margin/border, and also check for scroll offset.
+
+        // 1. Account for scroll offset of the container (if any)
+        // (If .four-repeat-type is not scrollable, this will be 0)
+        const repeatTypeScrollTop = repeatType.scrollTop || 0;
+
+        // 2. Account for border and padding of .four-repeat-type
+        const repeatTypeStyle = window.getComputedStyle(repeatType);
+        const borderTop = parseFloat(repeatTypeStyle.borderTopWidth) || 0;
+        const paddingTop = parseFloat(repeatTypeStyle.paddingTop) || 0;
+
+        // 3. Account for margin of .ketchup-hero (if any)
+        const heroStyle = window.getComputedStyle(ketchupHero);
+        const heroMarginTop = parseFloat(heroStyle.marginTop) || 0;
+
+        // 4. Add up all corrections
+        // If the mask is too low, we need to subtract from 'top'
+        // If the mask is too high, we need to add to 'top'
+        // Empirically, the issue is usually due to border/padding/margin or subpixel rounding.
+        // We'll also allow a manual fudge factor for fine-tuning.
+        const manualFudge = 0; // Try -10px to correct the 10px offset
+
+        // Final top and bottom with all corrections
+        const finalTop = Math.max(
+            0,
+            top - repeatTypeScrollTop - borderTop - paddingTop + heroMarginTop + manualFudge
+        );
+        // For bottom, we want to keep the same fudge as before, but you can adjust if needed
+        const fudgeBottom = 0;
+        const finalBottom = Math.max(0, bottom + fudgeBottom);
+
+        // Build the clip-path string
+        const clipPath = `inset(${finalTop}px ${right}px ${finalBottom}px ${left}px)`;
+
+        // Apply the clip-path to the target element
+        repeatType.style.clipPath = clipPath;
+        repeatType.style.webkitClipPath = clipPath; // For Safari support
+    }
+
+    // Run once on DOMContentLoaded, and on scroll/resize
+    document.addEventListener('DOMContentLoaded', updateRepeatTypeClip);
+    window.addEventListener('resize', updateRepeatTypeClip);
+    window.addEventListener('scroll', updateRepeatTypeClip);
+
+    //--------------Brands large type movement-------------------
+    (function() {
+        const brandLetters = document.querySelector('.brand-letters');
+        const brandsContainer = document.querySelector('.brands-container');
+        if (!brandLetters || !brandsContainer) return;
+
+        // Editable variable: how far up (in px) brand-letters should move at max
+        const maxTranslateY = -1100; // Change this value for more/less movement
+
+        function updateBrandLettersPosition() {
+            applyScrollTransform({
+                element: brandLetters,
+                container: brandsContainer,
+                maxTranslateY: maxTranslateY
+            });
+        }
+
+        // Initial set
+        updateBrandLettersPosition();
+        window.addEventListener('scroll', updateBrandLettersPosition);
+        window.addEventListener('resize', updateBrandLettersPosition);
+    })();    
+
+    //--------------Brand hover effect-------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        const brandItems = document.querySelectorAll('.brand-item');
+
+        brandItems.forEach(item => {
+            const mainImage = item.querySelector('img:not(.more-info)');
+            const moreInfoImages = item.querySelectorAll('.more-info');
+
+            // Calculate movement based on image width plus gap
+            const imageWidth = mainImage.offsetWidth;
+            const movement = imageWidth + 28; // 28px is 1.75rem gap
+
+            // Calculate grid positions based on the image width and gap
+            const gridPositions = generateGridPositions(movement, imageWidth);
+
+            // Position indicators
+            // Create container for position indicators
+            const positionIndicators = document.createElement('div');
+            positionIndicators.className = 'position-indicators';
+            positionIndicators.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1;
+            `;
+            item.appendChild(positionIndicators);
+
+            // Create position indicators
+            gridPositions.forEach(pos => {
+                const indicator = document.createElement('div');
+                indicator.className = 'position-indicator';
+                indicator.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: ${imageWidth}px;
+                    height: ${imageWidth}px;
+                    background-color: rgba(128, 128, 128, 0.2);
+                    border: 1px solid rgba(128, 128, 128, 0.4);
+                    transform: translate(-50%, -50%) translate(${pos.x}px, ${pos.y}px);
+                    opacity: 0;
+                    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                `;
+
+                // Create text box for the label
+                const textBox = document.createElement('div');
+                textBox.style.cssText = `
+                    padding: 4px 8px;
+                    color: black;
+                    font-size: 24px;
+                    font-weight: bold;
+                    font-family: monospace;
+                    display: inline-block;
+                    text-align: center;
+                    min-width: 1.5em;
+                    letter-spacing: -1px;
+                `;
+                textBox.textContent = pos.label;
+
+                indicator.appendChild(textBox);
+                positionIndicators.appendChild(indicator);
+            });
+            //
+
+
+            // Position each more-info image
+            // Get the brand name from the first image's class
+            const brandName = item.querySelector('img:not(.more-info)').className;
+
+            // Define custom positions for each brand's more-info images
+            const customPositions = {
+                'the-window': [7, 8, 14, 15, 17, 19],      // Example: first image goes to position 7, second to 8, etc.
+                'lemonade-stand': [8, 11, 14, 17, 19],
+                'those-eyes': [7, 11, 12, 19, 22],
+                'branded-moments': [13, 14, 15, 16],
+                'american-scripture-project': [8, 10, 14, 19, 20]
+            };
+
+            moreInfoImages.forEach((img, index) => {
+                // Get the target position number for this image
+                const targetPosition = customPositions[brandName][index];
+                // Find the corresponding grid position
+                const pos = gridPositions.find(p => p.label === targetPosition.toString());
+
+                // Start at center (behind main image)
+                img.style.transform = 'translate(0, 0)';
+                img.style.opacity = '0';
+                img.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+
+            // Add hover effect
+            let showIndicators = false; //Set to false to hide indicators    
+
+            item.querySelector('img:not(.more-info)').addEventListener('mouseenter', () => {
+                // Show position indicators only if enabled
+                if (showIndicators) {
+                    const indicators = positionIndicators.querySelectorAll('.position-indicator');
+                    indicators.forEach(indicator => {
+                        indicator.style.opacity = '1';
+                    });
+                }
+
+                // Move images
+                moreInfoImages.forEach((img, index) => {
+                    const targetPosition = customPositions[brandName][index];
+                    const pos = gridPositions.find(p => p.label === targetPosition.toString());
+
+                    img.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+                    img.style.opacity = '1';
+                });
+            });
+
+            // On hover out
+            item.querySelector('img:not(.more-info)').addEventListener('mouseleave', () => {
+                // Hide position indicators only if enabled
+                if (showIndicators) {
+                    const indicators = positionIndicators.querySelectorAll('.position-indicator');
+                    indicators.forEach(indicator => {
+                        indicator.style.opacity = '0';
+                    });
+                }
+
+                // Move images back
+                moreInfoImages.forEach(img => {
+                    img.style.transform = 'translate(0, 0)';
+                    img.style.opacity = '0';
+                });
+            });
+            //
+        });
     });
+
+    //--------------Yellow Ketchup Section-------------------
+    (function() {
+        // Select the yellow ketchup section and image
+        const yellowSection = document.querySelector('.yellow-ketchup-section');
+        const yellowKetchupImg = yellowSection ? yellowSection.querySelector('img') : null;
+
+        // Editable variable: how far up (in px) the yellow ketchup image should move at max
+        const maxTranslateY = -400; // Adjust as needed for effect
+
+        function updateYellowKetchupPosition() {
+            if (!yellowSection || !yellowKetchupImg) return;
+
+            applyScrollTransform({
+                element: yellowKetchupImg,
+                container: yellowSection,
+                maxTranslateY: maxTranslateY
+            });
+        }
+
+        // Initial set
+        updateYellowKetchupPosition();
+        window.addEventListener('scroll', updateYellowKetchupPosition);
+        window.addEventListener('resize', updateYellowKetchupPosition);
+    })();
+    
+    //--------------Testimonial scroll animation-------------------
+    (function() {
+        // Editable variable: how far down (in px) the testimonial should move at start
+        const testimonialStartOffset = 500; // Change this value for more/less movement
+
+        const yellowSection = document.querySelector('.yellow-ketchup-section');
+        const testimonial = document.querySelector('.testimonial');
+        if (!yellowSection || !testimonial) return;
+
+
+
+        function animateTestimonial() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const sectionTop = getOffsetTop(yellowSection);
+            const sectionBottom = sectionTop + yellowSection.offsetHeight;
+
+            // When does yellow-ketchup-section first enter the viewport?
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            const sectionEnters = sectionTop - viewportHeight;
+            const sectionHitsTop = sectionTop;
+
+            if (scrollY < sectionEnters) {
+                // Before yellow-ketchup-section enters, reset testimonial
+                testimonial.style.transform = `translateY(0px)`;
+            } else if (scrollY >= sectionEnters && scrollY < sectionHitsTop) {
+                // Animate from offset to 0 as yellow-ketchup-section moves from entering to top
+                const progress = (scrollY - sectionEnters) / (sectionHitsTop - sectionEnters);
+                const clamped = Math.max(0, Math.min(1, progress));
+                const translateY = testimonialStartOffset * (1 - clamped);
+                testimonial.style.transform = `translateY(${translateY}px)`;
+
+            } else {
+                // When yellow-ketchup-section hits the top, testimonial at 0
+                testimonial.style.transform = `translateY(0px)`;
+
+            }
+        }
+
+        // Initial set
+        animateTestimonial();
+        window.addEventListener('scroll', animateTestimonial);
+        window.addEventListener('resize', animateTestimonial);
+    })();
+
+    //--------------masking out CTA text on scroll-------------------
+    //--------------Masking out hero type with scroll-------------------
+    // Masking out CTA text on scroll (inset decreases from bottom as you scroll)
+    const ctaTextBoxes = document.querySelectorAll('.CTA-container .width-box h2');
+    if (ctaTextBoxes && ketchupWrapper && ketchupHero) {
+        // Custom start points for each CTA text box (as a fraction of wrapper height)
+        // Adjust these values as needed for your design
+        const ctaStartPoints = [2.74, 2.74, 0, 0];
+
+        function updateCtaTextBoxClipPath() {
+            const scrollY = window.scrollY;
+            const wrapperHeight = ketchupWrapper.offsetHeight;
+
+            ctaTextBoxes.forEach((textBox, i) => {
+                // Use the custom startPoint for this text box, or fallback to the first if not enough values
+                const startPoint = ctaStartPoints[i] !== undefined ? ctaStartPoints[i] : ctaStartPoints[0];
+                const startScroll = startPoint * wrapperHeight;
+                // As scroll increases, insetBottom decreases from full height to 0
+                const textBoxHeight = textBox.offsetHeight;
+                let insetBottom = Math.max(0, textBoxHeight - Math.max(0, scrollY - startScroll));
+                // Clamp to textBoxHeight so it never goes negative
+                insetBottom = Math.min(textBoxHeight, insetBottom);
+                textBox.style.clipPath = `inset(0 0 ${insetBottom}px 0)`;
+            });
+        }
+
+        // Set initial state
+        updateCtaTextBoxClipPath();
+        window.addEventListener('scroll', updateCtaTextBoxClipPath);
+    }
 }
-reloadOnResize();

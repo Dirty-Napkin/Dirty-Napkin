@@ -1,90 +1,98 @@
-// Function to create a card component on the BRANDS page
-function createCard(imageUrl, title, description, cardLink) {
+// Function to create a card component using jQuery
+function createCard(imageUrl, title, description, cardLink, id) {
     // Create the main card container
-    const card = document.createElement('a');
-    card.className = 'brand-card';
-    card.href = cardLink;
-
+    const $card = $('<a>', {
+        class: 'brand-card',
+        href: cardLink,
+        id: id
+    });
 
     // Create the image container
-    const imageContainer = document.createElement('div');
-    imageContainer.className = 'card__image-container';
+    const $imageContainer = $('<div>', {
+        class: 'card__image-container'
+    });
 
     // Create and set up the image
-    const image = document.createElement('img');
-    image.className = 'card__image';
-    image.src = imageUrl;
-    image.alt = title;
-    imageContainer.appendChild(image);
+    const $image = $('<img>', {
+        class: 'card__image',
+        src: imageUrl,
+        alt: title
+    });
 
     // Create the content container
-    const content = document.createElement('div');
-    content.className = 'card__content';
+    const $content = $('<div>', {
+        class: 'card__content'
+    });
 
     // Create and set up the title
-    const titleElement = document.createElement('h3');
-    titleElement.className = 'card__title';
-    titleElement.textContent = title;
+    const $titleElement = $('<h3>', {
+        class: 'card__title',
+        text: title
+    });
 
     // Create and set up the description
-    const descriptionElement = document.createElement('p');
-    descriptionElement.className = 'card__description';
-    descriptionElement.textContent = description;
+    const $descriptionElement = $('<p>', {
+        class: 'card__description',
+        text: description
+    });
 
-    // Assemble the card
-    content.appendChild(titleElement);
-    content.appendChild(descriptionElement);
-    card.appendChild(imageContainer);
-    card.appendChild(content);
+    // Assemble the card using jQuery chaining
+    $content.append($titleElement, $descriptionElement);
+    $imageContainer.append($image);
+    $card.append($imageContainer, $content);
 
-    return card;
+    return $card;
 }
 
 // Create multiple cards with different content
 const cardsData = [
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'https://placehold.co/1272x820.jpg',
         title: 'The Window',
         description: "Philly's new hole in the wall",
-        cardLink: 'the-window.html'
+        cardLink: 'the-window.html',
+        id: 'B1'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg', 
+        imageUrl: 'https://placehold.co/1272x820.jpg', 
         title: 'The Lemonade Stand',
         description: 'DIY performing arts gets juicy',
-        cardLink: 'lemonade-stand.html'
+        cardLink: 'lemonade-stand.html',
+        id: 'B2'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'https://placehold.co/1272x820.jpg',
         title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
-        cardLink: 'those-eyes.html'
+        cardLink: 'those-eyes.html',
+        id: 'B3'
     },
     {
-        imageUrl: 'assets/test/Those Eyes image.jpg',
+        imageUrl: 'https://placehold.co/1272x820.jpg',
         title: 'American Scripture Project',
         description: 'Unity through shared experiences',
-        cardLink: 'american-scripture-project.html'
+        cardLink: 'american-scripture-project.html',
+        id: 'B4'
     }
 ];
 
-
 // Create and append all cards when DOM loads - ONLY on brands page
-document.addEventListener('DOMContentLoaded', () => {
+$(document).ready(() => {
     // Check if we're on the brands page by looking for the brand-card-grid container
-    const gridContainer = document.querySelector('.brand-card-grid');
-    if (gridContainer) {
-        console.log("Brands page detected - creating cards...");
-        cardsData.forEach(cardData => {
-            const card = createCard(
+    const $gridContainer = $('.brand-card-grid');
+    if ($gridContainer.length) {
+        // console.log("Brands page detected - creating cards...");
+        
+        // Create and append all cards using jQuery
+        $.each(cardsData, (index, cardData) => {
+            const $card = createCard(
                 cardData.imageUrl,
                 cardData.title,
                 cardData.description,
-                cardData.cardLink
+                cardData.cardLink,
+                cardData.id
             );
-            gridContainer.appendChild(card);
+            $gridContainer.append($card);
         });
     }
 });
-
-

@@ -551,74 +551,48 @@
             }
         }
 
-        .CTA-container {
-            display: flex;
-            height: 30vh;
+    .CTA-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        overflow: none;
+        height: auto;
+        
 
-            h2 {
-                width: 100%;
-                line-height: normal;
-                text-align: justify;
-                text-align-last: justify;
-                color: var(--black);
-                margin: auto;
+        .four-repeat-type {
+            position: relative;
+            height: auto;
+            margin-bottom: 15vh;
+            
 
-                .button-text {
-                    margin-top: 1rem;
-                    display: inline-block;
-                    text-align: left;
-                    text-align-last: left;
+            
+            .width-box { //Sets the width and margins for the text
+                margin-top: 20vh;
+                position: relative;
+                top: 0;
 
-                }
 
-                @include md {
-                    width: 75%;
-                }
+                div {
+                    margin-bottom: 30vh;
 
-                @include lg {
-                    padding: 0;
-                    margin: 0;
-                    width: 24ch;
-                    line-height: normal;
-                    text-align: justify;
-                    text-align-last: justify;
-                    color: var(--black);
-
-                    &:nth-of-type(1) {
-                        grid-area: area2;
-                    }
-                    &:nth-of-type(2) {
-                        grid-area: area3;
-                    }
-                    &:nth-of-type(3) {
-                        grid-area: area5;
-                    }
-                    &:nth-of-type(4) {
-                        grid-area: area6;
-                    }
-                    &:nth-last-of-type(-n+2) {
-                        align-self: end;
-                    }
                 }
             }
 
-            @include lg {
-                display: grid;
-                height: 85vh;
-                grid-template-columns: 20% 60% 20%;
-                grid-template-rows: repeat(2, 1fr);
-                align-items: center;
-                justify-content: center;
-
-                grid-template-areas:
-                    "area1 area2 area3"
-                    "area4 area5 area6";
-            }
         }
+      
+        .button-text {
+            display: block;
+            padding: .2rem .8rem .2rem 0;
+            width: fit-content;
+            margin-top: 1.5rem;
+        }
+        
     }
-}
 
-/* ===== FOOTER ===== */
-footer {
-    margin-top: 10rem;
+    .yellow-ketchup-img {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+    }
 }

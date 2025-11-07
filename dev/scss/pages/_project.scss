@@ -69,7 +69,7 @@
             }
         }
 
-        img {
+        img, video {
             grid-area: image;
             width: 100vw;
             margin-left: -24px;
@@ -208,20 +208,17 @@
             grid-row: span 2;
         }
 
-        .width2 {
-            grid-column: span 2;
-        }
+        $width-spans: (
+            width2: 2,
+            width3: 3,
+            width4: 4,
+            width6: 6
+        );
 
-        .width3 {
-            grid-column: span 3;
-        }
-
-        .width4 {
-            grid-column: span 4;
-        }
-
-        .width6 {
-            grid-column: span 6;
+        @each $class, $span in $width-spans {
+            .#{$class} {
+                grid-column: span #{$span};
+            }
         }
 
         .narrow-text {
@@ -251,7 +248,7 @@
 
             @include md {
 
-                img {
+                img, video {
                     /* 2 columns + 1 gap
                         (100% - (2 x gap)) / 3 = column width
                         column width x 2 + gap = img width*/

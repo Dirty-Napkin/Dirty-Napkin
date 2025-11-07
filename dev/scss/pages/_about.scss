@@ -3,8 +3,66 @@
 ============= */
 
 #about-page {
+    position: relative;
+
+    .about-bg-img {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        min-height: 100vh;
+        height: auto;
+        bottom: 0;
+        object-fit: cover;
+        z-index: -1;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+
+        &.about-bg-cyan,
+        &.about-bg-black {
+            opacity: 0;
+        }
+    }
+
+    &.cyan-background {
+        .about-bg-cyan {
+            opacity: 1;
+        }
+
+        .about-bg-black,
+        .about-bg-white {
+            opacity: 0;
+        }
+    }
+
+    &.black-background {
+
+        .about-bg-cyan,
+        .about-bg-white {
+            opacity: 0;
+        }
+
+        .about-bg-black {
+            opacity: 1;
+        }
+    }
+
+    &.white-background {
+        .about-bg-img {
+            opacity: 0;
+        }
+
+        .square {
+            background-color: var(--key) !important;
+        }
+    }
+
+
+
     .square {
-        @for $i from 5 through 39 {
+        transition: background-color 0.3s ease-in-out;
+
+        @for $i from 5 through 43 {
             &#about-square-#{$i} {
                 grid-area: square-#{$i};
             }
@@ -17,6 +75,15 @@
                 grid-area: text-#{$i};
             }
         }
+    }
+
+    .button-text {
+        color: inherit;
+        transition: color none;
+    }
+
+    p>span {
+        padding-left: 0;
     }
 
     .pg-title-container {
@@ -57,279 +124,261 @@
     }
 
     .hero {
-        //temporary
-        background-color: gray;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding-bottom: 12px;
 
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            padding-bottom: 12px;
+        @include md {
+            display: block;
+        }
+
+        .repeated-container {
+            .repeated-text {
+                @include sm {
+                    font-size: 2.016rem;
+                }
+
+                @include md {
+                    font-size: 1.125rem;
+                    width: 24ch;
+                }
+
+                @include lg {
+                    font-size: 1.5rem;
+                }
+            }
+
+            @include md {
+                gap: 328.7px 210.6px;
+                z-index: 2;
+                position: absolute;
+            }
+        }
+
+        .team-pic-container {
+            z-index: 1;
+            position: relative;
+
+            picture {
+                display: block;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            #about-square-1 {
+                position: absolute;
+                top: calc(310 / 354 * 100%);
+                left: calc(180 / 272 * 100%);
+            }
+        }
+
+        #about-square-2 {
+            display: none;
 
             @include md {
                 display: block;
             }
-
-            .repeated-container {
-                .repeated-text {
-                    @include sm {
-                        font-size: 2.016rem;
-                    }
-
-                    @include md {
-                        font-size: 1.125rem;
-                        width: 24ch;
-                    }
-
-                    @include lg {
-                        font-size: 1.5rem;
-                    }
-                }
-
-                @include md {
-                    gap: 328.7px 210.6px;
-                    z-index: 2;
-                    position: absolute;
-                }
-            }
-
-            .team-pic-container {
-                z-index: 1;
-                position: relative;
-
-                picture {
-                    display: block;
-
-                    img {
-                        width: 100%;
-                    }
-                }
-
-                #about-square-1 {
-                    position: absolute;
-                    top: calc(310 / 354 * 100%);
-                    left: calc(180 / 272 * 100%);
-                }
-            }
-
-            #about-square-2 {
-                display: none;
-
-                @include md {
-                    display: initial;
-                }
-            }
         }
     }
 
-    .story {
-        // background-color: var(--cyan);
-        background-color: darkblue;
-        color: var(--white);
+    .story-grid {
+        padding-top: 28px;
+        padding-left: 24px;
+        padding-right: 24px;
+        display: grid;
+        @include build-grid(24px); //5 columns of 24px
+        grid-row-gap: 40px;
+        grid-template-areas:
+            "square-5  .    .         .    .        .      .         .      ."
+            "text-1    .    square-6  .    .        .      square-8  .      ."
+            "square-7  .    square-11 .    square-9 .      square-10 .      ."
+            "square-13 .    square-14 .    .        text-2 text-2    text-2 ."
+            "square-15 .    .         .    .        .      .         .      square-12"
+            "para      para para      para para     para   para      para   para";
 
-        .story-grid {
-            padding-top: 28px;
-            padding-left: 24px;
-            padding-right: 24px;
-            display: grid;
-            @include build-grid(24px); //5 columns of 24px
-            grid-row-gap: 40px;
+        @include sm {
+            @include build-grid(26.875px);
+            grid-row-gap: 56px;
+        }
+
+        @include md {
+            grid-template-columns: repeat(13, 19.2px);
+            grid-column-gap: calc((100% - 249.6px)/12);
+            grid-row-gap: 48px;
+            padding-left: 32px;
+            padding-right: 32px;
             grid-template-areas:
-                "square-5  .    .         .    .        .      .         .      ."
-                "text-1    .    square-6  .    .        .      square-8  .      ."
-                "square-7  .    square-11 .    square-9 .      square-10 .      ."
-                "square-13 .    square-14 .    .        text-2 text-2    text-2 ."
-                "square-15 .    .         .    .        .      .         .      square-12"
-                "para      para para      para para     para   para      para   para";
+                ".      square-5  .         .         .         .         .         .         square-6  .      .         . ."
+                ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ."
+                ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ."
+                ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ."
+                ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ."
+                "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4"
+                "para   para      para      para      para      para      para      .         .         .      .         . ."
+                "para   para      para      para      para      para      para      square-31 .         .      .         . ."
+                "para   para      para      para      para      para      para      .         .         .      square-32 . ."
+                ".      .         .         .         .         .         .         .         .         .      .         . ."
+                ".      .         .         .         .         .         .         .         .         .      .         . text-5";
+        }
 
-            @include sm {
-                @include build-grid(26.875px);
-                grid-row-gap: 56px;
-            }
+        @include lg {
+            grid-template-columns: repeat(13, 25.6px);
+            grid-column-gap: calc((100% - 332.8px)/12);
+            grid-row-gap: 64px;
+        }
+
+        @include xl {
+            grid-template-columns: repeat(13, 32px);
+            grid-column-gap: calc((100% - 416px)/12);
+            grid-row-gap: 80px;
+            padding-left: 64px;
+            padding-right: 64px;
+        }
+
+        .desktop {
+            display: none;
 
             @include md {
-                grid-template-columns: repeat(13, 19.2px);
-                grid-column-gap: calc((100% - 249.6px)/12);
-                grid-row-gap: 48px;
-                padding-left: 32px;
-                padding-right: 32px;
-                grid-template-areas:
-                    ".      square-5  .         .         .         .         .         .         square-6  .      .         . ."
-                    ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ."
-                    ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ."
-                    ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ."
-                    ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ."
-                    "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4"
-                    "para   para      para      para      para      para      para      .         .         .      .         . ."
-                    "para   para      para      para      para      para      para      square-31 .         .      .         . ."
-                    "para   para      para      para      para      para      para      .         .         .      square-32 . ."
-                    ".      .         .         .         .         .         .         .         .         .      .         . ."
-                    ".      .         .         .         .         .         .         .         .         .      .         . text-5";
+                display: block;
+            }
+        }
+
+        .square {
+
+            @include md {
+                width: 19.2px;
+                height: 19.2px;
             }
 
             @include lg {
-                grid-template-columns: repeat(13, 25.6px);
-                grid-column-gap: calc((100% - 332.8px)/12);
-                grid-row-gap: 64px;
+                height: 25.6px;
+                width: 25.6px;
             }
 
             @include xl {
-                grid-template-columns: repeat(13, 32px);
-                grid-column-gap: calc((100% - 416px)/12);
-                grid-row-gap: 80px;
-                padding-left: 64px;
-                padding-right: 64px;
+                height: 32px;
+                width: 32px;
+            }
+        }
+
+        .about-text {
+            white-space: nowrap;
+
+            @include md {
+                transform: rotate(-90deg)
             }
 
-            .desktop {
-                display: none;
+            &#about-text-1 {
+                padding-right: 17px;
+                justify-items: end;
+                justify-self: end;
 
                 @include md {
-                    display: block;
+                    justify-items: initial;
+                    justify-self: initial;
+                    padding-right: 0;
                 }
             }
 
-            .square {
-                @include md {
-                    width: 19.2px;
-                    height: 19.2px;
-                }
-
-                @include lg {
-                    height: 25.6px;
-                    width: 25.6px;
-                }
-
-                @include xl {
-                    height: 32px;
-                    width: 32px;
-                }
-            }
-
-            .about-text {
-                white-space: nowrap;
+            &#about-text-2 {
+                height: 24px;
+                display: flex;
+                align-items: center;
+                overflow: visible;
 
                 @include md {
-                    transform: rotate(-90deg)
-                }
-
-                &#about-text-1 {
-                    padding-right: 17px;
-                    justify-items: end;
-                    justify-self: end;
-
-                    @include md {
-                        justify-items: initial;
-                        justify-self: initial;
-                        padding-right: 0;
-                    }
-                }
-
-                &#about-text-2 {
-                    height: 24px;
-                    display: flex;
-                    align-items: center;
-                    overflow: visible;
-
-                    @include md {
-                        align-items: end;
-                    }
+                    align-items: end;
                 }
             }
+        }
 
-            .story-para {
-                grid-area: para;
-                padding-bottom: 55px;
+        .story-para {
+            grid-area: para;
+            padding-bottom: 55px;
 
-                @include sm {
-                    padding-bottom: 77px;
-                }
-
+            @include sm {
+                padding-bottom: 77px;
             }
+
         }
     }
 
-    .what-we-do {
-        background-color: var(--cyan);
-        color: var(--white);
+    .what-we-do>.content {
+        display: flex;
+        padding: 90px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 27px;
+        overflow: hidden;
 
-        .content {
+        .mobile-squares-container {
+
             display: flex;
-            padding: 90px 24px;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 27px;
-            overflow: hidden;
+            align-items: center;
+            gap: 67px;
 
-            .mobile-squares-container {
-                //temporary
-                background-color: #F266B9;
-
-                display: flex;
-                align-items: center;
-                gap: 67px;
-
-                @include sm {
-                    gap: 90px;
-                }
-
-                @include md {
-                    display: none;
-                }
-
-                .square {
-                    height: 67px;
-                    width: 67px;
-                    //temporary
-                    background-color: gray;
-
-                    @include sm {
-                        height: 90px;
-                        width: 90px;
-                    }
-                }
-            }
-
-            .square.desktop {
-                display: none;
-
-                @include md {
-                    display: block;
-                    height: 70px;
-                    width: 70px;
-
-                }
-
-                @include lg {
-                    height: 93px;
-                    width: 93px;
-                }
-
-                @include xl {
-                    height: 116px;
-                    width: 116px;
-                }
+            @include sm {
+                gap: 90px;
             }
 
             @include md {
-                padding-right: 0 !important;
-                padding-bottom: 0 !important;
-                display: grid;
-                grid-template-columns: repeat(6, minmax(0, 1fr));
-                grid-template-rows: repeat(7, minmax(0, auto));
-                gap: 58px 40px;
-                grid-template-areas:
-                    "square-33 .       .       square-34 .      ."
-                    ".         text-6  text-6  text-6    .      ."
-                    ".         .       .       .         .      ."
-                    "square-35 .       .       square-36 .      square-37"
-                    ".         .       .       .         text-7 text-7"
-                    ".         .       .       .         text-8 text-8"
-                    ".         .       .       square-38.       square-39";
+                display: none;
+            }
 
-                #about-text-7, #about-text-8 {
-                    max-width: 75%;
+            .square {
+                height: 67px;
+                width: 67px;
+
+                @include sm {
+                    height: 90px;
+                    width: 90px;
                 }
+            }
+        }
+
+        .square.desktop {
+            display: none;
+
+            @include md {
+                display: block;
+                height: 70px;
+                width: 70px;
+
+            }
+
+            @include lg {
+                height: 93px;
+                width: 93px;
+            }
+
+            @include xl {
+                height: 116px;
+                width: 116px;
+            }
+        }
+
+        @include md {
+            padding-right: 0 !important;
+            padding-bottom: 0 !important;
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-rows: repeat(7, minmax(0, auto));
+            gap: 58px 40px;
+            grid-template-areas:
+                "square-33 .       .       square-34 .      ."
+                ".         text-6  text-6  text-6    .      ."
+                ".         .       .       .         .      ."
+                "square-35 .       .       square-36 .      square-37"
+                ".         .       .       .         text-7 text-7"
+                ".         .       .       .         text-8 text-8"
+                ".         .       .       square-38.       square-39";
+
+            #about-text-7,
+            #about-text-8 {
+                max-width: 75%;
             }
         }
     }
@@ -370,10 +419,6 @@
         .conclusion {
             margin-bottom: 144px;
 
-            // p:first-of-type {
-            //     margin-top: 1rem;
-            // }
-
             p:last-of-type {
                 padding-bottom: 16px;
             }
@@ -406,98 +451,66 @@
         }
 
         @include lg {
+            grid-template-areas:
+                "square-40 .         dan-pic  .         .         noah-pic"
+                "evan-pic  .         dan-text .         .         noah-text"
+                "evan-text .         .        square-41 .         ."
+                ".         .         .        .         nick-pic  ."
+                ".         square-42 .        .         nick-text ."
+                "spacer    spacer    spacer   spacer    spacer    spacer"
+                ".         square-43 conc     conc      .         .";
+
             .bio {
                 display: contents;
 
-                &#dan {
+                $bio-names: (
+                    dan,
+                    noah,
+                    evan,
+                    nick
+                );
+
+            @each $name in $bio-names {
+                &##{$name} {
                     img {
-                        grid-column: 3;
-                        grid-row: 1;
+                        grid-area: #{$name}-pic;
                     }
 
                     div {
-                        grid-column: 3;
-                        grid-row: 2;
+                        grid-area: #{$name}-text;
                     }
-                }
-
-                &#noah {
-                    img {
-                        grid-column: 6;
-                        grid-row: 1;
-                    }
-
-                    div {
-                        grid-column: 6;
-                        grid-row: 2;
-                    }
-                }
-
-                &#evan {
-                    img {
-                        grid-column: 1;
-                        grid-row: 2;
-                    }
-
-                    div {
-                        grid-column: 1;
-                        grid-row: 3;
-                    }
-                }
-
-                &#nick {
-                    img {
-                        grid-column: 5;
-                        grid-row: 4;
-                    }
-
-                    div {
-                        grid-column: 5;
-                        grid-row: 5;
-                    }
-                }
-            }
-
-            .spacer {
-                display: block;
-                height: 145px;
-                grid-column: 1 / span 6;
-                grid-row: 6;
-            }
-
-            .conclusion {
-                grid-column: 3 / span 2;
-                grid-row: 7;
-            }
-
-            .square {
-                display: block !important;
-                justify-self: end;
-
-                &#about-square-40 {
-                    grid-column: 1;
-                    grid-row: 1;
-                    align-self: center;
-                }
-
-                &#about-square-41 {
-                    grid-column: 4;
-                    grid-row: 3;
-                    align-self: end;
-                }
-
-                &#about-square-42 {
-                    grid-column: 2;
-                    grid-row: 5;
-                    align-self: end;
-                }
-
-                &#about-square-43 {
-                    grid-column: 2;
-                    grid-row: 7;
-                    align-self: start;
                 }
             }
         }
+
+        .spacer {
+            display: block;
+            height: 145px;
+            grid-area: spacer;
+        }
+
+        .conclusion {
+            grid-area: conc;
+        }
+
+        .square {
+            display: block !important;
+            justify-self: end;
+
+            // Optimized square styling using Sass map
+            $square-alignments: (
+                40: center,
+                41: end,
+                42: end,
+                43: start
+            );
+
+        @each $square-num, $alignment in $square-alignments {
+            &#about-square-#{$square-num} {
+                align-self: #{$alignment};
+            }
+        }
     }
+}
+}
 }

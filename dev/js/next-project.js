@@ -3,25 +3,25 @@ const data = [
         "current-page": "the-window",
         "next-page": "lemonade-stand",
         "next-text": "The Lemonade Stand",
-        "next-img": "assets/home-pg/lemonade-stand.png"
+        "next-img": "assets/company-pages/h3_lemonade-stand-thumbnail.jpg"
     },
     {
         "current-page": "lemonade-stand",
         "next-page": "those-eyes",
         "next-text": "Those Eyes",
-        "next-img": "assets/home-pg/those-eyes.png"
+        "next-img": "assets/company-pages/h4_those-eyes-thumbnail.jpg"
     },
     {
         "current-page": "those-eyes",
         "next-page": "american-scripture-project",
         "next-text": "American Scripture Project",
-        "next-img": "assets/home-pg/asp.png"
+        "next-img": "assets/company-pages/h6_asp-thumbnail.jpg"
     },
     {
         "current-page": "american-scripture-project",
         "next-page": "the-window",
         "next-text": "The Window",
-        "next-img": "assets/home-pg/the-window.png"
+        "next-img": "assets/company-pages/h2_the-window-thumbnail.jpg"
     }
 ];
 
@@ -44,49 +44,45 @@ function updateNextProject() {
     const currentPage = getCurrentPage();
     const nextProjectData = getNextProjectData(currentPage);
 
+    // Cache jQuery objects for better performance
+    const $nextProject = $('.next-project');
+    const $nextProjectLink = $nextProject.find('a');
+    const $projectTitle = $nextProject.find('h2');
+    const $projectImg = $('.next-project-img');
+
     if (!nextProjectData) {
         // Hide the next project section if no data found
-        const nextProjectElement = document.querySelector('.next-project');
-        if (nextProjectElement) {
-            nextProjectElement.style.display = 'none';
+        if ($nextProject.length) {
+            $nextProject.css('display', 'none');
         }
         return;
     }
     
     // Update the link href
-    const nextProjectLink = document.querySelector('.next-project a');
-    if (nextProjectLink) {
-        nextProjectLink.href = `${nextProjectData['next-page']}.html`;
+    if ($nextProjectLink.length) {
+        $nextProjectLink.attr('href', `${nextProjectData['next-page']}.html`);
     }
     
     // Update the project title
-    const projectTitle = document.querySelector('.next-project h2');
-    if (projectTitle) {
+    if ($projectTitle.length) {
         // Split the text by spaces and add <br> between each word
         const words = nextProjectData['next-text'].split(' ');
-        projectTitle.innerHTML = words.join('<br>');
+        $projectTitle.html(words.join('<br>'));
     }
     
     // Update the image
-    const projectImg = document.querySelector('.next-project-img');
-    if (projectImg) {
+    if ($projectImg.length) {
         // Update the ID to match the next project
-        projectImg.id = nextProjectData['next-page'];
+        $projectImg.attr('id', nextProjectData['next-page']);
         
         // Update the background image
-        projectImg.style.backgroundImage = `url("${nextProjectData['next-img']}")`;
+        $projectImg.css('backgroundImage', `url("${nextProjectData['next-img']}")`);
     }
 }
 
-// Check if the current page is a project page
-if (document.querySelector('body').classList.contains('project-page')) {
-    // Run the update function when the DOM is loaded
-    document.addEventListener('DOMContentLoaded', updateNextProject);
-
-    // Also run on page load for cases where DOMContentLoaded might have already fired
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', updateNextProject);
-    } else {
+// Check if the current page is a project page and initialize
+$(document).ready(() => {
+    if ($('body').hasClass('project-page')) {
         updateNextProject();
     }
-}
+});
