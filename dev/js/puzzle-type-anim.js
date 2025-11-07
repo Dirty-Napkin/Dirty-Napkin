@@ -7,72 +7,69 @@ Puzzle type animations
 
 /-----------------*/
 
-$(document).ready(() => {
-    const CONSTANTS = {
-        SPACING_FACTOR: 0.75,
-        SMALL_SCREEN_BREAKPOINT: 768,
-        XL_BREAKPOINT: 1280,
-        MAX_LINES: 4,
-        MAX_CHARS_PER_LINE: 10,
-        MIN_CELL_SIZE: 20,
-        CONTAINER_MARGIN: 48,
-        ANIMATION_DELAYS: [1, 1000, 2000, 3000],
-        TRANSITION_DURATION: '0.3s ease'
-    };
+document.addEventListener("DOMContentLoaded", () => {
+    const textElements = document.querySelectorAll(".puzzle-type")
 
-    const $window = $(window);
-    const $textElements = $('.puzzle-type');
 
-    $textElements.each(function () {
-        const $element = $(this);
+    textElements.forEach((textElement) => {
+        // Here is where to adjust the spacing of the grid, if you want the tracking to be more or less
+
+        /* --------------------------------------------------------------------------------
+        
+        Here I need to fix the spacing Factor so that it can scale proportionally based on screen size in addition to the font size scaling.
+    
+        It works well on page load, but if you scale the browswer while you're using it, the spacing does not change. Maybe this is an issue we don't worry about fixing?
+    
+        -----------------------------------------------------------------------------------*/
+
+        const spacingFactor = .75;
 
         // Function to create rows for project titles
         function projectTitleRows(originalText) {
-            const isSmallScreen = $window.width() < CONSTANTS.SMALL_SCREEN_BREAKPOINT;
+            let rows = [];
+            let extraTopRow = false;
+            const isSmallScreen = window.innerWidth < 768;
+            const maxLines = 4;
             if (isSmallScreen) {
                 // Small screens: up to 4 lines, 10 chars max per line
+                const maxLineLength = 10;
                 const words = originalText.split(' ');
                 let lines = [];
                 let currentLine = '';
-
-                $.each(words, (i, word) => {
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
                     if (currentLine.length === 0) {
                         currentLine = word;
-                    } else if ((currentLine.length + 1 + word.length) <= CONSTANTS.MAX_CHARS_PER_LINE) {
+                    } else if ((currentLine.length + 1 + word.length) <= maxLineLength) {
                         currentLine += ' ' + word;
                     } else {
                         lines.push(currentLine);
                         currentLine = word;
                     }
-                });
-
+                }
                 if (currentLine.length > 0) {
                     lines.push(currentLine);
                 }
-
-                // Pad to max lines
-                while (lines.length < CONSTANTS.MAX_LINES) {
+                while (lines.length < maxLines) {
                     lines.unshift('');
                 }
-
-                return { rows: lines, extraTopRow: true };
+                rows = lines;
             } else {
                 // Large screens: special logic
                 const words = originalText.split(' ');
-
-                if (originalText.length <= CONSTANTS.MAX_CHARS_PER_LINE) {
+                let line1 = '';
+                let line2 = '';
+                if (originalText.length <= 10) {
                     // All on bottom line
-                    return { rows: ["", "", "", originalText], extraTopRow: true };
+                    rows = ["", "", "", originalText];
                 } else {
                     // Try all possible splits, pick the one where line1 <= 10 chars, line2 is the rest, and line2 is longer if possible
                     let bestSplit = { line1: '', line2: '', diff: Infinity };
-
                     for (let i = 1; i < words.length; i++) {
-                        const part1 = words.slice(0, i).join(' ');
-                        const part2 = words.slice(i).join(' ');
-
-                        if (part1.length <= CONSTANTS.MAX_CHARS_PER_LINE) {
-                            const diff = part2.length - part1.length;
+                        let part1 = words.slice(0, i).join(' ');
+                        let part2 = words.slice(i).join(' ');
+                        if (part1.length <= 10) {
+                            let diff = part2.length - part1.length;
                             // For 3+ words, prefer bottom line longer
                             if (words.length >= 3 && diff < 0) continue;
                             if (diff < bestSplit.diff) {
@@ -80,43 +77,46 @@ $(document).ready(() => {
                             }
                         }
                     }
-
                     if (bestSplit.line1) {
-                        return { rows: ["", "", bestSplit.line1, bestSplit.line2], extraTopRow: true };
+                        line1 = bestSplit.line1;
+                        line2 = bestSplit.line2;
                     } else {
                         // Fallback: just split at first word
-                        return { 
-                            rows: ["", "", words[0], words.slice(1).join(' ')], 
-                            extraTopRow: true 
-                        };
+                        line1 = words[0];
+                        line2 = words.slice(1).join(' ');
                     }
+                    rows = ["", "", line1, line2];
                 }
+                // Always pad to 4 lines (already done above)
             }
+            extraTopRow = true;
+            return { rows, extraTopRow };
         }
 
         // Function to wrap each letter in a span
-        function wrapLetters($element) {
+        function wrapLetters(element) {
             // Store the original text before any manipulation
-            let originalText = $element.data('originalText');
+            let originalText = element.dataset.originalText;
             if (!originalText) {
-                originalText = $element.text();
-                $element.data('originalText', originalText);
+                originalText = element.textContent;
+                element.dataset.originalText = originalText;
             }
 
-            // Clear existing content
-            $element.empty();
+            // Remove all child spans (reset) but preserve the original text
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
 
-            // Defensive check: ensure element is valid
-            if (!$element.length) {
-                console.warn('puzzle-type: element is not valid', $element);
+            // Defensive check: ensure element is a valid Element
+            if (!(element instanceof Element)) {
+                console.warn('puzzle-type: element is not a valid Element', element);
                 return;
             }
 
             // Word wrapping logic - only for project titles
             let rows = [];
             let extraTopRow = false;
-
-            if ($element.hasClass("project-title")) {
+            if (element.classList.contains("project-title")) {
                 const result = projectTitleRows(originalText);
                 rows = result.rows;
                 extraTopRow = result.extraTopRow;
@@ -127,44 +127,36 @@ $(document).ready(() => {
 
             // Defensive check: ensure rows is not empty
             if (!rows || rows.length === 0) {
-                console.warn('puzzle-type: rows is empty for element', $element, rows);
+                console.warn('puzzle-type: rows is empty for element', element, rows);
                 return;
             }
 
-            // Set up container with jQuery
-            $element.css({
-                position: 'relative',
-                display: 'inline-block',
-                margin: '12px 0 0 0',
-                padding: '0'
-            });
+            // Set up container
+            element.style.position = 'relative';
+            element.style.display = 'inline-block';
+            element.style.margin = `12px 0 0 0`;
+            element.style.padding = '0';
 
             // Calculate cell dimensions
-            const fontSize = parseFloat($element.css('fontSize'));
-            let cellSize = fontSize * CONSTANTS.SPACING_FACTOR;
-            let numRows;
-
-            if ($element.hasClass("project-title")) {
-                numRows = Math.max(CONSTANTS.MAX_LINES, rows.length);
-                if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
-            } else {
-                numRows = Math.max(3, rows.length); // Use 3 rows for non-project titles
-            }
+            const fontSize = window.getComputedStyle(element).fontSize;
+            let cellSize = parseFloat(fontSize) * spacingFactor;
+            let numRows = Math.max(3, rows.length);
+            if (extraTopRow) numRows += 1; // Add extra row at the top for project titles
 
             // Responsive grid sizing for project titles
-            if ($element.hasClass("project-title")) {
-                if ($window.width() < CONSTANTS.SMALL_SCREEN_BREAKPOINT) {
-                    // On smaller screens, calculate cell size to fit 10 characters
-                    const containerWidth = $window.width() - CONSTANTS.CONTAINER_MARGIN;
-                    const calculatedCellSize = containerWidth / CONSTANTS.MAX_CHARS_PER_LINE;
+            if (element.classList.contains("project-title")) {
+                if (window.innerWidth < 768) {
+                    // On smaller screens, calculate cell size to fit 10 characters in available width
+                    const containerWidth = window.innerWidth - 48; // Full width minus margins
+                    const calculatedCellSize = containerWidth / 10;
                     // Use the calculated cell size, but ensure it's not too small
-                    cellSize = Math.max(calculatedCellSize, CONSTANTS.MIN_CELL_SIZE);  // Minimum 20px cell size
+                    cellSize = Math.max(calculatedCellSize, 20); // Minimum 20px cell size
                 } else {
                     // On larger screens, ensure we don't exceed the container width
-                    const $titleFrame = $element.closest('.title-frame');
-                    if ($titleFrame.length) {
-                        const frameWidth = $titleFrame.width();
-                        const maxCellSize = frameWidth / CONSTANTS.MAX_CHARS_PER_LINE;
+                    const titleFrame = element.closest('.title-frame');
+                    if (titleFrame) {
+                        const frameWidth = titleFrame.offsetWidth;
+                        const maxCellSize = frameWidth / 10;
                         // Only shrink if absolutely necessary to fit
                         if (maxCellSize < cellSize) {
                             cellSize = maxCellSize;
@@ -176,258 +168,209 @@ $(document).ready(() => {
             // Create spans for each character
             let spanIndex = 0;
             let measuredCellSize = null;
-
-            $.each(rows, (rowIndex, row) => {
+            for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+                const row = rows[rowIndex];
                 // Calculate offset based on element type
                 let offsetRow;
-                if ($element.hasClass("project-title")) {
+                if (element.classList.contains("project-title")) {
                     // Project titles: bottom-aligned
-                    offsetRow = CONSTANTS.MAX_LINES - rows.length;
+                    offsetRow = 4 - rows.length;
                 } else {
                     // Non-project titles: center-aligned
                     offsetRow = Math.floor((4 - rows.length) / 2);
                 }
-
-                // Convert string row to array of characters
-                const chars = row.split('');
-                $.each(chars, (charIndex, char) => {
-                    const $span = $('<span>', {
-                        text: char,
-                        css: {
-                            display: 'block',
-                            position: 'absolute',
-                            transition: CONSTANTS.TRANSITION_DURATION,
-                            margin: '0',
-                            padding: '0',
-                            lineHeight: '1'
-                        },
-                        'data-span-number': spanIndex,
-                        'data-initial-col': charIndex,
-                        'data-row-index': rowIndex,
-                        'data-char-index': charIndex
-                    });
-
+                for (let charIndex = 0; charIndex < row.length; charIndex++) {
+                    const span = document.createElement('span');
+                    span.textContent = row[charIndex];
+                    span.style.display = 'block';
+                    span.style.position = 'absolute';
+                    span.style.transition = 'all 0.3s ease';
+                    span.style.margin = '0';
+                    span.style.padding = '0';
+                    span.style.lineHeight = '1';
+                    span.dataset.spanNumber = spanIndex;
                     // Calculate resting row position
-                    const restingRow = offsetRow + rowIndex;
-
+                    let restingRow = offsetRow + rowIndex;
                     // Temporarily append to measure height
-                    $element.append($span);
+                    element.appendChild(span);
                     if (measuredCellSize === null) {
-                        measuredCellSize = $span.outerHeight();
+                        measuredCellSize = span.offsetHeight;
                     }
-                    $span.detach();
-
+                    element.removeChild(span);
                     const initialX = charIndex * cellSize;
                     const initialY = (measuredCellSize || cellSize) * restingRow;
-
-                    $span.css({
-                        left: `${initialX}px`,
-                        top: `${initialY}px`
-                    }).data({
-                        initialX: initialX,
-                        initialY: initialY,
-                        initialRow: restingRow
-                    });
-
-                    $element.append($span);
+                    span.style.left = `${initialX}px`;
+                    span.style.top = `${initialY}px`;
+                    span.dataset.initialX = initialX;
+                    span.dataset.initialY = initialY;
+                    span.dataset.initialCol = charIndex;
+                    span.dataset.initialRow = restingRow;
+                    span.dataset.rowIndex = rowIndex;
+                    span.dataset.charIndex = charIndex;
+                    element.appendChild(span);
                     spanIndex++;
-                });
-            });
+                }
+            }
 
             // Calculate container dimensions
-            const maxRowLength = Math.max.apply(null, $.map(rows, row => row.length));
-
-            if ($element.hasClass("project-title") && $window.width() < CONSTANTS.SMALL_SCREEN_BREAKPOINT) {
+            const maxRowLength = Math.max(...rows.map(row => row.length));
+            if (element.classList.contains("project-title") && window.innerWidth < 768) {
                 // On small screens, always use height for 4 rows
-                const containerWidth = $window.width() - CONSTANTS.CONTAINER_MARGIN;
-                $element.css({
-                    width: `${containerWidth}px`,
-                    height: `${(CONSTANTS.MAX_LINES + 0.5) * cellSize}px`
-                });
-            } else if ($element.hasClass("project-title")) {
+                const containerWidth = window.innerWidth - 48; // Full width minus margins
+                element.style.width = `${containerWidth}px`;
+                element.style.height = `${(4 + 0.5) * cellSize}px`;
+            } else if (element.classList.contains("project-title")) {
                 // On larger screens (md breakpoint and up), use the maximum of:
                 // 1. The width of the resting position spans (actual rightmost span's offset)
                 // 2. The width of 10 characters (10 * cellSize)
-                const $spans = $element.find('span');
+                const spans = element.querySelectorAll('span');
                 let maxRight = 0;
-
-                $spans.each(function () {
-                    const $span = $(this);
-                    const initialX = parseFloat($span.data('initialX')) || 0;
-                    const rightEdge = initialX + $span.outerWidth();
+                spans.forEach(span => {
+                    const initialX = parseFloat(span.dataset.initialX) || 0;
+                    const rightEdge = initialX + span.offsetWidth;
                     maxRight = Math.max(maxRight, rightEdge);
                 });
-
-                const tenCharWidth = CONSTANTS.MAX_CHARS_PER_LINE * cellSize;
+                const tenCharWidth = 10 * cellSize;
                 const calculatedWidth = Math.max(maxRight, tenCharWidth);
-                const $titleFrame = $element.closest('.title-frame');
-
-                if ($titleFrame.length) {
-                    const frameWidth = $titleFrame.width();
-                    $element.css('width', `${Math.min(calculatedWidth, frameWidth)}px`);
+                const titleFrame = element.closest('.title-frame');
+                if (titleFrame) {
+                    const frameWidth = titleFrame.offsetWidth;
+                    element.style.width = `${Math.min(calculatedWidth, frameWidth)}px`;
                 } else {
-                    $element.css('width', `${calculatedWidth}px`);
+                    element.style.width = `${calculatedWidth}px`;
                 }
-
-                $element.css('height', `${(numRows + 0.5) * cellSize}px`);
+                element.style.height = `${(numRows + 0.5) * cellSize}px`;
             } else {
-                $element.css({
-                    width: `${maxRowLength * cellSize}px`,  // Use actual text width for all elements
-                    height: `${(numRows + 0.5) * cellSize}px`
-                });
+                element.style.width = `${maxRowLength * cellSize}px`; // Use actual text width for all elements
+                element.style.height = `${(numRows + 0.5) * cellSize}px`;
             }
 
             // Position tagline for XL breakpoint based on bottom row character count
-            if ($element.hasClass("project-title")) {
-                const $tagline = $element.parent().find('h5');
-                if ($tagline.length) {
+            if (element.classList.contains("project-title")) {
+                const tagline = element.parentElement.querySelector('h5');
+                if (tagline) {
                     // Remove previous resize listener if it exists
-                    $window.off('resize.tagline');
-
+                    if (tagline.taglineResizeListener) {
+                        window.removeEventListener('resize', tagline.taglineResizeListener);
+                    }
                     // Responsive positioning function
                     const positionTagline = () => {
-                        if ($window.width() >= CONSTANTS.XL_BREAKPOINT) {
+                        if (window.innerWidth >= 1280) {
                             const bottomRowCharCount = rows[rows.length - 1].length;
-
-                            if (bottomRowCharCount <= CONSTANTS.MAX_CHARS_PER_LINE) {
-                                $tagline.css({
-                                    position: '',
-                                    left: '',
-                                    top: '',
-                                    marginLeft: '0',
-                                    alignSelf: 'end',
-                                    justifySelf: 'start'
-                                });
+                            if (bottomRowCharCount <= 10) {
+                                tagline.style.position = '';
+                                tagline.style.left = '';
+                                tagline.style.top = '';
+                                tagline.style.marginLeft = '0';
+                                tagline.style.alignSelf = 'end';
+                                tagline.style.justifySelf = 'start';
                             } else {
-                                const $hero = $element.closest('.title-frame');
-                                if ($hero.length) $hero.css('position', 'relative');
-
-                                const $spans = $element.find('span');
+                                const hero = element.closest('.title-frame');
+                                if (hero) hero.style.position = 'relative';
+                                const spans = Array.from(element.querySelectorAll('span'));
                                 let charCount = 0;
-                                let $targetSpan = null;
-
-                                $spans.each(function () {
-                                    const $span = $(this);
-                                    if (parseInt($span.data('initialRow')) === 3) {
-                                        if (charCount === CONSTANTS.MAX_CHARS_PER_LINE) {
-                                            $targetSpan = $span;
-                                            return false; // break
+                                let targetSpan = null;
+                                for (let span of spans) {
+                                    if (parseInt(span.dataset.initialRow) === 3) {
+                                        if (charCount === 10) {
+                                            targetSpan = span;
+                                            break;
                                         }
                                         charCount++;
                                     }
-                                });
-
-                                const $thirdRowSpan = $spans.filter(function () {
-                                    return parseInt($(this).data('initialRow')) === 2;
-                                }).first();
-
-                                if ($targetSpan.length && $thirdRowSpan.length) {
-                                    const projectTitleOffset = $element.offset().top;
-                                    const thirdRowTop = $thirdRowSpan.offset().top;
-                                    const capHeightNudge = $thirdRowSpan.outerHeight() * 0.15;
-
-                                    $tagline.css({
-                                        position: 'absolute',
-                                        left: `${$targetSpan.offset().left}px`,
-                                        top: `${projectTitleOffset + thirdRowTop + capHeightNudge}px`
-                                    });
+                                }
+                                let thirdRowSpan = spans.find(span => parseInt(span.dataset.initialRow) === 2);
+                                if (targetSpan && thirdRowSpan) {
+                                    const projectTitle = element;
+                                    const projectTitleOffset = projectTitle.offsetTop;
+                                    const thirdRowTop = thirdRowSpan.offsetTop;
+                                    const capHeightNudge = thirdRowSpan.offsetHeight * 0.15;
+                                    tagline.style.position = 'absolute';
+                                    tagline.style.left = `${targetSpan.offsetLeft}px`;
+                                    tagline.style.top = `${projectTitleOffset + thirdRowTop + capHeightNudge}px`;
                                 } else {
-                                    $tagline.css({
-                                        position: '',
-                                        left: '',
-                                        top: ''
-                                    });
+                                    tagline.style.position = '';
+                                    tagline.style.left = '';
+                                    tagline.style.top = '';
                                 }
                             }
                         } else {
                             // Reset tagline to static/default for non-XL
-                            $tagline.css({
-                                position: '',
-                                left: '',
-                                top: '',
-                                marginLeft: '',
-                                alignSelf: '',
-                                justifySelf: ''
-                            });
+                            tagline.style.position = '';
+                            tagline.style.left = '';
+                            tagline.style.top = '';
+                            tagline.style.marginLeft = '';
+                            tagline.style.alignSelf = '';
+                            tagline.style.justifySelf = '';
                         }
                     };
-
-                    $window.on('resize.tagline', positionTagline);
-                    positionTagline(); // Call immediately
+                    tagline.taglineResizeListener = positionTagline;
+                    window.addEventListener('resize', positionTagline);
+                    // Call immediately
+                    positionTagline();
                 }
             }
 
-            // Hover animation event listeners
-            if ($element.hasClass("puzzle-hover")) {
-                $element.off('mouseenter.puzzle mouseleave.puzzle')
-                    .on('mouseenter.puzzle', () => {
-                        randomizeLetters($element, cellSize, measuredCellSize);
-                    })
-                    .on('mouseleave.puzzle', () => {
-                        const $letterSpans = $element.find('span');
-                        $letterSpans.each(function () {
-                            const $span = $(this);
-                            $span.css({
-                                left: `${$span.data('initialX')}px`,
-                                top: `${$span.data('initialY')}px`
-                            });
-                        });
+            // --- Hover animation event listeners ---
+            if (element.classList.contains("puzzle-hover")) {
+                element.onmouseenter = null;
+                element.onmouseleave = null;
+                element.addEventListener("mouseenter", () => {
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
+                });
+                element.addEventListener("mouseleave", () => {
+                    const letterSpans = element.querySelectorAll('span');
+                    letterSpans.forEach((span, idx) => {
+                        span.style.left = `${span.dataset.initialX}px`;
+                        span.style.top = `${span.dataset.initialY}px`;
                     });
+                });
             }
 
-            // Final height adjustment
+            // After all spans are created:
             if (measuredCellSize) {
-                if ($element.hasClass("project-title")) {
-                    $element.css('height', `${CONSTANTS.MAX_LINES * measuredCellSize}px`);
-                } else {
-                    $element.css('height', `${3 * measuredCellSize}px`);
-                }
+                element.style.height = `${4 * measuredCellSize}px`;
             }
 
             // Add random puzzle on load for puzzle-auto elements
-            if ($element.hasClass("puzzle-auto")) {
-                $.each(CONSTANTS.ANIMATION_DELAYS, (index, delay) => {
-                    setTimeout(() => {
-                        if (index < CONSTANTS.ANIMATION_DELAYS.length - 1) {
-                            randomizeLetters($element, cellSize, measuredCellSize);
-                        } else {
-                            // Final reset to original positions
-                            const $letterSpans = $element.find('span');
-                            $letterSpans.each(function () {
-                                const $span = $(this);
-                                $span.css({
-                                    left: `${$span.data('initialX')}px`,
-                                    top: `${$span.data('initialY')}px`
-                                });
-                            });
-                        }
-                    }, delay);
-                });
+            if (element.classList.contains("puzzle-auto")) {
+                setTimeout(() => {
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
+                }, 1);
+                setTimeout(() => {
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
+                }, 1000);
+                setTimeout(() => {
+                    randomizeLetters(element, 4, cellSize, measuredCellSize);
+                }, 2000);
+                setTimeout(() => {
+                    const letterSpans = element.querySelectorAll('span');
+                    letterSpans.forEach(span => {
+                        span.style.left = `${span.dataset.initialX}px`;
+                        span.style.top = `${span.dataset.initialY}px`;
+                    });
+                }, 3000);
             }
         }
 
         // Function to randomize letter positions
-        function randomizeLetters($element, cellSize, measuredCellSize) {
+        function randomizeLetters(element, numRows, cellSize, measuredCellSize) {
             if (!measuredCellSize || measuredCellSize <= 0) return;
-
-            const $letterSpans = $element.find('span');
+            const letterSpans = element.querySelectorAll('span');
             let maxCols, maxRows;
-
-            if ($element.hasClass("project-title")) {
-                maxCols = CONSTANTS.MAX_CHARS_PER_LINE;
-                maxRows = CONSTANTS.MAX_LINES;
+            if (element.classList.contains("project-title")) {
+                maxCols = 10;
+                maxRows = 4;
             } else {
-                const maxRowLength = Math.max.apply(null, $.map($letterSpans, function () {
-                    return parseInt($(this).data('initialCol')) + 1;
-                }));
+                const maxRowLength = Math.max(...Array.from(letterSpans).map(span =>
+                    parseInt(span.dataset.initialCol) + 1
+                ));
                 maxCols = maxRowLength;
-                maxRows = 3;
+                maxRows = numRows;
             }
-
             function isPositionOccupied(col, row, occupiedPositions) {
                 return occupiedPositions.some(pos => pos.col === col && pos.row === row);
             }
-
             function getRandomPosition(occupiedPositions) {
                 let col, row;
                 do {
@@ -436,37 +379,29 @@ $(document).ready(() => {
                 } while (isPositionOccupied(col, row, occupiedPositions));
                 return { col, row };
             }
-
             function getPixelPosition(col, row) {
                 return {
                     x: col * cellSize,
                     y: row * measuredCellSize
                 };
             }
-
-            let occupiedPositions = [];
-            let positions = [];
-
-            for (let i = 0; i < $letterSpans.length; i++) {
+            const occupiedPositions = [];
+            const positions = [];
+            for (let i = 0; i < letterSpans.length; i++) {
                 const newPos = getRandomPosition(occupiedPositions);
                 occupiedPositions.push(newPos);
                 positions.push(newPos);
             }
-
             positions.sort((a, b) => a.row - b.row || a.col - b.col);
-
-            $letterSpans.each((index, span) => {
-                const $span = $(span);
+            letterSpans.forEach((span, index) => {
                 const pixelPos = getPixelPosition(positions[index].col, positions[index].row);
-                $span.css({
-                    left: `${pixelPos.x}px`,
-                    top: `${pixelPos.y}px`
-                });
+                span.style.left = `${pixelPos.x}px`;
+                span.style.top = `${pixelPos.y}px`;
             });
         }
 
-        // Initialize the element
-        wrapLetters($element);
+        // Wrap all letters in spans
+        wrapLetters(textElement);
 
         // Add window resize listener to re-wrap letters when font size changes
         window.addEventListener('resize', () => {
