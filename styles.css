@@ -1173,17 +1173,12 @@ footer .footer-column.column2 .footer-icon-tray a:nth-child(2) {
   margin-left: 8px;
 }
 footer .footer-column.column2 .footer-icon-tray .footer-icon {
-<<<<<<< HEAD
-=======
   background: url("/assets/spritesheet.svg") no-repeat;
   height: 20px;
->>>>>>> home
   width: 20px;
-  height: 20px;
-  fill: var(--key);
-  transition: fill 0.2s, transform 0.3s ease;
-  vertical-align: middle;
-  display: inline-block;
+  background-size: cover;
+  margin: 6px;
+  background-position: 0 0;
 }
 footer .footer-column.column2 .footer-icon-tray .footer-icon:hover {
   fill: var(--white);
@@ -2368,7 +2363,7 @@ footer .footer-column.column3 {
   .home-container .hero-section-lg .ketchup-parent {
     width: 60vw;
     height: 72vh;
-    background-image: url("../../assets/home-pg/pink-ketchup.jpg");
+    background-image: url("../../assets/company-pages/h1_magenta-ketchup-home.jpg");
     background-size: cover;
     z-index: 0;
     transform-origin: center center;
@@ -2800,14 +2795,11 @@ footer .footer-column.column3 {
   }
 }
 
-<<<<<<< HEAD
-=======
 /* ===== FOOTER ===== */
 footer {
   margin-top: 10rem;
 }
 
->>>>>>> home
 /* =============
     Feedback Page
 ============= */
