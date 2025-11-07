@@ -3,514 +3,413 @@
 ============= */
 
 #about-page {
-    position: relative;
-
-    .about-bg-img {
-        position: absolute;
-        left: 0;
-        right: 0;
-        width: 100vw;
-        min-height: 100vh;
-        height: auto;
-        bottom: 0;
-        object-fit: cover;
-        z-index: -1;
-        pointer-events: none;
-        transition: opacity 0.3s ease-in-out;
-
-        &.about-bg-cyan,
-        &.about-bg-black {
-            opacity: 0;
-        }
-    }
-
-    &.cyan-background {
-        .about-bg-cyan {
-            opacity: 1;
-        }
-
-        .about-bg-black,
-        .about-bg-white {
-            opacity: 0;
-        }
-    }
-
-    &.black-background {
-
-        .about-bg-cyan,
-        .about-bg-white {
-            opacity: 0;
-        }
-
-        .about-bg-black {
-            opacity: 1;
-        }
-    }
-
-    &.white-background {
-        .about-bg-img {
-            opacity: 0;
-        }
-
-        .square {
-            background-color: var(--key) !important;
-        }
-    }
-
-
-
-    .square {
-        transition: background-color 0.3s ease-in-out;
-
-        @for $i from 5 through 43 {
-            &#about-square-#{$i} {
-                grid-area: square-#{$i};
-            }
-        }
-    }
-
-    .about-text {
-        @for $i from 1 through 8 {
-            &#about-text-#{$i} {
-                grid-area: text-#{$i};
-            }
-        }
-    }
-
-    .button-text {
-        color: inherit;
-        transition: color none;
-    }
-
-    p>span {
-        padding-left: 0;
-    }
-
-    .pg-title-container {
-        margin-bottom: 0;
-    }
-
-    h3 {
-        text-align: justify;
-        text-align-last: justify;
-    }
-
-    .hero .square,
-    .story .square {
-        @include sm {
-            height: 26.875px;
-            width: 26.875px;
-        }
-
-        @include md {
-            height: 19.2px;
-            width: 19.2px;
-        }
-
-        @include lg {
-            height: 25.6px;
-            width: 25.6px;
-        }
-
-        @include xl {
-            height: 32px;
-            width: 32px;
-        }
-
-        @include xxl {
-            height: 24px;
-            width: 24px;
-        }
-    }
-
-    .hero {
+    
+    main {
         display: flex;
         flex-direction: column;
-        gap: 40px;
-        padding-bottom: 12px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
 
-        @include md {
-            display: block;
-        }
-
-        .repeated-container {
-            .repeated-text {
-                @include sm {
-                    font-size: 2.016rem;
-                }
-
-                @include md {
-                    font-size: 1.125rem;
-                    width: 24ch;
-                }
-
-                @include lg {
-                    font-size: 1.5rem;
-                }
-            }
-
-            @include md {
-                gap: 328.7px 210.6px;
-                z-index: 2;
-                position: absolute;
-            }
-        }
-
-        .team-pic-container {
-            z-index: 1;
-            position: relative;
-
-            picture {
-                display: block;
-
-                img {
-                    width: 100%;
-                }
-            }
-
-            #about-square-1 {
-                position: absolute;
-                top: calc(310 / 354 * 100%);
-                left: calc(180 / 272 * 100%);
-            }
-        }
-
-        #about-square-2 {
-            display: none;
-
-            @include md {
-                display: block;
-            }
-        }
-    }
-
-    .story-grid {
-        padding-top: 28px;
-        padding-left: 24px;
-        padding-right: 24px;
-        display: grid;
-        @include build-grid(24px); //5 columns of 24px
-        grid-row-gap: 40px;
-        grid-template-areas:
-            "square-5  .    .         .    .        .      .         .      ."
-            "text-1    .    square-6  .    .        .      square-8  .      ."
-            "square-7  .    square-11 .    square-9 .      square-10 .      ."
-            "square-13 .    square-14 .    .        text-2 text-2    text-2 ."
-            "square-15 .    .         .    .        .      .         .      square-12"
-            "para      para para      para para     para   para      para   para";
-
-        @include sm {
-            @include build-grid(26.875px);
-            grid-row-gap: 56px;
-        }
-
-        @include md {
-            grid-template-columns: repeat(13, 19.2px);
-            grid-column-gap: calc((100% - 249.6px)/12);
-            grid-row-gap: 48px;
-            padding-left: 32px;
-            padding-right: 32px;
-            grid-template-areas:
-                ".      square-5  .         .         .         .         .         .         square-6  .      .         . ."
-                ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ."
-                ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ."
-                ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ."
-                ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ."
-                "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4"
-                "para   para      para      para      para      para      para      .         .         .      .         . ."
-                "para   para      para      para      para      para      para      square-31 .         .      .         . ."
-                "para   para      para      para      para      para      para      .         .         .      square-32 . ."
-                ".      .         .         .         .         .         .         .         .         .      .         . ."
-                ".      .         .         .         .         .         .         .         .         .      .         . text-5";
-        }
-
-        @include lg {
-            grid-template-columns: repeat(13, 25.6px);
-            grid-column-gap: calc((100% - 332.8px)/12);
-            grid-row-gap: 64px;
-        }
-
-        @include xl {
-            grid-template-columns: repeat(13, 32px);
-            grid-column-gap: calc((100% - 416px)/12);
-            grid-row-gap: 80px;
-            padding-left: 64px;
-            padding-right: 64px;
-        }
-
-        .desktop {
-            display: none;
-
-            @include md {
-                display: block;
-            }
-        }
-
-        .square {
-
-            @include md {
-                width: 19.2px;
-                height: 19.2px;
-            }
-
-            @include lg {
-                height: 25.6px;
-                width: 25.6px;
-            }
-
-            @include xl {
-                height: 32px;
-                width: 32px;
-            }
-        }
-
-        .about-text {
-            white-space: nowrap;
-
-            @include md {
-                transform: rotate(-90deg)
-            }
-
-            &#about-text-1 {
-                padding-right: 17px;
-                justify-items: end;
-                justify-self: end;
-
-                @include md {
-                    justify-items: initial;
-                    justify-self: initial;
-                    padding-right: 0;
-                }
-            }
-
-            &#about-text-2 {
-                height: 24px;
-                display: flex;
-                align-items: center;
-                overflow: visible;
-
-                @include md {
-                    align-items: end;
-                }
-            }
-        }
-
-        .story-para {
-            grid-area: para;
-            padding-bottom: 55px;
-
-            @include sm {
-                padding-bottom: 77px;
-            }
-
-        }
-    }
-
-    .what-we-do>.content {
-        display: flex;
-        padding: 90px 24px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 27px;
-        overflow: hidden;
-
-        .mobile-squares-container {
-
-            display: flex;
-            align-items: center;
-            gap: 67px;
-
-            @include sm {
-                gap: 90px;
-            }
-
-            @include md {
-                display: none;
-            }
-
-            .square {
-                height: 67px;
-                width: 67px;
-
-                @include sm {
-                    height: 90px;
-                    width: 90px;
-                }
-            }
-        }
-
-        .square.desktop {
-            display: none;
-
-            @include md {
-                display: block;
-                height: 70px;
-                width: 70px;
-
-            }
-
-            @include lg {
-                height: 93px;
-                width: 93px;
-            }
-
-            @include xl {
-                height: 116px;
-                width: 116px;
-            }
-        }
-
-        @include md {
-            padding-right: 0 !important;
-            padding-bottom: 0 !important;
+        > * {
             display: grid;
             grid-template-columns: repeat(6, minmax(0, 1fr));
-            grid-template-rows: repeat(7, minmax(0, auto));
-            gap: 58px 40px;
-            grid-template-areas:
-                "square-33 .       .       square-34 .      ."
-                ".         text-6  text-6  text-6    .      ."
-                ".         .       .       .         .      ."
-                "square-35 .       .       square-36 .      square-37"
-                ".         .       .       .         text-7 text-7"
-                ".         .       .       .         text-8 text-8"
-                ".         .       .       square-38.       square-39";
-
-            #about-text-7,
-            #about-text-8 {
-                max-width: 75%;
-            }
+            column-gap: 2.5rem;
+            width: 100%;
+            margin-left: 5rem;
+            margin-right: 5rem;
+            padding: 0 5rem;
         }
-    }
 
-    .bios-conc {
-        margin-top: 47px;
-        display: grid;
-        gap: 40px;
+        .small-square {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
 
-        .bio {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+        .intro-type {
 
-            .bio-text {
+            height: 60vh;
+            
+            
+            div[aria-hidden="true"] {
+                grid-column: 2;
                 display: flex;
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
+                gap: 1.2rem;
+                align-items: flex-end;
+                // justify-content: space-between;
+                height: 100%;
+            }
 
-                h4 {
-                    text-box: trim-both cap;
+            .small-square {
+                background-color: var(--key);
+
+                &:nth-of-type(2) {
+                    margin-top: auto;
+                }
+                &:nth-of-type(3) {
+                    margin-top: 2rem;
+                    margin-bottom: 7.8rem;
+                }
+            }
+
+            h1 {
+                font-size: 2rem;
+                font-weight: 500;
+
+                width: 23ch;
+                text-align-last: justify;
+
+                grid-column: 4;
+                align-self: flex-end;
+
+                .txtbold {
+                    font-weight: 700;
+                }
+
+                .line-break-comma {
+                    display: inline-block;
+                    width: 0;
+                    overflow: visible;
+                    font-size: 2rem;
+                    line-height: 130%;
+                    margin-left: -0.2rem;
+                }
+            }
+        }
+
+        .hero-image {
+            display: block;
+            margin: 0;
+            padding: 0;
+            margin-top: 6rem;
+            width: 100%;
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .share-your-story {
+            position: relative;
+            padding-top: 6rem;
+            padding-bottom: 12rem;
+            background-color: var(--key);
+            overflow: hidden;
+
+            .small-square {
+                background-color: var(--yellow);
+                grid-column: 2;
+                justify-self: flex-end;
+                margin-top: auto;
+            }
+
+            div {
+                grid-column: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 1.2rem;
+            }
+
+            h2 {
+                width: 30ch;
+                font-size: 1rem;
+                font-weight: 400;
+                justify-self: flex-end;
+                position: relative;
+                margin-top: 0rem;
+                color: var(--yellow);
+
+                &::after {
+                    content: "When you share your story";
+                    display: block;
+                    margin-top: 0.5rem;
+                }
+
+                &[aria-hidden="true"] {
+                    position: absolute;
+                    right: -7rem;
+                    top: 6rem;
+                    margin-top: 0rem;
+
+                    &::after {
+                        display: none;
+                    }
+                }
+            } 
+
+            p {
+                grid-column: 4 / span 2;
+                color: var(--white);
+
+                &:nth-of-type(2) {
+                    margin-top: 1rem;
+                }
+
+                .txtbold {
+                    text-transform: uppercase;
+                  
+                }
+            }
+        }
+
+        .services {
+            position: relative;
+            overflow: hidden;
+            min-height: 6rem; /* Maintain height when h2 is absolute */
+            max-width: 100%;
+            height: 60vh;
+
+            background-color: var(--key);
+            color: var(--cyan);
+
+            .services-bar {
+                white-space: nowrap;
+                pointer-events: none;
+                position: absolute;
+                top: 3rem;
+                left: 5rem;
+                font-weight: 300;
+                color: var(--cyan);
+
+                &::before {
+                    content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
+                    display: block;
+                    width: 107vw;
+                    text-transform: uppercase;
+                    white-space: pre;
+                    color: var(--cyan);
+                }
+
+                &.bottom {
+                    bottom: 3rem;
+                    top: auto;
+                }
+            }
+
+            h2 {
+                margin-top: 3rem;
+                z-index: 1;
+                padding-left: 42ch;
+                width: 107vw;
+                align-items: stretch;
+                justify-content: stretch;
+                color: var(--cyan);
+            }
+        }
+
+        .two-prongs {
+            padding-top: 6rem;
+            padding-bottom: 10rem;
+            color: var(--green);
+            background-color: var(--key);
+            h2 {
+                margin: 0;
+
+                &:first-of-type {
+                    grid-column: 2;
+                    text-align: right;
+                    justify-self: flex-end;
+                    width: 14ch;
+                }
+
+                &:last-of-type {
+                    grid-column: 4;
                     text-align: justify;
+                    width: 23ch;
+                    text-align-last: justify;
+                    margin-bottom: 3rem;
+                }
+            }
+
+            p {
+                color: var(--white);
+                grid-column: 4 / span 2;
+                width: 100%;
+
+                &:nth-of-type(1) {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            .small-square {
+                background-color: var(--green);
+                justify-self: flex-end;
+                grid-column: 2;
+                grid-row: 2;
+               
+                &:nth-of-type(2) {
+                    grid-column: 2;
+                    grid-row: 3;
+                }
+            }
+        }
+
+        .team {
+            padding-top: 8rem;
+            padding-bottom: 10rem;
+
+            .team-header {
+                grid-column: 1 / span 2;
+                justify-self: flex-end;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+
+                h2 {
+                    font-size: 1rem;
+                    margin-top: 0rem;
+                    line-height: 140%;
+                    text-align: justify;
+                    text-align-last: justify;
+                    text-transform: none;
+                }
+
+                .small-square {
+                    background-color: var(--key);
+
+                    &:nth-of-type(2) {
+                        margin-top: 2rem;
+                    }
+
+                    &:nth-of-type(3) {
+                        margin: auto 0;
+                    }
+
+                    &:nth-of-type(4) {
+                        margin-top: auto;
+                    }
+                }
+            }
+
+            .team-members {
+                grid-column: 4 / span 3;
+                gap: 3rem;
+                width: 80%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                row-gap: 4rem;
+
+                h3 {    
+                    text-align-last: justify;
+                    margin-top: .7rem;
+                    margin-bottom: 0rem;
+                    min-width: 11ch;
 
                 }
 
                 p {
                     text-align: justify;
+                    text-align-last: justify;
+                    text-wrap: balance;
                 }
             }
         }
 
-        #about-square-42,
-        #about-square-43 {
-            display: none;
-        }
+        .mission {
+            position: relative;
+            padding-top: 6rem;
+            padding-bottom: 12rem;
+            background-color: var(--white);
+            overflow: hidden;
 
-        .conclusion {
-            margin-bottom: 144px;
-
-            p:last-of-type {
-                padding-bottom: 16px;
+            .story-title {
+                grid-column: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 1.2rem;
             }
 
-            .arrow-btn {
-                margin-left: -30px;
-                margin-top: 20px;
-            }
-        }
+            h2 {
+                width: 30ch;
+                font-size: 1rem;
+                font-weight: 400;
+                text-align: right;
+                justify-self: flex-end;
+                position: relative;
+                margin-top: 0rem;
+                color: var(--key);
 
-        .spacer {
-            display: none;
-        }
+                &::before {
+                    content: "Our Mission is";
+                    position: absolute;
+                    right: 100%;
+                    margin-right: -4rem;
+                    top: 0;
+                    white-space: nowrap;
+                }
 
-        @include md {
-            grid-template-columns: repeat(6, 1fr);
+                &::after {
+                    content: "Our Mission is";
+                    display: block;
+                    margin-top: 0.5rem;
+                }
 
-            .bio {
-                grid-column: span 3;
-            }
+                &[aria-hidden="true"] {
+                    position: absolute;
+                    right: -1rem;
+                    top: 6rem;
+                    margin-top: 0rem;
 
-            #about-square-40,
-            #about-square-41 {
-                display: none;
-            }
-
-            .conclusion {
-                grid-column: 2 / span 4;
-            }
-        }
-
-        @include lg {
-            grid-template-areas:
-                "square-40 .         dan-pic  .         .         noah-pic"
-                "evan-pic  .         dan-text .         .         noah-text"
-                "evan-text .         .        square-41 .         ."
-                ".         .         .        .         nick-pic  ."
-                ".         square-42 .        .         nick-text ."
-                "spacer    spacer    spacer   spacer    spacer    spacer"
-                ".         square-43 conc     conc      .         .";
-
-            .bio {
-                display: contents;
-
-                $bio-names: (
-                    dan,
-                    noah,
-                    evan,
-                    nick
-                );
-
-            @each $name in $bio-names {
-                &##{$name} {
-                    img {
-                        grid-area: #{$name}-pic;
+                    &::after {
+                        display: none;
                     }
 
-                    div {
-                        grid-area: #{$name}-text;
+                    &::before {
+                        display: none;
                     }
                 }
+            } 
+
+            p {
+                grid-column: 4 / span 2;
+                color: var(--key);
+
+                &:nth-of-type(2) {
+                    margin-top: 1rem;
+                }
+
+                .txtbold {
+                    text-transform: uppercase;
+                }
+            }
+
+            a {
+                grid-column: 4 / span 2;
+                margin-top: 1rem;
+                display: inline-block;
+                text-align: left;
+                text-align-last: left;
+                margin-left: -0.4rem;
+                z-index: 1;
+                width: fit-content;
             }
         }
 
-        .spacer {
-            display: block;
-            height: 145px;
-            grid-area: spacer;
-        }
+        .logo-row {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            overflow: hidden;
 
-        .conclusion {
-            grid-area: conc;
-        }
+            .logo-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 105vw;
+                margin-left: -6vw;
+                gap: 2rem;
+            }
 
-        .square {
-            display: block !important;
-            justify-self: end;
-
-            // Optimized square styling using Sass map
-            $square-alignments: (
-                40: center,
-                41: end,
-                42: end,
-                43: start
-            );
-
-        @each $square-num, $alignment in $square-alignments {
-            &#about-square-#{$square-num} {
-                align-self: #{$alignment};
+            .logo-repeat {
+                width: auto;
+                height: 1.5rem;
+                flex-shrink: 0;
             }
         }
     }
-}
-}
 }

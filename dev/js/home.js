@@ -750,8 +750,13 @@ function setupResponsiveJS() {
     applyJS();
 }
 
-// Initialize when DOM is loaded
+// Initialize when DOM is loaded - only on index.html
 window.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on the index page by checking body ID
+    if (document.body.id !== 'index') {
+        return; // Exit early if not on index page
+    }
+    
     setTimeout(function() {
         setupResponsiveJS();
     }, 100);
@@ -759,6 +764,11 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 function reloadOnResize() {
+    // Check if we're on the index page by checking body ID
+    if (document.body.id !== 'index') {
+        return; // Exit early if not on index page
+    }
+    
     let resizeTimeout;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);

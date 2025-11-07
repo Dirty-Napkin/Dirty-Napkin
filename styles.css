@@ -1245,582 +1245,347 @@ footer .footer-column.column3 {
 /* =============
     About Page
 ============= */
-#about-page {
-  position: relative;
-}
-#about-page .about-bg-img {
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100vw;
-  min-height: 100vh;
-  height: auto;
-  bottom: 0;
-  object-fit: cover;
-  z-index: -1;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
-}
-#about-page .about-bg-img.about-bg-cyan, #about-page .about-bg-img.about-bg-black {
-  opacity: 0;
-}
-#about-page.cyan-background .about-bg-cyan {
-  opacity: 1;
-}
-#about-page.cyan-background .about-bg-black,
-#about-page.cyan-background .about-bg-white {
-  opacity: 0;
-}
-#about-page.black-background .about-bg-cyan,
-#about-page.black-background .about-bg-white {
-  opacity: 0;
-}
-#about-page.black-background .about-bg-black {
-  opacity: 1;
-}
-#about-page.white-background .about-bg-img {
-  opacity: 0;
-}
-#about-page.white-background .square {
-  background-color: var(--key) !important;
-}
-#about-page .square {
-  transition: background-color 0.3s ease-in-out;
-}
-#about-page .square#about-square-5 {
-  grid-area: square-5;
-}
-#about-page .square#about-square-6 {
-  grid-area: square-6;
-}
-#about-page .square#about-square-7 {
-  grid-area: square-7;
-}
-#about-page .square#about-square-8 {
-  grid-area: square-8;
-}
-#about-page .square#about-square-9 {
-  grid-area: square-9;
-}
-#about-page .square#about-square-10 {
-  grid-area: square-10;
-}
-#about-page .square#about-square-11 {
-  grid-area: square-11;
-}
-#about-page .square#about-square-12 {
-  grid-area: square-12;
-}
-#about-page .square#about-square-13 {
-  grid-area: square-13;
-}
-#about-page .square#about-square-14 {
-  grid-area: square-14;
-}
-#about-page .square#about-square-15 {
-  grid-area: square-15;
-}
-#about-page .square#about-square-16 {
-  grid-area: square-16;
-}
-#about-page .square#about-square-17 {
-  grid-area: square-17;
-}
-#about-page .square#about-square-18 {
-  grid-area: square-18;
-}
-#about-page .square#about-square-19 {
-  grid-area: square-19;
-}
-#about-page .square#about-square-20 {
-  grid-area: square-20;
-}
-#about-page .square#about-square-21 {
-  grid-area: square-21;
-}
-#about-page .square#about-square-22 {
-  grid-area: square-22;
-}
-#about-page .square#about-square-23 {
-  grid-area: square-23;
-}
-#about-page .square#about-square-24 {
-  grid-area: square-24;
-}
-#about-page .square#about-square-25 {
-  grid-area: square-25;
-}
-#about-page .square#about-square-26 {
-  grid-area: square-26;
-}
-#about-page .square#about-square-27 {
-  grid-area: square-27;
-}
-#about-page .square#about-square-28 {
-  grid-area: square-28;
-}
-#about-page .square#about-square-29 {
-  grid-area: square-29;
-}
-#about-page .square#about-square-30 {
-  grid-area: square-30;
-}
-#about-page .square#about-square-31 {
-  grid-area: square-31;
-}
-#about-page .square#about-square-32 {
-  grid-area: square-32;
-}
-#about-page .square#about-square-33 {
-  grid-area: square-33;
-}
-#about-page .square#about-square-34 {
-  grid-area: square-34;
-}
-#about-page .square#about-square-35 {
-  grid-area: square-35;
-}
-#about-page .square#about-square-36 {
-  grid-area: square-36;
-}
-#about-page .square#about-square-37 {
-  grid-area: square-37;
-}
-#about-page .square#about-square-38 {
-  grid-area: square-38;
-}
-#about-page .square#about-square-39 {
-  grid-area: square-39;
-}
-#about-page .square#about-square-40 {
-  grid-area: square-40;
-}
-#about-page .square#about-square-41 {
-  grid-area: square-41;
-}
-#about-page .square#about-square-42 {
-  grid-area: square-42;
-}
-#about-page .square#about-square-43 {
-  grid-area: square-43;
-}
-#about-page .about-text#about-text-1 {
-  grid-area: text-1;
-}
-#about-page .about-text#about-text-2 {
-  grid-area: text-2;
-}
-#about-page .about-text#about-text-3 {
-  grid-area: text-3;
-}
-#about-page .about-text#about-text-4 {
-  grid-area: text-4;
-}
-#about-page .about-text#about-text-5 {
-  grid-area: text-5;
-}
-#about-page .about-text#about-text-6 {
-  grid-area: text-6;
-}
-#about-page .about-text#about-text-7 {
-  grid-area: text-7;
-}
-#about-page .about-text#about-text-8 {
-  grid-area: text-8;
-}
-#about-page .button-text {
-  color: inherit;
-  transition: color none;
-}
-#about-page p > span {
-  padding-left: 0;
-}
-#about-page .pg-title-container {
-  margin-bottom: 0;
-}
-#about-page h3 {
-  text-align: justify;
-  text-align-last: justify;
-}
-@media (min-width: 430px) {
-  #about-page .hero .square,
-  #about-page .story .square {
-    height: 26.875px;
-    width: 26.875px;
-  }
-}
-@media (min-width: 768px) {
-  #about-page .hero .square,
-  #about-page .story .square {
-    height: 19.2px;
-    width: 19.2px;
-  }
-}
-@media (min-width: 1024px) {
-  #about-page .hero .square,
-  #about-page .story .square {
-    height: 25.6px;
-    width: 25.6px;
-  }
-}
-@media (min-width: 1280px) {
-  #about-page .hero .square,
-  #about-page .story .square {
-    height: 32px;
-    width: 32px;
-  }
-}
-@media (min-width: 1440px) {
-  #about-page .hero .square,
-  #about-page .story .square {
-    height: 24px;
-    width: 24px;
-  }
-}
-#about-page .hero {
+#about-page main {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding-bottom: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
-@media (min-width: 768px) {
-  #about-page .hero {
-    display: block;
-  }
+#about-page main > * {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  column-gap: 2.5rem;
+  width: 100%;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  padding: 0 5rem;
 }
-@media (min-width: 430px) {
-  #about-page .hero .repeated-container .repeated-text {
-    font-size: 2.016rem;
-  }
+#about-page main .small-square {
+  width: 1.2rem;
+  height: 1.2rem;
 }
-@media (min-width: 768px) {
-  #about-page .hero .repeated-container .repeated-text {
-    font-size: 1.125rem;
-    width: 24ch;
-  }
+#about-page main .intro-type {
+  height: 60vh;
 }
-@media (min-width: 1024px) {
-  #about-page .hero .repeated-container .repeated-text {
-    font-size: 1.5rem;
-  }
+#about-page main .intro-type div[aria-hidden=true] {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: flex-end;
+  height: 100%;
 }
-@media (min-width: 768px) {
-  #about-page .hero .repeated-container {
-    gap: 328.7px 210.6px;
-    z-index: 2;
-    position: absolute;
-  }
+#about-page main .intro-type .small-square {
+  background-color: var(--key);
 }
-#about-page .hero .team-pic-container {
-  z-index: 1;
-  position: relative;
+#about-page main .intro-type .small-square:nth-of-type(2) {
+  margin-top: auto;
 }
-#about-page .hero .team-pic-container picture {
+#about-page main .intro-type .small-square:nth-of-type(3) {
+  margin-top: 2rem;
+  margin-bottom: 7.8rem;
+}
+#about-page main .intro-type h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  width: 23ch;
+  text-align-last: justify;
+  grid-column: 4;
+  align-self: flex-end;
+}
+#about-page main .intro-type h1 .txtbold {
+  font-weight: 700;
+}
+#about-page main .intro-type h1 .line-break-comma {
+  display: inline-block;
+  width: 0;
+  overflow: visible;
+  font-size: 2rem;
+  line-height: 130%;
+  margin-left: -0.2rem;
+}
+#about-page main .hero-image {
   display: block;
-}
-#about-page .hero .team-pic-container picture img {
+  margin: 0;
+  padding: 0;
+  margin-top: 6rem;
   width: 100%;
 }
-#about-page .hero .team-pic-container #about-square-1 {
-  position: absolute;
-  top: 87.5706214689%;
-  left: 66.1764705882%;
+#about-page main .hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-#about-page .hero #about-square-2 {
-  display: none;
-}
-@media (min-width: 768px) {
-  #about-page .hero #about-square-2 {
-    display: block;
-  }
-}
-#about-page .story-grid {
-  padding-top: 28px;
-  padding-left: 24px;
-  padding-right: 24px;
-  display: grid;
-  grid-template-columns: 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px calc((100% - 120px) / 4) 24px  ;
-  grid-row-gap: 40px;
-  grid-template-areas: "square-5  .    .         .    .        .      .         .      ." "text-1    .    square-6  .    .        .      square-8  .      ." "square-7  .    square-11 .    square-9 .      square-10 .      ." "square-13 .    square-14 .    .        text-2 text-2    text-2 ." "square-15 .    .         .    .        .      .         .      square-12" "para      para para      para para     para   para      para   para";
-}
-@media (min-width: 430px) {
-  #about-page .story-grid {
-    grid-template-columns: 26.875px calc((100% - 134.375px) / 4) 26.875px calc((100% - 134.375px) / 4) 26.875px calc((100% - 134.375px) / 4) 26.875px calc((100% - 134.375px) / 4) 26.875px  ;
-    grid-row-gap: 56px;
-  }
-}
-@media (min-width: 768px) {
-  #about-page .story-grid {
-    grid-template-columns: repeat(13, 19.2px);
-    grid-column-gap: calc((100% - 249.6px) / 12);
-    grid-row-gap: 48px;
-    padding-left: 32px;
-    padding-right: 32px;
-    grid-template-areas: ".      square-5  .         .         .         .         .         .         square-6  .      .         . ." ".      .         square-7  square-8  square-9  .         .         square-10 square-11 text-1 .         . ." ".      square-12 square-13 square-14 square-15 square-16 square-17 square-18 .         .      .         . ." ".      square-19 .         square-20 square-21 square-22 square-23 .         .         .      .         . ." ".      .         square-24 .         square-25 square-26 .         square-27 .         .      .         . ." "text-3 square-28 .         square-29 .         square-30 .         .         .         text-2 .         . text-4" "para   para      para      para      para      para      para      .         .         .      .         . ." "para   para      para      para      para      para      para      square-31 .         .      .         . ." "para   para      para      para      para      para      para      .         .         .      square-32 . ." ".      .         .         .         .         .         .         .         .         .      .         . ." ".      .         .         .         .         .         .         .         .         .      .         . text-5";
-  }
-}
-@media (min-width: 1024px) {
-  #about-page .story-grid {
-    grid-template-columns: repeat(13, 25.6px);
-    grid-column-gap: calc((100% - 332.8px) / 12);
-    grid-row-gap: 64px;
-  }
-}
-@media (min-width: 1280px) {
-  #about-page .story-grid {
-    grid-template-columns: repeat(13, 32px);
-    grid-column-gap: calc((100% - 416px) / 12);
-    grid-row-gap: 80px;
-    padding-left: 64px;
-    padding-right: 64px;
-  }
-}
-#about-page .story-grid .desktop {
-  display: none;
-}
-@media (min-width: 768px) {
-  #about-page .story-grid .desktop {
-    display: block;
-  }
-}
-@media (min-width: 768px) {
-  #about-page .story-grid .square {
-    width: 19.2px;
-    height: 19.2px;
-  }
-}
-@media (min-width: 1024px) {
-  #about-page .story-grid .square {
-    height: 25.6px;
-    width: 25.6px;
-  }
-}
-@media (min-width: 1280px) {
-  #about-page .story-grid .square {
-    height: 32px;
-    width: 32px;
-  }
-}
-#about-page .story-grid .about-text {
-  white-space: nowrap;
-}
-@media (min-width: 768px) {
-  #about-page .story-grid .about-text {
-    transform: rotate(-90deg);
-  }
-}
-#about-page .story-grid .about-text#about-text-1 {
-  padding-right: 17px;
-  justify-items: end;
-  justify-self: end;
-}
-@media (min-width: 768px) {
-  #about-page .story-grid .about-text#about-text-1 {
-    justify-items: initial;
-    justify-self: initial;
-    padding-right: 0;
-  }
-}
-#about-page .story-grid .about-text#about-text-2 {
-  height: 24px;
-  display: flex;
-  align-items: center;
-  overflow: visible;
-}
-@media (min-width: 768px) {
-  #about-page .story-grid .about-text#about-text-2 {
-    align-items: end;
-  }
-}
-#about-page .story-grid .story-para {
-  grid-area: para;
-  padding-bottom: 55px;
-}
-@media (min-width: 430px) {
-  #about-page .story-grid .story-para {
-    padding-bottom: 77px;
-  }
-}
-#about-page .what-we-do > .content {
-  display: flex;
-  padding: 90px 24px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 27px;
+#about-page main .share-your-story {
+  position: relative;
+  padding-top: 6rem;
+  padding-bottom: 12rem;
+  background-color: var(--key);
   overflow: hidden;
 }
-#about-page .what-we-do > .content .mobile-squares-container {
+#about-page main .share-your-story .small-square {
+  background-color: var(--yellow);
+  grid-column: 2;
+  justify-self: flex-end;
+  margin-top: auto;
+}
+#about-page main .share-your-story div {
+  grid-column: 2;
   display: flex;
-  align-items: center;
-  gap: 67px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.2rem;
 }
-@media (min-width: 430px) {
-  #about-page .what-we-do > .content .mobile-squares-container {
-    gap: 90px;
-  }
+#about-page main .share-your-story h2 {
+  width: 30ch;
+  font-size: 1rem;
+  font-weight: 400;
+  justify-self: flex-end;
+  position: relative;
+  margin-top: 0rem;
+  color: var(--yellow);
 }
-@media (min-width: 768px) {
-  #about-page .what-we-do > .content .mobile-squares-container {
-    display: none;
-  }
+#about-page main .share-your-story h2::after {
+  content: "When you share your story";
+  display: block;
+  margin-top: 0.5rem;
 }
-#about-page .what-we-do > .content .mobile-squares-container .square {
-  height: 67px;
-  width: 67px;
+#about-page main .share-your-story h2[aria-hidden=true] {
+  position: absolute;
+  right: -7rem;
+  top: 6rem;
+  margin-top: 0rem;
 }
-@media (min-width: 430px) {
-  #about-page .what-we-do > .content .mobile-squares-container .square {
-    height: 90px;
-    width: 90px;
-  }
-}
-#about-page .what-we-do > .content .square.desktop {
+#about-page main .share-your-story h2[aria-hidden=true]::after {
   display: none;
 }
-@media (min-width: 768px) {
-  #about-page .what-we-do > .content .square.desktop {
-    display: block;
-    height: 70px;
-    width: 70px;
-  }
+#about-page main .share-your-story p {
+  grid-column: 4/span 2;
+  color: var(--white);
 }
-@media (min-width: 1024px) {
-  #about-page .what-we-do > .content .square.desktop {
-    height: 93px;
-    width: 93px;
-  }
+#about-page main .share-your-story p:nth-of-type(2) {
+  margin-top: 1rem;
 }
-@media (min-width: 1280px) {
-  #about-page .what-we-do > .content .square.desktop {
-    height: 116px;
-    width: 116px;
-  }
+#about-page main .share-your-story p .txtbold {
+  text-transform: uppercase;
 }
-@media (min-width: 768px) {
-  #about-page .what-we-do > .content {
-    padding-right: 0 !important;
-    padding-bottom: 0 !important;
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: repeat(7, minmax(0, auto));
-    gap: 58px 40px;
-    grid-template-areas: "square-33 .       .       square-34 .      ." ".         text-6  text-6  text-6    .      ." ".         .       .       .         .      ." "square-35 .       .       square-36 .      square-37" ".         .       .       .         text-7 text-7" ".         .       .       .         text-8 text-8" ".         .       .       square-38.       square-39";
-  }
-  #about-page .what-we-do > .content #about-text-7,
-  #about-page .what-we-do > .content #about-text-8 {
-    max-width: 75%;
-  }
+#about-page main .services {
+  position: relative;
+  overflow: hidden;
+  min-height: 6rem; /* Maintain height when h2 is absolute */
+  max-width: 100%;
+  height: 60vh;
+  background-color: var(--key);
+  color: var(--cyan);
 }
-#about-page .bios-conc {
-  margin-top: 47px;
+#about-page main .services .services-bar {
+  white-space: nowrap;
+  pointer-events: none;
+  position: absolute;
+  top: 3rem;
+  left: 5rem;
+  font-weight: 300;
+  color: var(--cyan);
+}
+#about-page main .services .services-bar::before {
+  content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
+  display: block;
+  width: 107vw;
+  text-transform: uppercase;
+  white-space: pre;
+  color: var(--cyan);
+}
+#about-page main .services .services-bar.bottom {
+  bottom: 3rem;
+  top: auto;
+}
+#about-page main .services h2 {
+  margin-top: 3rem;
+  z-index: 1;
+  padding-left: 42ch;
+  width: 107vw;
+  align-items: stretch;
+  justify-content: stretch;
+  color: var(--cyan);
+}
+#about-page main .two-prongs {
+  padding-top: 6rem;
+  padding-bottom: 10rem;
+  color: var(--green);
+  background-color: var(--key);
+}
+#about-page main .two-prongs h2 {
+  margin: 0;
+}
+#about-page main .two-prongs h2:first-of-type {
+  grid-column: 2;
+  text-align: right;
+  justify-self: flex-end;
+  width: 14ch;
+}
+#about-page main .two-prongs h2:last-of-type {
+  grid-column: 4;
+  text-align: justify;
+  width: 23ch;
+  text-align-last: justify;
+  margin-bottom: 3rem;
+}
+#about-page main .two-prongs p {
+  color: var(--white);
+  grid-column: 4/span 2;
+  width: 100%;
+}
+#about-page main .two-prongs p:nth-of-type(1) {
+  margin-bottom: 1rem;
+}
+#about-page main .two-prongs .small-square {
+  background-color: var(--green);
+  justify-self: flex-end;
+  grid-column: 2;
+  grid-row: 2;
+}
+#about-page main .two-prongs .small-square:nth-of-type(2) {
+  grid-column: 2;
+  grid-row: 3;
+}
+#about-page main .team {
+  padding-top: 8rem;
+  padding-bottom: 10rem;
+}
+#about-page main .team .team-header {
+  grid-column: 1/span 2;
+  justify-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+#about-page main .team .team-header h2 {
+  font-size: 1rem;
+  margin-top: 0rem;
+  line-height: 140%;
+  text-align: justify;
+  text-align-last: justify;
+  text-transform: none;
+}
+#about-page main .team .team-header .small-square {
+  background-color: var(--key);
+}
+#about-page main .team .team-header .small-square:nth-of-type(2) {
+  margin-top: 2rem;
+}
+#about-page main .team .team-header .small-square:nth-of-type(3) {
+  margin: auto 0;
+}
+#about-page main .team .team-header .small-square:nth-of-type(4) {
+  margin-top: auto;
+}
+#about-page main .team .team-members {
+  grid-column: 4/span 3;
+  gap: 3rem;
+  width: 80%;
   display: grid;
-  gap: 40px;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 4rem;
 }
-#about-page .bios-conc .bio {
+#about-page main .team .team-members h3 {
+  text-align-last: justify;
+  margin-top: 0.7rem;
+  margin-bottom: 0rem;
+  min-width: 11ch;
+}
+#about-page main .team .team-members p {
+  text-align: justify;
+  text-align-last: justify;
+  text-wrap: balance;
+}
+#about-page main .mission {
+  position: relative;
+  padding-top: 6rem;
+  padding-bottom: 12rem;
+  background-color: var(--white);
+  overflow: hidden;
+}
+#about-page main .mission .story-title {
+  grid-column: 2;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-items: flex-end;
+  gap: 1.2rem;
 }
-#about-page .bios-conc .bio .bio-text {
+#about-page main .mission h2 {
+  width: 30ch;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: right;
+  justify-self: flex-end;
+  position: relative;
+  margin-top: 0rem;
+  color: var(--key);
+}
+#about-page main .mission h2::before {
+  content: "Our Mission is";
+  position: absolute;
+  right: 100%;
+  margin-right: -4rem;
+  top: 0;
+  white-space: nowrap;
+}
+#about-page main .mission h2::after {
+  content: "Our Mission is";
+  display: block;
+  margin-top: 0.5rem;
+}
+#about-page main .mission h2[aria-hidden=true] {
+  position: absolute;
+  right: -1rem;
+  top: 6rem;
+  margin-top: 0rem;
+}
+#about-page main .mission h2[aria-hidden=true]::after {
+  display: none;
+}
+#about-page main .mission h2[aria-hidden=true]::before {
+  display: none;
+}
+#about-page main .mission p {
+  grid-column: 4/span 2;
+  color: var(--key);
+}
+#about-page main .mission p:nth-of-type(2) {
+  margin-top: 1rem;
+}
+#about-page main .mission p .txtbold {
+  text-transform: uppercase;
+}
+#about-page main .mission a {
+  grid-column: 4/span 2;
+  margin-top: 1rem;
+  display: inline-block;
+  text-align: left;
+  text-align-last: left;
+  margin-left: -0.4rem;
+  z-index: 1;
+  width: fit-content;
+}
+#about-page main .logo-row {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  overflow: hidden;
+}
+#about-page main .logo-row .logo-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  width: 105vw;
+  margin-left: -6vw;
+  gap: 2rem;
 }
-#about-page .bios-conc .bio .bio-text h4 {
-  text-box: trim-both cap;
-  text-align: justify;
-}
-#about-page .bios-conc .bio .bio-text p {
-  text-align: justify;
-}
-#about-page .bios-conc #about-square-42,
-#about-page .bios-conc #about-square-43 {
-  display: none;
-}
-#about-page .bios-conc .conclusion {
-  margin-bottom: 144px;
-}
-#about-page .bios-conc .conclusion p:last-of-type {
-  padding-bottom: 16px;
-}
-#about-page .bios-conc .conclusion .arrow-btn {
-  margin-left: -30px;
-  margin-top: 20px;
-}
-#about-page .bios-conc .spacer {
-  display: none;
-}
-@media (min-width: 768px) {
-  #about-page .bios-conc {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  #about-page .bios-conc .bio {
-    grid-column: span 3;
-  }
-  #about-page .bios-conc #about-square-40,
-  #about-page .bios-conc #about-square-41 {
-    display: none;
-  }
-  #about-page .bios-conc .conclusion {
-    grid-column: 2/span 4;
-  }
-}
-@media (min-width: 1024px) {
-  #about-page .bios-conc {
-    grid-template-areas: "square-40 .         dan-pic  .         .         noah-pic" "evan-pic  .         dan-text .         .         noah-text" "evan-text .         .        square-41 .         ." ".         .         .        .         nick-pic  ." ".         square-42 .        .         nick-text ." "spacer    spacer    spacer   spacer    spacer    spacer" ".         square-43 conc     conc      .         .";
-  }
-  #about-page .bios-conc .bio {
-    display: contents;
-  }
-  #about-page .bios-conc .bio#dan img {
-    grid-area: dan-pic;
-  }
-  #about-page .bios-conc .bio#dan div {
-    grid-area: dan-text;
-  }
-  #about-page .bios-conc .bio#noah img {
-    grid-area: noah-pic;
-  }
-  #about-page .bios-conc .bio#noah div {
-    grid-area: noah-text;
-  }
-  #about-page .bios-conc .bio#evan img {
-    grid-area: evan-pic;
-  }
-  #about-page .bios-conc .bio#evan div {
-    grid-area: evan-text;
-  }
-  #about-page .bios-conc .bio#nick img {
-    grid-area: nick-pic;
-  }
-  #about-page .bios-conc .bio#nick div {
-    grid-area: nick-text;
-  }
-  #about-page .bios-conc .spacer {
-    display: block;
-    height: 145px;
-    grid-area: spacer;
-  }
-  #about-page .bios-conc .conclusion {
-    grid-area: conc;
-  }
-  #about-page .bios-conc .square {
-    display: block !important;
-    justify-self: end;
-  }
-  #about-page .bios-conc .square#about-square-40 {
-    align-self: center;
-  }
-  #about-page .bios-conc .square#about-square-41 {
-    align-self: end;
-  }
-  #about-page .bios-conc .square#about-square-42 {
-    align-self: end;
-  }
-  #about-page .bios-conc .square#about-square-43 {
-    align-self: start;
-  }
+#about-page main .logo-row .logo-repeat {
+  width: auto;
+  height: 1.5rem;
+  flex-shrink: 0;
 }
 
 /* =============
@@ -2751,6 +2516,7 @@ footer .footer-column.column3 {
   display: inline-block;
   text-align: left;
   text-align-last: left;
+  margin-left: -0.3rem;
 }
 @media (min-width: 768px) {
   .home-container .yellow-ketchup-section .CTA-container h2 {
