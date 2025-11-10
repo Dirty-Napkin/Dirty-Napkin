@@ -15,11 +15,42 @@
         > *:not(footer) {
             width: 100%;
             padding: 0 map-get($margins, min);
+
+            @include lg {
+                display: grid;
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                column-gap: 2.5rem;
+                width: 100%;
+                margin-left: 5rem;
+                margin-right: 5rem;
+                padding: 0 5rem;
+            }
         }
 
         .small-square {
             width: 1.2rem;
             height: 1.2rem;
+        }
+
+        p {
+            max-width: 60ch;
+        }
+
+        .txtbold {
+            font-family: "Degular Mono", monospace;
+            font-size: 1rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        // Exception: Don't apply txtbold styling to intro section
+        .intro-type .txtbold {
+            font-family: inherit;
+            font-size: inherit;
+            letter-spacing: inherit;
+            text-transform: inherit;
+            font-weight: 700; // Keep bold weight
         }
 
         // ===== INTRO SECTION =====
@@ -30,6 +61,15 @@
 
             div[aria-hidden="true"] {
                 display: none; // Hide desktop squares on mobile
+
+                @include lg {
+                    display: flex;
+                    grid-column: 2;
+                    flex-direction: column;
+                    gap: 1.2rem;
+                    align-items: flex-end;
+                    height: 100%;
+                }
             }
 
             // Add small square bullet on mobile
@@ -40,18 +80,49 @@
                 height: 1.2rem;
                 background-color: var(--key);
                 margin-bottom: 1.5rem;
+
+                @include lg {
+                    display: none; // Hide mobile square bullet on desktop
+                }
+            }
+
+            @include lg {
+                height: 60vh;
+                padding: 0;
+            }
+
+            .small-square {
+                @include lg {
+                    background-color: var(--key);
+
+                    &:nth-of-type(2) {
+                        margin-top: auto;
+                        margin-bottom: 0;
+                    }
+                    &:nth-of-type(3) {
+                        margin-top: 2rem;
+                        margin-bottom: 7.8rem;
+                    }
+                }
             }
 
             h1 {
                 font-size: 1.5rem;
                 font-weight: 500;
                 text-transform: uppercase;
+                text-align-last: justify;
                 color: var(--key);
-                line-height: 130%;
+                line-height: 150%;
                 margin: 0;
 
-                .txtbold {
-                    font-weight: 700;
+                @include lg {
+                    font-size: 2rem;
+                    width: 23ch;
+                    text-align-last: justify;
+                    grid-column: 4;
+                    align-self: flex-end;
+                    line-height: 130%;
+
                 }
 
                 .line-break-comma {
@@ -61,6 +132,10 @@
                     font-size: 1.5rem;
                     line-height: 130%;
                     margin-left: -0.2rem;
+
+                    @include lg {
+                        font-size: 2rem;
+                    }
                 }
             }
         }
@@ -72,11 +147,19 @@
             padding: 0;
             width: 100%;
 
+            @include lg {
+                margin-top: 6rem;
+            }
+
             img {
                 display: block;
                 width: 100%;
                 height: auto;
                 object-fit: cover;
+
+                @include lg {
+                    height: 100%;
+                }
             }
         }
 
@@ -87,8 +170,22 @@
             background-color: var(--key);
             overflow: hidden;
 
+            @include lg {
+                padding-top: 6rem;
+                padding-bottom: 12rem;
+            }
+
             .story-title {
                 margin-bottom: 2rem;
+
+                @include lg {
+                    grid-column: 2;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 1.2rem;
+                    margin-bottom: 0;
+                }
 
                 .small-square {
                     background-color: var(--yellow);
@@ -98,10 +195,23 @@
 
             .small-square {
                 background-color: var(--yellow);
+
+                @include lg {
+                    grid-column: 2;
+                    justify-self: flex-end;
+                    margin-top: auto;
+                    margin-bottom: 0;
+                }
             }
 
             div {
-                display: none; // Hide desktop layout div on mobile
+                @include lg {
+                    display: flex;
+                    grid-column: 2;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 1.2rem;
+                }
             }
 
             h2 {
@@ -112,23 +222,55 @@
                 margin: 0 0 1.5rem 0;
                 line-height: 140%;
 
-                // Repeat title 3 times on mobile
-                &::after {
-                    content: "When you share your story";
-                    display: block;
-                    margin-top: 0.5rem;
+                @include lg {
+                    width: 30ch;
+                    font-size: 1rem;
+                    justify-self: flex-end;
+                    position: relative;
+                    margin-top: 0rem;
+                    grid-column: 2;
+                    text-align: right;
                 }
 
-                &::before {
-                    content: "When you share your story";
-                    display: block;
-                    margin-bottom: 0.5rem;
+                // Repeat title starting at md breakpoint
+                &::after {
+                    display: none; // Hide on mobile
+
+                    @include md {
+                        content: "When you share your story";
+                        display: block;
+                        position: absolute;
+                        right: 0;
+                        top: 4rem;
+                        margin-right: -12ch;
+                    }
+
+                    @include lg {
+                        content: "When you share your story";
+                        display: block;
+                        position: static;
+                        margin-top: 0.5rem;
+                        right: auto;
+                        top: auto;
+                        margin-right: 0;
+                    }
                 }
+
 
                 &[aria-hidden="true"] {
-                    display: block; // Show third repetition on mobile
-                    margin-top: 1.5rem;
-                    margin-bottom: 2rem;
+                    display: none; // Hide secondary h2 on mobile
+
+                    @include lg {
+                        display: block;
+                        position: absolute;
+                        right: -7rem;
+                        top: 6rem;
+                        margin-top: 0rem;
+
+                        &::after {
+                            display: none;
+                        }
+                    }
                 }
             } 
 
@@ -138,13 +280,17 @@
                 line-height: 140%;
                 margin: 0 0 1.5rem 0;
 
-                &:last-of-type {
-                    margin-bottom: 0;
+                @include lg {
+                    grid-column: 4 / span 2;
+                    margin: 0;
+
+                    &:nth-of-type(2) {
+                        margin-top: 1rem;
+                    }
                 }
 
-                .txtbold {
-                    text-transform: uppercase;
-                    font-weight: 700;
+                &:last-of-type {
+                    margin-bottom: 0;
                 }
             }
         }
@@ -156,6 +302,12 @@
             padding: 4rem 0;
             background-color: var(--key);
             color: var(--cyan);
+
+            @include lg {
+                min-height: 6rem;
+                height: 60vh;
+                padding: 0;
+            }
 
             .services-bar {
                 white-space: nowrap;
@@ -171,12 +323,34 @@
                 display: flex;
                 justify-content: space-between;
 
-                &::before {
-                    content: "SERVICES";
+                &:first-of-type {
+                    background-color: red;
                 }
 
-                &::after {
-                    content: "SERVICE";
+                @include lg {
+                    top: 3rem;
+                    left: 5rem;
+                    padding: 0;
+                }
+
+                &::before {
+                    content: "SERVICES SERVICES";
+                    position: absolute;
+                    width: 105vw;
+                    text-align: justify;
+                    text-align-last: justify;
+
+                    @include md {
+                        content: "SERVICES SERVICES SERVICES";
+                    }
+
+                    @include lg {
+                        content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
+                        display: block;
+                        width: 107vw;
+                        white-space: pre;
+                        text-align: justify;
+                    }
                 }
 
                 &.top {
@@ -186,11 +360,29 @@
                 &.bottom {
                     bottom: 1.5rem;
                     top: auto;
+
+                    @include lg {
+                        bottom: 3rem;
+                        top: auto;
+                    }
                 }
             }
 
             h2 {
                 display: none; // Hide desktop h2 on mobile
+
+                @include lg {
+                    display: block;
+                    position: absolute;
+                    padding: 0;
+                    margin: 0;
+                    margin-top: 1.5rem;
+                    margin-left: 47.7ch;
+                    z-index: 1;
+                    width: 107vw;
+                    align-items: stretch;
+                    justify-content: stretch;
+                }
             }
         }
 
@@ -198,7 +390,12 @@
         .two-prongs {
             padding: 4rem map-get($margins, min);
             background-color: var(--key);
-            color: var(--white);
+            color: var(--green);
+
+            @include lg {
+                padding-top: 6rem;
+                padding-bottom: 10rem;
+            }
 
             h2 {
                 margin: 0 0 1.5rem 0;
@@ -206,6 +403,28 @@
                 font-size: 1.25rem;
                 font-weight: 500;
                 line-height: 140%;
+
+                @include lg {
+                    margin: 0;
+                    font-size: 2rem;
+                    font-weight: 500;
+
+                    &:first-of-type {
+                        grid-column: 2;
+                        text-align: right;
+                        justify-self: flex-end;
+                        width: 14ch;
+                        margin-right: -1ch;
+                    }
+
+                    &:last-of-type {
+                        grid-column: 4;
+                        text-align: justify;
+                        width: 23ch;
+                        text-align-last: justify;
+                        margin-bottom: 3rem;
+                    }
+                }
 
                 &:last-of-type {
                     margin-bottom: 2rem;
@@ -217,6 +436,16 @@
                 line-height: 140%;
                 margin: 0 0 1.5rem 0;
 
+                @include lg {
+                    grid-column: 4 / span 2;
+                    width: 100%;
+                    margin: 0;
+
+                    &:nth-of-type(1) {
+                        margin-bottom: 1rem;
+                    }
+                }
+
                 &:last-of-type {
                     margin-bottom: 0;
                 }
@@ -226,8 +455,25 @@
                 background-color: var(--green);
                 margin-bottom: 1rem;
 
+                @include lg {
+                    justify-self: flex-end;
+                    grid-column: 2;
+                    grid-row: 2;
+                    margin: 0;
+
+                    &:nth-of-type(2) {
+                        grid-column: 2;
+                        grid-row: 3;
+                    }
+                }
+
                 &:nth-of-type(2) {
-                    margin-top: 0.5rem;
+                    margin-top: 3rem;
+                    margin-bottom: 2rem;
+
+                    @include lg {
+                        margin: 0rem;
+                    }
                 }
             }
         }
@@ -237,20 +483,72 @@
             padding: 4rem map-get($margins, min);
             background-color: var(--white);
 
+            @include lg {
+                padding-top: 8rem;
+                padding-bottom: 10rem;
+            }
+
             .team-header {
                 margin-bottom: 3rem;
+
+                @include lg {
+                    grid-column: 1 / span 2;
+                    justify-self: flex-end;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    margin-bottom: 0;
+                }
 
                 h2 {
                     font-size: 1rem;
                     margin: 0 0 1.5rem 0;
                     line-height: 140%;
+                    text-align: justify;
+                    text-align-last: justify;
                     text-transform: none;
                     color: var(--key);
+
+                    max-width: 40ch;
+
+                    @include lg {
+                        margin-top: 0rem;
+                        line-height: 140%;
+                        
+                        text-transform: none;
+                    }
                 }
 
                 .small-square {
                     background-color: var(--key);
                     margin-bottom: 0.5rem;
+                    
+                    &:nth-of-type(2) {
+                        margin-top: 8rem;
+                    }
+
+                    &:nth-of-type(3) {
+                        margin-top: 2rem;
+                    }
+
+                    &:nth-of-type(4) {
+                        display: none;
+                    }
+
+                    @include lg {
+                        &:nth-of-type(2) {
+                            margin-top: 2rem;
+                        }
+
+                        &:nth-of-type(3) {
+                            margin: auto 0;
+                        }
+
+                        &:nth-of-type(4) {
+                            display: block;
+                            margin-top: auto;
+                        }
+                    }
 
                     &:last-of-type {
                         margin-bottom: 0;
@@ -263,9 +561,26 @@
                 flex-direction: column;
                 gap: 3rem;
 
+                @include lg {
+                    grid-column: 4 / span 3;
+                    gap: 3rem;
+                    width: fit-content;
+                    max-width: 80%;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    row-gap: 4rem;
+                    
+                }
+
                 > div {
                     display: flex;
                     flex-direction: column;
+                    
+
+                    @include lg {
+                        display: block;
+                        max-width: 60ch;
+                    }
                 }
 
                 img {
@@ -273,6 +588,10 @@
                     height: auto;
                     margin-bottom: 1rem;
                     background-color: #e0e0e0; // Placeholder color
+
+                    @include lg {
+                        margin-bottom: 0;
+                    }
                 }
 
                 h3 {
@@ -280,6 +599,13 @@
                     font-weight: 700;
                     margin: 0 0 0.5rem 0;
                     color: var(--key);
+
+                    @include lg {
+                        text-align-last: justify;
+                        margin-top: .7rem;
+                        margin-bottom: 0rem;
+                        min-width: 11ch;
+                    }
                 }
 
                 p {
@@ -287,6 +613,12 @@
                     line-height: 140%;
                     color: var(--key);
                     margin: 0;
+
+                    @include lg {
+                        text-align: justify;
+                        text-align-last: justify;
+                        text-wrap: balance;
+                    }
                 }
             }
         }
@@ -298,8 +630,22 @@
             background-color: var(--white);
             overflow: hidden;
 
+            @include lg {
+                padding-top: 6rem;
+                padding-bottom: 12rem;
+            }
+
             .story-title {
                 margin-bottom: 1.5rem;
+
+                @include lg {
+                    grid-column: 2;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 1.2rem;
+                    margin-bottom: 0;
+                }
             }
 
             h2 {
@@ -310,350 +656,7 @@
                 margin: 0 0 1.5rem 0;
                 line-height: 140%;
 
-                // Repeat title 2 times on mobile
-                &::after {
-                    content: "Our Mission is";
-                    display: block;
-                    margin-top: 0.5rem;
-                }
-
-                &[aria-hidden="true"] {
-                    display: block; // Show second repetition on mobile
-                    margin-top: 1.5rem;
-                    margin-bottom: 2rem;
-                }
-            } 
-
-            p {
-                color: var(--key);
-                line-height: 140%;
-                margin: 0 0 1.5rem 0;
-
-                &:last-of-type {
-                    margin-bottom: 1.5rem;
-                }
-
-                .txtbold {
-                    text-transform: uppercase;
-                    font-weight: 700;
-                }
-            }
-
-            a {
-                display: inline-block;
-                text-transform: uppercase;
-                color: var(--key);
-                margin-top: 1rem;
-            }
-        }
-
-        // ===== LOGO ROW =====
-        .logo-row {
-            display: none; // Hide on mobile
-        }
-
-        // ===== DESKTOP STYLES (LG+) =====
-        @include lg {
-            > *:not(footer) {
-                display: grid;
-                grid-template-columns: repeat(6, minmax(0, 1fr));
-                column-gap: 2.5rem;
-                width: 100%;
-                margin-left: 5rem;
-                margin-right: 5rem;
-                padding: 0 5rem;
-            }
-
-            .intro-type {
-                height: 60vh;
-                padding: 0;
-
-                // Hide mobile square bullet on desktop
-                &::before {
-                    display: none;
-                }
-
-                div[aria-hidden="true"] {
-                    display: flex;
-                    grid-column: 2;
-                    flex-direction: column;
-                    gap: 1.2rem;
-                    align-items: flex-end;
-                    height: 100%;
-                }
-
-                .small-square {
-                    background-color: var(--key);
-
-                    &:nth-of-type(2) {
-                        margin-top: auto;
-                        margin-bottom: 0;
-                    }
-                    &:nth-of-type(3) {
-                        margin-top: 2rem;
-                        margin-bottom: 7.8rem;
-                    }
-                }
-
-                h1 {
-                    font-size: 2rem;
-                    width: 23ch;
-                    text-align-last: justify;
-                    grid-column: 4;
-                    align-self: flex-end;
-                    text-transform: none;
-
-                    .line-break-comma {
-                        font-size: 2rem;
-                    }
-                }
-            }
-
-            .hero-image {
-                margin-top: 6rem;
-
-                img {
-                    height: 100%;
-                }
-            }
-
-            .share-your-story {
-                padding-top: 6rem;
-                padding-bottom: 12rem;
-
-                .story-title {
-                    grid-column: 2;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    gap: 1.2rem;
-                    margin-bottom: 0;
-                }
-
-                .small-square {
-                    grid-column: 2;
-                    justify-self: flex-end;
-                    margin-top: auto;
-                    margin-bottom: 0;
-                }
-
-                div {
-                    display: flex;
-                    grid-column: 2;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    gap: 1.2rem;
-                }
-
-                h2 {
-                    width: 30ch;
-                    font-size: 1rem;
-                    justify-self: flex-end;
-                    position: relative;
-                    margin-top: 0rem;
-                    grid-column: 2;
-
-                    &::before {
-                        display: none;
-                    }
-
-                    &::after {
-                        content: "When you share your story";
-                        display: block;
-                        margin-top: 0.5rem;
-                    }
-
-                    &[aria-hidden="true"] {
-                        display: block;
-                        position: absolute;
-                        right: -7rem;
-                        top: 6rem;
-                        margin-top: 0rem;
-
-                        &::after {
-                            display: none;
-                        }
-                    }
-                } 
-
-                p {
-                    grid-column: 4 / span 2;
-                    margin: 0;
-
-                    &:nth-of-type(2) {
-                        margin-top: 1rem;
-                    }
-                }
-            }
-
-            .services {
-                min-height: 6rem;
-                height: 60vh;
-                padding: 0;
-
-                .services-bar {
-                    top: 3rem;
-                    left: 5rem;
-                    padding: 0;
-
-                    &::before {
-                        content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
-                        display: block;
-                        width: 107vw;
-                        white-space: pre;
-                    }
-
-                    &::after {
-                        display: none;
-                    }
-
-                    &.bottom {
-                        bottom: 3rem;
-                        top: auto;
-                    }
-                }
-
-                h2 {
-                    display: block;
-                    margin-top: 3rem;
-                    z-index: 1;
-                    padding-left: 42ch;
-                    width: 107vw;
-                    align-items: stretch;
-                    justify-content: stretch;
-                }
-            }
-
-            .two-prongs {
-                padding-top: 6rem;
-                padding-bottom: 10rem;
-                color: var(--green);
-
-                h2 {
-                    margin: 0;
-                    font-size: 2rem;
-                    font-weight: 500;
-
-                    &:first-of-type {
-                        grid-column: 2;
-                        text-align: right;
-                        justify-self: flex-end;
-                        width: 14ch;
-                    }
-
-                    &:last-of-type {
-                        grid-column: 4;
-                        text-align: justify;
-                        width: 23ch;
-                        text-align-last: justify;
-                        margin-bottom: 3rem;
-                    }
-                }
-
-                p {
-                    grid-column: 4 / span 2;
-                    width: 100%;
-                    margin: 0;
-
-                    &:nth-of-type(1) {
-                        margin-bottom: 1rem;
-                    }
-                }
-
-                .small-square {
-                    justify-self: flex-end;
-                    grid-column: 2;
-                    grid-row: 2;
-                    margin: 0;
-                   
-                    &:nth-of-type(2) {
-                        grid-column: 2;
-                        grid-row: 3;
-                    }
-                }
-            }
-
-            .team {
-                padding-top: 8rem;
-                padding-bottom: 10rem;
-
-                .team-header {
-                    grid-column: 1 / span 2;
-                    justify-self: flex-end;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    margin-bottom: 0;
-
-                    h2 {
-                        font-size: 1rem;
-                        margin-top: 0rem;
-                        line-height: 140%;
-                        text-align: justify;
-                        text-align-last: justify;
-                        text-transform: none;
-                    }
-
-                    .small-square {
-                        &:nth-of-type(2) {
-                            margin-top: 2rem;
-                        }
-
-                        &:nth-of-type(3) {
-                            margin: auto 0;
-                        }
-
-                        &:nth-of-type(4) {
-                            margin-top: auto;
-                        }
-                    }
-                }
-
-                .team-members {
-                    grid-column: 4 / span 3;
-                    gap: 3rem;
-                    width: 80%;
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    row-gap: 4rem;
-
-                    > div {
-                        display: block;
-                    }
-
-                    img {
-                        margin-bottom: 0;
-                    }
-
-                    h3 {
-                        text-align-last: justify;
-                        margin-top: .7rem;
-                        margin-bottom: 0rem;
-                        min-width: 11ch;
-                    }
-
-                    p {
-                        text-align: justify;
-                        text-align-last: justify;
-                        text-wrap: balance;
-                    }
-                }
-            }
-
-            .mission {
-                padding-top: 6rem;
-                padding-bottom: 12rem;
-
-                .story-title {
-                    grid-column: 2;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    gap: 1.2rem;
-                    margin-bottom: 0;
-                }
-
-                h2 {
+                @include lg {
                     width: 30ch;
                     font-size: 1rem;
                     text-align: right;
@@ -661,23 +664,48 @@
                     position: relative;
                     margin-top: 0rem;
                     grid-column: 2;
+                }
 
-                    &::before {
+                // Repeat title 2 times on mobile
+                &::after {
+                    content: "Our Mission is";
+                    display: block;
+                    margin-top: 0.5rem;
+
+                    @include lg {
+                        content: "Our Mission is";
+                        display: block;
+                        margin-top: 0.5rem;
+                    }
+                }
+
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    background-color: var(--key);
+                    margin-bottom: 1.5rem;
+
+                    @include lg {
                         content: "Our Mission is";
                         position: absolute;
                         right: 100%;
                         margin-right: -4rem;
                         top: 0;
                         white-space: nowrap;
-                    }
-
-                    &::after {
-                        content: "Our Mission is";
                         display: block;
-                        margin-top: 0.5rem;
+                        width: auto;
+                        height: auto;
+                        background-color: transparent;
+                        margin-bottom: 0rem;
                     }
+                }
 
-                    &[aria-hidden="true"] {
+                &[aria-hidden="true"] {
+                    display: none; // Hide secondary h2 on mobile
+
+                    @include lg {
                         display: block;
                         position: absolute;
                         right: -1rem;
@@ -692,9 +720,15 @@
                             display: none;
                         }
                     }
-                } 
+                }
+            } 
 
-                p {
+            p {
+                color: var(--key);
+                line-height: 140%;
+                margin: 0 0 1.5rem 0;
+
+                @include lg {
                     grid-column: 4 / span 2;
                     margin: 0;
 
@@ -703,22 +737,44 @@
                     }
                 }
 
-                a {
+                &:last-of-type {
+                    margin-bottom: 1.5rem;
+                }
+            }
+
+            a {
+                display: inline-block;
+                text-transform: uppercase;
+                color: var(--key);
+                margin-top: 1rem;
+                border-bottom: 1px solid var(--key);
+                padding: 1rem 0rem 0.2rem 0rem;
+
+                @include lg {
                     grid-column: 4 / span 2;
                     margin-top: 1rem;
                     margin-left: -0.4rem;
                     z-index: 1;
                     width: fit-content;
+                    border-bottom: none;
+                    padding: 0.2rem 0.4rem; 
                 }
             }
+        }
 
-            .logo-row {
+        // ===== LOGO ROW =====
+        .logo-row {
+            display: none; // Hide on mobile
+
+            @include lg {
                 display: block;
                 padding-top: 6rem;
                 padding-bottom: 6rem;
                 overflow: hidden;
+            }
 
-                .logo-container {
+            .logo-container {
+                @include lg {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
@@ -726,8 +782,10 @@
                     margin-left: -6vw;
                     gap: 2rem;
                 }
+            }
 
-                .logo-repeat {
+            .logo-repeat {
+                @include lg {
                     width: auto;
                     height: 1.5rem;
                     flex-shrink: 0;

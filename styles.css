@@ -1260,9 +1260,37 @@ footer .footer-column.column3 {
   width: 100%;
   padding: 0 24px;
 }
+@media (min-width: 1024px) {
+  #about-page main > *:not(footer) {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 2.5rem;
+    width: 100%;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    padding: 0 5rem;
+  }
+}
 #about-page main .small-square {
   width: 1.2rem;
   height: 1.2rem;
+}
+#about-page main p {
+  max-width: 60ch;
+}
+#about-page main .txtbold {
+  font-family: "Degular Mono", monospace;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+#about-page main .intro-type .txtbold {
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  font-weight: 700;
 }
 #about-page main .intro-type {
   padding-top: 6rem;
@@ -1272,6 +1300,16 @@ footer .footer-column.column3 {
 #about-page main .intro-type div[aria-hidden=true] {
   display: none;
 }
+@media (min-width: 1024px) {
+  #about-page main .intro-type div[aria-hidden=true] {
+    display: flex;
+    grid-column: 2;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-end;
+    height: 100%;
+  }
+}
 #about-page main .intro-type::before {
   content: "";
   display: block;
@@ -1280,16 +1318,48 @@ footer .footer-column.column3 {
   background-color: var(--key);
   margin-bottom: 1.5rem;
 }
+@media (min-width: 1024px) {
+  #about-page main .intro-type::before {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page main .intro-type {
+    height: 60vh;
+    padding: 0;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page main .intro-type .small-square {
+    background-color: var(--key);
+  }
+  #about-page main .intro-type .small-square:nth-of-type(2) {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+  #about-page main .intro-type .small-square:nth-of-type(3) {
+    margin-top: 2rem;
+    margin-bottom: 7.8rem;
+  }
+}
 #about-page main .intro-type h1 {
   font-size: 1.5rem;
   font-weight: 500;
   text-transform: uppercase;
+  text-align-last: justify;
   color: var(--key);
-  line-height: 130%;
+  line-height: 150%;
   margin: 0;
 }
-#about-page main .intro-type h1 .txtbold {
-  font-weight: 700;
+@media (min-width: 1024px) {
+  #about-page main .intro-type h1 {
+    font-size: 2rem;
+    width: 23ch;
+    text-align-last: justify;
+    grid-column: 4;
+    align-self: flex-end;
+    line-height: 130%;
+  }
 }
 #about-page main .intro-type h1 .line-break-comma {
   display: inline-block;
@@ -1299,11 +1369,21 @@ footer .footer-column.column3 {
   line-height: 130%;
   margin-left: -0.2rem;
 }
+@media (min-width: 1024px) {
+  #about-page main .intro-type h1 .line-break-comma {
+    font-size: 2rem;
+  }
+}
 #about-page main .hero-image {
   display: block;
   margin: 0;
   padding: 0;
   width: 100%;
+}
+@media (min-width: 1024px) {
+  #about-page main .hero-image {
+    margin-top: 6rem;
+  }
 }
 #about-page main .hero-image img {
   display: block;
@@ -1311,14 +1391,35 @@ footer .footer-column.column3 {
   height: auto;
   object-fit: cover;
 }
+@media (min-width: 1024px) {
+  #about-page main .hero-image img {
+    height: 100%;
+  }
+}
 #about-page main .share-your-story {
   position: relative;
   padding: 4rem 24px;
   background-color: var(--key);
   overflow: hidden;
 }
+@media (min-width: 1024px) {
+  #about-page main .share-your-story {
+    padding-top: 6rem;
+    padding-bottom: 12rem;
+  }
+}
 #about-page main .share-your-story .story-title {
   margin-bottom: 2rem;
+}
+@media (min-width: 1024px) {
+  #about-page main .share-your-story .story-title {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.2rem;
+    margin-bottom: 0;
+  }
 }
 #about-page main .share-your-story .story-title .small-square {
   background-color: var(--yellow);
@@ -1327,8 +1428,22 @@ footer .footer-column.column3 {
 #about-page main .share-your-story .small-square {
   background-color: var(--yellow);
 }
-#about-page main .share-your-story div {
-  display: none;
+@media (min-width: 1024px) {
+  #about-page main .share-your-story .small-square {
+    grid-column: 2;
+    justify-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page main .share-your-story div {
+    display: flex;
+    grid-column: 2;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.2rem;
+  }
 }
 #about-page main .share-your-story h2 {
   font-size: 1rem;
@@ -1338,20 +1453,55 @@ footer .footer-column.column3 {
   margin: 0 0 1.5rem 0;
   line-height: 140%;
 }
-#about-page main .share-your-story h2::after {
-  content: "When you share your story";
-  display: block;
-  margin-top: 0.5rem;
+@media (min-width: 1024px) {
+  #about-page main .share-your-story h2 {
+    width: 30ch;
+    font-size: 1rem;
+    justify-self: flex-end;
+    position: relative;
+    margin-top: 0rem;
+    grid-column: 2;
+    text-align: right;
+  }
 }
-#about-page main .share-your-story h2::before {
-  content: "When you share your story";
-  display: block;
-  margin-bottom: 0.5rem;
+#about-page main .share-your-story h2::after {
+  display: none;
+}
+@media (min-width: 768px) {
+  #about-page main .share-your-story h2::after {
+    content: "When you share your story";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 4rem;
+    margin-right: -12ch;
+  }
+}
+@media (min-width: 1024px) {
+  #about-page main .share-your-story h2::after {
+    content: "When you share your story";
+    display: block;
+    position: static;
+    margin-top: 0.5rem;
+    right: auto;
+    top: auto;
+    margin-right: 0;
+  }
 }
 #about-page main .share-your-story h2[aria-hidden=true] {
-  display: block;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
+  display: none;
+}
+@media (min-width: 1024px) {
+  #about-page main .share-your-story h2[aria-hidden=true] {
+    display: block;
+    position: absolute;
+    right: -7rem;
+    top: 6rem;
+    margin-top: 0rem;
+  }
+  #about-page main .share-your-story h2[aria-hidden=true]::after {
+    display: none;
+  }
 }
 #about-page main .share-your-story p {
   color: var(--white);
@@ -1359,12 +1509,17 @@ footer .footer-column.column3 {
   line-height: 140%;
   margin: 0 0 1.5rem 0;
 }
+@media (min-width: 1024px) {
+  #about-page main .share-your-story p {
+    grid-column: 4/span 2;
+    margin: 0;
+  }
+  #about-page main .share-your-story p:nth-of-type(2) {
+    margin-top: 1rem;
+  }
+}
 #about-page main .share-your-story p:last-of-type {
   margin-bottom: 0;
-}
-#about-page main .share-your-story p .txtbold {
-  text-transform: uppercase;
-  font-weight: 700;
 }
 #about-page main .services {
   position: relative;
@@ -1372,6 +1527,13 @@ footer .footer-column.column3 {
   padding: 4rem 0;
   background-color: var(--key);
   color: var(--cyan);
+}
+@media (min-width: 1024px) {
+  #about-page main .services {
+    min-height: 6rem;
+    height: 60vh;
+    padding: 0;
+  }
 }
 #about-page main .services .services-bar {
   white-space: nowrap;
@@ -1387,11 +1549,36 @@ footer .footer-column.column3 {
   display: flex;
   justify-content: space-between;
 }
-#about-page main .services .services-bar::before {
-  content: "SERVICES";
+#about-page main .services .services-bar:first-of-type {
+  background-color: red;
 }
-#about-page main .services .services-bar::after {
-  content: "SERVICE";
+@media (min-width: 1024px) {
+  #about-page main .services .services-bar {
+    top: 3rem;
+    left: 5rem;
+    padding: 0;
+  }
+}
+#about-page main .services .services-bar::before {
+  content: "SERVICES SERVICES";
+  position: absolute;
+  width: 105vw;
+  text-align: justify;
+  text-align-last: justify;
+}
+@media (min-width: 768px) {
+  #about-page main .services .services-bar::before {
+    content: "SERVICES SERVICES SERVICES";
+  }
+}
+@media (min-width: 1024px) {
+  #about-page main .services .services-bar::before {
+    content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
+    display: block;
+    width: 107vw;
+    white-space: pre;
+    text-align: justify;
+  }
 }
 #about-page main .services .services-bar.top {
   top: 1.5rem;
@@ -1400,13 +1587,39 @@ footer .footer-column.column3 {
   bottom: 1.5rem;
   top: auto;
 }
+@media (min-width: 1024px) {
+  #about-page main .services .services-bar.bottom {
+    bottom: 3rem;
+    top: auto;
+  }
+}
 #about-page main .services h2 {
   display: none;
+}
+@media (min-width: 1024px) {
+  #about-page main .services h2 {
+    display: block;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    margin-top: 1.5rem;
+    margin-left: 47.7ch;
+    z-index: 1;
+    width: 107vw;
+    align-items: stretch;
+    justify-content: stretch;
+  }
 }
 #about-page main .two-prongs {
   padding: 4rem 24px;
   background-color: var(--key);
-  color: var(--white);
+  color: var(--green);
+}
+@media (min-width: 1024px) {
+  #about-page main .two-prongs {
+    padding-top: 6rem;
+    padding-bottom: 10rem;
+  }
 }
 #about-page main .two-prongs h2 {
   margin: 0 0 1.5rem 0;
@@ -1415,268 +1628,7 @@ footer .footer-column.column3 {
   font-weight: 500;
   line-height: 140%;
 }
-#about-page main .two-prongs h2:last-of-type {
-  margin-bottom: 2rem;
-}
-#about-page main .two-prongs p {
-  color: var(--white);
-  line-height: 140%;
-  margin: 0 0 1.5rem 0;
-}
-#about-page main .two-prongs p:last-of-type {
-  margin-bottom: 0;
-}
-#about-page main .two-prongs .small-square {
-  background-color: var(--green);
-  margin-bottom: 1rem;
-}
-#about-page main .two-prongs .small-square:nth-of-type(2) {
-  margin-top: 0.5rem;
-}
-#about-page main .team {
-  padding: 4rem 24px;
-  background-color: var(--white);
-}
-#about-page main .team .team-header {
-  margin-bottom: 3rem;
-}
-#about-page main .team .team-header h2 {
-  font-size: 1rem;
-  margin: 0 0 1.5rem 0;
-  line-height: 140%;
-  text-transform: none;
-  color: var(--key);
-}
-#about-page main .team .team-header .small-square {
-  background-color: var(--key);
-  margin-bottom: 0.5rem;
-}
-#about-page main .team .team-header .small-square:last-of-type {
-  margin-bottom: 0;
-}
-#about-page main .team .team-members {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-#about-page main .team .team-members > div {
-  display: flex;
-  flex-direction: column;
-}
-#about-page main .team .team-members img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
-  background-color: #e0e0e0;
-}
-#about-page main .team .team-members h3 {
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  color: var(--key);
-}
-#about-page main .team .team-members p {
-  text-transform: none;
-  line-height: 140%;
-  color: var(--key);
-  margin: 0;
-}
-#about-page main .mission {
-  position: relative;
-  padding: 4rem 24px;
-  background-color: var(--white);
-  overflow: hidden;
-}
-#about-page main .mission .story-title {
-  margin-bottom: 1.5rem;
-}
-#about-page main .mission h2 {
-  font-size: 1rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: var(--key);
-  margin: 0 0 1.5rem 0;
-  line-height: 140%;
-}
-#about-page main .mission h2::after {
-  content: "Our Mission is";
-  display: block;
-  margin-top: 0.5rem;
-}
-#about-page main .mission h2[aria-hidden=true] {
-  display: block;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
-#about-page main .mission p {
-  color: var(--key);
-  line-height: 140%;
-  margin: 0 0 1.5rem 0;
-}
-#about-page main .mission p:last-of-type {
-  margin-bottom: 1.5rem;
-}
-#about-page main .mission p .txtbold {
-  text-transform: uppercase;
-  font-weight: 700;
-}
-#about-page main .mission a {
-  display: inline-block;
-  text-transform: uppercase;
-  color: var(--key);
-  margin-top: 1rem;
-}
-#about-page main .logo-row {
-  display: none;
-}
 @media (min-width: 1024px) {
-  #about-page main > *:not(footer) {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    column-gap: 2.5rem;
-    width: 100%;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    padding: 0 5rem;
-  }
-  #about-page main .intro-type {
-    height: 60vh;
-    padding: 0;
-  }
-  #about-page main .intro-type::before {
-    display: none;
-  }
-  #about-page main .intro-type div[aria-hidden=true] {
-    display: flex;
-    grid-column: 2;
-    flex-direction: column;
-    gap: 1.2rem;
-    align-items: flex-end;
-    height: 100%;
-  }
-  #about-page main .intro-type .small-square {
-    background-color: var(--key);
-  }
-  #about-page main .intro-type .small-square:nth-of-type(2) {
-    margin-top: auto;
-    margin-bottom: 0;
-  }
-  #about-page main .intro-type .small-square:nth-of-type(3) {
-    margin-top: 2rem;
-    margin-bottom: 7.8rem;
-  }
-  #about-page main .intro-type h1 {
-    font-size: 2rem;
-    width: 23ch;
-    text-align-last: justify;
-    grid-column: 4;
-    align-self: flex-end;
-    text-transform: none;
-  }
-  #about-page main .intro-type h1 .line-break-comma {
-    font-size: 2rem;
-  }
-  #about-page main .hero-image {
-    margin-top: 6rem;
-  }
-  #about-page main .hero-image img {
-    height: 100%;
-  }
-  #about-page main .share-your-story {
-    padding-top: 6rem;
-    padding-bottom: 12rem;
-  }
-  #about-page main .share-your-story .story-title {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1.2rem;
-    margin-bottom: 0;
-  }
-  #about-page main .share-your-story .small-square {
-    grid-column: 2;
-    justify-self: flex-end;
-    margin-top: auto;
-    margin-bottom: 0;
-  }
-  #about-page main .share-your-story div {
-    display: flex;
-    grid-column: 2;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1.2rem;
-  }
-  #about-page main .share-your-story h2 {
-    width: 30ch;
-    font-size: 1rem;
-    justify-self: flex-end;
-    position: relative;
-    margin-top: 0rem;
-    grid-column: 2;
-  }
-  #about-page main .share-your-story h2::before {
-    display: none;
-  }
-  #about-page main .share-your-story h2::after {
-    content: "When you share your story";
-    display: block;
-    margin-top: 0.5rem;
-  }
-  #about-page main .share-your-story h2[aria-hidden=true] {
-    display: block;
-    position: absolute;
-    right: -7rem;
-    top: 6rem;
-    margin-top: 0rem;
-  }
-  #about-page main .share-your-story h2[aria-hidden=true]::after {
-    display: none;
-  }
-  #about-page main .share-your-story p {
-    grid-column: 4/span 2;
-    margin: 0;
-  }
-  #about-page main .share-your-story p:nth-of-type(2) {
-    margin-top: 1rem;
-  }
-  #about-page main .services {
-    min-height: 6rem;
-    height: 60vh;
-    padding: 0;
-  }
-  #about-page main .services .services-bar {
-    top: 3rem;
-    left: 5rem;
-    padding: 0;
-  }
-  #about-page main .services .services-bar::before {
-    content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
-    display: block;
-    width: 107vw;
-    white-space: pre;
-  }
-  #about-page main .services .services-bar::after {
-    display: none;
-  }
-  #about-page main .services .services-bar.bottom {
-    bottom: 3rem;
-    top: auto;
-  }
-  #about-page main .services h2 {
-    display: block;
-    margin-top: 3rem;
-    z-index: 1;
-    padding-left: 42ch;
-    width: 107vw;
-    align-items: stretch;
-    justify-content: stretch;
-  }
-  #about-page main .two-prongs {
-    padding-top: 6rem;
-    padding-bottom: 10rem;
-    color: var(--green);
-  }
   #about-page main .two-prongs h2 {
     margin: 0;
     font-size: 2rem;
@@ -1687,6 +1639,7 @@ footer .footer-column.column3 {
     text-align: right;
     justify-self: flex-end;
     width: 14ch;
+    margin-right: -1ch;
   }
   #about-page main .two-prongs h2:last-of-type {
     grid-column: 4;
@@ -1695,6 +1648,16 @@ footer .footer-column.column3 {
     text-align-last: justify;
     margin-bottom: 3rem;
   }
+}
+#about-page main .two-prongs h2:last-of-type {
+  margin-bottom: 2rem;
+}
+#about-page main .two-prongs p {
+  color: var(--white);
+  line-height: 140%;
+  margin: 0 0 1.5rem 0;
+}
+@media (min-width: 1024px) {
   #about-page main .two-prongs p {
     grid-column: 4/span 2;
     width: 100%;
@@ -1703,6 +1666,15 @@ footer .footer-column.column3 {
   #about-page main .two-prongs p:nth-of-type(1) {
     margin-bottom: 1rem;
   }
+}
+#about-page main .two-prongs p:last-of-type {
+  margin-bottom: 0;
+}
+#about-page main .two-prongs .small-square {
+  background-color: var(--green);
+  margin-bottom: 1rem;
+}
+@media (min-width: 1024px) {
   #about-page main .two-prongs .small-square {
     justify-self: flex-end;
     grid-column: 2;
@@ -1713,10 +1685,30 @@ footer .footer-column.column3 {
     grid-column: 2;
     grid-row: 3;
   }
+}
+#about-page main .two-prongs .small-square:nth-of-type(2) {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 1024px) {
+  #about-page main .two-prongs .small-square:nth-of-type(2) {
+    margin: 0rem;
+  }
+}
+#about-page main .team {
+  padding: 4rem 24px;
+  background-color: var(--white);
+}
+@media (min-width: 1024px) {
   #about-page main .team {
     padding-top: 8rem;
     padding-bottom: 10rem;
   }
+}
+#about-page main .team .team-header {
+  margin-bottom: 3rem;
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-header {
     grid-column: 1/span 2;
     justify-self: flex-end;
@@ -1725,14 +1717,38 @@ footer .footer-column.column3 {
     align-items: flex-end;
     margin-bottom: 0;
   }
+}
+#about-page main .team .team-header h2 {
+  font-size: 1rem;
+  margin: 0 0 1.5rem 0;
+  line-height: 140%;
+  text-align: justify;
+  text-align-last: justify;
+  text-transform: none;
+  color: var(--key);
+  max-width: 40ch;
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-header h2 {
-    font-size: 1rem;
     margin-top: 0rem;
     line-height: 140%;
-    text-align: justify;
-    text-align-last: justify;
     text-transform: none;
   }
+}
+#about-page main .team .team-header .small-square {
+  background-color: var(--key);
+  margin-bottom: 0.5rem;
+}
+#about-page main .team .team-header .small-square:nth-of-type(2) {
+  margin-top: 8rem;
+}
+#about-page main .team .team-header .small-square:nth-of-type(3) {
+  margin-top: 2rem;
+}
+#about-page main .team .team-header .small-square:nth-of-type(4) {
+  display: none;
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-header .small-square:nth-of-type(2) {
     margin-top: 2rem;
   }
@@ -1740,37 +1756,93 @@ footer .footer-column.column3 {
     margin: auto 0;
   }
   #about-page main .team .team-header .small-square:nth-of-type(4) {
+    display: block;
     margin-top: auto;
   }
+}
+#about-page main .team .team-header .small-square:last-of-type {
+  margin-bottom: 0;
+}
+#about-page main .team .team-members {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-members {
     grid-column: 4/span 3;
     gap: 3rem;
-    width: 80%;
+    width: fit-content;
+    max-width: 80%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 4rem;
   }
+}
+#about-page main .team .team-members > div {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-members > div {
     display: block;
+    max-width: 60ch;
   }
+}
+#about-page main .team .team-members img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  background-color: #e0e0e0;
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-members img {
     margin-bottom: 0;
   }
+}
+#about-page main .team .team-members h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--key);
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-members h3 {
     text-align-last: justify;
     margin-top: 0.7rem;
     margin-bottom: 0rem;
     min-width: 11ch;
   }
+}
+#about-page main .team .team-members p {
+  text-transform: none;
+  line-height: 140%;
+  color: var(--key);
+  margin: 0;
+}
+@media (min-width: 1024px) {
   #about-page main .team .team-members p {
     text-align: justify;
     text-align-last: justify;
     text-wrap: balance;
   }
+}
+#about-page main .mission {
+  position: relative;
+  padding: 4rem 24px;
+  background-color: var(--white);
+  overflow: hidden;
+}
+@media (min-width: 1024px) {
   #about-page main .mission {
     padding-top: 6rem;
     padding-bottom: 12rem;
   }
+}
+#about-page main .mission .story-title {
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 1024px) {
   #about-page main .mission .story-title {
     grid-column: 2;
     display: flex;
@@ -1779,6 +1851,16 @@ footer .footer-column.column3 {
     gap: 1.2rem;
     margin-bottom: 0;
   }
+}
+#about-page main .mission h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--key);
+  margin: 0 0 1.5rem 0;
+  line-height: 140%;
+}
+@media (min-width: 1024px) {
   #about-page main .mission h2 {
     width: 30ch;
     font-size: 1rem;
@@ -1788,6 +1870,28 @@ footer .footer-column.column3 {
     margin-top: 0rem;
     grid-column: 2;
   }
+}
+#about-page main .mission h2::after {
+  content: "Our Mission is";
+  display: block;
+  margin-top: 0.5rem;
+}
+@media (min-width: 1024px) {
+  #about-page main .mission h2::after {
+    content: "Our Mission is";
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+#about-page main .mission h2::before {
+  content: "";
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: var(--key);
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 1024px) {
   #about-page main .mission h2::before {
     content: "Our Mission is";
     position: absolute;
@@ -1795,12 +1899,17 @@ footer .footer-column.column3 {
     margin-right: -4rem;
     top: 0;
     white-space: nowrap;
-  }
-  #about-page main .mission h2::after {
-    content: "Our Mission is";
     display: block;
-    margin-top: 0.5rem;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    margin-bottom: 0rem;
   }
+}
+#about-page main .mission h2[aria-hidden=true] {
+  display: none;
+}
+@media (min-width: 1024px) {
   #about-page main .mission h2[aria-hidden=true] {
     display: block;
     position: absolute;
@@ -1814,6 +1923,13 @@ footer .footer-column.column3 {
   #about-page main .mission h2[aria-hidden=true]::before {
     display: none;
   }
+}
+#about-page main .mission p {
+  color: var(--key);
+  line-height: 140%;
+  margin: 0 0 1.5rem 0;
+}
+@media (min-width: 1024px) {
   #about-page main .mission p {
     grid-column: 4/span 2;
     margin: 0;
@@ -1821,19 +1937,41 @@ footer .footer-column.column3 {
   #about-page main .mission p:nth-of-type(2) {
     margin-top: 1rem;
   }
+}
+#about-page main .mission p:last-of-type {
+  margin-bottom: 1.5rem;
+}
+#about-page main .mission a {
+  display: inline-block;
+  text-transform: uppercase;
+  color: var(--key);
+  margin-top: 1rem;
+  border-bottom: 1px solid var(--key);
+  padding: 1rem 0rem 0.2rem 0rem;
+}
+@media (min-width: 1024px) {
   #about-page main .mission a {
     grid-column: 4/span 2;
     margin-top: 1rem;
     margin-left: -0.4rem;
     z-index: 1;
     width: fit-content;
+    border-bottom: none;
+    padding: 0.2rem 0.4rem;
   }
+}
+#about-page main .logo-row {
+  display: none;
+}
+@media (min-width: 1024px) {
   #about-page main .logo-row {
     display: block;
     padding-top: 6rem;
     padding-bottom: 6rem;
     overflow: hidden;
   }
+}
+@media (min-width: 1024px) {
   #about-page main .logo-row .logo-container {
     display: flex;
     justify-content: space-between;
@@ -1842,6 +1980,8 @@ footer .footer-column.column3 {
     margin-left: -6vw;
     gap: 2rem;
   }
+}
+@media (min-width: 1024px) {
   #about-page main .logo-row .logo-repeat {
     width: auto;
     height: 1.5rem;
