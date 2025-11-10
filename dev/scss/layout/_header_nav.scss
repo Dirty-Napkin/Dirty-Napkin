@@ -15,15 +15,20 @@ header {
 
     img{
         width: auto;
+        max-width: 20ch;
         height: 100%;
     }
 
     @include sm {
-        padding: 16.125px 32.25px;
+        padding: 1rem 2rem;
     }
 
     @include md {
-        padding: 1.5rem /*24px*/ 4rem /*64px*/;
+        padding: 0.5rem 2rem;
+    }
+
+    @include lg {
+        padding: 0.5rem 4rem;
     }
 
     .logo-container {

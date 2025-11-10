@@ -42,7 +42,8 @@
             overflow: hidden;
 
             @include sm {
-                padding-top: 56.25%; // 16:9 aspect ratio (9/16 = 0.5625)
+                padding-top: 57%; // 16:9 aspect ratio (9/16 = 0.5625)
+                
             }
 
             .card__image {
@@ -95,7 +96,7 @@
     @include md {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 4rem max(1rem, 3.6%);
+        gap: 4rem max(1rem, 2.5%);
     }
 
     @include md {

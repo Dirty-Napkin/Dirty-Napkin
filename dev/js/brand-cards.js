@@ -43,7 +43,7 @@ function createCard(imageUrl, title, description, cardLink) {
 // Create multiple cards with different content
 const cardsData = [
     {
-        imageUrl: 'assets/company-pages/h2_the-window-thumbnail.jpg',
+        imageUrl: 'assets/brands-pg/b1_window-thumbnail.jpg',
         title: 'The Window',
         description: "Philly's new hole in the wall",
         cardLink: 'the-window.html'
