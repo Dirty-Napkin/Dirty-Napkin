@@ -41,7 +41,7 @@ function updateNextProject() {
     
     const $projectImg = $('.next-project-img');
     $projectImg.attr('id', nextProject.nextPage);
-    $projectImg.css('backgroundImage', `url("${nextProject.nextImg}")`);
+    $projectImg.attr('src', nextProject.nextImg);
 }
 
 // Initialize on project pages
