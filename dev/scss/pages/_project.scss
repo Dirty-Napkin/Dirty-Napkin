@@ -87,8 +87,9 @@
         }
 
         .tags-frame {
+
             grid-area: tags;
-            display: flex;
+            display: none;
             // margin: 8px 24px 24px 24px;
             justify-content: space-between;
             gap: 1.6875rem; //27px
@@ -221,6 +222,18 @@
             }
         }
 
+        .under-img {
+            display: flex;
+            flex-direction: column;
+
+            p {
+                margin-top: auto;
+                margin-bottom: auto;
+                padding: 0;
+                padding-top: 20px;
+            }
+        }
+
         .narrow-text {
             justify-self: center;
             margin-bottom: 1rem; //16px
@@ -236,7 +249,7 @@
                 /*4 columns + 3 gaps:
                 (100% - (5 x gap)) / 6 = column width
                 (column width x 4) + (gap x 3) = img width*/
-                max-width: calc((100% - 5 * 40px) / 6 * 4 + 40px * 3);
+                // max-width: calc((100% - 5 * 40px) / 6 * 4 + 40px * 3);
             }
         }
 
@@ -263,6 +276,11 @@
             @include md {
                 padding-left: 24px;
                 padding-right: 24px;
+            }
+
+            @include xl {
+                max-width: 55ch;
+                margin: auto auto;
             }
         }
     }

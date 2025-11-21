@@ -2200,7 +2200,7 @@ footer .footer-column.column3 {
 }
 .project-page .hero .tags-frame {
   grid-area: tags;
-  display: flex;
+  display: none;
   justify-content: space-between;
   gap: 1.6875rem;
 }
@@ -2324,6 +2324,16 @@ footer .footer-column.column3 {
 .project-page .content .width6 {
   grid-column: span 6;
 }
+.project-page .content .under-img {
+  display: flex;
+  flex-direction: column;
+}
+.project-page .content .under-img p {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0;
+  padding-top: 20px;
+}
 .project-page .content .narrow-text {
   justify-self: center;
   margin-bottom: 1rem;
@@ -2341,7 +2351,6 @@ footer .footer-column.column3 {
     /*4 columns + 3 gaps:
     (100% - (5 x gap)) / 6 = column width
     (column width x 4) + (gap x 3) = img width*/
-    max-width: calc((100% - 200px) / 6 * 4 + 120px);
   }
 }
 .project-page .content .small-img {
@@ -2365,6 +2374,12 @@ footer .footer-column.column3 {
   .project-page .content p {
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+@media (min-width: 1280px) {
+  .project-page .content p {
+    max-width: 55ch;
+    margin: auto auto;
   }
 }
 
