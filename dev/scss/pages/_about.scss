@@ -745,12 +745,11 @@
             a {
                 display: inline-block;
                 text-transform: uppercase;
-                color: var(--key);
                 margin-top: 1rem;
-                border-bottom: 1px solid var(--key);
-                padding: 1rem 0rem 0.2rem 0rem;
+                
 
                 @include lg {
+                    padding: 1rem 0rem 0.2rem 0rem;
                     grid-column: 4 / span 2;
                     margin-top: 1rem;
                     margin-left: -0.4rem;

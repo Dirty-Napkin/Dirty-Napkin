@@ -22,12 +22,23 @@ a.no-link {
     line-height: normal;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
+    background-color: var(--magenta);
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    transition: background-color 0.2s ease-in-out;
 
-    padding: .2rem .4rem .2rem .4rem;
-    color: var(--magenta);
-    // transition: 0.2s ease-in-out; //I like this  no transiton look for now
+    &:hover {background-color: var(--key);}
 
-    &:hover {color: var(--white)}
+    @include lg {
+        color: var(--magenta);    
+        &:hover {color: var(--white)}
+        background-color: transparent;
+        &:hover {background-color: transparent;}
+        padding: .3rem .5rem .3rem .5rem;
+
+
+    }
+   
 }
 
 .centered-text {

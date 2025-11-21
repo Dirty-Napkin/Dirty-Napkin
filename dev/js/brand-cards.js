@@ -70,7 +70,7 @@ const cardsData = [
 
 
 // Create and append all cards when DOM loads - ONLY on brands page
-document.addEventListener('DOMContentLoaded', () => {
+function initBrandCards() {
     // Check if we're on the brands page by looking for the brand-card-grid container
     const gridContainer = document.querySelector('.brand-card-grid');
     if (gridContainer) {
@@ -85,6 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
             gridContainer.appendChild(card);
         });
     }
-});
+}
+
+// Run immediately if DOM is already loaded, otherwise wait for DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBrandCards);
+} else {
+    // DOM is already loaded
+    initBrandCards();
+}
 
 

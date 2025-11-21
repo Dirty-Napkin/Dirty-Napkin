@@ -6,6 +6,13 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    background-color: transparent;
+
+    .button-text {
+        background-color: transparent;
+        &:hover {background-color: transparent;}
+    }
+
 
     a {
         display: flex;
@@ -28,8 +35,7 @@
             font-family: inherit;
             z-index: 1;
             transition: inherit;
-            opacity: 0;
-            
+            opacity: 0;   
         }
 
         // Top right arrow (black, above square)

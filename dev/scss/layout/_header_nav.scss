@@ -65,6 +65,12 @@ header {
     }
 
     nav {
+
+        &.closed {
+            button {
+                background-color: transparent;
+            }
+        }
         
         button{
             @include md{
@@ -85,11 +91,13 @@ header {
         // Ensure nav links are white for blend mode
         a {
             color: var(--white) !important;
+            background-color: transparent;
 
             
             // Override button-text magenta color for blend mode
             &.button-text {
                 color: var(--white) !important;
+                background-color: transparent;
                 
                 &:hover {
                     color: var(--white) !important;
