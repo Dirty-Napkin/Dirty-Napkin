@@ -420,8 +420,13 @@ template {
   box-sizing: border-box;
 }
 
+html {
+  background-color: var(--white);
+}
+
 body {
   overflow-x: hidden;
+  background-color: var(--white);
 }
 
 ul.blank-list {
@@ -1049,6 +1054,9 @@ header {
   z-index: 999;
   top: 0;
   pointer-events: none;
+  mix-blend-mode: difference;
+  color: var(--white);
+  background: transparent;
 }
 header img {
   width: auto;
@@ -1073,6 +1081,9 @@ header img {
 header .logo-container {
   height: 2em;
   pointer-events: auto;
+}
+header .logo-container img {
+  filter: brightness(0) invert(1);
 }
 header .logo-container #desktop-logo {
   display: none;
@@ -1100,6 +1111,18 @@ header nav ul {
   header nav ul {
     display: flex;
   }
+}
+header nav a {
+  color: var(--white) !important;
+}
+header nav a.button-text {
+  color: var(--white) !important;
+}
+header nav a.button-text:hover {
+  color: var(--white) !important;
+}
+header nav button.button-text {
+  color: var(--white) !important;
 }
 header .test {
   text-transform: uppercase;

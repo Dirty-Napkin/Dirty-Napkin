@@ -5,8 +5,15 @@
     box-sizing: border-box;
 }
 
+html {
+    // Set default background for blend mode to work properly
+    background-color: var(--white);
+}
+
 body {
     overflow-x: hidden;
+    // Set default background for blend mode to work properly
+    background-color: var(--white);
 }
 
 ul.blank-list {

@@ -12,6 +12,15 @@ header {
     z-index: 999;
     top: 0;
     pointer-events: none;
+    
+    // Blend mode difference for color inversion effect
+    mix-blend-mode: difference;
+    
+    // Ensure header elements are white to invert properly
+    color: var(--white);
+    
+    // Make sure background doesn't interfere with blend mode
+    background: transparent;
 
     img{
         width: auto;
@@ -34,6 +43,11 @@ header {
     .logo-container {
         height: 2em;
         pointer-events: auto;
+        
+        // Ensure logos work with blend mode
+        img {
+            filter: brightness(0) invert(1); // Makes SVG white for blend mode
+        }
 
         #desktop-logo {
             display: none;
@@ -51,19 +65,41 @@ header {
     }
 
     nav {
+        
         button{
             @include md{
                 display: none;
             }
         }
         
-        ul {
+        ul {            
+            
             display: none;
             gap: 48px;
 
             @include md {
                 display: flex;
             }
+        }
+        
+        // Ensure nav links are white for blend mode
+        a {
+            color: var(--white) !important;
+
+            
+            // Override button-text magenta color for blend mode
+            &.button-text {
+                color: var(--white) !important;
+                
+                &:hover {
+                    color: var(--white) !important;
+                }
+            }
+        }
+        
+        // Button text in nav should also be white
+        button.button-text {
+            color: var(--white) !important;
         }
     }
 
