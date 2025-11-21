@@ -33,7 +33,8 @@
         }
 
         p {
-            max-width: 60ch;
+            max-width: 50ch;
+            // The correct syntax (experimental, not fully supported) is:
         }
 
         .txtbold {
@@ -215,10 +216,12 @@
             }
 
             h2 {
+
                 font-size: 1rem;
-                font-weight: 400;
+                font-weight: 100;
                 text-transform: uppercase;
                 color: var(--yellow);
+                opacity: 0.8;
                 margin: 0 0 1.5rem 0;
                 line-height: 140%;
 
@@ -234,15 +237,17 @@
 
                 // Repeat title starting at md breakpoint
                 &::after {
-                    display: none; // Hide on mobile
+                    content: "When you share your story";
+                    display: block;
+                    position: absolute;
+                    margin-top: -3.5rem;
 
                     @include md {
-                        content: "When you share your story";
-                        display: block;
-                        position: absolute;
                         right: 0;
                         top: 4rem;
                         margin-right: -12ch;
+                        margin-top: 0rem;
+
                     }
 
                     @include lg {
@@ -315,7 +320,7 @@
                 position: absolute;
                 left: 0;
                 right: 0;
-                font-weight: 300;
+                font-weight: 100;
                 color: var(--cyan);
                 font-size: 1.5rem;
                 text-transform: uppercase;
@@ -369,11 +374,16 @@
             }
 
             h2 {
-                display: none; // Hide desktop h2 on mobile
+                position: absolute;
+                top: .25rem;
+                left: 0;
+                font-size: 1.5rem;
+                padding: 0 map-get($margins, min);
+
 
                 @include lg {
-                    display: block;
                     position: absolute;
+                    top: 0;
                     padding: 0;
                     margin: 0;
                     margin-top: 1.5rem;
@@ -388,19 +398,20 @@
 
         // ===== TWO PRONGS SECTION =====
         .two-prongs {
-            padding: 4rem map-get($margins, min);
+            padding: 8rem map-get($margins, min);
             background-color: var(--key);
             color: var(--green);
 
+
             @include lg {
-                padding-top: 6rem;
-                padding-bottom: 10rem;
+                padding-top: 16rem;
+                padding-bottom: 18rem;
             }
 
             h2 {
                 margin: 0 0 1.5rem 0;
                 text-transform: uppercase;
-                font-size: 1.25rem;
+                font-size: 1.75rem;
                 font-weight: 500;
                 line-height: 140%;
 
@@ -560,6 +571,10 @@
                 display: flex;
                 flex-direction: column;
                 gap: 3rem;
+
+                @include md {
+                    max-width: 30rem;
+                }
 
                 @include lg {
                     grid-column: 4 / span 3;

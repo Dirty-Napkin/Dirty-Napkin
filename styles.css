@@ -645,7 +645,7 @@ p {
   font-family: "Degular Text", sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  line-height: 130%;
+  line-height: 150%;
   margin: 0;
 }
 .body.paragraph-spacing,
@@ -1322,7 +1322,7 @@ footer .footer-column.column3 {
   height: 1.2rem;
 }
 #about-page main p {
-  max-width: 60ch;
+  max-width: 50ch;
 }
 #about-page main .txtbold {
   font-family: "Degular Mono", monospace;
@@ -1493,9 +1493,10 @@ footer .footer-column.column3 {
 }
 #about-page main .share-your-story h2 {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 100;
   text-transform: uppercase;
   color: var(--yellow);
+  opacity: 0.8;
   margin: 0 0 1.5rem 0;
   line-height: 140%;
 }
@@ -1511,16 +1512,17 @@ footer .footer-column.column3 {
   }
 }
 #about-page main .share-your-story h2::after {
-  display: none;
+  content: "When you share your story";
+  display: block;
+  position: absolute;
+  margin-top: -3.5rem;
 }
 @media (min-width: 768px) {
   #about-page main .share-your-story h2::after {
-    content: "When you share your story";
-    display: block;
-    position: absolute;
     right: 0;
     top: 4rem;
     margin-right: -12ch;
+    margin-top: 0rem;
   }
 }
 @media (min-width: 1024px) {
@@ -1587,7 +1589,7 @@ footer .footer-column.column3 {
   position: absolute;
   left: 0;
   right: 0;
-  font-weight: 300;
+  font-weight: 100;
   color: var(--cyan);
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -1640,12 +1642,16 @@ footer .footer-column.column3 {
   }
 }
 #about-page main .services h2 {
-  display: none;
+  position: absolute;
+  top: 0.25rem;
+  left: 0;
+  font-size: 1.5rem;
+  padding: 0 24px;
 }
 @media (min-width: 1024px) {
   #about-page main .services h2 {
-    display: block;
     position: absolute;
+    top: 0;
     padding: 0;
     margin: 0;
     margin-top: 1.5rem;
@@ -1657,20 +1663,20 @@ footer .footer-column.column3 {
   }
 }
 #about-page main .two-prongs {
-  padding: 4rem 24px;
+  padding: 8rem 24px;
   background-color: var(--key);
   color: var(--green);
 }
 @media (min-width: 1024px) {
   #about-page main .two-prongs {
-    padding-top: 6rem;
-    padding-bottom: 10rem;
+    padding-top: 16rem;
+    padding-bottom: 18rem;
   }
 }
 #about-page main .two-prongs h2 {
   margin: 0 0 1.5rem 0;
   text-transform: uppercase;
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: 500;
   line-height: 140%;
 }
@@ -1813,6 +1819,11 @@ footer .footer-column.column3 {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+}
+@media (min-width: 768px) {
+  #about-page main .team .team-members {
+    max-width: 30rem;
+  }
 }
 @media (min-width: 1024px) {
   #about-page main .team .team-members {
@@ -2077,7 +2088,7 @@ footer .footer-column.column3 {
 }
 @media (min-width: 430px) {
   .brand-card-grid .brand-card .card__image-container {
-    padding-top: 57%;
+    padding-top: 56.25%;
   }
 }
 .brand-card-grid .brand-card .card__image-container .card__image {
@@ -2096,6 +2107,7 @@ footer .footer-column.column3 {
 .brand-card-grid .brand-card .card__content {
   width: 100%;
   box-sizing: border-box;
+  z-index: 1;
 }
 .brand-card-grid .brand-card .card__content .card__title {
   padding: 0.25rem 0 0 0;
@@ -2125,7 +2137,7 @@ footer .footer-column.column3 {
   .brand-card-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4rem max(1rem, 2.5%);
+    gap: 4rem max(1rem, 3.6%);
   }
 }
 @media (min-width: 768px) {
@@ -2137,7 +2149,7 @@ footer .footer-column.column3 {
     opacity: 90%;
   }
   .brand-card-grid .brand-card:hover .card__description {
-    transform: translateY(0);
+    transform: translateY(-20%);
   }
 }
 
@@ -2291,9 +2303,14 @@ footer .footer-column.column3 {
 .project-page .hero .adjectives p {
   font-family: "Degular Mono", monospace;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0.15rem;
+}
+@media (min-width: 1024px) {
+  .project-page .hero .adjectives p {
+    font-size: 1.5rem;
+  }
 }
 .project-page .intro {
   display: flex;
