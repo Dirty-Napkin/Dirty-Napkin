@@ -64,10 +64,6 @@ footer {
                 align-items: flex-start;
 
                 a {
-                    &:hover,
-                    &:focus {
-                        filter: brightness(0) invert(1);
-                    }
                     height: 22px;
                     width: 22px;
                     margin-left: -2px;
@@ -82,7 +78,7 @@ footer {
                 width: 20px;
                 background-size: cover;
                 margin: 6px;
-                // transition: 0.2s ease-in-out;
+                transition: transform 0.2s ease-in-out;
                 
                 &.linkedin {
                     background-position: -21px 0;
@@ -93,8 +89,11 @@ footer {
                 }
 
                     &:hover {
-                        fill: var(--white);
-                        transform: scale(1.1)
+                        transform: scale(1.1);
+
+                        @include lg {
+                            filter: brightness(0) invert(1);
+                        }
                     }
                 }
             }   
@@ -159,11 +158,6 @@ footer {
                     a { //Adding padding to the email so the pink hover looks better
                         padding-right: 6px;
                         // transition: 0.2s ease-in-out;
-
-                        &:hover,
-                        &:focus {
-                            color: var(--white);
-                        }
                     }
 
                    

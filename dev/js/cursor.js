@@ -1,126 +1,154 @@
+// Hide cursor universally at lg breakpoints or larger
 document.addEventListener("DOMContentLoaded", function () {
-    // Responsive cursor setup - only runs at lg breakpoints or larger
-    function setupResponsiveCursor() {
-        const breakpoints = {
-            sm: window.matchMedia("(min-width: 430px)"),
-            md: window.matchMedia("(min-width: 768px)"),
-            lg: window.matchMedia("(min-width: 1024px)"),
-            xl: window.matchMedia("(min-width: 1280px)")
-        };
-
+    
+    // Responsive cursor setup - creates custom cursor at lg breakpoints or larger
+    function setupCursor() {
+        const lgBreakpoint = window.matchMedia("(min-width: 1024px)");
         let cursor = null;
-        let delegationAttached = false;
+        let mousemoveHandler = null;
+        let hoverDelegationAttached = false;
 
-        function attachHoverDelegation() {
-            if (delegationAttached) return;
-
-            // Use event delegation so dynamically added elements are handled
-            document.addEventListener('mouseover', function (e) {
-                if (!cursor) return;
-                const target = e.target.closest('a, button');
-                if (!target || !document.body.contains(target)) return;
-
-                if (target.tagName.toLowerCase() === 'button') {
-                    cursor.classList.add('hover-button');
-                    cursor.style.transform = "scale(1.7) rotate(45deg)";
-                } else if (target.tagName.toLowerCase() === 'a') {
-                    if (target.classList.contains('hover-style-one')) {
-                        const rect = target.getBoundingClientRect();
-                        cursor.style.setProperty('--link-width', `${rect.width + 10}px`);
-                        cursor.style.setProperty('--link-height', `${rect.height + 10}px`);
-                        
-                        // Check if link is inside nav element
-                        const isInNav = target.closest('nav') !== null;
-                        if (isInNav) {
-                            cursor.classList.add('hover-link-nav');
-                        } else {
-                            cursor.classList.add('hover-one');
-                        }
-                    } else {
-                        // Default to hover-style-two (either has hover-style-two class or no class)
-                        cursor.classList.add('hover-two');
-                    }
+        /**
+         * Creates the custom cursor element and sets up mouse tracking
+         */
+        function createCursor() {
+            // Create the custom cursor element
+            cursor = document.createElement("div");
+            cursor.classList.add("cursors");
+            document.body.appendChild(cursor);
+            
+            // Update cursor position on mouse move
+            mousemoveHandler = function (e) {
+                if (cursor) {
+                    cursor.style.left = e.clientX + "px";
+                    cursor.style.top = e.clientY + "px";
                 }
-            });
-
-            document.addEventListener('mouseout', function (e) {
-                if (!cursor) return;
-                const fromEl = e.target.closest('a, button');
-                const toEl = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest('a, button') : null;
-                // If moving within the same anchor/button, ignore
-                if (fromEl && toEl && fromEl === toEl) return;
-
-                // On leaving any anchor/button, remove hover classes
-                if (fromEl) {
-                    cursor.classList.remove('hover-button');
-                    cursor.classList.remove('hover-one');
-                    cursor.classList.remove('hover-link-nav');
-                    cursor.classList.remove('hover-two');
-                }
-            });
-
-            delegationAttached = true;
+            };
+            document.addEventListener("mousemove", mousemoveHandler);
+            
+            // Initialize hover interaction handlers
+            setupHoverInteractions();
         }
 
-        function applyCursorJS() {
-            // Remove existing cursor if it exists
+        /**
+         * Removes the cursor element and cleans up event listeners
+         */
+        function removeCursor() {
+            // Remove cursor element
             if (cursor) {
                 cursor.remove();
                 cursor = null;
             }
-
-            // Only create cursor for lg breakpoints and larger
-            if (breakpoints.lg.matches) {
-                
-                // Create the custom cursor element
-                cursor = document.createElement("div");
-                cursor.classList.add("cursors");
-                document.body.appendChild(cursor);
-                
-                // Hide the default cursor for the entire document
-                document.documentElement.style.cursor = "none";
-                document.body.style.cursor = "none";
-                // This line removes the default cursor from all elements on the page
-                document.querySelectorAll("*").forEach(el => el.style.cursor = "none");
-
-                // Update cursor position
-                document.addEventListener("mousemove", function (e) {
-                    cursor.style.left = e.clientX + "px";
-                    cursor.style.top = e.clientY + "px";
-                });
-                
-                // Ensure delegation is attached (once)
-                attachHoverDelegation();
-            } else {
-                console.log('Cursor disabled - below LG breakpoint');
-                // Restore default cursor behavior for smaller screens
-                document.documentElement.style.cursor = "auto";
-                document.body.style.cursor = "auto";
-                document.querySelectorAll("*").forEach(el => el.style.cursor = "auto");
+            
+            // Remove event listener
+            if (mousemoveHandler) {
+                document.removeEventListener("mousemove", mousemoveHandler);
+                mousemoveHandler = null;
             }
         }
 
-        // Debounced initializer to ensure DOM mutations (like clones) have completed
-        let applyTimeoutId = null;
-        function scheduleApplyCursorJS() {
-            if (applyTimeoutId) {
-                clearTimeout(applyTimeoutId);
+        /**
+         * Sets up hover interaction handlers for links and buttons
+         * Uses event delegation to handle dynamically added elements
+         */
+        function setupHoverInteractions() {
+            // Prevent duplicate event listeners
+            if (hoverDelegationAttached || !cursor) return;
+            
+            /**
+             * Removes all hover state classes from the cursor
+             */
+            function clearCursorClasses() {
+                if (!cursor) return;
+                cursor.classList.remove('hover-one', 'hover-two', 'hover-button', 'hover-link-nav');
             }
-            applyTimeoutId = setTimeout(() => {
-                applyCursorJS();
-                applyTimeoutId = null;
-            }, 1000); // minimal delay to allow cloned elements to be added
+
+            /**
+             * Handles mouseover events on interactive elements
+             */
+            function handleMouseOver(e) {
+                // Graceful fallback: exit if cursor doesn't exist
+                if (!cursor) return;
+
+                // Detect if hovered element is a link or button
+                const target = e.target.closest('a, button');
+                
+                // Graceful fallback: exit if no valid target found
+                if (!target || !document.body.contains(target)) {
+                    clearCursorClasses();
+                    return;
+                }
+
+                // Remove previous classes before applying new ones
+                clearCursorClasses();
+
+                // Handle hover-style-one: measure element and set CSS custom properties
+                if (target.classList.contains('hover-style-one')) {
+                    const rect = target.getBoundingClientRect();
+                    cursor.style.setProperty('--link-width', `${rect.width + 10}px`);
+                    cursor.style.setProperty('--link-height', `${rect.height + 10}px`);
+                    
+                    // Check if link is inside nav element for special styling
+                    const isInNav = target.closest('nav') !== null;
+                    cursor.classList.add(isInNav ? 'hover-link-nav' : 'hover-one');
+                }
+                // Handle hover-style-two: add hover-two class
+                else if (target.classList.contains('hover-style-two')) {
+                    cursor.classList.add('hover-two');
+                }
+            }
+
+            /**
+             * Handles mouseout events to clear cursor classes
+             */
+            function handleMouseOut(e) {
+                // Graceful fallback: exit if cursor doesn't exist
+                if (!cursor) return;
+
+                const fromEl = e.target.closest('a, button');
+                const toEl = e.relatedTarget?.closest('a, button');
+                
+                // If moving within the same element, don't clear classes
+                if (fromEl && toEl && fromEl === toEl) return;
+
+                // Clear classes when leaving an interactive element
+                if (fromEl) {
+                    clearCursorClasses();
+                }
+            }
+
+            // Attach event listeners using event delegation
+            document.addEventListener('mouseover', handleMouseOver);
+            document.addEventListener('mouseout', handleMouseOut);
+            
+            hoverDelegationAttached = true;
+        }
+
+        /**
+         * Toggles cursor visibility based on breakpoint
+         */
+        function toggleCursor() {
+            if (lgBreakpoint.matches) {
+                // Hide default cursor and create custom cursor
+                document.documentElement.classList.add('cursor-hidden');
+                if (!cursor) {
+                    createCursor();
+                }
+            } else {
+                // Restore normal cursor behavior and remove custom cursor
+                document.documentElement.classList.remove('cursor-hidden');
+                removeCursor();
+                hoverDelegationAttached = false;
+            }
         }
 
         // Listen for screen size changes
-        Object.values(breakpoints).forEach(mq => {
-            mq.addEventListener('change', applyCursorJS);
-        });
+        lgBreakpoint.addEventListener('change', toggleCursor);
 
-        // Run once on load (debounced)
-        scheduleApplyCursorJS();
+        // Run once on load
+        toggleCursor();
     }
 
-    // Initialize responsive cursor
-    setupResponsiveCursor();
+    // Initialize cursor
+    setupCursor();
 });

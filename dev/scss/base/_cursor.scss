@@ -7,6 +7,7 @@
     z-index: 9999;
     border-radius: 0px;
     transform: translate(-50%, -50%);
+    
     transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), 
                 height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
                 transform 0.15s ease-in-out;
@@ -38,10 +39,9 @@
     
 }
 
-// Hide the default cursor for the entire document
-@include lg {
-    html, body, * {
-        cursor: none;
-    }
+// Hide the default cursor for the entire document when class is present
+.cursor-hidden,
+.cursor-hidden * {
+    cursor: none !important;
 }
 

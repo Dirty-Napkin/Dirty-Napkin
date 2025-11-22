@@ -43,6 +43,12 @@ header {
     .logo-container {
         height: 2em;
         pointer-events: auto;
+        transition: transform 0.3s ease;
+        transform-origin: left center;
+        
+        &:hover {
+            transform: scale(1.05);
+        }
         
         // Ensure logos work with blend mode
         img {

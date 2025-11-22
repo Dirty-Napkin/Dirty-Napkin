@@ -2,7 +2,7 @@
 function createCard(imageUrl, title, description, cardLink) {
     // Create the main card container
     const card = document.createElement('a');
-    card.className = 'brand-card';
+    card.className = 'brand-card hover-style-two';
     card.href = cardLink;
 
 
