@@ -41,9 +41,9 @@
             }
 
             h5 {
-                position: static;
-                left: unset;
-                top: unset;
+                // position: static;
+                // left: unset;
+                // top: unset;
                 margin-left: 0;
                 align-self: flex-start;
                 justify-self: unset;
@@ -116,13 +116,11 @@
                     font-family: "Degular Mono", sans-serif;
                     font-size: 0.7941875rem; //12.707px
                     font-weight: 600;
-                    line-height: 130%;
                     text-transform: uppercase;
 
                     @include md {
                         font-size: 1.5rem; //24px
                         font-weight: 600;
-                        line-height: 130%; //31.2px
                         text-transform: uppercase;
                     }
                 }

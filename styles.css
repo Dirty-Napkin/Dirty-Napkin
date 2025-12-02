@@ -637,7 +637,7 @@ h5 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 500;
-  line-height: 130%;
+  line-height: 150%;
 }
 
 .body,
@@ -1303,6 +1303,22 @@ footer .footer-column.column3 {
   footer .footer-column.column3 .square {
     order: 1;
   }
+}
+
+/* =============
+    Mobile Menu Squares
+============= */
+.mobile-menu-squares {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0;
+  width: 100%;
+  height: 100vh;
+}
+.mobile-menu-squares .menu-square {
+  background-color: var(--cyan);
+  aspect-ratio: 1;
 }
 
 /* =============
@@ -2209,9 +2225,6 @@ footer .footer-column.column3 {
   }
 }
 .project-page .hero .title-frame h5 {
-  position: static;
-  left: unset;
-  top: unset;
   margin-left: 0;
   align-self: flex-start;
   justify-self: unset;
@@ -2281,14 +2294,12 @@ footer .footer-column.column3 {
   font-family: "Degular Mono", sans-serif;
   font-size: 0.7941875rem;
   font-weight: 600;
-  line-height: 130%;
   text-transform: uppercase;
 }
 @media (min-width: 768px) {
   .project-page .hero .tags-frame .tag p {
     font-size: 1.5rem;
     font-weight: 600;
-    line-height: 130%;
     text-transform: uppercase;
   }
 }
