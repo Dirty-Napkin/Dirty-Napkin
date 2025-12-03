@@ -28,20 +28,68 @@ footer {
         &.column2 {
             .square {
                 display: none;
+
+                @include md {
+                    display: block !important;
+                }
             }
+        }
+    }
+
+    .square {
+        @include md {
+            display: block !important;
+        }
+    }
+
+    @include md {
+        height: 256px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        grid-template-areas: "column2 column1 column3";
+    }
+
+    .footer-column {
+
+        p { 
+            white-space: nowrap;
         }
 
         &.column1 {
+            width: 26ch;
             grid-area: column1;
 
             div:nth-child(1) {
                 display: flex;
                 flex-direction: column;
                 width: fit-content;
+
+                @include md {
+                    align-self: center;
+                }
+            }
+
+            p {
+                min-width: 24ch;
+
+                @include lg {
+                    min-width: 0;
+                }
+            }
+
+            @include md {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                margin: 0 auto;
             }
         }
 
         &.column2 {
+            width: 26ch;
             grid-area: column2;
             display: grid;
             grid-template-columns: auto auto;
@@ -49,44 +97,111 @@ footer {
                 "contact contact"
                 "email icons";
 
+            @include md {
+                height: 100%;
+                grid-template-rows: auto 1fr auto auto auto;
+                grid-template-areas:
+                    "icons"
+                    "spacer"
+                    "contact"
+                    "email"
+                    "square";
+            }
+
             h4 {
                 grid-area: contact;
             }
 
             p {
                 grid-area: email;
-                padding: 6px 0;
+                padding: 0 0 6px;
+
+
+                @include lg {
+                    padding: 6px 0;
+                }
+                // Disable hover color change on all breakpoints md and smaller (up to 1023px)
+                a {
+                    @media (max-width: 1023px) {
+                        text-decoration: underline;
+                        margin-top: -4px;
+
+                        &:hover {
+                            color: inherit !important;
+                        }
+                    }
+
+                    @include md {
+                        //Adding padding to the email so the pink hover looks better
+                        padding-right: 6px;
+                        // transition: 0.2s ease-in-out;
+                    }
+                }
+            }
+
+            .spacer {
+                @include md {
+                    grid-area: spacer;
+                }
+            }
+
+            .square {
+                @include md {
+                    grid-area: square;
+                }
             }
 
             .footer-icon-tray {//Footer icon hover behavior
                 grid-area: icons;
                 display: flex;
                 align-items: flex-start;
+                transform: translateY(-50%);
+                
+                @include md {
+                    transform: none;
+                }
 
                 a {
+                    width: 100%;
+                    justify-content: center;
                     height: 22px;
                     width: 22px;
                     margin-left: -2px;
-                    &:nth-child(2) {
-                        margin-left: 8px;
+                    @include lg {
+                        &:nth-child(2) {
+                            margin-left: 8px;
+                        }
                     }
                 }
+                .footer-icon-container {
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
 
+
+                    @include lg {
+                        width: 22px;
+                        height: 22px;
+                        display: block;
+                    }
+                }
                 .footer-icon {
-                background: url("/assets/spritesheet.svg") no-repeat;
-                height: 20px;
-                width: 20px;
-                background-size: cover;
-                margin: 6px;
-                transition: transform 0.2s ease-in-out;
-                
-                &.linkedin {
-                    background-position: -21px 0;
-                }
+                    background: url("/assets/spritesheet.svg") no-repeat;
+                    height: 20px;
+                    width: 20px;
+                    background-size: cover;
+                    margin: 6px;
+                    transition: transform 0.2s ease-in-out;
+                    
+                    &.linkedin {
+                        background-position: -21px 0;
+                    }
 
-                &.instagram {
-                    background-position: 0 0;
-                }
+                    &.instagram {
+                        background-position: 0 0;
+                    }
 
                     &:hover {
                         transform: scale(1.1);
@@ -108,72 +223,18 @@ footer {
             align-items: flex-end;
             gap: 8px;
             align-self: stretch;
-        }
-    }
 
-    @include md {
-        height: 256px;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
-        grid-template-areas: "column2 column1 column3";
-
-        .square {
-            display: block !important;
-        }
-
-        .footer-column {
-            &.column1 {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                height: 100%;
-
-                div:nth-child(1) {
-                    align-self: center;
-                }
-            }
-
-            &.column2 {
-                height: 100%;
-                grid-template-rows: auto 1fr auto auto auto;
-                grid-template-areas:
-                    "icons"
-                    "spacer"
-                    "contact"
-                    "email"
-                    "square";
-
-                .spacer {
-                    grid-area: spacer;
-                }
-
-                .square {
-                    grid-area: square;
-                }
-
-                p { //Email hover behavior
-
-                    a { //Adding padding to the email so the pink hover looks better
-                        padding-right: 6px;
-                        // transition: 0.2s ease-in-out;
-                    }
-
-                   
-                }
-            }
-
-            &.column3 {
+            @include md {
                 height: 100%;
                 padding-top: 0;
                 flex-direction: row !important;
+            }
 
-                .square {
+            .square {
+                @include md {
                     order: 1;
                 }
             }
         }
-
     }
 }

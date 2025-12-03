@@ -379,6 +379,8 @@
                 img {
                     width: 100%;
 
+                    
+
                     @include md {
                         height: auto;
                         object-fit: contain;
@@ -389,6 +391,13 @@
                         }
                     }
                 }
+                // Hide the backup images on mobile and tablet
+                @media (max-width: 1023px) {
+                    > img {
+                        display: none;
+                    }
+                }
+                
     
                 .more-info {
                     display: none;
