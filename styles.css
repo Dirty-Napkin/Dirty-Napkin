@@ -1612,14 +1612,19 @@ footer .footer-column.column3 {
     margin-top: 6rem;
   }
 }
-#about-page main .hero-image img {
+#about-page main .hero-image img,
+#about-page main .hero-image video {
   display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
 }
 @media (min-width: 1024px) {
-  #about-page main .hero-image img {
+  #about-page main .hero-image img,
+  #about-page main .hero-image video {
     height: 100%;
   }
 }
