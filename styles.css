@@ -2605,7 +2605,7 @@ footer .footer-column.column3 {
 }
 @media (min-width: 1280px) {
   .project-page .content p {
-    max-width: 55ch;
+    max-width: 24rem;
     margin: auto auto;
   }
 }
