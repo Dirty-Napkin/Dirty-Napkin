@@ -2608,6 +2608,9 @@ footer .footer-column.column3 {
     max-width: 24rem;
     margin: auto auto;
   }
+  .project-page .content p.width6 {
+    max-width: 40rem;
+  }
 }
 
 /* ===== HOME PAGE STYLES ===== */
