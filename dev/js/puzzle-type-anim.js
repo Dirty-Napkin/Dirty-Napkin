@@ -103,7 +103,7 @@ function setupCustomLayouts(element) {
     }
 }
 
-/*---Function that creates custom layout based on "setupCustomLayouts" ---*/
+/*---Create custom layout based on "setupCustomLayouts" ---*/
     /**
      * Gets custom layout positions for text letters
      * Can be overridden by setting element.dataset.customLayoutFunction or element.customLayoutFunction
@@ -205,7 +205,7 @@ function getCustomLayout(element, originalText, gridWidth, gridHeight) {
     return null; // Use default layout
 }
 
-/*---Function that creates the base layer grid ---*/
+/*---Create the base layer grid ---*/
     /**
      * @param {HTMLElement} element - The element containing the text
      * @param {Array|null} customLayout - Optional custom layout positions [{letterIndex, row, col}, ...]
@@ -272,7 +272,7 @@ function buildTextGrid(element, customLayout = null) {
     // Calculate grid spacing relative to text size
     // gridSpacing is a multiplier of cellWidth (default 0.75 = 75% of cell width)
     // Can be customized via data-grid-spacing attribute (e.g., "0.5" for 50%, "1" for 100%)
-    const gridSpacingMultiplier = parseFloat(element.dataset.gridSpacing) || 0.3;
+    const gridSpacingMultiplier = parseFloat(element.dataset.gridSpacing) || 0.35;
     const gridSpacing = cellWidth * gridSpacingMultiplier;
 
     // Step 2: Create the full grid with borders
@@ -382,7 +382,7 @@ function buildTextGrid(element, customLayout = null) {
     element.dataset.gridSpacing = gridSpacingMultiplier;
 }
 
-/*---Function that creates the animation (weird name, oops)---*/
+/*---Create the animation (weird name, oops)---*/
     /**
      * Creates animation functions to randomly rearrange letters in the grid
      * @param {HTMLElement} element - The grid container element (must have grid built first)
@@ -482,7 +482,7 @@ function addGridHoverAnimation(element) {
     };
 }
 
-/*---Function that plays the animation on hover---*/
+/*---Play the animation on hover---*/
     /**
      * Sets up hover triggers for grid animation
      * @param {HTMLElement} element - The grid container element (must have grid built first)
@@ -509,7 +509,7 @@ function setupGridHoverAnimation(element) {
     element.dataset.hoverAnimationSetup = 'true';
 }
 
-/*---Function that plays the animation on load---*/
+/*---Playthe animation on load---*/
 function setupGridLoadAnimation(element) {
     // Get the animation functions
     const animation = addGridHoverAnimation(element);
@@ -545,7 +545,7 @@ function setupGridLoadAnimation(element) {
     }, 500);
 }
 
-/*---Function that positions the project description on project pages---*/
+/*---Position the project description on project pages---*/
     /**
      * @param {HTMLElement} puzzleElement - The puzzle-type element
      * @param {Object} [gridDimensions] - Optional grid dimensions object from addGridHoverAnimation to avoid recalculation
@@ -603,8 +603,8 @@ function setupGridLoadAnimation(element) {
         h5.style.left = `${leftPosition}px`;
         h5.style.bottom = `${bottomPosition}px`;
     }
-    
-/*---Function that controls which animations play. Based on the classes applied to each element---*/
+
+/*---Control which animations play. Based on the classes applied to each element---*/
     /**
      * @param {HTMLElement} element - The element with the puzzle-type class
      */

@@ -575,7 +575,6 @@ h1 {
   /*https://caniuse.com/mdn-css_properties_text-box*/
   font-size: 21.563rem;
   font-weight: 700;
-  letter-spacing: 86.25px;
   text-transform: uppercase;
 }
 
@@ -2369,7 +2368,6 @@ footer .footer-column.column3 {
   margin-top: 0;
   grid-area: title;
   font-size: clamp(2rem, 8vw, 5rem);
-  letter-spacing: 0.7rem;
   max-width: 100%;
 }
 @media (min-width: 768px) {
@@ -2392,8 +2390,6 @@ footer .footer-column.column3 {
     width: 19ch;
     padding-bottom: 7px;
     position: absolute;
-    bottom: 0;
-    left: 11em;
   }
 }
 .project-page .hero img, .project-page .hero video {

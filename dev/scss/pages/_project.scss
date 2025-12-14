@@ -32,7 +32,7 @@
                 margin-top: 0;
                 grid-area: title;
                 font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
-                letter-spacing: 0.7rem; //11.2px
+                // letter-spacing: 0.7rem; //11.2px
                 max-width: 100%;
 
                 @include md {
@@ -60,17 +60,11 @@
                     padding-bottom: 7px;
 
                     position: absolute;
-                    bottom: 0;
-                    left: 11em;
+                    
+                    //bottom: x;
+                    // left: x;
+                    // Position is determined in JS file
 
-                    // // When positioned absolutely by JS, ensure proper text wrapping
-                    // &[style*="position: absolute"] {
-                    //     width: 300px;
-                    //     word-wrap: break-word;
-                    //     overflow-wrap: break-word;
-                    //     hyphens: none;
-                    //     white-space: normal;
-                    // }
                 }
             }
         }
