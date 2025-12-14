@@ -1,5 +1,5 @@
 // Function to create a card component on the BRANDS page
-function createCard(imageUrl, title, description, cardLink) {
+function createCard(imageUrl, title, description, cardLink, mobileImageUrl = null) {
     // Create the main card container
     const card = document.createElement('a');
     card.className = 'brand-card hover-style-two';
@@ -10,12 +10,21 @@ function createCard(imageUrl, title, description, cardLink) {
     const imageContainer = document.createElement('div');
     imageContainer.className = 'card__image-container';
 
-    // Create and set up the image
+    // Create and set up the desktop image (hidden on sm breakpoint if mobile image exists)
     const image = document.createElement('img');
-    image.className = 'card__image';
+    image.className = mobileImageUrl ? 'card__image card__image--desktop' : 'card__image';
     image.src = imageUrl;
     image.alt = title;
     imageContainer.appendChild(image);
+
+    // Create and set up the mobile image (only shown on sm breakpoint if provided)
+    if (mobileImageUrl) {
+        const mobileImage = document.createElement('img');
+        mobileImage.className = 'card__image card__image--mobile';
+        mobileImage.src = mobileImageUrl;
+        mobileImage.alt = title;
+        imageContainer.appendChild(mobileImage);
+    }
 
     // Create the content container
     const content = document.createElement('div');
@@ -43,25 +52,29 @@ function createCard(imageUrl, title, description, cardLink) {
 // Create multiple cards with different content
 const cardsData = [
     {
-        imageUrl: 'assets/brands-pg/b1_window-thumbnail.jpg',
+        imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b1m_the-window-thumbnail.jpg',
         title: 'The Window',
         description: "Philly's new hole in the wall",
         cardLink: 'the-window.html'
     },
     {
-        imageUrl: 'assets/company-pages/h3_lemonade-stand-thumbnail.jpg', 
+        imageUrl: 'assets/brands-pg/b2d_lemonade-stand-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b2m_lemonade-stand-thumbnail.jpg',
         title: 'The Lemonade Stand',
         description: 'DIY performing arts gets juicy',
         cardLink: 'lemonade-stand.html'
     },
     {
-        imageUrl: 'assets/company-pages/h4_those-eyes-thumbnail.jpg',
+        imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b3m_those-eyes-thumbnail.jpg',
         title: 'Those Eyes', 
         description: 'Prepare to be psychologically thrilled',
         cardLink: 'those-eyes.html'
     },
     {
-        imageUrl: 'assets/company-pages/h6_asp-thumbnail.jpg',
+        imageUrl: 'assets/brands-pg/b4-desktopASPthumbnail.png',
+        mobileImageUrl: 'assets/brands-pg/b4-mobileASPthumbnail.png',
         title: 'American Scripture Project',
         description: 'Unity through shared experiences',
         cardLink: 'american-scripture-project.html'
@@ -80,7 +93,8 @@ function initBrandCards() {
                 cardData.imageUrl,
                 cardData.title,
                 cardData.description,
-                cardData.cardLink
+                cardData.cardLink,
+                cardData.mobileImageUrl
             );
             gridContainer.appendChild(card);
         });

@@ -690,7 +690,7 @@ function setupGridLoadAnimation(element) {
             // Fallback: read from dataset and recalculate gridSpacing
             cellWidth = parseFloat(puzzleElement.dataset.cellWidth);
             cellHeight = parseFloat(puzzleElement.dataset.cellHeight);
-            const gridSpacingMultiplier = parseFloat(puzzleElement.dataset.gridSpacing) || 0.75;
+            const gridSpacingMultiplier = parseFloat(puzzleElement.dataset.gridSpacing) || 0.3;
             gridSpacing = cellWidth * gridSpacingMultiplier;
             gridHeight = parseInt(puzzleElement.dataset.gridHeight) || 3;
         }
@@ -706,7 +706,7 @@ function setupGridLoadAnimation(element) {
         
         // Calculate position
         // Column 11 = column index 10 (0-indexed, after the 10-column grid)
-        const targetCol = 10;
+        const targetCol = 11;
         const leftPosition = targetCol * (cellWidth + gridSpacing);
         
         // Calculate bottom position for row 2

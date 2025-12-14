@@ -402,7 +402,7 @@
                 .more-info {
                     display: none;
 
-                    @include md {
+                    @include lg {
                         display: flex;
                         position: absolute;
                         top: 0;

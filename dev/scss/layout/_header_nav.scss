@@ -84,7 +84,8 @@ header {
         // }
         
         @include md{
-            display: block;
+            display: flex;
+            align-items: center;
         }
         
         button{ //Mobile menu toggle button
@@ -123,10 +124,12 @@ header {
                 height: auto;
                 width: auto;
                 background-color: transparent;
-                display: block;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
                 padding-right: 0;
                 opacity: 1; // Always visible on desktop
-                padding-bottom: inherit;
+                padding-bottom: 0;
             }
             a {
                 z-index: 2;
@@ -137,8 +140,9 @@ header {
                     font-size: inherit;
                     font-weight: inherit;
                     color: var(--key);
-                    margin-left: 1.5rem !important;
-    
+                    margin-left: 2.5rem !important;
+                    letter-spacing: 0;
+                    font-weight: 600;
                 }
                 
                 // Override button-text magenta color for blend mode
@@ -232,4 +236,17 @@ header {
             z-index: 100000;
         }
     }
+}
+
+.transition-block {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    z-index: 9998;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
 }

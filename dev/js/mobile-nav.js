@@ -37,6 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
         void menuLinks.offsetHeight;
         void mobileMenuSquares.offsetHeight;
         
+        // Reset letter spacing animation state for re-triggering
+        const linkElements = menuLinks.querySelectorAll('a');
+        linkElements.forEach(link => {
+            link.style.transition = '';
+            link.style.letterSpacing = '';
+        });
+        
+        // Force reflow after reset to ensure styles are cleared
+        void linkElements[0]?.offsetHeight;
+        
         // Set initial states
         menuSquares.forEach((square) => {
             square.style.transform = 'scale(0)';
@@ -45,9 +55,22 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Animate opacity quickly
         requestAnimationFrame(() => {
-            menuLinks.style.transition = 'opacity 0.1s ease';
+            menuLinks.style.transition = 'opacity 0.5s ease';
             menuLinks.style.opacity = '1';
             mobileMenuSquares.style.opacity = '1';
+            
+            // Letter spacing animation on menu links
+            linkElements.forEach(link => {
+                link.style.letterSpacing = '1rem';
+            });
+            
+            // Return letter spacing to default after 100ms
+            setTimeout(() => {
+                linkElements.forEach(link => {
+                    link.style.transition = 'letter-spacing 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6)';
+                    link.style.letterSpacing = 'inherit';
+                });
+            }, 1);
             
             // Animate all squares simultaneously
             requestAnimationFrame(() => {
@@ -64,6 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Change button text
         menuButton.textContent = 'menu';
 
+        // Letter spacing animation on menu links (close)
+        const linkElements = menuLinks.querySelectorAll('a');
+        linkElements.forEach(link => {
+            link.style.transition = 'letter-spacing 0.65s cubic-bezier(.7,-0.87,1,.99)';
+            link.style.letterSpacing = '-3rem';
+        });
+
          // Reverse square animations - scale down simultaneously
          menuSquares.forEach((square) => {
             square.style.transition = 'transform 0.5s cubic-bezier(.8,0,1,.8)';
@@ -73,14 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fade out menu links immediately (faster than squares)
         //Transition defined at begining of file
         setTimeout(() => {
-            menuLinks.style.transition = 'opacity 1s ease';
+            menuLinks.style.transition = 'opacity 0.5s ease';
             menuLinks.style.opacity = '0';
             
             // Hide menu links after fade transition
             setTimeout(() => {
                 menuLinks.style.display = 'none';
             }, 201); // Match opacity transition duration
-        }, 300);       
+        }, 200);       
             // Hide after opacity transition
             setTimeout(() => {
                 mobileMenuSquares.style.display = 'none';

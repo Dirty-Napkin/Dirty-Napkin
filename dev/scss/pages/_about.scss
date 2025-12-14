@@ -60,50 +60,84 @@
             padding-bottom: 4rem;
             background-color: var(--white);
 
-            div[aria-hidden="true"] {
-                display: none; // Hide desktop squares on mobile
-
-                @include lg {
-                    display: flex;
-                    grid-column: 2;
-                    flex-direction: column;
-                    gap: 1.2rem;
-                    align-items: flex-end;
-                    height: 100%;
-                }
-            }
-
-            // Add small square bullet on mobile
-            &::before {
-                content: "";
-                display: block;
-                width: 1.2rem;
-                height: 1.2rem;
-                background-color: var(--key);
-                margin-bottom: 1.5rem;
-
-                @include lg {
-                    display: none; // Hide mobile square bullet on desktop
-                }
-            }
-
             @include lg {
+                display: grid;
+                grid-template-areas: 
+                    ". square . . . ."
+                    "paragraph paragraph . heading heading .";
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                grid-template-rows: 60% 40%;
+                column-gap: 2.5rem;
                 height: 60vh;
                 padding: 0;
+            }
+
+            // First small square (direct child) - goes in square area
+            .small-square {
+                display: none; // Hide on mobile
+                grid-area: square;
+                background-color: var(--key);
+                justify-self: flex-end;
+                align-self: start;
+
+                @include lg {
+                    display: block;
+                }
+            }
+
+            .paragraph-container {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 30vh;
+
+                .small-square:first-of-type {
+                    display: block;
+                }
+
+                h2 {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin: 0 0 0 3.5rem;
+                    line-height: 140%;
+                    text-align: justify;
+                    text-align-last: justify;
+                    text-transform: none;
+                    color: var(--key);
+
+                    max-width: 30ch;
+
+                    @include md {
+                        max-width: 40ch;
+                    }
+
+                    @include lg {
+                        max-width: 30ch;
+                        margin-top: 0rem;
+                        line-height: 140%;
+                        text-transform: none;
+                        margin: 0 0 0 2.5rem;
+
+                    }
+                }
+
+                @include lg {
+                    grid-area: paragraph;
+                    flex-direction: row-reverse;
+                    justify-content: space-between;
+                    gap: 1.2rem;
+                    margin-bottom: 0;
+                    
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4.2rem;
+                    }
+                }
             }
 
             .small-square {
                 @include lg {
                     background-color: var(--key);
-
-                    &:nth-of-type(2) {
-                        margin-top: auto;
-                        margin-bottom: 0;
-                    }
-                    &:nth-of-type(3) {
-                        margin-top: 2rem;
-                        margin-bottom: 7.8rem;
-                    }
                 }
             }
 
@@ -117,13 +151,12 @@
                 margin: 0;
 
                 @include lg {
+                    grid-area: heading;
                     font-size: 2rem;
                     width: 23ch;
                     text-align-last: justify;
-                    grid-column: 4;
                     align-self: flex-end;
                     line-height: 130%;
-
                 }
 
                 .line-break-comma {
@@ -160,7 +193,7 @@
                 object-fit: cover;
                 margin: 0;
                 padding: 0;
-                vertical-align: bottom;
+                background-color: var(--key);
 
                 @include lg {
                     height: 100%;
@@ -191,11 +224,6 @@
                     gap: 1.2rem;
                     margin-bottom: 0;
                 }
-
-                .small-square {
-                    background-color: var(--yellow);
-                    margin-bottom: 1.5rem;
-                }
             }
 
             .small-square {
@@ -203,9 +231,10 @@
 
                 @include lg {
                     grid-column: 2;
+                    grid-row: 2;
                     justify-self: flex-end;
-                    margin-top: auto;
-                    margin-bottom: 0;
+                    margin-top: 0;
+                    margin-bottom: auto;
                 }
             }
 
@@ -293,8 +322,8 @@
                     grid-column: 4 / span 2;
                     margin: 0;
 
-                    &:nth-of-type(2) {
-                        margin-top: 1rem;
+                    &:nth-of-type(1) {
+                        margin-bottom: 1rem;
                     }
                 }
 
@@ -311,11 +340,63 @@
             padding: 4rem 0;
             background-color: var(--key);
             color: var(--cyan);
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+ 
+
+            video:nth-of-type(1) {
+                margin-top: 3rem;
+            }
+
+            video:nth-of-type(2) {
+                display: none;
+            }
+
+            video:nth-of-type(3) {
+                margin-top: 4rem;
+                padding: 0 1.5rem;
+            }
+            
+            @include md {
+
+                video:nth-of-type(1) {
+                    width: 50vw;
+                }
+
+                video:nth-of-type(3) {
+                    width: 70vw;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+         
 
             @include lg {
+                display: grid;
                 min-height: 6rem;
-                height: 60vh;
-                padding: 0;
+                padding: 0 1.5rem;
+
+                video:nth-of-type(1) {
+                    display: none;
+                    height: auto;
+                }
+    
+                video:nth-of-type(2) {
+                    display: block;
+                    grid-column: span 2;
+                    height: 40%;   
+                    width: auto;
+                    margin-left: auto;
+                }
+    
+                video:nth-of-type(3) {
+                    grid-column: span 4;
+                    height: 60vh;
+                    margin: 8rem 0;
+                }
             }
 
             .services-bar {
@@ -517,6 +598,7 @@
 
                 h2 {
                     font-size: 1rem;
+                    font-weight: 400;
                     margin: 0 0 1.5rem 0;
                     line-height: 140%;
                     text-align: justify;
@@ -638,6 +720,18 @@
                         text-align-last: justify;
                         text-wrap: balance;
                     }
+
+                    .awards {
+
+                        font-weight: 600;
+                        font-size: 1rem;
+                        font-family: "Degular Mono", monospace;
+                        text-transform: uppercase;
+                        margin-top: 1rem;
+                        display: block;
+                        text-align: left;
+                        text-align-last: left;
+                    }
                 }
             }
         }
@@ -687,12 +781,12 @@
 
                 // Repeat title 2 times on mobile
                 &::after {
-                    content: "Our Mission is";
+                    content: "Our Mission";
                     display: block;
                     margin-top: 0.5rem;
 
                     @include lg {
-                        content: "Our Mission is";
+                        content: "Our Mission";
                         display: block;
                         margin-top: 0.5rem;
                     }
@@ -707,7 +801,7 @@
                     margin-bottom: 1.5rem;
 
                     @include lg {
-                        content: "Our Mission is";
+                        content: "Our Mission";
                         position: absolute;
                         right: 100%;
                         margin-right: -4rem;
