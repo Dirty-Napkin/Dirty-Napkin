@@ -99,5 +99,25 @@ document.addEventListener('DOMContentLoaded', function() {
             openMenu();
         }
     });
+
+
+    // on resize between md and lg breakpoints (scaled up OR down) reload the page
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            const windowWidth = window.innerWidth;
+            const mdBreakpoint = 768;
+            const lgBreakpoint = 1024;
+            
+            // Check if window width is between md and lg breakpoints
+            if (windowWidth >= mdBreakpoint && windowWidth < lgBreakpoint) {
+                // Reload the page when resizing within md-lg range
+                window.location.reload();
+            }
+        }, 150); // Debounce resize events
+    });
 });
+
+
 

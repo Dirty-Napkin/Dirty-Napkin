@@ -22,6 +22,7 @@
             flex-direction: column;
             align-items: flex-start;
             width: 100%;
+            position: relative;
 
             @include xl {
                 flex-direction: row;
@@ -31,7 +32,7 @@
                 margin-top: 0;
                 grid-area: title;
                 font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
-                letter-spacing: 0.7rem; //11.2px
+                // letter-spacing: 0.7rem; //11.2px
                 max-width: 100%;
 
                 @include md {
@@ -49,6 +50,7 @@
                 justify-self: unset;
 
                 @include xl {
+                  
                     max-width: 50%;
                     word-wrap: break-word;
                     overflow-wrap: break-word;
@@ -57,14 +59,12 @@
                     width: 19ch;
                     padding-bottom: 7px;
 
-                    // When positioned absolutely by JS, ensure proper text wrapping
-                    &[style*="position: absolute"] {
-                        width: 300px;
-                        word-wrap: break-word;
-                        overflow-wrap: break-word;
-                        hyphens: none;
-                        white-space: normal;
-                    }
+                    position: absolute;
+                    
+                    //bottom: x;
+                    // left: x;
+                    // Position is determined in JS file
+
                 }
             }
         }
