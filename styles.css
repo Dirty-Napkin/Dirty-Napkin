@@ -2358,6 +2358,7 @@ footer .footer-column.column3 {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  position: relative;
 }
 @media (min-width: 1280px) {
   .project-page .hero .title-frame {
@@ -2390,13 +2391,9 @@ footer .footer-column.column3 {
     white-space: normal;
     width: 19ch;
     padding-bottom: 7px;
-  }
-  .project-page .hero .title-frame h5[style*="position: absolute"] {
-    width: 300px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: none;
-    white-space: normal;
+    position: absolute;
+    bottom: 0;
+    left: 11em;
   }
 }
 .project-page .hero img, .project-page .hero video {
