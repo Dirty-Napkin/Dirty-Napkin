@@ -25,6 +25,28 @@ document.addEventListener("DOMContentLoaded", () => {
         setupCustomLayouts(element);
         setupPuzzleTypeAnimation(element);
     });
+    
+    // Remove puzzle animations from nav on small screens
+    removeNavPuzzle();
+    
+    // Rebuild grid on all resizes to recalculate scaling when font size changes
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        // Debounce resize events to avoid excessive rebuilds
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            puzzleTypeElements.forEach((element) => {
+                // Remove old hover animation listeners before rebuilding
+                if (element.dataset.hoverAnimationSetup === 'true') {
+                    removeGridHoverAnimation(element);
+                }
+                setupCustomLayouts(element);
+                setupPuzzleTypeAnimation(element);
+            });
+            // Remove puzzle animations from nav on small screens after resize
+            removeNavPuzzle();
+        }, 500); // 500ms debounce delay
+    });
 });
 
 
@@ -40,66 +62,138 @@ function setupCustomLayouts(element) {
     // Text: "American\nScripture Project" (24 chars: 8 + newline + 9 + space + 7)
     // Manually define position for each character
     if (text.includes('American') && text.includes('Scripture')) {
-        // Grid: 10 columns x 4 rows (0-9 cols, 0-3 rows, row 3 is bottom)
-        // Each position: {letterIndex: character position in text, row: 0-3, col: 0-9}
-        element.customLayout = [
-            // "American" - Row 3 (first line, bottom row)
-            {letterIndex: 0, row: 2, col: 0},   // A
-            {letterIndex: 1, row: 2, col: 1},   // m
-            {letterIndex: 2, row: 2, col: 2},   // e
-            {letterIndex: 3, row: 2, col: 3},   // r
-            {letterIndex: 4, row: 2, col: 4},   // i
-            {letterIndex: 5, row: 2, col: 5},   // c
-            {letterIndex: 6, row: 2, col: 6},   // a
-            {letterIndex: 7, row: 2, col: 7},   // n
-            {letterIndex: 8, row: 2, col: 8},   // (space)
-            // "Scripture" - Row 2 (second line)
-            {letterIndex: 9, row: 3, col: 0},    // S
-            {letterIndex: 10, row: 3, col: 1},   // c
-            {letterIndex: 11, row: 3, col: 2},   // r
-            {letterIndex: 12, row: 3, col: 3},   // i
-            {letterIndex: 13, row: 3, col: 4},   // p
-            {letterIndex: 14, row: 3, col: 5},   // t
-            {letterIndex: 15, row: 3, col: 6},   // u
-            {letterIndex: 16, row: 3, col: 7},   // r
-            {letterIndex: 17, row: 3, col: 8},   // e
-            {letterIndex: 18, row: 3, col: 9},   // (space)
-            // "Project" - Row 1 (third line)
-            {letterIndex: 19, row: 3, col: 10},   // P
-            {letterIndex: 20, row: 3, col: 11},   // r
-            {letterIndex: 21, row: 3, col: 12},   // o
-            {letterIndex: 22, row: 3, col: 13},   // j
-            {letterIndex: 23, row: 3, col: 14},   // e
-            {letterIndex: 24, row: 3, col: 15},   // c
-            {letterIndex: 25, row: 3, col: 16},   // t
-        ];
+        // Check for small screen breakpoint (below 430px)
+        const mdBreakpoint = window.matchMedia("(min-width: 768px")
+        const isMedScreen = !mdBreakpoint.matches;
+        
+        if (isMedScreen) {
+            // Small screen layout: Each word on its own line
+            // Grid: 10 columns x 4 rows (0-9 cols, 0-3 rows, row 3 is bottom)
+            element.customLayout = [
+                // "American" - Row 3 (bottom row)
+                {letterIndex: 0, row: 1, col: 0},   // A
+                {letterIndex: 1, row: 1, col: 1},   // m
+                {letterIndex: 2, row: 1, col: 2},   // e
+                {letterIndex: 3, row: 1, col: 3},   // r
+                {letterIndex: 4, row: 1, col: 4},   // i
+                {letterIndex: 5, row: 1, col: 5},   // c
+                {letterIndex: 6, row: 1, col: 6},   // a
+                {letterIndex: 7, row: 1, col: 7},   // n
+                {letterIndex: 8, row: 1, col: 8},   // (space)
+                // "Scripture" - Row 2 (second line)
+                {letterIndex: 9, row: 2, col: 0},    // S
+                {letterIndex: 10, row: 2, col: 1},   // c
+                {letterIndex: 11, row: 2, col: 2},   // r
+                {letterIndex: 12, row: 2, col: 3},   // i
+                {letterIndex: 13, row: 2, col: 4},   // p
+                {letterIndex: 14, row: 2, col: 5},   // t
+                {letterIndex: 15, row: 2, col: 6},   // u
+                {letterIndex: 16, row: 2, col: 7},   // r
+                {letterIndex: 17, row: 2, col: 8},   // e
+                {letterIndex: 18, row: 2, col: 9},   // (space)
+                // "Project" - Row 1 (third line)
+                {letterIndex: 19, row: 3, col: 0},   // P
+                {letterIndex: 20, row: 3, col: 1},   // r
+                {letterIndex: 21, row: 3, col: 2},   // o
+                {letterIndex: 22, row: 3, col: 3},   // j
+                {letterIndex: 23, row: 3, col: 4},   // e
+                {letterIndex: 24, row: 3, col: 5},   // c
+                {letterIndex: 25, row: 3, col: 6},   // t
+            ];
+        } else {
+            // Default layout: Desktop/tablet
+            // Grid: 10 columns x 4 rows (0-9 cols, 0-3 rows, row 3 is bottom)
+            element.customLayout = [
+                // "American" - Row 3 (first line, bottom row)
+                {letterIndex: 0, row: 2, col: 0},   // A
+                {letterIndex: 1, row: 2, col: 1},   // m
+                {letterIndex: 2, row: 2, col: 2},   // e
+                {letterIndex: 3, row: 2, col: 3},   // r
+                {letterIndex: 4, row: 2, col: 4},   // i
+                {letterIndex: 5, row: 2, col: 5},   // c
+                {letterIndex: 6, row: 2, col: 6},   // a
+                {letterIndex: 7, row: 2, col: 7},   // n
+                {letterIndex: 8, row: 2, col: 8},   // (space)
+                // "Scripture" - Row 2 (second line)
+                {letterIndex: 9, row: 3, col: 0},    // S
+                {letterIndex: 10, row: 3, col: 1},   // c
+                {letterIndex: 11, row: 3, col: 2},   // r
+                {letterIndex: 12, row: 3, col: 3},   // i
+                {letterIndex: 13, row: 3, col: 4},   // p
+                {letterIndex: 14, row: 3, col: 5},   // t
+                {letterIndex: 15, row: 3, col: 6},   // u
+                {letterIndex: 16, row: 3, col: 7},   // r
+                {letterIndex: 17, row: 3, col: 8},   // e
+                {letterIndex: 18, row: 3, col: 9},   // (space)
+                // "Project" - Row 1 (third line)
+                {letterIndex: 19, row: 3, col: 10},   // P
+                {letterIndex: 20, row: 3, col: 11},   // r
+                {letterIndex: 21, row: 3, col: 12},   // o
+                {letterIndex: 22, row: 3, col: 13},   // j
+                {letterIndex: 23, row: 3, col: 14},   // e
+                {letterIndex: 24, row: 3, col: 15},   // c
+                {letterIndex: 25, row: 3, col: 16},   // t
+            ];
+        }
     }
 
     if (text.includes('Lemonade')) {
-        // "The Lemonade Stand" layout
-        // Grid: 17 columns x 4 rows (0-16 cols, 0-3 rows, row 3 is bottom)
-        element.customLayout = [
-            // "the" - Row 2 (second line)
-            {letterIndex: 0, row: 2, col: 0},   // T
-            {letterIndex: 1, row: 2, col: 1},   // h
-            {letterIndex: 2, row: 2, col: 2},   // e
-            {letterIndex: 3, row: 2, col: 3},   // (space)
-            // "Lemonade Stand" - Row 3 (bottom)
-            {letterIndex: 4, row: 3, col: 0},   // L
-            {letterIndex: 5, row: 3, col: 1},   // e
-            {letterIndex: 6, row: 3, col: 2},   // m
-            {letterIndex: 7, row: 3, col: 3},   // o
-            {letterIndex: 8, row: 3, col: 4},   // n
-            {letterIndex: 9, row: 3, col: 5},   // a
-            {letterIndex: 10, row: 3, col: 6},  // d
-            {letterIndex: 11, row: 3, col: 7},  // e
-            {letterIndex: 12, row: 3, col: 8},  // (space)
-            {letterIndex: 13, row: 3, col: 9},  // S
-            {letterIndex: 14, row: 3, col: 10}, // t
-            {letterIndex: 15, row: 3, col: 11}, // a
-            {letterIndex: 16, row: 3, col: 12}, // n
-            {letterIndex: 17, row: 3, col: 13}, // d
-        ];
+        // Check for small screen breakpoint (below 768px)
+        const smBreakpoint = window.matchMedia("(min-width: 430px)");
+        const isSmallScreen = !smBreakpoint.matches;
+        
+        if (isSmallScreen) {
+            // Small screen layout: Each word on its own line
+            // Grid: 17 columns x 4 rows (0-16 cols, 0-3 rows, row 3 is bottom)
+            element.customLayout = [
+                // "The" - Row 3 (bottom row)
+                {letterIndex: 0, row: 3, col: 0},   // T
+                {letterIndex: 1, row: 3, col: 1},   // h
+                {letterIndex: 2, row: 3, col: 2},   // e
+                {letterIndex: 3, row: 3, col: 3},   // (space)
+                // "Lemonade" - Row 2 (second line)
+                {letterIndex: 4, row: 2, col: 0},   // L
+                {letterIndex: 5, row: 2, col: 1},   // e
+                {letterIndex: 6, row: 2, col: 2},   // m
+                {letterIndex: 7, row: 2, col: 3},   // o
+                {letterIndex: 8, row: 2, col: 4},   // n
+                {letterIndex: 9, row: 2, col: 5},   // a
+                {letterIndex: 10, row: 2, col: 6},  // d
+                {letterIndex: 11, row: 2, col: 7},  // e
+                {letterIndex: 12, row: 2, col: 8},  // (space)
+                // "Stand" - Row 1 (third line)
+                {letterIndex: 13, row: 1, col: 0},  // S
+                {letterIndex: 14, row: 1, col: 1}, // t
+                {letterIndex: 15, row: 1, col: 2}, // a
+                {letterIndex: 16, row: 1, col: 3}, // n
+                {letterIndex: 17, row: 1, col: 4}, // d
+            ];
+        } else {
+            // Default layout: Desktop/tablet
+            // Grid: 17 columns x 4 rows (0-16 cols, 0-3 rows, row 3 is bottom)
+            element.customLayout = [
+                // "the" - Row 2 (second line)
+                {letterIndex: 0, row: 2, col: 0},   // T
+                {letterIndex: 1, row: 2, col: 1},   // h
+                {letterIndex: 2, row: 2, col: 2},   // e
+                {letterIndex: 3, row: 2, col: 3},   // (space)
+                // "Lemonade Stand" - Row 3 (bottom)
+                {letterIndex: 4, row: 3, col: 0},   // L
+                {letterIndex: 5, row: 3, col: 1},   // e
+                {letterIndex: 6, row: 3, col: 2},   // m
+                {letterIndex: 7, row: 3, col: 3},   // o
+                {letterIndex: 8, row: 3, col: 4},   // n
+                {letterIndex: 9, row: 3, col: 5},   // a
+                {letterIndex: 10, row: 3, col: 6},  // d
+                {letterIndex: 11, row: 3, col: 7},  // e
+                {letterIndex: 12, row: 3, col: 8},  // (space)
+                {letterIndex: 13, row: 3, col: 9},  // S
+                {letterIndex: 14, row: 3, col: 10}, // t
+                {letterIndex: 15, row: 3, col: 11}, // a
+                {letterIndex: 16, row: 3, col: 12}, // n
+                {letterIndex: 17, row: 3, col: 13}, // d
+            ];
+        }
     }
 }
 
@@ -482,16 +576,33 @@ function addGridHoverAnimation(element) {
     };
 }
 
+/*---Remove hover animation listeners---*/
+    /**
+     * Removes hover animation event listeners from an element
+     * @param {HTMLElement} element - The grid container element
+     */
+function removeGridHoverAnimation(element) {
+    // Check if animation functions are stored on the element
+    if (element._puzzleAnimation) {
+        const animation = element._puzzleAnimation;
+        // Remove event listeners
+        element.removeEventListener('mouseenter', animation.animate);
+        element.removeEventListener('mouseleave', animation.restore);
+        // Clear stored animation
+        delete element._puzzleAnimation;
+    }
+    // Reset the setup flag
+    element.dataset.hoverAnimationSetup = 'false';
+}
+
 /*---Play the animation on hover---*/
     /**
      * Sets up hover triggers for grid animation
      * @param {HTMLElement} element - The grid container element (must have grid built first)
      */
 function setupGridHoverAnimation(element) {
-    // Check if hover animation is already set up to prevent duplicate listeners
-    if (element.dataset.hoverAnimationSetup === 'true') {
-        return;
-    }
+    // Remove any existing hover animation first
+    removeGridHoverAnimation(element);
     
     // Get the animation functions
     const animation = addGridHoverAnimation(element);
@@ -500,6 +611,9 @@ function setupGridHoverAnimation(element) {
         console.warn('setupGridHoverAnimation: Could not initialize animation');
         return;
     }
+    
+    // Store animation functions on element for cleanup
+    element._puzzleAnimation = animation;
     
     // Set up hover triggers
     element.addEventListener('mouseenter', animation.animate);
@@ -711,3 +825,86 @@ function setupPuzzleTypeAnimation(element) {
     // If neither class is present, no animation is set up (grid is built but static)
 }
 
+/*---Remove the puzzle animations on the mobile nav---*/
+    /**
+     * Removes puzzle-type animations from nav buttons on small screens
+     * Restores original text and removes animation classes
+     * Re-enables animations on larger screens
+     */
+function removeNavPuzzle() {
+    const mdBreakpoint = window.matchMedia("(min-width: 768px)");
+    const isMedScreen = !mdBreakpoint.matches;
+    
+    // Find all puzzle-type elements within nav menu
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    
+    const navPuzzleElements = nav.querySelectorAll('.puzzle-type');
+    
+    navPuzzleElements.forEach((element) => {
+        if (isMedScreen) {
+            // Remove hover animation if it exists
+            if (element.dataset.hoverAnimationSetup === 'true') {
+                removeGridHoverAnimation(element);
+            }
+            
+            // Get original text - it should be stored in dataset, otherwise reconstruct from grid
+            let originalText = element.dataset.originalText;
+            
+            if (!originalText) {
+                // Try to reconstruct from grid cells if grid is already built
+                const cells = element.querySelectorAll('span[data-letter-index]');
+                if (cells.length > 0) {
+                    // Reconstruct text from grid cells
+                    const textArray = Array.from(cells)
+                        .filter(cell => {
+                            const idx = parseInt(cell.dataset.letterIndex);
+                            return idx >= 0 && idx < 1000; // Valid index
+                        })
+                        .sort((a, b) => parseInt(a.dataset.letterIndex) - parseInt(b.dataset.letterIndex))
+                        .map(cell => cell.textContent);
+                    originalText = textArray.join('');
+                    element.dataset.originalText = originalText;
+                } else {
+                    // Fallback to current text content
+                    originalText = element.textContent.trim();
+                    element.dataset.originalText = originalText;
+                }
+            }
+            if (originalText) {
+                // Clear the grid content
+                while (element.firstChild) {
+                    element.removeChild(element.firstChild);
+                }
+                // Restore original text
+                element.textContent = originalText;
+            }
+            
+            // Remove animation classes (but keep puzzle-type class for potential re-enabling)
+            element.classList.remove('puzzle-hover', 'puzzle-auto');
+            
+            // Reset styles that were applied by buildTextGrid
+            element.style.position = '';
+            element.style.display = '';
+            element.style.width = '';
+            element.style.height = '';
+            element.style.padding = '';
+            element.style.margin = '';
+        } else {
+            // On larger screens, restore animations if classes are present
+            // Check if element has puzzle-hover or puzzle-auto classes but no animation setup
+            const hasPuzzleHover = element.classList.contains('puzzle-hover');
+            const hasPuzzleAuto = element.classList.contains('puzzle-auto');
+            
+            if ((hasPuzzleHover || hasPuzzleAuto) && element.dataset.hoverAnimationSetup !== 'true') {
+                // Re-setup the puzzle animation
+                setupCustomLayouts(element);
+                setupPuzzleTypeAnimation(element);
+            }
+        }
+    });
+}
+
+// Set up responsive removal of nav puzzle animations on breakpoint change
+const smBreakpoint = window.matchMedia("(min-width: 430px)");
+smBreakpoint.addEventListener('change', removeNavPuzzle);
