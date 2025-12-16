@@ -69,21 +69,9 @@
             }
         }
 
-        img, video {
+        .hero-image {
             grid-area: image;
             width: 100vw;
-            margin-left: -24px;
-            margin-right: -24px;
-
-            @include md {
-                margin-left: -32px;
-                margin-right: -32px;
-            }
-
-            @include xl {
-                margin-left: -64px;
-                margin-right: -64px;
-            }
         }
 
         .tags-frame {

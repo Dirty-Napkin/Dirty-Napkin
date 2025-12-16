@@ -2510,23 +2510,9 @@ footer .footer-column.column3 {
     position: absolute;
   }
 }
-.project-page .hero img, .project-page .hero video {
+.project-page .hero .hero-image {
   grid-area: image;
   width: 100vw;
-  margin-left: -24px;
-  margin-right: -24px;
-}
-@media (min-width: 768px) {
-  .project-page .hero img, .project-page .hero video {
-    margin-left: -32px;
-    margin-right: -32px;
-  }
-}
-@media (min-width: 1280px) {
-  .project-page .hero img, .project-page .hero video {
-    margin-left: -64px;
-    margin-right: -64px;
-  }
 }
 .project-page .hero .tags-frame {
   grid-area: tags;
