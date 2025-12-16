@@ -252,7 +252,7 @@
 
             @include md {
 
-                img, video {
+                img, video, .vimeo-video {
                     /* 2 columns + 1 gap
                         (100% - (2 x gap)) / 3 = column width
                         column width x 2 + gap = img width*/

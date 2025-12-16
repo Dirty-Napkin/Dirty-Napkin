@@ -3,17 +3,22 @@
 ============= */
 * {
     box-sizing: border-box;
+    caret-color: transparent
 }
 
 html {
     // Set default background for blend mode to work properly
     background-color: var(--white);
+    cursor: none;
+    caret-color: transparent
 }
 
 body {
     overflow-x: hidden;
     // Set default background for blend mode to work properly
     background-color: var(--white);
+    cursor: none;
+    caret-color: transparent
 }
 
 ul.blank-list {
@@ -30,6 +35,24 @@ img,
 video {
     width: 100%;
     height: auto;
+}
+
+.vimeo-video {
+    width: 100%;
+    position: relative;
+    background-image: var(--poster);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
 .margins {
@@ -101,3 +124,4 @@ $square-colors: (
         color: var(--key);
     }
 }
+

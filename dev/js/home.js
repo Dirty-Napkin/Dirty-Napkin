@@ -769,12 +769,20 @@ function reloadOnResize() {
         return; // Exit early if not on index page
     }
     
+    let previousWidth = window.innerWidth;
     let resizeTimeout;
+    
     window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-            window.location.reload();
-        }, 200);
+        const currentWidth = window.innerWidth;
+        
+        // Only reload if width changed, not height
+        if (currentWidth !== previousWidth) {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                window.location.reload();
+            }, 200);
+            previousWidth = currentWidth;
+        }
     });
 }
 reloadOnResize();

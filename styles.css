@@ -419,15 +419,20 @@ template {
 ============= */
 * {
   box-sizing: border-box;
+  caret-color: transparent;
 }
 
 html {
   background-color: var(--white);
+  cursor: none;
+  caret-color: transparent;
 }
 
 body {
   overflow-x: hidden;
   background-color: var(--white);
+  cursor: none;
+  caret-color: transparent;
 }
 
 ul.blank-list {
@@ -444,6 +449,24 @@ img,
 video {
   width: 100%;
   height: auto;
+}
+
+.vimeo-video {
+  width: 100%;
+  position: relative;
+  background-image: var(--poster);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .margins {
@@ -1548,7 +1571,7 @@ footer .footer-column.column3 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-template-rows: 60% 40%;
     column-gap: 2.5rem;
-    height: 60vh;
+    height: 70vh;
     padding: 0;
   }
 }
@@ -1656,7 +1679,7 @@ footer .footer-column.column3 {
 }
 @media (min-width: 1024px) {
   #about-page main .hero-image {
-    margin-top: 6rem;
+    margin-top: 3rem;
   }
 }
 #about-page main .hero-image img,
@@ -1742,7 +1765,7 @@ footer .footer-column.column3 {
   }
 }
 #about-page main .share-your-story h2::after {
-  content: "When you share your story";
+  content: "approach";
   display: block;
   position: absolute;
   margin-top: -3.5rem;
@@ -1757,7 +1780,7 @@ footer .footer-column.column3 {
 }
 @media (min-width: 1024px) {
   #about-page main .share-your-story h2::after {
-    content: "When you share your story";
+    content: "approach";
     display: block;
     position: static;
     margin-top: 0.5rem;
@@ -1773,7 +1796,7 @@ footer .footer-column.column3 {
   #about-page main .share-your-story h2[aria-hidden=true] {
     display: block;
     position: absolute;
-    right: -7rem;
+    right: -1rem;
     top: 6rem;
     margin-top: 0rem;
   }
@@ -2211,13 +2234,13 @@ footer .footer-column.column3 {
   }
 }
 #about-page main .mission h2::after {
-  content: "Our Mission";
+  content: "Mission";
   display: block;
   margin-top: 0.5rem;
 }
 @media (min-width: 1024px) {
   #about-page main .mission h2::after {
-    content: "Our Mission";
+    content: "Mission";
     display: block;
     margin-top: 0.5rem;
   }
@@ -2232,7 +2255,7 @@ footer .footer-column.column3 {
 }
 @media (min-width: 1024px) {
   #about-page main .mission h2::before {
-    content: "Our Mission";
+    content: "Mission";
     position: absolute;
     right: 100%;
     margin-right: -4rem;
@@ -2680,7 +2703,7 @@ footer .footer-column.column3 {
   align-items: center;
 }
 @media (min-width: 768px) {
-  .project-page .content .small-img img, .project-page .content .small-img video {
+  .project-page .content .small-img img, .project-page .content .small-img video, .project-page .content .small-img .vimeo-video {
     /* 2 columns + 1 gap
         (100% - (2 x gap)) / 3 = column width
         column width x 2 + gap = img width*/
