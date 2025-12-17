@@ -82,9 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Remove previous classes before applying new ones
                 clearCursorClasses();
 
+                // Check for hover-style classes on target or its parents
+                const hoverStyleOneElement = target.closest('.hover-style-one');
+                const hoverStyleTwoElement = target.closest('.hover-style-two');
+
                 // Handle hover-style-one: measure element and set CSS custom properties
-                if (target.classList.contains('hover-style-one')) {
-                    const rect = target.getBoundingClientRect();
+                if (hoverStyleOneElement) {
+                    const rect = hoverStyleOneElement.getBoundingClientRect();
                     cursor.style.setProperty('--link-width', `${rect.width + 10}px`);
                     cursor.style.setProperty('--link-height', `${rect.height + 10}px`);
                     
@@ -93,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     cursor.classList.add(isInNav ? 'hover-link-nav' : 'hover-one');
                 }
                 // Handle hover-style-two: add hover-two class
-                else if (target.classList.contains('hover-style-two')) {
+                else if (hoverStyleTwoElement) {
                     cursor.classList.add('hover-two');
                 }
             }

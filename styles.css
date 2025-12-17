@@ -1173,12 +1173,13 @@ header img {
 }
 @media (min-width: 768px) {
   header {
-    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    padding: 0.5rem 3rem 0.5rem 2rem;
   }
 }
 @media (min-width: 1024px) {
   header {
-    padding: 0.5rem 4rem;
+    padding: 0.5rem 5rem 0.5rem 4rem;
   }
 }
 header .logo-container {
@@ -2013,6 +2014,9 @@ footer .footer-column.column3 {
   background-color: var(--key);
   color: var(--green);
 }
+#about-page main .two-prongs br {
+  display: none;
+}
 @media (min-width: 1024px) {
   #about-page main .two-prongs {
     padding-top: 16rem;
@@ -2764,14 +2768,22 @@ footer .footer-column.column3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: calc((100% - 80px) / 3 * 2 + 40px);
+  margin: 0 auto;
+  height: 100%;
+  align-self: center;
 }
 @media (min-width: 768px) {
   .project-page .content .small-img img, .project-page .content .small-img video, .project-page .content .small-img .vimeo-video {
     /* 2 columns + 1 gap
         (100% - (2 x gap)) / 3 = column width
         column width x 2 + gap = img width*/
-    width: calc((100% - 80px) / 3 * 2 + 40px);
+    width: 100%;
+    height: auto;
   }
+}
+.project-page .content .short-video {
+  height: 0;
 }
 .project-page .content p {
   align-self: center;
@@ -3234,6 +3246,11 @@ footer .footer-column.column3 {
   }
   .home-container .brands-container .brands-content .brand-item:nth-child(4) {
     grid-area: ASP;
+  }
+}
+@media (min-width: 1024px) {
+  .home-container .brands-container .brands-content .brand-item {
+    overflow: visible;
   }
 }
 .home-container .brands-container .brands-content .brand-item:not(div) > a {

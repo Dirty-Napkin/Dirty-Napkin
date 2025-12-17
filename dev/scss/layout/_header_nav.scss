@@ -12,7 +12,10 @@ header {
     z-index: 999;
     top: 0;
     pointer-events: none;
-    
+
+    @include md {
+        
+    }
     // Header invert styling
     // Apply mix-blend-mode on mobile when menu is closed, and always on desktop
     &.menu-closed {
@@ -38,11 +41,12 @@ header {
     }
 
     @include md {
-        padding: 0.5rem 2rem;
+        margin-top: 1rem;
+        padding: 0.5rem 3rem 0.5rem 2rem;
     }
 
     @include lg {
-        padding: 0.5rem 4rem;
+        padding: 0.5rem 5rem 0.5rem 4rem;
     }
 
     .logo-container {

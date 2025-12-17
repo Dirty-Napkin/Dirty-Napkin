@@ -398,88 +398,160 @@ function lgBrandHover() {
 
         if (!mainImage) return;
 
-        const imageWidth = mainImage.offsetWidth;
-        const movement = imageWidth + 28;
-        const gridPositions = generateGridPositions(movement, imageWidth);
-
-        // Create container for position indicators
-        const positionIndicators = document.createElement('div');
-        positionIndicators.className = 'position-indicators';
-        positionIndicators.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        `;
-        item.appendChild(positionIndicators);
-
-        // Create position indicators
-        gridPositions.forEach(pos => {
-            const indicator = createPositionIndicator(pos, imageWidth);
-            positionIndicators.appendChild(indicator);
-        });
-
-        const brandName = mainImage.className;
-        const customPositions = BRAND_CUSTOM_POSITIONS[brandName];
-
-        if (!customPositions) {
-            console.warn('No custom positions found for brand:', brandName);
-            return;
-        }
-
-        // Position more-info images
-        moreInfoImages.forEach((img, index) => {
-            img.style.transform = 'translate(0, 0)';
-            img.style.opacity = '0';
-        });
-
-        // Position text divs
-        textDivs.forEach((div, index) => {
-            div.style.transform = 'translate(0, 0)';
-            div.style.opacity = '0';
-        });
-
-        // Add hover effect
-        let showIndicators = false;
-
-        mainImage.addEventListener('mouseenter', () => {
-            if (showIndicators) {
-                const indicators = positionIndicators.querySelectorAll('.position-indicator');
-                indicators.forEach(indicator => {
-                    indicator.style.opacity = '1';
-                });
+        // Wait for image to load before measuring
+        const measureImage = () => {
+            let imageWidth = mainImage.offsetWidth;
+            
+            // Fallback to getBoundingClientRect if offsetWidth is 0
+            if (imageWidth === 0) {
+                const rect = mainImage.getBoundingClientRect();
+                imageWidth = rect.width;
+            }
+            
+            // If image still hasn't loaded yet, wait and retry
+            if (imageWidth === 0) {
+                if (mainImage.complete) {
+                    // Image is loaded but width is 0, try again after a short delay
+                    setTimeout(measureImage, 100);
+                } else {
+                    // Image not loaded yet, wait for load event
+                    mainImage.addEventListener('load', measureImage, { once: true });
+                }
+                return;
             }
 
-            // Move images
+            const movement = imageWidth + 28;
+            const gridPositions = generateGridPositions(movement, imageWidth);
+
+            // Get the center position of the main image relative to the brand-item
+            const mainImageRect = mainImage.getBoundingClientRect();
+            const itemRect = item.getBoundingClientRect();
+            const centerX = mainImageRect.left + mainImageRect.width / 2 - itemRect.left;
+            const centerY = mainImageRect.top + mainImageRect.height / 2 - itemRect.top;
+
+            // Create container for position indicators
+            const positionIndicators = document.createElement('div');
+            positionIndicators.className = 'position-indicators';
+            positionIndicators.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1;
+                overflow: visible;
+            `;
+            item.appendChild(positionIndicators);
+
+            // Create position indicators
+            gridPositions.forEach(pos => {
+                const indicator = createPositionIndicator(pos, imageWidth);
+                positionIndicators.appendChild(indicator);
+            });
+
+            const brandName = mainImage.className;
+            const customPositions = BRAND_CUSTOM_POSITIONS[brandName];
+
+            if (!customPositions) {
+                console.warn('No custom positions found for brand:', brandName);
+                return;
+            }
+
+            // Position more-info images relative to center of main image
             moreInfoImages.forEach((img, index) => {
-                const targetPosition = customPositions[index];
-                const pos = gridPositions.find(p => p.label === targetPosition.toString());
-                img.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
-                img.style.opacity = '1';
+                // Get the current position of the image relative to brand-item
+                const imgRect = img.getBoundingClientRect();
+                const imgCenterX = imgRect.left + imgRect.width / 2 - itemRect.left;
+                const imgCenterY = imgRect.top + imgRect.height / 2 - itemRect.top;
+                
+                // Calculate offset from center of main image
+                const offsetX = imgCenterX - centerX;
+                const offsetY = imgCenterY - centerY;
+                
+                // Store initial offset for later use
+                img.dataset.initialOffsetX = offsetX;
+                img.dataset.initialOffsetY = offsetY;
+                
+                img.style.transform = `translate(${-offsetX}px, ${-offsetY}px)`;
+                img.style.opacity = '0';
             });
 
-            // Move text divs
+            // Position text divs relative to center of main image
             textDivs.forEach((div, index) => {
-                const targetPosition = customPositions[customPositions.length - 1];
-                const pos = gridPositions.find(p => p.label === targetPosition.toString());
-                div.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
-                div.style.opacity = '1';
+                const divRect = div.getBoundingClientRect();
+                const divCenterX = divRect.left + divRect.width / 2 - itemRect.left;
+                const divCenterY = divRect.top + divRect.height / 2 - itemRect.top;
+                
+                const offsetX = divCenterX - centerX;
+                const offsetY = divCenterY - centerY;
+                
+                div.dataset.initialOffsetX = offsetX;
+                div.dataset.initialOffsetY = offsetY;
+                
+                div.style.transform = `translate(${-offsetX}px, ${-offsetY}px)`;
+                div.style.opacity = '0';
             });
-        });
 
-        mainImage.addEventListener('mouseleave', () => {
-            if (showIndicators) {
-                const indicators = positionIndicators.querySelectorAll('.position-indicator');
-                indicators.forEach(indicator => {
-                    indicator.style.opacity = '0';
+            // Add hover effect
+            let showIndicators = false;
+
+            mainImage.addEventListener('mouseenter', () => {
+                if (showIndicators) {
+                    const indicators = positionIndicators.querySelectorAll('.position-indicator');
+                    indicators.forEach(indicator => {
+                        indicator.style.opacity = '1';
+                    });
+                }
+
+                // Move images relative to center of main image
+                moreInfoImages.forEach((img, index) => {
+                    const targetPosition = customPositions[index];
+                    const pos = gridPositions.find(p => p.label === targetPosition.toString());
+                    const offsetX = parseFloat(img.dataset.initialOffsetX || 0);
+                    const offsetY = parseFloat(img.dataset.initialOffsetY || 0);
+                    img.style.transform = `translate(${pos.x - offsetX}px, ${pos.y - offsetY}px)`;
+                    img.style.opacity = '1';
                 });
-            }
 
-            moveElementsToCenter([...moreInfoImages, ...textDivs]);
-        });
+                // Move text divs relative to center of main image
+                textDivs.forEach((div, index) => {
+                    const targetPosition = customPositions[customPositions.length - 1];
+                    const pos = gridPositions.find(p => p.label === targetPosition.toString());
+                    const offsetX = parseFloat(div.dataset.initialOffsetX || 0);
+                    const offsetY = parseFloat(div.dataset.initialOffsetY || 0);
+                    div.style.transform = `translate(${pos.x - offsetX}px, ${pos.y - offsetY}px)`;
+                    div.style.opacity = '1';
+                });
+            });
+
+            mainImage.addEventListener('mouseleave', () => {
+                if (showIndicators) {
+                    const indicators = positionIndicators.querySelectorAll('.position-indicator');
+                    indicators.forEach(indicator => {
+                        indicator.style.opacity = '0';
+                    });
+                }
+
+                // Reset to center position
+                moreInfoImages.forEach((img) => {
+                    const offsetX = parseFloat(img.dataset.initialOffsetX || 0);
+                    const offsetY = parseFloat(img.dataset.initialOffsetY || 0);
+                    img.style.transform = `translate(${-offsetX}px, ${-offsetY}px)`;
+                    img.style.opacity = '0';
+                });
+
+                textDivs.forEach((div) => {
+                    const offsetX = parseFloat(div.dataset.initialOffsetX || 0);
+                    const offsetY = parseFloat(div.dataset.initialOffsetY || 0);
+                    div.style.transform = `translate(${-offsetX}px, ${-offsetY}px)`;
+                    div.style.opacity = '0';
+                });
+            });
+        };
+
+        // Start measurement
+        measureImage();
     });
 }
 
