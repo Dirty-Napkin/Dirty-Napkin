@@ -2014,9 +2014,6 @@ footer .footer-column.column3 {
   background-color: var(--key);
   color: var(--green);
 }
-#about-page main .two-prongs br {
-  display: none;
-}
 @media (min-width: 1024px) {
   #about-page main .two-prongs {
     padding-top: 16rem;
@@ -2716,7 +2713,7 @@ footer .footer-column.column3 {
   }
 }
 .project-page .content .border {
-  border: 1px solid var(--key);
+  border: 1px solid gray;
 }
 .project-page .content .height2 {
   grid-row: span 2;

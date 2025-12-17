@@ -492,15 +492,6 @@
             background-color: var(--key);
             color: var(--green);
 
-            br {
-                display: none;
-
-                // @include lg {
-                //     display: block;
-                // }
-            }
-
-
             @include lg {
                 padding-top: 16rem;
                 padding-bottom: 18rem;
