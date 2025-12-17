@@ -28,29 +28,35 @@ function initPageTransition() {
     // Set delay based on page (600ms for home page, 300ms for others)
     const fadeOutDelay = isHomePage ? 1400 : 300;
 
-    // Fade out after page loads
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            transitionBlock.style.opacity = '0';
-            transitionBlock.style.pointerEvents = 'none';
-        }, fadeOutDelay);
-    });
-
-    // Also handle DOMContentLoaded for faster initial fade
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                transitionBlock.style.opacity = '0';
-                transitionBlock.style.pointerEvents = 'none';
-            }, fadeOutDelay);
-        });
-    } else {
-        // DOM already loaded
+    // Helper to fade out the transition block
+    function fadeOutTransition() {
         setTimeout(() => {
             transitionBlock.style.opacity = '0';
             transitionBlock.style.pointerEvents = 'none';
         }, fadeOutDelay);
     }
+
+    // Fade out after page loads
+    window.addEventListener('load', fadeOutTransition);
+
+    // Also handle DOMContentLoaded for faster initial fade
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fadeOutTransition);
+    } else {
+        // DOM already loaded
+        fadeOutTransition();
+    }
+
+    // Handle page show from bfcache (back/forward navigation)
+    window.addEventListener('pageshow', (event) => {
+        // Only re-run fade if page was restored from bfcache
+        if (event.persisted) {
+            // Ensure the block is visible first, then fade it out
+            transitionBlock.style.opacity = '1';
+            transitionBlock.style.pointerEvents = 'auto';
+            fadeOutTransition();
+        }
+    });
 
     // Intercept all internal link clicks
     document.addEventListener('click', (e) => {
