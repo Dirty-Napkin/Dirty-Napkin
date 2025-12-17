@@ -29,23 +29,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // Remove puzzle animations from nav on small screens
     removeNavPuzzle();
     
-    // Rebuild grid on all resizes to recalculate scaling when font size changes
+    // Rebuild grid on width resizes to recalculate scaling when font size changes
+    let previousWidth = window.innerWidth;
     let resizeTimeout;
     window.addEventListener('resize', () => {
-        // Debounce resize events to avoid excessive rebuilds
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            puzzleTypeElements.forEach((element) => {
-                // Remove old hover animation listeners before rebuilding
-                if (element.dataset.hoverAnimationSetup === 'true') {
-                    removeGridHoverAnimation(element);
-                }
-                setupCustomLayouts(element);
-                setupPuzzleTypeAnimation(element);
-            });
-            // Remove puzzle animations from nav on small screens after resize
-            removeNavPuzzle();
-        }, 500); // 500ms debounce delay
+        const currentWidth = window.innerWidth;
+        
+        // Only rebuild if width changed, not height
+        if (currentWidth !== previousWidth) {
+            // Debounce resize events to avoid excessive rebuilds
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                puzzleTypeElements.forEach((element) => {
+                    // Remove old hover animation listeners before rebuilding
+                    if (element.dataset.hoverAnimationSetup === 'true') {
+                        removeGridHoverAnimation(element);
+                    }
+                    setupCustomLayouts(element);
+                    setupPuzzleTypeAnimation(element);
+                });
+                // Remove puzzle animations from nav on small screens after resize
+                removeNavPuzzle();
+                previousWidth = currentWidth;
+            }, 500); // 500ms debounce delay
+        }
     });
 });
 
