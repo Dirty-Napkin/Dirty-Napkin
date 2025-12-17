@@ -147,10 +147,10 @@ function setupCustomLayouts(element) {
             // Grid: 17 columns x 4 rows (0-16 cols, 0-3 rows, row 3 is bottom)
             element.customLayout = [
                 // "The" - Row 3 (bottom row)
-                {letterIndex: 0, row: 3, col: 0},   // T
-                {letterIndex: 1, row: 3, col: 1},   // h
-                {letterIndex: 2, row: 3, col: 2},   // e
-                {letterIndex: 3, row: 3, col: 3},   // (space)
+                {letterIndex: 0, row: 1, col: 0},   // T
+                {letterIndex: 1, row: 1, col: 1},   // h
+                {letterIndex: 2, row: 1, col: 2},   // e
+                {letterIndex: 3, row: 1, col: 3},   // (space)
                 // "Lemonade" - Row 2 (second line)
                 {letterIndex: 4, row: 2, col: 0},   // L
                 {letterIndex: 5, row: 2, col: 1},   // e
@@ -162,11 +162,11 @@ function setupCustomLayouts(element) {
                 {letterIndex: 11, row: 2, col: 7},  // e
                 {letterIndex: 12, row: 2, col: 8},  // (space)
                 // "Stand" - Row 1 (third line)
-                {letterIndex: 13, row: 1, col: 0},  // S
-                {letterIndex: 14, row: 1, col: 1}, // t
-                {letterIndex: 15, row: 1, col: 2}, // a
-                {letterIndex: 16, row: 1, col: 3}, // n
-                {letterIndex: 17, row: 1, col: 4}, // d
+                {letterIndex: 13, row: 3, col: 0},  // S
+                {letterIndex: 14, row: 3, col: 1}, // t
+                {letterIndex: 15, row: 3, col: 2}, // a
+                {letterIndex: 16, row: 3, col: 3}, // n
+                {letterIndex: 17, row: 3, col: 4}, // d
             ];
         } else {
             // Default layout: Desktop/tablet
