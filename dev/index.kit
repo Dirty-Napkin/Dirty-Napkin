@@ -1,28 +1,253 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head>
-    <!-- @import "global/head.kit"-->
-    <title>Dirty Napkin</title>
-</head>
+<!-- @pageTitle = Home -->
+<!-- @include "global/head.kit"-->
 
-<body class="home">
-    <!-- @import "global/header.kit"-->
+<body id="index">
+    <!-- @include "global/header_nav.kit" -->
+    <main>
+        <div class="home-container black-background">        
+            <div class="small-squares"></div>
 
-    <div class="content">
-        <div class="topBar">
-            <p class="welcome">Welcome to Dirty Napkin</p>
-            <p class="smile">:)</p>
+            <!-- SM & MD Hero Section -->
+            <section class="hero-section-mobile"> 
+                <div class="p-parent">
+                    <h2 class="p-child">
+                        We design for the <br>
+                        curious, the creative, <br>
+                        the ambitious, and the <br>
+                        up - and - coming
+                    </h2>
+                </div>      
+                <div class="ketchup-parent">
+                    <div class="vimeo-video" id="K1" style="--poster:url('assets/vimeo-thumbnails/k1.jpg');">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1146806425?background=1&autoplay=1&loop=1&muted=1&controls=0" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture;" 
+                            title="ketchup-video">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- LG+ Hero Section -->
+            <section class="hero-section-lg">
+                <div class="p-parent">
+                    <div class="p-child">
+                        <h2>
+                            We design for the <br>
+                            curious, the creative, <br>
+                            the ambitious, and the <br>
+                            up - and - coming
+                        </h2>
+                        <h2>
+                            We design for the <br>
+                            curious, the creative, <br>
+                            the ambitious, and the <br>
+                            up - and - coming
+                        </h2>
+                        <h2>
+                            We design for the <br>
+                            curious, the creative, <br>
+                            the ambitious, and the <br>
+                            up - and - coming
+                        </h2>
+                        <h2>
+                            We design for the <br>
+                            curious, the creative, <br>
+                            the ambitious, and the <br>
+                            up - and - coming
+                        </h2>
+                    </div>
+                </div>
+                      
+                <div class="ketchup-parent">
+                    <div class="vimeo-video" id="K1" style="--poster:url('assets/vimeo-thumbnails/k1.jpg');">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1146806425?background=1&autoplay=1&loop=1&muted=1&controls=0" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture;" 
+                            title="ketchup-video">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Brands Section -->
+            <section class="brands-container big-puzzle">
+                <div class="brand-letters">
+                    <span>B</span>
+                    <span>R</span>
+                    <span>A</span>
+                    <span>N</span>
+                    <span>D</span>
+                    <span>S</span>
+                </div>
+              
+                <div class="brand-paragraphs">
+                    <div class="semibold-24pt">
+                        <h3>
+                            Dirty Napkin is a branding and strategy studio in Philadelphia
+                        </h3>
+                    </div>
+                   
+                    <div class="semibold-24pt">
+                        <h3>
+                            We create immersive worlds that give permission to break the rules
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="brands-content">
+                    <!-- The Window Assets -->
+                    <article class="brand-item hover-style-two">
+                        <a href="the-window.html"><img src="assets/home-pg/brands/H2-3_logo-mobile.jpg" alt="The Window project" class="the-window" id="H1" /></a>
+                        <img src="assets/home-pg/brands/H2-1_type.jpg" alt="" class="the-window more-info" id="H2-1" />
+                        <img src="assets/home-pg/brands/H2-2_photo-01.jpg" alt="" class="the-window more-info" id="H2-2" />
+                        <img src="assets/home-pg/brands/H2-4_grid-crop-01.jpg" alt="" class="the-window more-info" id="H2-4" />
+                        <img src="assets/home-pg/brands/H2-5_logo-crops.jpg" alt="" class="the-window more-info" id="H2-5" />
+                        <img src="assets/home-pg/brands/H2-6_grid-crop-02.jpg" alt="" class="the-window more-info" id="H2-6" />
+                        <img src="assets/home-pg/brands/H2-7_photo-02.jpg" alt="" class="the-window more-info" id="H2-7" />
+                        <div>
+                            <h3>The Window</h3>
+                            <p class="body">Philly's new hole in&nbsp;the wall</p>
+                        </div>
+                    </article>
+                    
+                    <article class="brand-item hover-style-two">
+                        <a href="lemonade-stand.html"><img src="assets/home-pg/brands/H3-3_logo-mobile.jpg" alt="The Lemonade Stand project" class="lemonade-stand" id="H2" /></a>
+                        <img src="assets/home-pg/brands/H3-2_logo-crop-02.jpg" alt="" class="lemonade-stand more-info" id="H2-1" />
+                        <img src="assets/home-pg/brands/H3-1_logo-crop-01.jpg" alt="" class="lemonade-stand more-info" id="H2-2" />
+                        <img src="assets/home-pg/brands/H3-4_hand-drawn.jpg" alt="" class="lemonade-stand more-info" id="H2-3" />
+                        <img src="assets/home-pg/brands/H3-5_lemon.jpg" alt="" class="lemonade-stand more-info" id="H2-4" />
+                        <img src="assets/home-pg/brands/H3-6_logo-crop-03.jpg" alt="" class="lemonade-stand more-info" id="H2-5" />
+                        <div>
+                            <h3>The Lemonade Stand</h3>
+                            <p class="body">DIY performing arts gets juicy</p>
+                        </div>
+                    </article>
+                    
+                    <article class="brand-item hover-style-two">
+                        <a href="those-eyes.html"><img src="assets/home-pg/brands/H4-4_logo-mobile.jpg" alt="Those Eyes project" class="those-eyes" id="H3" /></a>
+                        <img src="assets/home-pg/brands/H4-1_eye.jpg" alt="" class="those-eyes more-info" id="H4-1" />
+                        <img src="assets/home-pg/brands/H4-2_logo-crop-01.jpg" alt="" class="those-eyes more-info" id="H4-2" />
+                        <img src="assets/home-pg/brands/H4-3_collage.jpg" alt="" class="those-eyes more-info" id="H4-3" />
+                        <img src="assets/home-pg/brands/H4-5_logo-crop-02.jpg" alt="" class="those-eyes more-info" id="H4-5" />
+                        <img src="assets/home-pg/brands/H4-6_logo-crop-03.jpg" alt="" class="those-eyes more-info" id="H4-6" />
+                        <div>
+                            <h3>Those Eyes</h3>
+                            <p class="body">Prepare to be psychologically thrilled</p>
+                        </div>
+                    </article>
+                    
+                    <article class="brand-item hover-style-two">
+                        <a href="american-scripture-project.html"><img src="assets/company-pages/h6_asp-thumbnail.jpg" alt="American Scripture Project" class="american-scripture-project" id="H4" /></a>
+                        <img src="assets/home-pg/brands/h6-1-aspthumbnail.png" alt="" class="american-scripture-project more-info" id="H4-1" />
+                        <img src="assets/home-pg/brands/h6-2-aspthumbnail.png" alt="" class="american-scripture-project more-info" id="H4-2" />
+                        <img src="assets/home-pg/brands/h6-3-aspthumbnail.jpg" alt="" class="american-scripture-project more-info" id="H4-3" />
+                        <img src="assets/home-pg/brands/h6-4-aspthumbnail.jpg" alt="" class="american-scripture-project more-info" id="H4-4" />
+                        <div>
+                            <h3>American Scripture Project</h3>
+                            <p class="body">Unity through shared&nbsp;experiences</p>
+                        </div>
+                    </article>
+                    
+                    <div class="brand-item">
+                        <a href="brands.html" class="button-text hover-style-one">See brands</a>
+                    </div>
+                </div>
+            </section>
+ 
+            <!-- Collaborations Section -->
+            <section class="collabs">
+                <div class="collabs-paragraph">
+                    <h2>
+                        Our collabs partner design<br>
+                        with even more design
+                    </h2>
+                </div>
+                
+                <div class="adam-collab">
+                    <img src="assets/company-pages/h7_temp-clock.png" alt="Vertically moving clock created in collaboration with Adam Simler" id="H5">
+
+                    <h3 class="small-puzzle">
+                        <span class="I">I</span>
+                        <span class="T1">T</span>
+                        <span class="S">S</span>
+                        <span class="A">A</span>
+                        <span class="B">B</span>
+                        <span class="T2">T</span>
+                        <span class="I2">I</span>
+                        <span class="O">O</span>
+                        <span class="U">U</span>
+                        <span class="M">M</span>
+                        <span class="T3">T</span>
+                        <span class="E">E</span>
+                    </h3>
+
+                    <div class="sideways-copy bold-20pt">
+                        <p class="sideways1">Dirty napkin x adam simler</p>
+                        <div>
+                            <p>Dirty napkin x adam simler</p>
+                            <p>Dirty napkin x adam simler</p>
+                        </div>
+                        <p>Dirty napkin x adam simler</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonial Section -->
+            <section class="yellow-ketchup-section">
+                <div class="mobile-yellow-ketchup-img"></div>
+                
+                <img src="assets/company-pages/h8_yellow-ketchup-home.png" alt="Yellow ketchup" class="yellow-ketchup-img">
+                
+                <div class="yellow-text-section">
+                    <div class="testimonial">
+                        <div>
+                            <p class="semibold-32pt with-breaks">
+                                "This creative team listens, <br>
+                                communicates, proposes, listens <br>
+                                again, redesigns, and imagines in <br>
+                                ways I did not anticipate. The <br>
+                                journey was actually fun, and the <br>
+                                final product far exceeded our <br>
+                                expectations."
+                            </p>
+                            <p class="semibold-32pt without-breaks">
+                                "This creative team listens,
+                                communicates, proposes, listens
+                                again, redesigns, and imagines in
+                                ways I did not anticipate. The
+                                journey was actually fun, and the
+                                final product far exceeded our
+                                expectations."
+                            </p>
+                            <p>
+                                - Michael <br>
+                                <span>- </span> <span>American Scripture Project</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="CTA-container">
+                        <h2>
+                            What are you doing <br>
+                            down here?? Go check <br>
+                            out our projects! :) <br>
+                            <a href="brands.html" class="button-text hover-style-one">See brands</a>
+                        </h2>
+                    </div>
+                </div>
+            </section>
         </div>
-        <img class="homeLogo" src="assets/logo.svg" alt="Dirty Napkin Logo">
-        <div class="bottomBar">
-            <p class="email"><a href="mailto:hello@dirtynapkin.co">hello@dirtynapkin.co</a></p>
-            <p class="insta"><a href="https://www.instagram.com/dirtynapkin.co" target="_blank">Instagram</a></p>
-        </div>
-    </div>
-    <!-- @import global/analytics.kit-->
 
+        <!-- @include "global/footer.kit" -->
+         
+    </main>
+    <!-- @import "global/scripts.kit"-->
 </body>
-<!--@import "global/scripts.kit"-->
 
 </html>

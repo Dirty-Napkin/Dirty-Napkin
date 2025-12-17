@@ -28,7 +28,7 @@
   
       ```<img src="/assets/window_lockup.png" alt="The Window logo lockup">```
       
-      you can use [this](https://github.com/Dirty-Napkin/Dirty-Napkin/blob/dev/docs/snippets.md#responsive-images)
+      you can use [this](docs/snippets.md#responsive-images)
 
 ### When You Are Done Working:
 - Validate `styles.css` and all new or modified `.html` files

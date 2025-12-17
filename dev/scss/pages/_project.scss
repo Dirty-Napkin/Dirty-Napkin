@@ -1,0 +1,304 @@
+/* =============
+    Project Pages
+============= */
+.project-page {
+
+    .hero {
+        max-width: 100%;
+        overflow: hidden;
+
+        @include md {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-rows: repeat(4, auto);
+            grid-template-areas:
+                "titleframe tags"
+                "image image"
+                "adjectives adjectives";
+        }
+
+        .title-frame {
+            grid-area: titleframe;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+
+            @include xl {
+                flex-direction: row;
+            }
+
+            .project-title {
+                margin-top: 0;
+                grid-area: title;
+                font-size: clamp(2rem, 8vw, 5rem); // Responsive font sizing
+                // letter-spacing: 0.7rem; //11.2px
+                max-width: 100%;
+
+                @include md {
+                    // Use maximum font size unless layout requires shrinking
+                    font-size: clamp(2rem, 6vw, 5rem);
+                }
+            }
+
+            h5 {
+                // position: static;
+                // left: unset;
+                // top: unset;
+                margin-left: 0;
+                align-self: flex-start;
+                justify-self: unset;
+
+                @include xl {
+                  
+                    max-width: 50%;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    hyphens: none;
+                    white-space: normal;
+                    width: 19ch;
+                    padding-bottom: 7px;
+
+                    position: absolute;
+                    
+                    //bottom: x;
+                    // left: x;
+                    // Position is determined in JS file
+
+                }
+            }
+        }
+
+        .hero-image {
+            grid-area: image;
+            width: 100%;
+            overflow: hidden;
+
+        }
+
+        .tags-frame {
+
+            grid-area: tags;
+            display: none;
+            // margin: 8px 24px 24px 24px;
+            justify-content: space-between;
+            gap: 1.6875rem; //27px
+
+            @include md {
+                margin-left: 24px;
+                order: 0;
+                // margin: 0 32px 20px 0;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-end;
+            }
+
+            @include xl {
+                padding-bottom: 7px;
+            }
+
+            .tag {
+                display: flex;
+                gap: 12.177px;
+                align-items: center;
+
+                p {
+                    font-family: "Degular Mono", sans-serif;
+                    font-size: 0.7941875rem; //12.707px
+                    font-weight: 600;
+                    text-transform: uppercase;
+
+                    @include md {
+                        font-size: 1.5rem; //24px
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+                }
+
+                .squares {
+                    width: 8.471px;
+                    height: 8.471px;
+                    background-color: var(--key);
+
+                    @include md {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        .adjectives {
+            grid-area: adjectives;
+            margin-top: 32px;
+            display: flex;
+            gap: 26px 28px;
+            flex-wrap: wrap;
+            // width: 100%;
+
+            @include md {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                gap: unset;
+            }
+
+            p {
+                font-family: "Degular Mono", monospace;
+                text-transform: uppercase;
+                font-size: 1rem; //24px
+                font-weight: 400;
+                letter-spacing: 0.15rem; //2.4px
+
+                @include lg {
+                    font-size: 1.5rem; //24px
+                }
+            }
+        }
+    }
+
+    .intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+        gap: 1rem;
+        margin-top: 120px;
+        margin-bottom: 120px;
+        overflow: hidden;
+        
+
+        @include lg {
+            margin-top: 152px;
+            margin-bottom: 152px;
+        }
+
+        h5 {
+            max-width: 50ch;
+            width: 100%;
+            font-size: 1rem;
+            
+            &:not(.no-justify) {
+                text-align: justify;
+                text-align-last: justify;
+            }
+
+            @include md {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding-bottom: 24px;
+        overflow: hidden;
+
+        @include md {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        .border {
+            border: 1px solid gray;
+        }
+
+        .height2 {
+            grid-row: span 2;
+        }
+
+        $width-spans: (
+            width2: 2,
+            width3: 3,
+            width4: 4,
+            width6: 6
+        );
+
+        @each $class, $span in $width-spans {
+            .#{$class} {
+                grid-column: span #{$span};
+            }
+        }
+
+        .under-img {
+            display: flex;
+            flex-direction: column;
+
+            p {
+                margin-top: auto;
+                margin-bottom: auto;
+                padding: 0;
+                padding-top: 20px;
+                width: 70%;
+            }
+        }
+
+        .narrow-text {
+            justify-self: center;
+            margin-bottom: 1rem; //16px
+
+            @include md {
+                margin-left: 32px;
+                margin-right: 32px;
+            }
+
+            @include lg {
+                margin-left: 0;
+                margin-right: 0;
+                /*4 columns + 3 gaps:
+                (100% - (5 x gap)) / 6 = column width
+                (column width x 4) + (gap x 3) = img width*/
+                // max-width: calc((100% - 5 * 40px) / 6 * 4 + 40px * 3);
+            }
+        }
+
+        .small-img {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: calc((100% - 2 * 40px) / 3 * 2 + 40px);
+            margin: 0 auto;
+            height: 100%;
+            align-self: center;
+
+
+            @include md {
+
+                img, video, .vimeo-video {
+                    /* 2 columns + 1 gap
+                        (100% - (2 x gap)) / 3 = column width
+                        column width x 2 + gap = img width*/
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+
+        .short-video {
+            height: 0;
+        }
+
+        p {
+            align-self: center;
+
+            @include md {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            @include xl {
+                max-width: 24rem;
+                margin: auto auto;
+
+                &.width6 {
+                    max-width: 40rem;
+                }
+            }
+        }
+    }
+}

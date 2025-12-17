@@ -1,0 +1,256 @@
+/* =============
+    Header
+============= */
+header {
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    gap: 1rem;
+    padding: 12px 24px;
+    justify-content: space-between;
+    z-index: 999;
+    top: 0;
+    pointer-events: none;
+
+    @include md {
+        
+    }
+    // Header invert styling
+    // Apply mix-blend-mode on mobile when menu is closed, and always on desktop
+    &.menu-closed {
+        mix-blend-mode: difference; // Blend mode difference for color inversion effect
+        color: var(--white); // Ensure header elements are white to invert properly
+        background: transparent; // Make sure background doesn't interfere with blend mode
+    }
+    
+    @include md{
+        mix-blend-mode: difference; // Blend mode difference for color inversion effect
+        color: var(--white); // Ensure header elements are white to invert properly
+        background: transparent; // Make sure background doesn't interfere with blend mode
+    }
+
+    img{
+        width: auto;
+        max-width: 20ch;
+        height: 100%;
+    }
+
+    @include sm {
+        padding: 1rem 2rem;
+    }
+
+    @include md {
+        margin-top: 1rem;
+        padding: 0.5rem 3rem 0.5rem 2rem;
+    }
+
+    @include lg {
+        padding: 0.5rem 5rem 0.5rem 4rem;
+    }
+
+    .logo-container {
+        height: 2em;
+        pointer-events: auto;
+        transition: transform 0.3s ease;
+        transform-origin: left center;
+        z-index: 3;
+        
+        &:hover {
+            transform: scale(1.05);
+        }
+        
+        // Ensure logos work with blend mode
+        img {
+            filter: brightness(0) invert(1); // Makes SVG white for blend mode
+        }
+
+        #desktop-logo {
+            display: none;
+
+            @media (min-width: 900px) {
+                display: block;
+            }
+        }
+
+        @media (min-width: 900px) {
+            #mobile-logo {
+                display: none;
+            }
+        }
+    }
+
+    nav {
+        // &.closed {
+        //     button {
+        //         background-color: transparent;
+        //     }
+        // }
+        
+        @include md{
+            display: flex;
+            align-items: center;
+        }
+        
+        button{ //Mobile menu toggle button
+            position: absolute;
+            right: 0.5rem;
+            top: 50%; // Center vertically
+            transform: translateY(-50%); // Center vertically
+            z-index: 10; // Higher than the grid
+            display: block; // Ensure visible
+            background-color: transparent !important;
+           
+
+            @include md{
+                display: none;
+                position: relative;
+            }
+        }
+        
+        .menu-links{ //Menu links container
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            z-index: 3;
+            left: 0;
+            top: 0;
+            display: none; // Hidden by default
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding-right: 1.5rem;
+            padding-bottom: 20vh;
+            opacity: 0; // Initial opacity
+
+            @include md{
+                position: relative;
+                height: auto;
+                width: auto;
+                background-color: transparent;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding-right: 0;
+                opacity: 1; // Always visible on desktop
+                padding-bottom: 0;
+            }
+            a {
+                z-index: 2;
+                font-weight: 500;
+                font-size: 3rem;
+    
+                @include md{
+                    font-size: inherit;
+                    font-weight: inherit;
+                    color: var(--key);
+                    margin-left: 2.5rem !important;
+                    letter-spacing: 0;
+                    font-weight: 600;
+                }
+                
+                // Override button-text magenta color for blend mode
+                &.button-text {
+                    color: var(--white) !important;
+                    background-color: transparent;
+                    
+                    &:hover {
+                        color: var(--white) !important;
+                    }
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+
+        // Ensure nav links are white for blend mode
+        a {
+            z-index: 2;
+
+            @include md{
+                color: var(--key);
+                margin-left: 1.5rem !important;
+
+            }
+            
+            // Override button-text magenta color for blend mode
+            &.button-text {
+                color: var(--white) !important;
+                background-color: transparent;
+                
+                &:hover {
+                    color: var(--white) !important;
+                }
+            }
+        }
+        
+        // Button text in nav should also be white
+        button.button-text {
+            color: var(--white) !important;
+        }
+
+        // The Blue Squares Grid
+        .mobile-menu-squares {
+            position: fixed;
+            display: none; // Hidden by default
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(7, 1fr);
+            gap: 0;
+            width: 100vw;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            pointer-events: none; // Allow clicks to pass through
+            opacity: 0; // Initial opacity
+            
+            @include md{
+                display: none;
+            }
+        
+            .menu-square {
+                background-color: var(--cyan);
+                width: 100%;
+                height: 100%;
+                aspect-ratio: 1;
+
+            }
+        }
+    }
+
+    .test {
+        text-transform: uppercase;
+    }
+
+    a, button, img {
+        pointer-events: auto;
+    }
+    
+    a {
+        &:hover {
+            position: relative;
+            z-index: 100000;
+        }
+    }
+}
+
+.transition-block {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    z-index: 9998;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}

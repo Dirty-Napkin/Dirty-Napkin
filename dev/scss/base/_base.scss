@@ -5,54 +5,126 @@
     box-sizing: border-box;
 }
 
-.homeLogo {
-    width: 198px;
-    height: 189px;
-}
+html {
+    // Set default background for blend mode to work properly
+    background-color: var(--white);
 
-.feedbackLogo {
-    width: 100px;
+    @include lg {
+        cursor: none;
+    }
 }
 
 body {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-}
+    overflow-x: hidden;
+    // Set default background for blend mode to work properly
+    background-color: var(--white);
 
-.home{
-    background-image: url("assets/Colors.gif");
-}
-
-.content {
-    display: flex;
-    width: 80vw;
-    height: 45vh;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    margin: auto;
-    @include sm{
-        width: 50vw;
+    @include lg {
+        cursor: none;
     }
-
 }
 
-.topBar, .bottomBar {
-    display: flex;
-    // flex-direction: row;
-    justify-content: space-between;
-    // width: 100%;
-    align-items: flex-start;
-    align-self: stretch;
+ul.blank-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.bullet-fix {
+    list-style-type: disc !important;
+}
+
+img,
+video {
+    width: 100%;
+    height: auto;
+}
+
+.vimeo-video {
+    width: 100%;
+    position: relative;
+    background-image: var(--poster);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 iframe {
-    width: 400px;
-    @include sm {
-        width: 80vw !important;
-        height: 800px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.margins {
+    margin-left: 24px;
+    margin-right: 24px;
+
+    @include md {
+        margin-left: 32px;
+        margin-right: 32px;
+    }
+
+    @include xl {
+        margin-left: 64px;
+        margin-right: 64px;
     }
 }
+
+$square-colors: (
+    green: var(--green),
+    cyan: var(--cyan),
+    white: var(--white),
+    magenta: var(--magenta)
+);
+
+.square {
+    width: 24px;
+    height: 24px;
+    background-color: var(--key);
+
+    @each $name, $color in $square-colors {
+        &.#{$name} {
+            background-color: $color;
+        }
+    }
+}
+
+
+.puzzle-type {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    margin: 12px 0 0 0;
+
+    span {
+        display: block;
+        position: absolute;
+        transition: all 0.3s ease;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+    }
+}
+
+.background-transition {
+    transition: background-color 0.3s ease-in-out;
+
+    &.cyan-background {
+        background-color: var(--cyan);
+        color: var(--white);
+    }
+
+    &.black-background {
+        background-color: var(--key);
+        color: var(--white);
+    }
+
+    &.white-background {
+        background-color: var(--white) !important;
+        color: var(--key);
+    }
+}
+

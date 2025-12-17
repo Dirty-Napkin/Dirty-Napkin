@@ -1,20 +1,29 @@
 @charset 'utf-8';
 
 // Helpers Styles
-@import "helpers/_mixins";
 @import "helpers/_variables";
+@import "helpers/_mixins";
 
 // Base Styles
 @import "base/_normalize";
 @import "base/fonts";
 @import "base/_base";
 @import "base/_typography";
+@import "base/_cursor";
 
 // Components Styles
 @import "components/_buttons";
 @import "components/_forms";
-@import "components/_navigation";
+@import "components/_brand-hover";
+@import "components/next-project";
 
 // Layout Styles
-@import "layout/_header";
+@import "layout/_header_nav";
 @import "layout/_footer";
+
+//Page-specific Styles
+@import "pages/about";
+@import "pages/_brands";
+@import "pages/_project";
+@import "pages/_home";
+@import "pages/_feedback";

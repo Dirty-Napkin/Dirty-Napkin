@@ -1,0 +1,912 @@
+/* =============
+    About Page
+============= */
+
+#about-page {
+    
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+        // Mobile: Single column, no grid
+        > *:not(footer) {
+            width: 100%;
+            padding: 0 map-get($margins, min);
+
+            @include lg {
+                display: grid;
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                column-gap: 2.5rem;
+                width: 100%;
+                margin-left: 5rem;
+                margin-right: 5rem;
+                padding: 0 5rem;
+            }
+        }
+
+        .small-square {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        p {
+            max-width: 50ch;
+            // The correct syntax (experimental, not fully supported) is:
+        }
+
+        .txtbold {
+            font-family: "Degular Mono", monospace;
+            font-size: 1rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        // Exception: Don't apply txtbold styling to intro section
+        .intro-type .txtbold {
+            font-family: inherit;
+            font-size: inherit;
+            letter-spacing: inherit;
+            text-transform: inherit;
+            font-weight: 700; // Keep bold weight
+        }
+
+        // ===== INTRO SECTION =====
+        .intro-type {
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+            background-color: var(--white);
+
+            @include lg {
+                display: grid;
+                grid-template-areas: 
+                    ". square . . . ."
+                    "paragraph paragraph . heading heading .";
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                grid-template-rows: 60% 40%;
+                column-gap: 2.5rem;
+                height: 70vh;
+                padding: 0;
+            }
+
+            // First small square (direct child) - goes in square area
+            .small-square {
+                display: none; // Hide on mobile
+                grid-area: square;
+                background-color: var(--key);
+                justify-self: flex-end;
+                align-self: start;
+
+                @include lg {
+                    display: block;
+                }
+            }
+
+            .paragraph-container {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 30vh;
+
+                .small-square:first-of-type {
+                    display: block;
+                }
+
+                h2 {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin: 0 0 0 3.5rem;
+                    line-height: 140%;
+                    text-align: justify;
+                    text-align-last: justify;
+                    text-transform: none;
+                    color: var(--key);
+
+                    max-width: 30ch;
+
+                    @include md {
+                        max-width: 40ch;
+                    }
+
+                    @include lg {
+                        max-width: 30ch;
+                        margin-top: 0rem;
+                        line-height: 140%;
+                        text-transform: none;
+                        margin: 0 0 0 2.5rem;
+
+                    }
+                }
+
+                @include lg {
+                    grid-area: paragraph;
+                    flex-direction: row-reverse;
+                    justify-content: space-between;
+                    gap: 1.2rem;
+                    margin-bottom: 0;
+                    
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4.2rem;
+                    }
+                }
+            }
+
+            .small-square {
+                @include lg {
+                    background-color: var(--key);
+                }
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                text-align-last: justify;
+                color: var(--key);
+                line-height: 150%;
+                margin: 0;
+
+                @include lg {
+                    grid-area: heading;
+                    font-size: 2rem;
+                    width: 23ch;
+                    text-align-last: justify;
+                    align-self: flex-end;
+                    line-height: 130%;
+                }
+
+                .line-break-comma {
+                    display: inline-block;
+                    width: 0;
+                    overflow: visible;
+                    font-size: 1.5rem;
+                    line-height: 130%;
+                    margin-left: -0.2rem;
+
+                    @include lg {
+                        font-size: 2rem;
+                    }
+                }
+            }
+        }
+
+        // ===== HERO IMAGE =====
+        .hero-image {
+            display: block;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+
+
+            @include lg {
+                margin-top: 3rem;
+            }
+
+            iframe {
+                background-image: var(--poster);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-color: var(--key);
+            }
+        }
+
+        // ===== APPROACH SECTION =====
+        .approach {
+            position: relative;
+            padding: 4rem map-get($margins, min);
+            background-color: var(--key);
+            overflow: hidden;
+
+            @include lg {
+                padding-top: 6rem;
+                padding-bottom: 12rem;
+            }
+
+            .story-title {
+                margin-bottom: 2rem;
+
+                @include lg {
+                    grid-column: 2;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 1.2rem;
+                    margin-bottom: 0;
+                }
+            }
+
+            .small-square {
+                background-color: var(--yellow);
+                margin-bottom: 1.5rem;
+
+                @include lg {
+                    grid-column: 2;
+                    grid-row: 2;
+                    justify-self: flex-end;
+                    margin-top: 0;
+                    margin-bottom: auto;
+                }
+            }
+
+            div {
+                @include lg {
+                    display: flex;
+                    grid-column: 2;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 1.2rem;
+                }
+            }
+
+            h2 {
+
+                font-size: 1rem;
+                font-weight: 100;
+                text-transform: uppercase;
+                color: var(--yellow);
+                opacity: 0.8;
+                margin: 0 0 1.5rem 0;
+                line-height: 140%;
+
+                @include lg {
+                    width: 30ch;
+                    font-size: 1rem;
+                    justify-self: flex-end;
+                    position: relative;
+                    margin-top: 0rem;
+                    grid-column: 2;
+                    text-align: right;
+                }
+
+                // Repeat title starting at md breakpoint
+                &::after {
+                    content: "approach";
+                    display: block;
+                    position: absolute;
+                    margin-top: -3.5rem;
+
+                    @include md {
+                        right: 0;
+                        top: 4rem;
+                        margin-right: -12ch;
+                        margin-top: 0rem;
+
+                    }
+
+                    @include lg {
+                        content: "approach";
+                        display: block;
+                        position: static;
+                        margin-top: 0.5rem;
+                        right: auto;
+                        top: auto;
+                        margin-right: 0;
+                    }
+                }
+
+
+                &[aria-hidden="true"] {
+                    display: none; // Hide secondary h2 on mobile
+
+                    @include lg {
+                        display: block;
+                        position: absolute;
+                        right: -1rem;
+                        top: 6rem;
+                        margin-top: 0rem;
+
+                        &::after {
+                            display: none;
+                        }
+                    }
+                }
+            } 
+
+            p {
+                color: var(--white);
+                text-transform: none;
+                line-height: 140%;
+                margin: 0 0 1.5rem 0;
+
+                @include lg {
+                    grid-column: 4 / span 2;
+                    margin: 0;
+
+                    &:nth-of-type(1) {
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        // ===== SERVICES SECTION =====
+        .services {
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0;
+            background-color: var(--key);
+            color: var(--cyan);
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+ 
+            .small-square {
+                background-color: var(--cyan);
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+
+            .vimeo-video-two { //desktop only
+                position: relative;
+                display: none;
+            }
+
+
+            #A5M {
+                margin-top: 3rem;
+            }
+
+            #A6 {
+                margin-top: 4rem;
+                padding: 0 1.5rem;
+            }
+            
+            @include md {
+
+                #A5M {
+                    width: 50vw;
+                }
+
+                #A6 {
+                    width: 70vw;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+         
+
+            @include lg {
+                display: grid;
+                min-height: 6rem;
+                padding: 0 1.5rem;
+
+                .vimeo-video-two {
+                    display: block;
+                    grid-column: span 2;  
+                    width: 100%;
+                    margin-left: auto;
+                }
+
+                #A5M {
+                    display: none;
+                    height: auto;
+                }
+    
+                #A5D {
+                    display: block;
+                    grid-column: span 2;  
+                    width: 60%;
+                    margin-left: auto;
+                }
+    
+                #A6 {
+                    grid-column: span 4;
+                    width: 100%;
+                    margin: 8rem 0;
+                }
+            }
+
+            .services-bar {
+                white-space: nowrap;
+                pointer-events: none;
+                position: absolute;
+                left: 0;
+                right: 0;
+                font-weight: 100;
+                color: var(--cyan);
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                padding: 0 map-get($margins, min);
+                display: flex;
+                justify-content: space-between;
+
+                @include lg {
+                    top: 3rem;
+                    left: 5rem;
+                    padding: 0;
+                }
+
+                &::before {
+                    content: "SERVICES SERVICES";
+                    position: absolute;
+                    width: 105vw;
+                    text-align: justify;
+                    text-align-last: justify;
+
+                    @include md {
+                        content: "SERVICES SERVICES SERVICES";
+                    }
+
+                    @include lg {
+                        content: "SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES      SERVICES";
+                        display: block;
+                        width: 107vw;
+                        white-space: pre;
+                        text-align: justify;
+                    }
+                }
+
+                &.top {
+                    top: 1.5rem;
+                }
+
+                &.bottom {
+                    bottom: 1.5rem;
+                    top: auto;
+
+                    @include lg {
+                        bottom: 3rem;
+                        top: auto;
+                    }
+                }
+            }
+
+            h2 {
+                position: absolute;
+                top: .25rem;
+                left: 0;
+                font-size: 1.5rem;
+                padding: 0 map-get($margins, min);
+
+
+                @include lg {
+                    position: absolute;
+                    top: 0;
+                    padding: 0;
+                    margin: 0;
+                    margin-top: 1.5rem;
+                    margin-left: 47.7ch;
+                    z-index: 1;
+                    width: 107vw;
+                    align-items: stretch;
+                    justify-content: stretch;
+                }
+            }
+        }
+
+        // ===== TWO PRONGS SECTION =====
+        .two-prongs {
+            padding: 8rem map-get($margins, min);
+            background-color: var(--key);
+            color: var(--green);
+
+            @include lg {
+                padding-top: 16rem;
+                padding-bottom: 18rem;
+            }
+
+            h2 {
+                margin: 0 0 1.5rem 0;
+                text-transform: uppercase;
+                font-size: 1.75rem;
+                font-weight: 500;
+                line-height: 140%;
+
+                @include lg {
+                    margin: 0;
+                    font-size: 2rem;
+                    font-weight: 500;
+
+                    &:first-of-type {
+                        grid-column: 2;
+                        text-align: right;
+                        justify-self: flex-end;
+                        width: 14ch;
+                        margin-right: -1ch;
+                    }
+
+                    &:last-of-type {
+                        grid-column: 4;
+                        text-align: justify;
+                        width: 23ch;
+                        text-align-last: justify;
+                        margin-bottom: 3rem;
+                    }
+                }
+
+                &:last-of-type {
+                    margin-bottom: 2rem;
+                }
+            }
+
+            p {
+                color: var(--white);
+                line-height: 140%;
+                margin: 0 0 1.5rem 0;
+
+                @include lg {
+                    grid-column: 4 / span 2;
+                    width: 100%;
+                    margin: 0;
+
+                    &:nth-of-type(1) {
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+
+            .small-square {
+                background-color: var(--green);
+                margin-bottom: 1rem;
+
+                @include lg {
+                    justify-self: flex-end;
+                    grid-column: 2;
+                    grid-row: 2;
+                    margin: 0;
+
+                    &:nth-of-type(2) {
+                        grid-column: 2;
+                        grid-row: 3;
+                    }
+                }
+
+                &:nth-of-type(2) {
+                    margin-top: 3rem;
+                    margin-bottom: 2rem;
+
+                    @include lg {
+                        margin: 0rem;
+                    }
+                }
+            }
+        }
+
+        // ===== TEAM SECTION =====
+        .team {
+            padding: 4rem map-get($margins, min);
+            background-color: var(--white);
+
+            @include lg {
+                padding-top: 8rem;
+                padding-bottom: 10rem;
+            }
+
+            .team-header {
+                margin-bottom: 3rem;
+
+                @include lg {
+                    grid-column: 1 / span 2;
+                    justify-self: flex-end;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    margin-bottom: 0;
+                }
+
+                h2 {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin: 0 0 1.5rem 0;
+                    line-height: 140%;
+                    text-align: justify;
+                    text-align-last: justify;
+                    text-transform: none;
+                    color: var(--key);
+
+                    max-width: 40ch;
+
+                    @include lg {
+                        margin-top: 0rem;
+                        line-height: 140%;
+                        
+                        text-transform: none;
+                    }
+                }
+
+                .small-square {
+                    background-color: var(--key);
+                    margin-bottom: 0.5rem;
+                    
+                    &:nth-of-type(2) {
+                        margin-top: 8rem;
+                    }
+
+                    &:nth-of-type(3) {
+                        margin-top: 2rem;
+                    }
+
+                    &:nth-of-type(4) {
+                        display: none;
+                    }
+
+                    @include lg {
+                        &:nth-of-type(2) {
+                            margin-top: 2rem;
+                        }
+
+                        &:nth-of-type(3) {
+                            margin: auto 0;
+                        }
+
+                        &:nth-of-type(4) {
+                            display: block;
+                            margin-top: auto;
+                        }
+                    }
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+            .team-members {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+
+                @include md {
+                    max-width: 30rem;
+                }
+
+                @include lg {
+                    grid-column: 4 / span 3;
+                    gap: 3rem;
+                    width: fit-content;
+                    max-width: 80%;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    row-gap: 4rem;
+                    
+                }
+
+                > div {
+                    display: flex;
+                    flex-direction: column;
+                    
+
+                    @include lg {
+                        display: block;
+                        max-width: 60ch;
+                    }
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
+                    margin-bottom: 1rem;
+                    background-color: #e0e0e0; // Placeholder color
+
+                    @include lg {
+                        margin-bottom: 0;
+                    }
+                }
+
+                h3 {
+                    text-transform: uppercase;
+                    font-weight: 700;
+                    margin: 0 0 0.5rem 0;
+                    color: var(--key);
+
+                    @include lg {
+                        text-align-last: justify;
+                        margin-top: .7rem;
+                        margin-bottom: 0rem;
+                        min-width: 11ch;
+                    }
+                }
+
+                p {
+                    text-transform: none;
+                    line-height: 140%;
+                    color: var(--key);
+                    margin: 0;
+
+                    @include lg {
+                        text-align: justify;
+                        text-align-last: justify;
+                        text-wrap: balance;
+                    }
+
+                    .awards {
+
+                        font-weight: 600;
+                        font-size: 1rem;
+                        font-family: "Degular Mono", monospace;
+                        text-transform: uppercase;
+                        margin-top: 1rem;
+                        display: block;
+                        text-align: left;
+                        text-align-last: left;
+                    }
+                }
+            }
+        }
+
+        // ===== MISSION SECTION =====
+        .mission {
+            position: relative;
+            padding: 4rem map-get($margins, min);
+            background-color: var(--white);
+            overflow: hidden;
+
+            @include lg {
+                padding-top: 6rem;
+                padding-bottom: 12rem;
+            }
+
+            .story-title {
+                margin-bottom: 1.5rem;
+
+                @include lg {
+                    grid-column: 2;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 1.2rem;
+                    margin-bottom: 0;
+                }
+            }
+
+            h2 {
+                font-size: 1rem;
+                font-weight: 400;
+                text-transform: uppercase;
+                color: var(--key);
+                margin: 0 0 1.5rem 0;
+                line-height: 140%;
+
+                @include lg {
+                    width: 30ch;
+                    font-size: 1rem;
+                    text-align: right;
+                    justify-self: flex-end;
+                    position: relative;
+                    margin-top: 0rem;
+                    grid-column: 2;
+                }
+
+                // Repeat title 2 times on mobile
+                &::after {
+                    content: "Mission";
+                    display: block;
+                    margin-top: 0.5rem;
+
+                    @include lg {
+                        content: "Mission";
+                        display: block;
+                        margin-top: 0.5rem;
+                    }
+                }
+
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    background-color: var(--key);
+                    margin-bottom: 1.5rem;
+
+                    @include lg {
+                        content: "Mission";
+                        position: absolute;
+                        right: 100%;
+                        margin-right: -4rem;
+                        top: 0;
+                        white-space: nowrap;
+                        display: block;
+                        width: auto;
+                        height: auto;
+                        background-color: transparent;
+                        margin-bottom: 0rem;
+                    }
+                }
+
+                &[aria-hidden="true"] {
+                    display: none; // Hide secondary h2 on mobile
+
+                    @include lg {
+                        display: block;
+                        position: absolute;
+                        right: -1rem;
+                        top: 6rem;
+                        margin-top: 0rem;
+
+                        &::after {
+                            display: none;
+                        }
+
+                        &::before {
+                            display: none;
+                        }
+                    }
+                }
+            } 
+
+            p {
+                color: var(--key);
+                line-height: 140%;
+                margin: 0 0 1.5rem 0;
+
+                @include lg {
+                    grid-column: 4 / span 2;
+                    margin: 0;
+
+                    &:nth-of-type(2) {
+                        margin-top: 1rem;
+                    }
+                }
+
+                &:last-of-type {
+                    margin-bottom: 1.5rem;
+                }
+            }
+
+            a {
+                display: inline-block;
+                text-transform: uppercase;
+                margin-top: 1rem;
+                
+
+                @include lg {
+                    padding: 1rem 0rem 0.2rem 0rem;
+                    grid-column: 4 / span 2;
+                    margin-top: 1rem;
+                    margin-left: -0.4rem;
+                    z-index: 1;
+                    width: fit-content;
+                    border-bottom: none;
+                    padding: 0.2rem 0.4rem; 
+                }
+            }
+        }
+
+        // ===== LOGO ROW =====
+        .logo-row {
+            display: none; // Hide on mobile
+
+            @include lg {
+                display: block;
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+                overflow: hidden;
+            }
+
+            .logo-container {
+                @include lg {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 105vw;
+                    margin-left: -6vw;
+                    gap: 2rem;
+                }
+            }
+
+            .logo-repeat {
+                @include lg {
+                    width: auto;
+                    height: 1.5rem;
+                    flex-shrink: 0;
+                }
+            }
+        }
+    }
+}

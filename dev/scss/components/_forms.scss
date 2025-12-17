@@ -2,12 +2,16 @@
     Forms
 ============= */
 
-[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea{
-	box-shadow: none;
-}
+$input-types: text, password, date, datetime, datetime-local, month, week, email, number, search, tel, time, url, color;
 
-[type='text']:focus, [type='password']:focus, [type='date']:focus, [type='datetime']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='week']:focus, [type='email']:focus, [type='number']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='url']:focus, [type='color']:focus, textarea:focus{
-	box-shadow: none;
+@each $type in $input-types {
+  [type='#{$type}'] {
+    box-shadow: none;
+    
+    &:focus {
+      box-shadow: none;
+    }
+  }
 }
 
 input[type=text],
@@ -15,4 +19,5 @@ input[type=email],
 input[type=password],
 textarea {
     -webkit-appearance: none;
+    appearance: none;
 }

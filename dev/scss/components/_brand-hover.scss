@@ -1,0 +1,60 @@
+.brands-content {
+    img {
+        position: relative;
+        z-index: 2;
+        transition: transform 0.3s ease;
+    }
+
+    .hover-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 1rem;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .hover-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        background-size: cover;
+        background-position: center;
+        transform: scale(0.8);
+    }
+
+    .brand-item {
+        position: relative;
+
+        @include md {
+            &:hover {
+            .hover-grid {
+                pointer-events: all;
+            }
+
+            .hover-image {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            img {
+                transform: scale(1.02);
+
+                @include lg {
+                    transform: scale(1.05);
+                }
+            }
+        }
+            
+        }
+        
+    }
+} 

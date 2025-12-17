@@ -4,33 +4,145 @@
 body {
     font-family: "Degular Mono", monospace;
 }
-.noLink a{
-    // color: var(--yellow) !important;
+
+a.no-link {
+    color: initial !important;
     text-decoration: none !important;
+    
+    &.button-text:hover {
+        color: var(--white) !important;
+    }
 }
 
-a{
-    /*CSS why are you like this*/
-    color: inherit;
+
+/* Button Text */
+.button-text {
+    font-size: 1rem; //16px
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    background-color: var(--magenta);
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {background-color: var(--key);}
+
+    @include lg {
+        color: var(--magenta);    
+        &:hover {color: var(--white)}
+        background-color: transparent;
+        &:hover {background-color: transparent;}
+        padding: .3rem .5rem .3rem .5rem;
+
+
+    }
+   
 }
 
-p {
-    font-size: 18.5px;
-    font-style: normal;
+.centered-text {
+    font-size: 1em; //16px
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    /* Adjust tracking */
+}
+
+.justified-text {
+    text-align-last: justify;
+}
+
+// Big Puzzle
+.big-puzzle,
+h1 {
+    text-align: justify;
+    text-box: trim-both cap;
+    /*https://caniuse.com/mdn-css_properties_text-box*/
+    font-size: 21.563rem; //345px
+    font-weight: 700;
+
+    // letter-spacing: 86.25px;
+    text-transform: uppercase;
+}
+
+.small-puzzle {
+    font-size: 7.2rem;
+    font-weight: 700;
+    line-height: 130%; /* 9.34375rem */
+
+    letter-spacing: 3.6rem;
+    text-transform: uppercase;
+}
+
+.semibold-32pt,
+h2 {
+    font-size: 1.25rem; //20px
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+
+    @include sm {
+        font-size: 1.5rem; //24px
+    }
+
+    @include md {
+        font-size: 2rem; //32px
+    }
+
+}
+
+.semibold-24pt,
+h3 {
+    font-size: 1.25rem; //20px
+    font-weight: 600;
+    line-height: 130%; //31.2px
+    text-transform: uppercase;
+    letter-spacing: normal;
+
+    @include md {
+        font-size: 1.5rem; //24px
+    }
+}
+
+.bold-20pt,
+h4 {
+    font-size: 1.25rem; //20px
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: 0.075rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.medium-24pt-lower,
+h5 {
+    margin: 0;
+    font-size: 1.5rem; //24px
     font-weight: 500;
-    line-height: 100%;
-    /* 18.5px */
+    line-height: 150%;
 }
 
-.welcome{
-    color: var(--key);
+.body,
+p {
+    font-family: "Degular Text", sans-serif;
+    font-size: 1rem; //16px
+    font-weight: 500;
+    line-height: 150%; //20.8px
+    margin: 0;
+    
+    &.paragraph-spacing{
+        margin-top: 0.5rem;
+    }
+    .italics{
+        font-style: italic;
+    }
 }
-.email {
-    color: var(--cyan);
+
+.txt24pt {
+    font-size: 1.5rem;
 }
-.smile{
-    color: var(--yellow);
-}
-.insta{
-    color: var(--magenta)
+
+.txtbold {
+    font-weight: 700;
 }
