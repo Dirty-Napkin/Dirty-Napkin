@@ -3,22 +3,25 @@
 ============= */
 * {
     box-sizing: border-box;
-    caret-color: transparent
 }
 
 html {
     // Set default background for blend mode to work properly
     background-color: var(--white);
-    cursor: none;
-    caret-color: transparent
+
+    @include lg {
+        cursor: none;
+    }
 }
 
 body {
     overflow-x: hidden;
     // Set default background for blend mode to work properly
     background-color: var(--white);
-    cursor: none;
-    caret-color: transparent
+
+    @include lg {
+        cursor: none;
+    }
 }
 
 ul.blank-list {

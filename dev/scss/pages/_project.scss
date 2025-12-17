@@ -5,6 +5,7 @@
 
     .hero {
         max-width: 100%;
+        overflow: hidden;
 
         @include md {
             display: grid;
@@ -21,7 +22,8 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
             position: relative;
 
             @include xl {
@@ -71,7 +73,9 @@
 
         .hero-image {
             grid-area: image;
-            width: 100vw;
+            width: 100%;
+            overflow: hidden;
+
         }
 
         .tags-frame {
@@ -143,7 +147,7 @@
             p {
                 font-family: "Degular Mono", monospace;
                 text-transform: uppercase;
-                font-size: 1.2rem; //24px
+                font-size: 1rem; //24px
                 font-weight: 400;
                 letter-spacing: 0.15rem; //2.4px
 
@@ -163,6 +167,8 @@
         gap: 1rem;
         margin-top: 120px;
         margin-bottom: 120px;
+        overflow: hidden;
+        
 
         @include lg {
             margin-top: 152px;
@@ -172,10 +178,15 @@
         h5 {
             max-width: 50ch;
             width: 100%;
+            font-size: 1rem;
             
             &:not(.no-justify) {
                 text-align: justify;
                 text-align-last: justify;
+            }
+
+            @include md {
+                font-size: 1.5rem;
             }
         }
     }
@@ -185,6 +196,7 @@
         flex-direction: column;
         gap: 40px;
         padding-bottom: 24px;
+        overflow: hidden;
 
         @include md {
             display: grid;

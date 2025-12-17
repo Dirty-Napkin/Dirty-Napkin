@@ -37,7 +37,14 @@ function updateNextProject() {
     
     const $nextProject = $('.next-project');
     $nextProject.find('a').attr('href', `${nextProject.nextPage}.html`);
-    $nextProject.find('h2').html(nextProject.nextText.split(' ').join('<br>'));
+    
+    // Only add <br> tags on desktop (md breakpoint and above, 768px+)
+    // On mobile, keep text as a single line
+    const isDesktop = window.innerWidth >= 768;
+    const formattedText = isDesktop 
+        ? nextProject.nextText.split(' ').join('<br>')
+        : nextProject.nextText;
+    $nextProject.find('h2').html(formattedText);
     
     const $projectImg = $('.next-project-img');
     $projectImg.attr('id', nextProject.nextPage);
@@ -48,5 +55,14 @@ function updateNextProject() {
 $(document).ready(() => {
     if ($('body').hasClass('project-page')) {
         updateNextProject();
+        
+        // Update on resize to handle mobile/desktop switching
+        let resizeTimeout;
+        $(window).on('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                updateNextProject();
+            }, 200);
+        });
     }
 });

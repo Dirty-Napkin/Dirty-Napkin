@@ -79,7 +79,7 @@
         </section>
 
         <section class="hero-image">
-            <div class="vimeo-video hero-image" style="--poster:url('assets/vimeo-thumbnails/a1d.png');padding:74.06% 0 0 0;">
+            <div class="vimeo-video hero-image" style="--poster:url('assets/vimeo-thumbnails/a1d.jpg');padding:74.06% 0 0 0;">
                 <iframe 
                     src="https://player.vimeo.com/video/1146807030?background=1&autoplay=1&loop=1&muted=1&controls=0" 
                     frameborder="0" 
@@ -89,7 +89,7 @@
             </div>
         </section>
 
-        <section class="share-your-story">
+        <section class="approach">
             <div class="story-title">
                 <h2>approach</h2>
             </div>
@@ -107,9 +107,33 @@
             <div class="services-bar top semibold-24pt" aria-hidden="true"></div>
             <h2 class="semibold-24pt">Services</h2>
             <!-- <div class="video-container"> -->
-                <video src="assets/about-pg/a5m_services-list.mp4" autoplay loop muted playsinline></video>
-                <video src="assets/about-pg/a5d_services-list.mp4" autoplay loop muted playsinline></video>
-                <video src="assets/about-pg/a6_puzzle-type.mp4" class="left" autoplay loop muted playsinline></video>
+                <div class="vimeo-video" id="A5M" style="--poster:url('assets/vimeo-thumbnails/a5m.png');padding:7.03% 0 0 0;">
+                    <iframe 
+                        src="https://player.vimeo.com/video/1146810957?background=1&loop=1&muted=1&controls=0" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture;" 
+                        title="a5m_services-list">
+                    </iframe>
+                </div>
+                <div class="vimeo-video-two">
+                    <div class="small-square" aria-hidden="true"></div>
+                    <div class="vimeo-video" id="A5D" style="--poster:url('assets/vimeo-thumbnails/a5d.png');padding:110% 0 0 0;">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1146810947?background=1&loop=1&muted=1&controls=0" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture;" 
+                            title="a5d_services-list">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="vimeo-video left" id="A6" style="--poster:url('assets/vimeo-thumbnails/a6.png');padding:60% 0 0 0;">
+                    <iframe 
+                        src="https://player.vimeo.com/video/1146810967?background=1&loop=1&muted=1&controls=0" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture;" 
+                        title="a6_puzzle-type">
+                    </iframe>
+                </div>
             <!-- </div> -->
             <div class="services-bar bottom semibold-24pt" aria-hidden="true"></div>
         </section>
@@ -224,6 +248,7 @@
 <script src="dev/js/home.js"></script>
 <script src="dev/js/next-project.js"></script>
 <script src="dev/js/cursor.js"></script>
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script src="dev/js/about.js"></script>
 <script src="dev/js/mobile-nav.js"></script></body>
 

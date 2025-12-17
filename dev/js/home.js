@@ -322,7 +322,7 @@ function lgHeroTextMask() {
 
     if (!textBoxes.length) return;
 
-    const startPoints = [22, 22, 32, 32];
+    const startPoints = [20, 20, 32, 32];
 
     function updateTextBoxClipPath() {
         const scrollY = window.scrollY;

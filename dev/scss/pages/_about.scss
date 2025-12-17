@@ -181,28 +181,22 @@
             padding: 0;
             width: 100%;
 
+
             @include lg {
                 margin-top: 3rem;
             }
 
-            img,
-            video {
-                display: block;
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-                margin: 0;
-                padding: 0;
+            iframe {
+                background-image: var(--poster);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
                 background-color: var(--key);
-
-                @include lg {
-                    height: 100%;
-                }
             }
         }
 
-        // ===== SHARE YOUR STORY SECTION =====
-        .share-your-story {
+        // ===== APPROACH SECTION =====
+        .approach {
             position: relative;
             padding: 4rem map-get($margins, min);
             background-color: var(--key);
@@ -228,6 +222,7 @@
 
             .small-square {
                 background-color: var(--yellow);
+                margin-bottom: 1.5rem;
 
                 @include lg {
                     grid-column: 2;
@@ -346,27 +341,35 @@
             justify-content: center;
             align-items: center;
  
-
-            video:nth-of-type(1) {
-                margin-top: 3rem;
+            .small-square {
+                background-color: var(--cyan);
+                position: absolute;
+                top: 0;
+                right: 0;
             }
 
-            video:nth-of-type(2) {
+            .vimeo-video-two { //desktop only
+                position: relative;
                 display: none;
             }
 
-            video:nth-of-type(3) {
+
+            #A5M {
+                margin-top: 3rem;
+            }
+
+            #A6 {
                 margin-top: 4rem;
                 padding: 0 1.5rem;
             }
             
             @include md {
 
-                video:nth-of-type(1) {
+                #A5M {
                     width: 50vw;
                 }
 
-                video:nth-of-type(3) {
+                #A6 {
                     width: 70vw;
                     margin-left: auto;
                     margin-right: auto;
@@ -379,22 +382,28 @@
                 min-height: 6rem;
                 padding: 0 1.5rem;
 
-                video:nth-of-type(1) {
+                .vimeo-video-two {
+                    display: block;
+                    grid-column: span 2;  
+                    width: 100%;
+                    margin-left: auto;
+                }
+
+                #A5M {
                     display: none;
                     height: auto;
                 }
     
-                video:nth-of-type(2) {
+                #A5D {
                     display: block;
-                    grid-column: span 2;
-                    height: 40%;   
-                    width: auto;
+                    grid-column: span 2;  
+                    width: 60%;
                     margin-left: auto;
                 }
     
-                video:nth-of-type(3) {
+                #A6 {
                     grid-column: span 4;
-                    height: 60vh;
+                    width: 100%;
                     margin: 8rem 0;
                 }
             }
@@ -412,10 +421,6 @@
                 padding: 0 map-get($margins, min);
                 display: flex;
                 justify-content: space-between;
-
-                &:first-of-type {
-                    background-color: red;
-                }
 
                 @include lg {
                     top: 3rem;

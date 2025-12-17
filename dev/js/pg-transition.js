@@ -22,12 +22,18 @@ function initPageTransition() {
     transitionBlock.style.opacity = '1';
     transitionBlock.style.pointerEvents = 'auto';
 
+    // Check if we're on the home page
+    const isHomePage = document.body.id === 'index' || document.querySelector('.home-container');
+
+    // Set delay based on page (600ms for home page, 300ms for others)
+    const fadeOutDelay = isHomePage ? 1400 : 300;
+
     // Fade out after page loads
     window.addEventListener('load', () => {
         setTimeout(() => {
             transitionBlock.style.opacity = '0';
             transitionBlock.style.pointerEvents = 'none';
-        }, 300); // Delay before fade out
+        }, fadeOutDelay);
     });
 
     // Also handle DOMContentLoaded for faster initial fade
@@ -36,14 +42,14 @@ function initPageTransition() {
             setTimeout(() => {
                 transitionBlock.style.opacity = '0';
                 transitionBlock.style.pointerEvents = 'none';
-            }, 300);
+            }, fadeOutDelay);
         });
     } else {
         // DOM already loaded
         setTimeout(() => {
             transitionBlock.style.opacity = '0';
             transitionBlock.style.pointerEvents = 'none';
-        }, 300);
+        }, fadeOutDelay);
     }
 
     // Intercept all internal link clicks
