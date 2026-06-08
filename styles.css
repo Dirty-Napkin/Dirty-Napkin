@@ -573,14 +573,18 @@ a.no-link.button-text:hover {
 @media (min-width: 1024px) {
   .button-text {
     color: var(--magenta);
-    background-color: transparent;
-    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   }
   .button-text:hover {
     color: var(--white);
   }
+  .button-text {
+    background-color: transparent;
+  }
   .button-text:hover {
     background-color: transparent;
+  }
+  .button-text {
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   }
 }
 
@@ -2586,6 +2590,8 @@ footer .footer-column.column3 {
     width: 19ch;
     padding-bottom: 7px;
     position: absolute;
+    bottom: x;
+    left: x;
   }
 }
 .project-page .hero .hero-image {
@@ -2768,6 +2774,7 @@ footer .footer-column.column3 {
   width: calc((100% - 80px) / 3 * 2 + 40px);
   margin: 0 auto;
   height: 100%;
+  min-height: 70vh;
   align-self: center;
 }
 @media (min-width: 768px) {
@@ -2804,10 +2811,6 @@ footer .footer-column.column3 {
 /* ===== HOME PAGE STYLES ===== */
 .home-container {
   /* ===== SMALL SQUARES GRID ===== */
-  /* ===== HERO SECTION ===== */
-  /* ===== BRANDS SECTION ===== */
-  /* ===== COLLABORATIONS SECTION ===== */
-  /* ===== TESTIMONIAL SECTION ===== */
 }
 .home-container .small-squares {
   position: absolute;
@@ -2888,6 +2891,9 @@ footer .footer-column.column3 {
   grid-row: 56;
   grid-column: 11;
 }
+.home-container {
+  /* ===== HERO SECTION ===== */
+}
 .home-container .hero-section-mobile {
   height: 240vh;
 }
@@ -2946,6 +2952,9 @@ footer .footer-column.column3 {
   .home-container .hero-section-mobile .p-parent .p-child {
     width: 75%;
   }
+}
+.home-container {
+  /* Desktop Hero Section (LG+ only) */
 }
 .home-container .hero-section-lg {
   display: none;
@@ -3038,6 +3047,9 @@ footer .footer-column.column3 {
     margin-left: -10%;
   }
 }
+.home-container {
+  /* ===== BRANDS SECTION ===== */
+}
 .home-container .brands-container {
   contain: paint;
   position: relative;
@@ -3050,14 +3062,17 @@ footer .footer-column.column3 {
 }
 @media (min-width: 768px) {
   .home-container .brands-container {
-    height: 350vh;
+    height: 350vh; /* brand-paragraphs + brand-content + translateY value from JS */
   }
 }
 @media (min-width: 1024px) {
   .home-container .brands-container {
     margin-top: -155vh;
-    height: 272rem;
+    height: 272rem; /* height of brand letters + height of brand paragraphs + height of brand images */
   }
+}
+.home-container .brands-container {
+  /* Brand Letters Grid */
 }
 .home-container .brands-container .brand-letters {
   font-size: 14rem;
@@ -3067,9 +3082,6 @@ footer .footer-column.column3 {
   display: grid;
   width: 124%;
   transform: translateY(0%);
-  grid-template-areas: "b r . " ". r a" "n d ." ". . s";
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1.75em);
 }
 @media (min-width: 1024px) {
   .home-container .brands-container .brand-letters {
@@ -3077,6 +3089,11 @@ footer .footer-column.column3 {
     font-size: 24rem;
     line-height: 1;
   }
+}
+.home-container .brands-container .brand-letters {
+  grid-template-areas: "b r . " ". r a" "n d ." ". . s";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1.75em);
 }
 @media (min-width: 768px) {
   .home-container .brands-container .brand-letters {
@@ -3090,11 +3107,6 @@ footer .footer-column.column3 {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1.25em);
   }
-}
-.home-container .brands-container .brand-letters span {
-  letter-spacing: 0rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 .home-container .brands-container .brand-letters span:nth-of-type(1) {
   grid-area: b;
@@ -3113,6 +3125,14 @@ footer .footer-column.column3 {
 }
 .home-container .brands-container .brand-letters span:nth-of-type(6) {
   grid-area: s;
+}
+.home-container .brands-container .brand-letters span {
+  letter-spacing: 0rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-container .brands-container {
+  /* Brand Paragraphs */
 }
 .home-container .brands-container .brand-paragraphs {
   padding: 0 24px;
@@ -3163,6 +3183,9 @@ footer .footer-column.column3 {
     margin: 0;
   }
 }
+.home-container .brands-container {
+  /* Grid layout for brand letters and paragraphs (LG+) */
+}
 @media (min-width: 1024px) {
   .home-container .brands-container .brand-paragraphs, .home-container .brands-container .brand-letters {
     display: grid;
@@ -3178,6 +3201,9 @@ footer .footer-column.column3 {
   .home-container .brands-container .brand-paragraphs div:nth-of-type(2), .home-container .brands-container .brand-letters div:nth-of-type(2) {
     grid-area: p2;
   }
+}
+.home-container .brands-container {
+  /* Brand Content Grid */
 }
 .home-container .brands-container .brands-content {
   padding: 0 24px 10rem;
@@ -3235,15 +3261,19 @@ footer .footer-column.column3 {
   .home-container .brands-container .brands-content .brand-item:nth-child(1) {
     grid-area: TW;
   }
+  .home-container .brands-container .brands-content .brand-item { /* The Window */ }
   .home-container .brands-container .brands-content .brand-item:nth-child(2) {
     grid-area: LS;
   }
+  .home-container .brands-container .brands-content .brand-item { /* Lemonade Stand */ }
   .home-container .brands-container .brands-content .brand-item:nth-child(3) {
     grid-area: TE;
   }
+  .home-container .brands-container .brands-content .brand-item { /* Those Eyes */ }
   .home-container .brands-container .brands-content .brand-item:nth-child(4) {
     grid-area: ASP;
   }
+  .home-container .brands-container .brands-content .brand-item { /* American Scripture Project */ }
 }
 @media (min-width: 1024px) {
   .home-container .brands-container .brands-content .brand-item {
@@ -3267,6 +3297,9 @@ footer .footer-column.column3 {
     z-index: 10;
   }
 }
+.home-container .brands-container .brands-content .brand-item {
+  /* Hide the backup images on mobile and tablet */
+}
 @media (max-width: 1023px) {
   .home-container .brands-container .brands-content .brand-item > img {
     display: none;
@@ -3284,7 +3317,7 @@ footer .footer-column.column3 {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-.home-container .brands-container .brands-content .brand-item div {
+.home-container .brands-container .brands-content .brand-item div { /* See brands button */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -3320,8 +3353,14 @@ footer .footer-column.column3 {
     padding-bottom: 3rem;
   }
 }
+.home-container {
+  /* ===== COLLABORATIONS SECTION ===== */
+}
 .home-container .collabs {
   display: none;
+}
+.home-container {
+  /* ===== TESTIMONIAL SECTION ===== */
 }
 .home-container .yellow-ketchup-section {
   position: relative;

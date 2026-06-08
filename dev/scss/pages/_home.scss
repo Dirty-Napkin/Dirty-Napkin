@@ -99,7 +99,7 @@
         }
     }
 
-    // Desktop Hero Section (LG+ only)
+    /* Desktop Hero Section (LG+ only) */
     .hero-section-lg {
         display: none;
 
@@ -214,15 +214,15 @@
         z-index: 1;
 
         @include md {
-            height: calc((80vh + 150vh + 120vh)); // brand-paragraphs + brand-content + translateY value from JS
+            height: calc((80vh + 150vh + 120vh)); /* brand-paragraphs + brand-content + translateY value from JS */
         }
 
         @include lg {
             margin-top: -155vh;
-            height: calc((96rem + 96rem + 80rem)); // height of brand letters + height of brand paragraphs + height of brand images
+            height: calc((96rem + 96rem + 80rem)); /* height of brand letters + height of brand paragraphs + height of brand images */
         }
 
-        // Brand Letters Grid
+        /* Brand Letters Grid */
         .brand-letters {
             font-size: 14rem;
             position: absolute;
@@ -276,7 +276,7 @@
             }
         }
 
-        // Brand Paragraphs
+        /* Brand Paragraphs */
         .brand-paragraphs {
             padding: 0 map-get($margins, min);
             width: 100%;
@@ -327,7 +327,7 @@
             }
         }
 
-        // Grid layout for brand letters and paragraphs (LG+)
+        /* Grid layout for brand letters and paragraphs (LG+) */
         @include lg {
             .brand-paragraphs, .brand-letters {
                 display: grid;
@@ -356,7 +356,7 @@
             }
         }
 
-        // Brand Content Grid
+        /* Brand Content Grid */
         .brands-content {
             padding: 0 map-get($margins, min) 10rem;
             width: 100%;
@@ -416,10 +416,10 @@
                     text-align: justify;
                     text-align-last: justify;
 
-                    &:nth-child(1) { grid-area: TW; }  // The Window
-                    &:nth-child(2) { grid-area: LS; }  // Lemonade Stand
-                    &:nth-child(3) { grid-area: TE; }  // Those Eyes
-                    &:nth-child(4) { grid-area: ASP; }  // American Scripture Project
+                    &:nth-child(1) { grid-area: TW; }  /* The Window */
+                    &:nth-child(2) { grid-area: LS; }  /* Lemonade Stand */
+                    &:nth-child(3) { grid-area: TE; }  /* Those Eyes */
+                    &:nth-child(4) { grid-area: ASP; }  /* American Scripture Project */
                 }
 
                 @include lg {
@@ -446,7 +446,7 @@
                         }
                     }
                 }
-                // Hide the backup images on mobile and tablet
+                /* Hide the backup images on mobile and tablet */
                 @media (max-width: 1023px) {
                     > img {
                         display: none;
@@ -466,7 +466,7 @@
                     }
                 }
 
-                div { //See brands button
+                div { /* See brands button */
                     width: 100%;
                     display: flex;
                     flex-direction: column;

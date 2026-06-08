@@ -63,8 +63,8 @@
 
                     position: absolute;
                     
-                    //bottom: x;
-                    // left: x;
+                    bottom: x;
+                    left: x;
                     // Position is determined in JS file
 
                 }
@@ -264,6 +264,7 @@
             width: calc((100% - 2 * 40px) / 3 * 2 + 40px);
             margin: 0 auto;
             height: 100%;
+            min-height: 70vh;
             align-self: center;
 
 
