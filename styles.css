@@ -2724,6 +2724,16 @@ footer .footer-column.column3 {
 .project-page .content .height2 {
   grid-row: span 2;
 }
+.project-page .content .align-bottom {
+  align-self: end;
+}
+.project-page .content .align-top-left {
+  align-self: start;
+  justify-self: start;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 48px;
+}
 .project-page .content .width2 {
   grid-column: span 2;
 }
@@ -3286,6 +3296,8 @@ footer .footer-column.column3 {
 }
 .home-container .brands-container .brands-content .brand-item img {
   width: 100%;
+  background-color: none;
+  border: 0px;
 }
 @media (min-width: 768px) {
   .home-container .brands-container .brands-content .brand-item img {

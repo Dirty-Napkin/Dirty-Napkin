@@ -52,11 +52,11 @@ function createCard(imageUrl, title, description, cardLink, mobileImageUrl = nul
 // Create multiple cards with different content
 const cardsData = [
     {
-        imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/b1m_the-window-thumbnail.jpg',
-        title: 'The Window',
-        description: "Philly's new hole in the wall",
-        cardLink: 'the-window.html'
+        imageUrl: 'assets/brands-pg/sil0d_thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/sil0m_thumbnail.jpg',
+        title: 'Sillydelphia',
+        description: 'The next generation of filmmakers',
+        cardLink: 'sillydelphia.html'
     },
     {
         imageUrl: 'assets/brands-pg/b2d_lemonade-stand-thumbnail.jpg',
@@ -68,9 +68,16 @@ const cardsData = [
     {
         imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
         mobileImageUrl: 'assets/brands-pg/b3m_those-eyes-thumbnail.jpg',
-        title: 'Those Eyes', 
+        title: 'Those Eyes',
         description: 'Prepare to be psychologically thrilled',
         cardLink: 'those-eyes.html'
+    },
+    {
+        imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b1m_the-window-thumbnail.jpg',
+        title: 'The Window',
+        description: "Philly's new hole in the wall",
+        cardLink: 'the-window.html'
     },
     {
         imageUrl: 'assets/brands-pg/b4-desktopASPthumbnail.png',

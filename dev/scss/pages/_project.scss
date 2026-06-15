@@ -211,6 +211,18 @@
             grid-row: span 2;
         }
 
+        .align-bottom {
+            align-self: end;
+        }
+
+        .align-top-left {
+            align-self: start;
+            justify-self: start;
+            margin: 0;
+            padding-left: 0;
+            padding-right: 48px;
+        }
+
         $width-spans: (
             width2: 2,
             width3: 3,

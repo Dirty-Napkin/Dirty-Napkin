@@ -433,7 +433,8 @@
 
                 img {
                     width: 100%;
-
+                    background-color: none;
+                    border: 0px;
                     
 
                     @include md {
