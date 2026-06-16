@@ -21,13 +21,15 @@ shows while iframe is inactive.
             var label = getLabel(iframe);
 
             if (entry.isIntersecting) {
-                if (!iframe.src) {
+                if (!iframe.dataset.active) {
                     iframe.src = iframe.dataset.src;
+                    iframe.dataset.active = '1';
                     console.log('[vimeo] LOAD: ' + label);
                 }
             } else {
-                if (iframe.src) {
-                    iframe.src = '';
+                if (iframe.dataset.active) {
+                    iframe.removeAttribute('src');
+                    delete iframe.dataset.active;
                     console.log('[vimeo] UNLOAD: ' + label);
                 }
             }
