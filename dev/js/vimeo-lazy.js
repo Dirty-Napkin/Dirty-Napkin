@@ -6,32 +6,35 @@ activating iframes near the viewport. Poster image (via CSS --poster)
 shows while iframe is inactive.
 -----------------*/
 (function () {
-    const LOAD_MARGIN = '400px';
-    const UNLOAD_MARGIN = '600px';
+    const MARGIN = '500px';
 
     const iframes = document.querySelectorAll('.vimeo-video iframe[data-src]');
     if (!iframes.length) return;
 
-    const loadObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            const iframe = entry.target;
-            if (entry.isIntersecting && !iframe.src) {
-                iframe.src = iframe.dataset.src;
-            }
-        });
-    }, { rootMargin: LOAD_MARGIN });
+    function getLabel(iframe) {
+        return iframe.title || iframe.closest('.vimeo-video')?.id || 'unknown';
+    }
 
-    const unloadObserver = new IntersectionObserver(function (entries) {
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-            const iframe = entry.target;
-            if (!entry.isIntersecting && iframe.src) {
-                iframe.src = '';
+            var iframe = entry.target;
+            var label = getLabel(iframe);
+
+            if (entry.isIntersecting) {
+                if (!iframe.src) {
+                    iframe.src = iframe.dataset.src;
+                    console.log('[vimeo] LOAD: ' + label);
+                }
+            } else {
+                if (iframe.src) {
+                    iframe.src = '';
+                    console.log('[vimeo] UNLOAD: ' + label);
+                }
             }
         });
-    }, { rootMargin: UNLOAD_MARGIN });
+    }, { rootMargin: MARGIN });
 
     iframes.forEach(function (iframe) {
-        loadObserver.observe(iframe);
-        unloadObserver.observe(iframe);
+        observer.observe(iframe);
     });
 })();
