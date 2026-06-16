@@ -1,19 +1,26 @@
 // Lazy-load project page Vimeo background videos.
-// Inject iframe src only when near viewport, pause (don't unload) when off-screen.
+// Load when within 1 viewport, unload when outside that zone.
+// Mobile: cap at 3 loaded iframes to stay within Safari memory limits.
 
 (function () {
     if (!document.querySelector('.project-page')) return;
 
     var DEBUG = /[?&]videoDebug=1(?:&|$)/.test(location.search);
     var PRELOAD_MARGIN = '100% 0px 100% 0px';
+    var MOBILE_MAX_LOADED = 3;
     var MAX_PLAYER_RETRIES = 50;
     var RETRY_DELAY_MS = 250;
     var IFRAME_READY_FALLBACK_MS = 1500;
+    var mdQuery = window.matchMedia('(min-width: 768px)');
 
     var containers = document.querySelectorAll('.project-page .vimeo-video');
     if (!containers.length) return;
 
     var entries = [];
+
+    function isMobile() {
+        return !mdQuery.matches;
+    }
 
     function log() {
         if (!DEBUG) return;
@@ -33,10 +40,53 @@
         return null;
     }
 
+    function getLoadedEntries() {
+        return entries.filter(function (entry) {
+            return !!entry.iframe.src;
+        });
+    }
+
     function wait(ms) {
         return new Promise(function (resolve) {
             setTimeout(resolve, ms);
         });
+    }
+
+    function resetPlayerState(entry) {
+        entry.player = null;
+        entry.playerReady = false;
+        entry.initPromise = null;
+        entry.iframeReady = false;
+        entry.iframeReadyPromise = null;
+        entry.loadedAt = null;
+    }
+
+    function pickEvictionCandidate(excludeEntry) {
+        var loaded = getLoadedEntries().filter(function (entry) {
+            return entry !== excludeEntry;
+        });
+        if (!loaded.length) return null;
+
+        var inactive = loaded.filter(function (entry) {
+            return !entry.shouldPlay;
+        });
+        var pool = inactive.length ? inactive : loaded;
+
+        pool.sort(function (a, b) {
+            return (a.loadedAt || 0) - (b.loadedAt || 0);
+        });
+
+        return pool[0];
+    }
+
+    function enforceMobileLoadCap(excludeEntry) {
+        if (!isMobile()) return;
+
+        while (getLoadedEntries().length >= MOBILE_MAX_LOADED) {
+            var victim = pickEvictionCandidate(excludeEntry);
+            if (!victim) break;
+            unloadVideo(victim.container, 'mobile-cap');
+        }
     }
 
     function waitForIframe(entry) {
@@ -134,7 +184,6 @@
                     setStatus(container, 'playing');
                     log('play', container.id);
                 }).catch(function (err) {
-                    // background=1 may already be playing even if API play() rejects
                     setStatus(container, 'native-autoplay');
                     log('play failed, using background autoplay', container.id, err);
                 });
@@ -158,6 +207,30 @@
         });
     }
 
+    function unloadVideo(container, reason) {
+        var entry = findEntry(container);
+        if (!entry || !entry.iframe.src) {
+            entry && setStatus(container, 'pending');
+            return;
+        }
+
+        entry.shouldPlay = false;
+
+        function finishUnload() {
+            resetPlayerState(entry);
+            entry.iframe.removeAttribute('src');
+            setStatus(container, 'pending');
+            log('unload', container.id, reason || 'off-screen');
+        }
+
+        if (entry.playerReady && entry.player) {
+            entry.player.pause().catch(function () {}).then(finishUnload);
+            return;
+        }
+
+        finishUnload();
+    }
+
     function playVideo(container) {
         var entry = findEntry(container);
         if (!entry) return;
@@ -166,35 +239,18 @@
 
         var src = entry.iframe.getAttribute('data-src');
         if (!entry.iframe.src && src) {
+            enforceMobileLoadCap(entry);
             setStatus(container, 'loading');
             log('load', container.id || src);
             entry.iframeReady = false;
             entry.iframeReadyPromise = null;
+            entry.loadedAt = Date.now();
             entry.iframe.src = src;
         }
 
         if (entry.iframe.src) {
             syncPlayback(container);
         }
-    }
-
-    function pauseVideo(container) {
-        var entry = findEntry(container);
-        if (!entry) return;
-
-        entry.shouldPlay = false;
-
-        if (!entry.iframe.src) {
-            setStatus(container, 'pending');
-            return;
-        }
-
-        if (!entry.playerReady) {
-            setStatus(container, 'paused');
-            return;
-        }
-
-        syncPlayback(container);
     }
 
     containers.forEach(function (container) {
@@ -215,6 +271,7 @@
             initPromise: null,
             iframeReady: false,
             iframeReadyPromise: null,
+            loadedAt: null,
             shouldPlay: false
         });
 
@@ -226,7 +283,7 @@
             if (record.isIntersecting) {
                 playVideo(record.target);
             } else {
-                pauseVideo(record.target);
+                unloadVideo(record.target, 'off-screen');
             }
         });
     }, {
@@ -262,6 +319,6 @@
             '.vimeo-video[data-video-status="init-failed"]::after { background: rgba(160, 0, 0, 0.85); }'
         ].join('');
         document.head.appendChild(style);
-        log('debug mode on —', containers.length, 'videos tracked');
+        log('debug mode on —', containers.length, 'videos tracked', isMobile() ? '(mobile cap: ' + MOBILE_MAX_LOADED + ')' : '(desktop, no cap)');
     }
 })();
