@@ -1,7 +1,5 @@
 // Lazy-load project page Vimeo background videos.
-// Only inject iframe src when a video is near the viewport so mobile browsers
-// aren't asked to autoplay a dozen players at once. background=1 handles mute +
-// autoplay natively once the iframe loads — no Vimeo API play() needed.
+// Inject iframe src only when near viewport, pause (don't unload) when off-screen.
 
 (function () {
     if (!document.querySelector('.project-page')) return;
@@ -11,6 +9,8 @@
 
     var containers = document.querySelectorAll('.project-page .vimeo-video');
     if (!containers.length) return;
+
+    var entries = [];
 
     function log() {
         if (!DEBUG) return;
@@ -23,31 +23,88 @@
         container.setAttribute('data-video-status', status);
     }
 
-    function loadVideo(container) {
-        var iframe = container.querySelector('iframe');
-        if (!iframe) return;
-
-        var src = iframe.getAttribute('data-src');
-        if (!src || iframe.src) return;
-
-        log('load', container.id || src);
-        setStatus(container, 'loading');
-        iframe.src = src;
-
-        iframe.addEventListener('load', function onLoad() {
-            iframe.removeEventListener('load', onLoad);
-            setStatus(container, 'loaded');
-            log('loaded', container.id || src);
-        });
+    function findEntry(container) {
+        for (var i = 0; i < entries.length; i++) {
+            if (entries[i].container === container) return entries[i];
+        }
+        return null;
     }
 
-    function unloadVideo(container) {
-        var iframe = container.querySelector('iframe');
-        if (!iframe || !iframe.src) return;
+    function ensurePlayer(entry) {
+        if (entry.playerReady) {
+            return Promise.resolve(entry.player);
+        }
+        if (entry.playerPromise) {
+            return entry.playerPromise;
+        }
+        if (typeof Vimeo === 'undefined') {
+            return Promise.reject(new Error('Vimeo API not loaded'));
+        }
 
-        log('unload', container.id || iframe.getAttribute('data-src'));
-        iframe.removeAttribute('src');
-        setStatus(container, 'pending');
+        entry.playerPromise = new Vimeo.Player(entry.iframe).ready().then(function (player) {
+            entry.player = player;
+            entry.playerReady = true;
+            player.setMuted(true);
+            return player;
+        });
+
+        return entry.playerPromise;
+    }
+
+    function playVideo(container) {
+        var entry = findEntry(container);
+        if (!entry) return;
+
+        entry.shouldPlay = true;
+
+        function startPlayback() {
+            ensurePlayer(entry).then(function (player) {
+                if (!entry.shouldPlay) {
+                    player.pause().catch(function () {});
+                    setStatus(container, 'paused');
+                    return;
+                }
+                player.play().then(function () {
+                    setStatus(container, 'playing');
+                    log('play', container.id);
+                }).catch(function (err) {
+                    setStatus(container, 'play-failed');
+                    log('play failed', container.id, err);
+                });
+            }).catch(function (err) {
+                log('player init failed', container.id, err);
+            });
+        }
+
+        var src = entry.iframe.getAttribute('data-src');
+        if (!entry.iframe.src && src) {
+            setStatus(container, 'loading');
+            log('load', container.id || src);
+            entry.iframe.src = src;
+            entry.iframe.addEventListener('load', function onLoad() {
+                entry.iframe.removeEventListener('load', onLoad);
+                startPlayback();
+            });
+            return;
+        }
+
+        if (entry.iframe.src) {
+            startPlayback();
+        }
+    }
+
+    function pauseVideo(container) {
+        var entry = findEntry(container);
+        if (!entry) return;
+
+        entry.shouldPlay = false;
+
+        if (!entry.playerReady || !entry.player) return;
+
+        entry.player.pause().then(function () {
+            setStatus(container, 'paused');
+            log('pause', container.id);
+        }).catch(function () {});
     }
 
     containers.forEach(function (container) {
@@ -60,15 +117,24 @@
             iframe.removeAttribute('src');
         }
 
+        entries.push({
+            container: container,
+            iframe: iframe,
+            player: null,
+            playerReady: false,
+            playerPromise: null,
+            shouldPlay: false
+        });
+
         setStatus(container, 'pending');
     });
 
     var observer = new IntersectionObserver(function (records) {
         records.forEach(function (record) {
             if (record.isIntersecting) {
-                loadVideo(record.target);
+                playVideo(record.target);
             } else {
-                unloadVideo(record.target);
+                pauseVideo(record.target);
             }
         });
     }, {
@@ -96,8 +162,9 @@
             '  font: 11px/1.2 monospace;',
             '  pointer-events: none;',
             '}',
-            '.vimeo-video[data-video-status="loaded"]::after { background: rgba(0, 128, 0, 0.85); }',
-            '.vimeo-video[data-video-status="loading"]::after { background: rgba(200, 128, 0, 0.85); }'
+            '.vimeo-video[data-video-status="playing"]::after { background: rgba(0, 128, 0, 0.85); }',
+            '.vimeo-video[data-video-status="loading"]::after { background: rgba(200, 128, 0, 0.85); }',
+            '.vimeo-video[data-video-status="paused"]::after { background: rgba(80, 80, 80, 0.85); }'
         ].join('');
         document.head.appendChild(style);
         log('debug mode on —', containers.length, 'videos tracked');
