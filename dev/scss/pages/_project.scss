@@ -3,6 +3,16 @@
 ============= */
 .project-page {
 
+    // Body copy links: keep underline, don't invert to white on hover
+    p a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--magenta);
+            text-decoration: none;
+        }
+    }
+
     .hero {
         max-width: 100%;
         overflow: hidden;

@@ -202,6 +202,66 @@ function setupCustomLayouts(element) {
             ];
         }
     }
+
+    if (text.includes('Clean Up Your Mind')) {
+        // Check for small screen breakpoint (below 430px)
+        const smBreakpoint = window.matchMedia("(min-width: 430px)");
+        const isSmallScreen = !smBreakpoint.matches;
+
+        if (isSmallScreen) {
+            // Small screen layout: Each word on its own line
+            // Grid: 17 columns x 4 rows (0-16 cols, 0-3 rows, row 3 is bottom)
+            element.customLayout = [
+                // "Clean" - Row 0 (top row)
+                {letterIndex: 0, row: 0, col: 0},   // C
+                {letterIndex: 1, row: 0, col: 1},   // l
+                {letterIndex: 2, row: 0, col: 2},   // e
+                {letterIndex: 3, row: 0, col: 3},   // a
+                {letterIndex: 4, row: 0, col: 4},   // n
+                {letterIndex: 5, row: 0, col: 5},   // (space)
+                // "Up" - Row 1
+                {letterIndex: 6, row: 1, col: 0},   // U
+                {letterIndex: 7, row: 1, col: 1},   // p
+                {letterIndex: 8, row: 1, col: 2},   // (space)
+                // "Your" - Row 2
+                {letterIndex: 9, row: 2, col: 0},   // Y
+                {letterIndex: 10, row: 2, col: 1},  // o
+                {letterIndex: 11, row: 2, col: 2},  // u
+                {letterIndex: 12, row: 2, col: 3},  // r
+                {letterIndex: 13, row: 2, col: 4},  // (space)
+                // "Mind" - Row 3 (bottom)
+                {letterIndex: 14, row: 3, col: 0},  // M
+                {letterIndex: 15, row: 3, col: 1},  // i
+                {letterIndex: 16, row: 3, col: 2},  // n
+                {letterIndex: 17, row: 3, col: 3},  // d
+            ];
+        } else {
+            // Default layout: Desktop/tablet
+            // Grid: 17 columns x 4 rows (0-16 cols, 0-3 rows, row 3 is bottom)
+            element.customLayout = [
+                // "Clean Up" - Row 2 (second line)
+                {letterIndex: 0, row: 2, col: 0},   // C
+                {letterIndex: 1, row: 2, col: 1},   // l
+                {letterIndex: 2, row: 2, col: 2},   // e
+                {letterIndex: 3, row: 2, col: 3},   // a
+                {letterIndex: 4, row: 2, col: 4},   // n
+                {letterIndex: 5, row: 2, col: 5},   // (space)
+                {letterIndex: 6, row: 2, col: 6},   // U
+                {letterIndex: 7, row: 2, col: 7},   // p
+                {letterIndex: 8, row: 2, col: 8},   // (space)
+                // "Your Mind" - Row 3 (bottom)
+                {letterIndex: 9, row: 3, col: 0},   // Y
+                {letterIndex: 10, row: 3, col: 1},  // o
+                {letterIndex: 11, row: 3, col: 2},  // u
+                {letterIndex: 12, row: 3, col: 3},  // r
+                {letterIndex: 13, row: 3, col: 4},  // (space)
+                {letterIndex: 14, row: 3, col: 5},  // M
+                {letterIndex: 15, row: 3, col: 6},  // i
+                {letterIndex: 16, row: 3, col: 7},  // n
+                {letterIndex: 17, row: 3, col: 8},  // d
+            ];
+        }
+    }
 }
 
 /*---Create custom layout based on "setupCustomLayouts" ---*/

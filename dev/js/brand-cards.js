@@ -66,11 +66,10 @@ const cardsData = [
         cardLink: 'lemonade-stand.html'
     },
     {
-        imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/b3m_those-eyes-thumbnail.jpg',
-        title: 'Those Eyes',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'those-eyes.html'
+        imageUrl: 'assets/project-pages/CLE/b3-cleanupyourmind-thumbnail.jpg',
+        title: 'Clean Up Your Mind',
+        description: 'Album from the archives',
+        cardLink: 'clean-up-your-mind.html'
     },
     {
         imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
@@ -78,6 +77,13 @@ const cardsData = [
         title: 'The Window',
         description: "Philly's new hole in the wall",
         cardLink: 'the-window.html'
+    },
+    {
+        imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b3m_those-eyes-thumbnail.jpg',
+        title: 'Those Eyes',
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'those-eyes.html'
     },
     {
         imageUrl: 'assets/brands-pg/b4-desktopASPthumbnail.png',

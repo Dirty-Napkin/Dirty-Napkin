@@ -2538,6 +2538,13 @@ footer .footer-column.column3 {
 /* =============
     Project Pages
 ============= */
+.project-page p a {
+  text-decoration: underline;
+}
+.project-page p a:hover {
+  color: var(--magenta);
+  text-decoration: none;
+}
 .project-page .hero {
   max-width: 100%;
   overflow: hidden;
