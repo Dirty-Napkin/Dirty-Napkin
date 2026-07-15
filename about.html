@@ -25,6 +25,7 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
     <!-- End Favicon -->
     <title>Dirty Napkin | About</title>
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
 </head>
 <body id="about-page" class="background-transition">
 <!--Header-->
@@ -81,7 +82,7 @@
         <section class="hero-image">
             <div class="vimeo-video hero-image" style="--poster:url('assets/vimeo-thumbnails/a1d.jpg');padding:74.06% 0 0 0;">
                 <iframe 
-                    src="https://player.vimeo.com/video/1146807030?background=1&autoplay=1&loop=1&muted=1&controls=0&min_quality=480p" 
+                    data-src="https://player.vimeo.com/video/1146807030?background=1&autoplay=1&loop=1&muted=1&controls=0" 
                     frameborder="0" 
                     allow="autoplay; fullscreen; picture-in-picture;" 
                     title="A1D_team-photo">
@@ -109,7 +110,7 @@
             <!-- <div class="video-container"> -->
                 <div class="vimeo-video" id="A5M" style="--poster:url('assets/vimeo-thumbnails/a5m.png');padding:7.03% 0 0 0;">
                     <iframe 
-                        src="https://player.vimeo.com/video/1146810957?background=1&loop=1&muted=1&controls=0&min_quality=480p" 
+                        data-src="https://player.vimeo.com/video/1146810957?background=1&loop=1&muted=1&controls=0" 
                         frameborder="0" 
                         allow="autoplay; fullscreen; picture-in-picture;" 
                         title="a5m_services-list">
@@ -119,7 +120,7 @@
                     <div class="small-square" aria-hidden="true"></div>
                     <div class="vimeo-video" id="A5D" style="--poster:url('assets/vimeo-thumbnails/a5d.png');padding:110% 0 0 0;">
                         <iframe 
-                            src="https://player.vimeo.com/video/1146810947?background=1&loop=1&muted=1&controls=0&min_quality=480p" 
+                            data-src="https://player.vimeo.com/video/1146810947?background=1&loop=1&muted=1&controls=0" 
                             frameborder="0" 
                             allow="autoplay; fullscreen; picture-in-picture;" 
                             title="a5d_services-list">
@@ -128,7 +129,7 @@
                 </div>
                 <div class="vimeo-video left" id="A6" style="--poster:url('assets/vimeo-thumbnails/a6.png');padding:60% 0 0 0;">
                     <iframe 
-                        src="https://player.vimeo.com/video/1146810967?background=1&loop=1&muted=1&controls=0&min_quality=480p" 
+                        data-src="https://player.vimeo.com/video/1146810967?background=1&loop=1&muted=1&controls=0" 
                         frameborder="0" 
                         allow="autoplay; fullscreen; picture-in-picture;" 
                         title="a6_puzzle-type">
@@ -246,7 +247,7 @@
 <script src="dev/js/next-project.js"></script>
 <script src="dev/js/cursor.js"></script>
 <script src="https://player.vimeo.com/api/player.js"></script>
-<script src="dev/js/project-videos.js"></script>
+<script src="dev/js/vimeo-lazy.js"></script>
 <script src="dev/js/about.js"></script>
 <script src="dev/js/mobile-nav.js"></script></body>
 

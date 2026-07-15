@@ -1,12 +1,24 @@
 const data = [
     {
-        currentPage: "the-window",
+        currentPage: "sillydelphia",
         nextPage: "lemonade-stand",
         nextText: "The Lemonade Stand",
         nextImg: "assets/company-pages/h3_lemonade-stand-thumbnail.jpg"
     },
     {
         currentPage: "lemonade-stand",
+        nextPage: "clean-up-your-mind",
+        nextText: "Clean Up Your Mind",
+        nextImg: "assets/home-pg/brands/CLE/CLE-a_thumb.jpg"
+    },
+    {
+        currentPage: "clean-up-your-mind",
+        nextPage: "the-window",
+        nextText: "The Window",
+        nextImg: "assets/company-pages/h2_the-window-thumbnail.jpg"
+    },
+    {
+        currentPage: "the-window",
         nextPage: "those-eyes",
         nextText: "Those Eyes",
         nextImg: "assets/company-pages/h4_those-eyes-thumbnail.jpg"
@@ -19,9 +31,9 @@ const data = [
     },
     {
         currentPage: "american-scripture-project",
-        nextPage: "the-window",
-        nextText: "The Window",
-        nextImg: "assets/company-pages/h2_the-window-thumbnail.jpg"
+        nextPage: "sillydelphia",
+        nextText: "Sillydelphia",
+        nextImg: "assets/brands-pg/sil0d_thumbnail.jpg"
     }
 ];
 

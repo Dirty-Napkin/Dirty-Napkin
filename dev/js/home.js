@@ -9,7 +9,7 @@ const lgQuery = window.matchMedia('(min-width: 1080px)');
 const BRAND_CUSTOM_POSITIONS = {
     'the-window': [7, 8, 14, 15, 17, 19, 18],
     'lemonade-stand': [8, 11, 14, 17, 19, 12],
-    'those-eyes': [7, 11, 12, 19, 22, 18],
+    'clean-up-your-mind': [7, 11, 12, 19, 22, 18],
     'branded-moments': [13, 14, 15, 16, 20],
     'sillydelphia': [8, 10, 14, 19, 20, 18]
 };

@@ -25,6 +25,7 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
     <!-- End Favicon -->
     <title>Dirty Napkin | Home</title>
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
 </head>
 <body id="index">
 <!--Header-->
@@ -82,7 +83,7 @@
                 <div class="ketchup-parent">
                     <div class="vimeo-video" id="K1" style="--poster:url('assets/vimeo-thumbnails/k1.jpg');">
                         <iframe 
-                            src="https://player.vimeo.com/video/1146806425?background=1&autoplay=1&loop=1&muted=1&controls=0&min_quality=480p" 
+                            data-src="https://player.vimeo.com/video/1146806425?background=1&autoplay=1&loop=1&muted=1&controls=0" 
                             frameborder="0" 
                             allow="autoplay; fullscreen; picture-in-picture;" 
                             title="ketchup-video">
@@ -125,7 +126,7 @@
                 <div class="ketchup-parent">
                     <div class="vimeo-video" id="K1" style="--poster:url('assets/vimeo-thumbnails/k1.jpg');">
                         <iframe 
-                            src="https://player.vimeo.com/video/1146806425?background=1&autoplay=1&loop=1&muted=1&controls=0&min_quality=480p" 
+                            data-src="https://player.vimeo.com/video/1146806425?background=1&autoplay=1&loop=1&muted=1&controls=0" 
                             frameborder="0" 
                             allow="autoplay; fullscreen; picture-in-picture;" 
                             title="ketchup-video">
@@ -189,15 +190,15 @@
                     </article>
                     
                     <article class="brand-item hover-style-two">
-                        <a href="those-eyes.html"><img src="assets/home-pg/brands/H4-4_logo-mobile.jpg" alt="Those Eyes project" class="those-eyes" id="H3" /></a>
-                        <img src="assets/home-pg/brands/H4-1_eye.jpg" alt="" class="those-eyes more-info" id="H4-1" />
-                        <img src="assets/home-pg/brands/H4-2_logo-crop-01.jpg" alt="" class="those-eyes more-info" id="H4-2" />
-                        <img src="assets/home-pg/brands/H4-3_collage.jpg" alt="" class="those-eyes more-info" id="H4-3" />
-                        <img src="assets/home-pg/brands/H4-5_logo-crop-02.jpg" alt="" class="those-eyes more-info" id="H4-5" />
-                        <img src="assets/home-pg/brands/H4-6_logo-crop-03.jpg" alt="" class="those-eyes more-info" id="H4-6" />
+                        <a href="clean-up-your-mind.html"><img src="assets/home-pg/brands/CLE/CLE-a_thumb.jpg" alt="Clean Up Your Mind project" class="clean-up-your-mind" id="H3" /></a>
+                        <img src="assets/home-pg/brands/CLE/CLE-b_thumb.jpg" alt="" class="clean-up-your-mind more-info" id="H4-1" />
+                        <img src="assets/home-pg/brands/CLE/CLE-c_thumb.jpg" alt="" class="clean-up-your-mind more-info" id="H4-2" />
+                        <img src="assets/home-pg/brands/CLE/CLE-d_thumb.jpg" alt="" class="clean-up-your-mind more-info" id="H4-3" />
+                        <img src="assets/home-pg/brands/CLE/CLE-e_thumb.jpg" alt="" class="clean-up-your-mind more-info" id="H4-5" />
+                        <img src="assets/home-pg/brands/CLE/CLE-f_thumb.jpg" alt="" class="clean-up-your-mind more-info" id="H4-6" />
                         <div>
-                            <h3>Those Eyes</h3>
-                            <p class="body">Prepare to be psychologically thrilled</p>
+                            <h3>Clean Up Your Mind</h3>
+                            <p class="body">Album from the archives</p>
                         </div>
                     </article>
                     
@@ -341,7 +342,7 @@
 <script src="dev/js/next-project.js"></script>
 <script src="dev/js/cursor.js"></script>
 <script src="https://player.vimeo.com/api/player.js"></script>
-<script src="dev/js/project-videos.js"></script>
+<script src="dev/js/vimeo-lazy.js"></script>
 <script src="dev/js/about.js"></script>
 <script src="dev/js/mobile-nav.js"></script></body>
 
