@@ -1,9 +1,16 @@
+// Strip .html only on production domains so local Prepros preview keeps working
+function cleanUrl(link) {
+    const host = window.location.hostname;
+    const isProd = /(^|\.)dirtynapkin\.co$/.test(host) || host.endsWith('.netlify.app');
+    return isProd ? link.replace(/\.html(?=$|[?#])/, '') : link;
+}
+
 // Function to create a card component on the BRANDS page
 function createCard(imageUrl, title, description, cardLink, mobileImageUrl = null) {
     // Create the main card container
     const card = document.createElement('a');
     card.className = 'brand-card hover-style-two';
-    card.href = cardLink;
+    card.href = cleanUrl(cardLink);
 
 
     // Create the image container

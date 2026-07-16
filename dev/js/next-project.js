@@ -48,7 +48,7 @@ function updateNextProject() {
     }
     
     const $nextProject = $('.next-project');
-    $nextProject.find('a').attr('href', `${nextProject.nextPage}.html`);
+    $nextProject.find('a').attr('href', cleanUrl(`${nextProject.nextPage}.html`));
     
     // Only add <br> tags on desktop (md breakpoint and above, 768px+)
     // On mobile, keep text as a single line
