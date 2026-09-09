@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let cursor = null;
         let mousemoveHandler = null;
         let hoverDelegationAttached = false;
+        let interactiveFrames = [];
+        let frameRecoveryHandler = null;
+        let activeFrame = null;
 
         /**
          * Creates the custom cursor element and sets up mouse tracking
@@ -28,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
             // Initialize hover interaction handlers
             setupHoverInteractions();
+            setupInteractiveFrames();
         }
 
         /**
@@ -44,6 +48,74 @@ document.addEventListener("DOMContentLoaded", function () {
             if (mousemoveHandler) {
                 document.removeEventListener("mousemove", mousemoveHandler);
                 mousemoveHandler = null;
+            }
+            
+            teardownInteractiveFrames();
+        }
+
+        /**
+         * Cross-origin iframes (Vimeo's player) swallow all mouse events, so the
+         * custom cursor freezes at the edge as soon as the pointer moves inside one.
+         * The pointer position can't be read from another origin, so instead hide the
+         * custom cursor over any iframe that accepts pointer events and let the
+         * player's own cursor take over for its controls.
+         */
+        function hideCursorForFrame(e) {
+            if (!cursor) return;
+            activeFrame = e.currentTarget;
+            cursor.style.opacity = "0";
+        }
+
+        function showCursorForFrame(e) {
+            if (!cursor) return;
+            activeFrame = null;
+            // Reposition before revealing so it doesn't flash at a stale spot
+            if (e) {
+                cursor.style.left = e.clientX + "px";
+                cursor.style.top = e.clientY + "px";
+            }
+            cursor.style.opacity = "";
+        }
+
+        function setupInteractiveFrames() {
+            if (interactiveFrames.length) return;
+
+            document.querySelectorAll("iframe").forEach(function (frame) {
+                // Only frames that actually capture the pointer steal the cursor
+                if (getComputedStyle(frame).pointerEvents === "none") return;
+
+                frame.addEventListener("mouseenter", hideCursorForFrame);
+                frame.addEventListener("mouseleave", showCursorForFrame);
+                interactiveFrames.push(frame);
+            });
+
+            if (!interactiveFrames.length || frameRecoveryHandler) return;
+
+            // Safety net for fast exits where mouseleave never fires: a mousemove
+            // outside the frame's box means the pointer is back in our document
+            frameRecoveryHandler = function (e) {
+                if (!activeFrame) return;
+
+                const rect = activeFrame.getBoundingClientRect();
+                const inside = e.clientX >= rect.left && e.clientX <= rect.right &&
+                               e.clientY >= rect.top && e.clientY <= rect.bottom;
+
+                if (!inside) showCursorForFrame(e);
+            };
+            document.addEventListener("mousemove", frameRecoveryHandler);
+        }
+
+        function teardownInteractiveFrames() {
+            interactiveFrames.forEach(function (frame) {
+                frame.removeEventListener("mouseenter", hideCursorForFrame);
+                frame.removeEventListener("mouseleave", showCursorForFrame);
+            });
+            interactiveFrames = [];
+            activeFrame = null;
+
+            if (frameRecoveryHandler) {
+                document.removeEventListener("mousemove", frameRecoveryHandler);
+                frameRecoveryHandler = null;
             }
         }
 

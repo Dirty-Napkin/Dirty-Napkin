@@ -7,18 +7,24 @@ const data = [
     },
     {
         currentPage: "lemonade-stand",
-        nextPage: "clean-up-your-mind",
-        nextText: "Clean Up Your Mind",
-        nextImg: "assets/home-pg/brands/CLE/CLE-a_thumb.jpg"
+        nextPage: "oligo-space",
+        nextText: "Oligo Space",
+        nextImg: "assets/home-pg/brands/OLI/oli-a_thumb.jpg"
     },
     {
-        currentPage: "clean-up-your-mind",
+        currentPage: "oligo-space",
         nextPage: "the-window",
         nextText: "The Window",
         nextImg: "assets/company-pages/h2_the-window-thumbnail.jpg"
     },
     {
         currentPage: "the-window",
+        nextPage: "clean-up-your-mind",
+        nextText: "Clean Up Your Mind",
+        nextImg: "assets/home-pg/brands/CLE/CLE-a_thumb.jpg"
+    },
+    {
+        currentPage: "clean-up-your-mind",
         nextPage: "those-eyes",
         nextText: "Those Eyes",
         nextImg: "assets/company-pages/h4_those-eyes-thumbnail.jpg"
