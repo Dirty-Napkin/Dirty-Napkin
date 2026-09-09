@@ -59,6 +59,13 @@ function createCard(imageUrl, title, description, cardLink, mobileImageUrl = nul
 // Create multiple cards with different content
 const cardsData = [
     {
+        imageUrl: 'assets/brands-pg/oli0d_thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/oli0m_thumbnail.jpg',
+        title: 'Oligo Space',
+        description: 'Bringing wonder back to space',
+        cardLink: 'oligo-space.html'
+    },
+    {
         imageUrl: 'assets/brands-pg/sil0d_thumbnail.jpg',
         mobileImageUrl: 'assets/brands-pg/sil0m_thumbnail.jpg',
         title: 'Sillydelphia',
