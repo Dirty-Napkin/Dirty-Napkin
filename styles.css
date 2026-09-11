@@ -459,6 +459,10 @@ video {
 .vimeo-video {
   width: 100%;
   position: relative;
+  /* The padding-top aspect ratio only holds if the box is not stretched by a
+     taller neighbor in the grid row, which would crop the poster and letterbox
+     the video inside it. */
+  align-self: start;
   background-image: var(--poster);
   background-size: cover;
   background-position: center;
