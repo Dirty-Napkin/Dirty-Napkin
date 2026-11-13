@@ -1,6 +1,12 @@
 const data = [
     {
         currentPage: "sillydelphia",
+        nextPage: "wild-horizon",
+        nextText: "Wild Horizon",
+        nextImg: "assets/project-pages/WIL/WIL0_desktop.jpg"
+    },
+    {
+        currentPage: "wild-horizon",
         nextPage: "lemonade-stand",
         nextText: "The Lemonade Stand",
         nextImg: "assets/company-pages/h3_lemonade-stand-thumbnail.jpg"

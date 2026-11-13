@@ -59,6 +59,13 @@ function createCard(imageUrl, title, description, cardLink, mobileImageUrl = nul
 // Create multiple cards with different content
 const cardsData = [
     {
+        imageUrl: 'assets/project-pages/WIL/WIL0_desktop.jpg',
+        mobileImageUrl: 'assets/project-pages/WIL/WIL0_mobile.jpg',
+        title: 'Wild Horizon',
+        description: 'The wondrous circus festival',
+        cardLink: 'wild-horizon.html'
+    },
+    {
         imageUrl: 'assets/brands-pg/oli0d_thumbnail.jpg',
         mobileImageUrl: 'assets/brands-pg/oli0m_thumbnail.jpg',
         title: 'Oligo Space',
