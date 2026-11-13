@@ -204,7 +204,7 @@
     .content {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 72px 40px; // 72px vertical between rows, 40px between columns
         padding-bottom: 24px;
         overflow: hidden;
 

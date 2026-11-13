@@ -2719,7 +2719,7 @@ footer .footer-column.column3 {
 .project-page .content {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 72px 40px;
   padding-bottom: 24px;
   overflow: hidden;
 }
