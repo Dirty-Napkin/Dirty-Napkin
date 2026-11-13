@@ -59,6 +59,13 @@ function createCard(imageUrl, title, description, cardLink, mobileImageUrl = nul
 // Create multiple cards with different content
 const cardsData = [
     {
+        imageUrl: 'assets/brands-pg/oli0d_thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/oli0m_thumbnail.jpg',
+        title: 'Oligo Space',
+        description: 'Bringing wonder back to space',
+        cardLink: 'oligo-space.html'
+    },
+    {
         imageUrl: 'assets/project-pages/WIL/WIL0_desktop.jpg',
         mobileImageUrl: 'assets/project-pages/WIL/WIL0_mobile.jpg',
         title: 'Wild Horizon',
@@ -66,11 +73,11 @@ const cardsData = [
         cardLink: 'wild-horizon.html'
     },
     {
-        imageUrl: 'assets/brands-pg/oli0d_thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/oli0m_thumbnail.jpg',
-        title: 'Oligo Space',
-        description: 'Bringing wonder back to space',
-        cardLink: 'oligo-space.html'
+        imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b1m_the-window-thumbnail.jpg',
+        title: 'The Window',
+        description: "Philly's new hole in the wall",
+        cardLink: 'the-window.html'
     },
     {
         imageUrl: 'assets/brands-pg/sil0d_thumbnail.jpg',
@@ -87,24 +94,17 @@ const cardsData = [
         cardLink: 'lemonade-stand.html'
     },
     {
-        imageUrl: 'assets/project-pages/CLE/b3-cleanupyourmind-thumbnail.jpg',
-        title: 'Clean Up Your Mind',
-        description: 'Album from the archives',
-        cardLink: 'clean-up-your-mind.html'
-    },
-    {
-        imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/b1m_the-window-thumbnail.jpg',
-        title: 'The Window',
-        description: "Philly's new hole in the wall",
-        cardLink: 'the-window.html'
-    },
-    {
         imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
         mobileImageUrl: 'assets/brands-pg/b3m_those-eyes-thumbnail.jpg',
         title: 'Those Eyes',
         description: 'Prepare to be psychologically thrilled',
         cardLink: 'those-eyes.html'
+    },
+    {
+        imageUrl: 'assets/project-pages/CLE/b3-cleanupyourmind-thumbnail.jpg',
+        title: 'Clean Up Your Mind',
+        description: 'Album from the archives',
+        cardLink: 'clean-up-your-mind.html'
     },
     {
         imageUrl: 'assets/brands-pg/b4-desktopASPthumbnail.png',
