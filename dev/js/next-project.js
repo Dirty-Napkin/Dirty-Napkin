@@ -3,40 +3,40 @@ const data = [
         currentPage: "oligo-space",
         nextPage: "wild-horizon",
         nextText: "Wild Horizon",
-        nextImg: "assets/project-pages/WIL/WIL0_desktop.jpg"
+        nextImg: "assets/brands-pg/wil0d_thumbnail.jpg"
     },
     {
         currentPage: "wild-horizon",
-        nextPage: "the-window",
-        nextText: "The Window",
-        nextImg: "assets/company-pages/h2_the-window-thumbnail.jpg"
-    },
-    {
-        currentPage: "the-window",
-        nextPage: "sillydelphia",
-        nextText: "Sillydelphia",
-        nextImg: "assets/brands-pg/sil0d_thumbnail.jpg"
-    },
-    {
-        currentPage: "sillydelphia",
         nextPage: "lemonade-stand",
         nextText: "The Lemonade Stand",
         nextImg: "assets/company-pages/h3_lemonade-stand-thumbnail.jpg"
     },
     {
         currentPage: "lemonade-stand",
-        nextPage: "those-eyes",
-        nextText: "Those Eyes",
-        nextImg: "assets/company-pages/h4_those-eyes-thumbnail.jpg"
+        nextPage: "sillydelphia",
+        nextText: "Sillydelphia",
+        nextImg: "assets/brands-pg/sil0d_thumbnail.jpg"
     },
     {
-        currentPage: "those-eyes",
+        currentPage: "sillydelphia",
+        nextPage: "the-window",
+        nextText: "The Window",
+        nextImg: "assets/company-pages/h2_the-window-thumbnail.jpg"
+    },
+    {
+        currentPage: "the-window",
         nextPage: "clean-up-your-mind",
         nextText: "Clean Up Your Mind",
         nextImg: "assets/home-pg/brands/CLE/CLE-a_thumb.jpg"
     },
     {
         currentPage: "clean-up-your-mind",
+        nextPage: "those-eyes",
+        nextText: "Those Eyes",
+        nextImg: "assets/company-pages/h4_those-eyes-thumbnail.jpg"
+    },
+    {
+        currentPage: "those-eyes",
         nextPage: "american-scripture-project",
         nextText: "American Scripture Project",
         nextImg: "assets/company-pages/h6_asp-thumbnail.jpg"

@@ -66,25 +66,11 @@ const cardsData = [
         cardLink: 'oligo-space.html'
     },
     {
-        imageUrl: 'assets/project-pages/WIL/WIL0_desktop.jpg',
-        mobileImageUrl: 'assets/project-pages/WIL/WIL0_mobile.jpg',
+        imageUrl: 'assets/brands-pg/wil0d_thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/wil0m_thumbnail.jpg',
         title: 'Wild Horizon',
-        description: 'The wondrous circus festival',
+        description: 'Wonder in public',
         cardLink: 'wild-horizon.html'
-    },
-    {
-        imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/b1m_the-window-thumbnail.jpg',
-        title: 'The Window',
-        description: "Philly's new hole in the wall",
-        cardLink: 'the-window.html'
-    },
-    {
-        imageUrl: 'assets/brands-pg/sil0d_thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/sil0m_thumbnail.jpg',
-        title: 'Sillydelphia',
-        description: 'The next generation of filmmakers',
-        cardLink: 'sillydelphia.html'
     },
     {
         imageUrl: 'assets/brands-pg/b2d_lemonade-stand-thumbnail.jpg',
@@ -94,17 +80,31 @@ const cardsData = [
         cardLink: 'lemonade-stand.html'
     },
     {
-        imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/b3m_those-eyes-thumbnail.jpg',
-        title: 'Those Eyes',
-        description: 'Prepare to be psychologically thrilled',
-        cardLink: 'those-eyes.html'
+        imageUrl: 'assets/brands-pg/sil0d_thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/sil0m_thumbnail.jpg',
+        title: 'Sillydelphia',
+        description: 'The next generation of filmmakers',
+        cardLink: 'sillydelphia.html'
+    },
+    {
+        imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b1m_the-window-thumbnail.jpg',
+        title: 'The Window',
+        description: "Philly's new hole in the wall",
+        cardLink: 'the-window.html'
     },
     {
         imageUrl: 'assets/project-pages/CLE/b3-cleanupyourmind-thumbnail.jpg',
         title: 'Clean Up Your Mind',
         description: 'Album from the archives',
         cardLink: 'clean-up-your-mind.html'
+    },
+    {
+        imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/b3m_those-eyes-thumbnail.jpg',
+        title: 'Those Eyes',
+        description: 'Prepare to be psychologically thrilled',
+        cardLink: 'those-eyes.html'
     },
     {
         imageUrl: 'assets/brands-pg/b4-desktopASPthumbnail.png',

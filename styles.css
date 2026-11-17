@@ -2716,6 +2716,14 @@ footer .footer-column.column3 {
     font-size: 1.5rem;
   }
 }
+.project-page .intro h5 br {
+  display: none;
+}
+@media (min-width: 768px) {
+  .project-page .intro h5 br {
+    display: inline;
+  }
+}
 .project-page .content {
   display: flex;
   flex-direction: column;

@@ -11,7 +11,8 @@ const BRAND_CUSTOM_POSITIONS = {
     'lemonade-stand': [8, 11, 14, 17, 19, 12],
     'oligo-space': [7, 11, 12, 19, 22, 18],
     'branded-moments': [13, 14, 15, 16, 20],
-    'sillydelphia': [8, 10, 14, 19, 20, 18]
+    'sillydelphia': [8, 10, 14, 19, 20, 18],
+    'wild-horizon': [8, 10, 14, 19, 20, 18]
 };
 
 // ===== HELPER FUNCTIONS =====

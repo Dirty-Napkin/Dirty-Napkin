@@ -198,6 +198,15 @@
             @include md {
                 font-size: 1.5rem;
             }
+
+            // Manual line breaks only apply from md up; on mobile the text wraps naturally
+            br {
+                display: none;
+
+                @include md {
+                    display: inline;
+                }
+            }
         }
     }
 
