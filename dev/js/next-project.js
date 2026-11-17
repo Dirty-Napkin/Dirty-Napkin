@@ -3,7 +3,7 @@ const data = [
         currentPage: "oligo-space",
         nextPage: "wild-horizon",
         nextText: "Wild Horizon",
-        nextImg: "assets/brands-pg/wil0d_thumbnail.jpg"
+        nextImg: "assets/home-pg/brands/WIL/wil-a_thumb.jpg"
     },
     {
         currentPage: "wild-horizon",
@@ -15,7 +15,7 @@ const data = [
         currentPage: "lemonade-stand",
         nextPage: "sillydelphia",
         nextText: "Sillydelphia",
-        nextImg: "assets/brands-pg/sil0d_thumbnail.jpg"
+        nextImg: "assets/home-pg/brands/sil-a_thumb.jpg"
     },
     {
         currentPage: "sillydelphia",
