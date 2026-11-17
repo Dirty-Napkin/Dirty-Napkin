@@ -198,13 +198,22 @@
             @include md {
                 font-size: 1.5rem;
             }
+
+            // Manual line breaks only apply from md up; on mobile the text wraps naturally
+            br {
+                display: none;
+
+                @include md {
+                    display: inline;
+                }
+            }
         }
     }
 
     .content {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 72px 40px; // 72px vertical between rows, 40px between columns
         padding-bottom: 24px;
         overflow: hidden;
 

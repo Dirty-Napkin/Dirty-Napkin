@@ -1,18 +1,24 @@
 const data = [
     {
-        currentPage: "sillydelphia",
+        currentPage: "oligo-space",
+        nextPage: "wild-horizon",
+        nextText: "Wild Horizon",
+        nextImg: "assets/home-pg/brands/WIL/wil-a_thumb.jpg"
+    },
+    {
+        currentPage: "wild-horizon",
         nextPage: "lemonade-stand",
         nextText: "The Lemonade Stand",
         nextImg: "assets/company-pages/h3_lemonade-stand-thumbnail.jpg"
     },
     {
         currentPage: "lemonade-stand",
-        nextPage: "oligo-space",
-        nextText: "Oligo Space",
-        nextImg: "assets/home-pg/brands/OLI/oli-a_thumb.jpg"
+        nextPage: "sillydelphia",
+        nextText: "Sillydelphia",
+        nextImg: "assets/home-pg/brands/sil-a_thumb.jpg"
     },
     {
-        currentPage: "oligo-space",
+        currentPage: "sillydelphia",
         nextPage: "the-window",
         nextText: "The Window",
         nextImg: "assets/company-pages/h2_the-window-thumbnail.jpg"
@@ -37,9 +43,9 @@ const data = [
     },
     {
         currentPage: "american-scripture-project",
-        nextPage: "sillydelphia",
-        nextText: "Sillydelphia",
-        nextImg: "assets/brands-pg/sil0d_thumbnail.jpg"
+        nextPage: "oligo-space",
+        nextText: "Oligo Space",
+        nextImg: "assets/home-pg/brands/OLI/oli-a_thumb.jpg"
     }
 ];
 

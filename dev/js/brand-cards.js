@@ -66,11 +66,11 @@ const cardsData = [
         cardLink: 'oligo-space.html'
     },
     {
-        imageUrl: 'assets/brands-pg/sil0d_thumbnail.jpg',
-        mobileImageUrl: 'assets/brands-pg/sil0m_thumbnail.jpg',
-        title: 'Sillydelphia',
-        description: 'The next generation of filmmakers',
-        cardLink: 'sillydelphia.html'
+        imageUrl: 'assets/brands-pg/wil0d_thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/wil0m_thumbnail.jpg',
+        title: 'Wild Horizon',
+        description: 'Wonder in public',
+        cardLink: 'wild-horizon.html'
     },
     {
         imageUrl: 'assets/brands-pg/b2d_lemonade-stand-thumbnail.jpg',
@@ -80,10 +80,11 @@ const cardsData = [
         cardLink: 'lemonade-stand.html'
     },
     {
-        imageUrl: 'assets/project-pages/CLE/b3-cleanupyourmind-thumbnail.jpg',
-        title: 'Clean Up Your Mind',
-        description: 'Album from the archives',
-        cardLink: 'clean-up-your-mind.html'
+        imageUrl: 'assets/brands-pg/sil0d_thumbnail.jpg',
+        mobileImageUrl: 'assets/brands-pg/sil0m_thumbnail.jpg',
+        title: 'Sillydelphia',
+        description: 'The next generation of filmmakers',
+        cardLink: 'sillydelphia.html'
     },
     {
         imageUrl: 'assets/brands-pg/b1d_the-window-thumbnail.jpg',
@@ -91,6 +92,12 @@ const cardsData = [
         title: 'The Window',
         description: "Philly's new hole in the wall",
         cardLink: 'the-window.html'
+    },
+    {
+        imageUrl: 'assets/project-pages/CLE/b3-cleanupyourmind-thumbnail.jpg',
+        title: 'Clean Up Your Mind',
+        description: 'Album from the archives',
+        cardLink: 'clean-up-your-mind.html'
     },
     {
         imageUrl: 'assets/brands-pg/b3d_those-eyes-thumbnail.jpg',
