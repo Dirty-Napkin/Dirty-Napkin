@@ -25,3 +25,6 @@ ehthumbs_vista.db
 *.ai
 
 ### Compiler Logs ###
+
+### Local tooling ###
+.claude/launch.json
